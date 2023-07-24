@@ -1,4 +1,4 @@
-package Programs;
+package basics_Of_Java;
 
 public class Program3 {
 	public static void main(String args[]) {

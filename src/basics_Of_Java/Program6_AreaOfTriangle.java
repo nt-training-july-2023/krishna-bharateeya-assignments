@@ -1,4 +1,4 @@
-package Programs;
+package basics_Of_Java;
 import java.util.*;
 public class Program6_AreaOfTriangle {
 	
