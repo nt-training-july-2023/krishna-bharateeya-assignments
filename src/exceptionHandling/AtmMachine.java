@@ -23,7 +23,7 @@ public class AtmMachine{
 			double remaingBalence=accountBalance-withDrawAmount;
 			System.out.println("Your Remaining Account Balance Is : "+remaingBalence);
 		} catch (InvalidInputException e) {
-			System.out.println(""+e.getMessage());
+			System.out.println("Error :"+e.getMessage());
 		}
 		
 	}
