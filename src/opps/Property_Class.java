@@ -7,7 +7,7 @@ public class Property_Class {
 
 	public static void main(String[] args) throws Exception{
 		
-		FileReader fileReader=new FileReader("d:/Assignments/src/opps/application.properties");
+		FileReader fileReader=new FileReader("D:\\Assignment\\src\\opps\\application.properties");
 		
 		Properties properties=new Properties();
 		
