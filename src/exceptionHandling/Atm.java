@@ -8,7 +8,7 @@ class InvilidInputException extends Exception{
 	}
 }
 
-public class AtmMachine{
+public class Atm{
 	
 	public static void main(String[] args){
 
