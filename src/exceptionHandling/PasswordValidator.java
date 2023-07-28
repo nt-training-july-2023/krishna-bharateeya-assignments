@@ -25,7 +25,9 @@ public class PasswordValidator {
 			
 			
 		} catch (InvalidPasswordException e) {
-			System.out.println("This is not a valid password.");
+			System.out.println("This is not a valid password. "+e.getMessage());
+		}catch(Exception e) {
+			System.out.println("An unexpected problem occured."+e.getMessage());
 		}
 	}
 	

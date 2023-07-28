@@ -1,6 +1,7 @@
 package exceptionHandling;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class NotEvenNumberException extends Exception {
@@ -21,11 +22,15 @@ public class EvenNumberWithException {
             int num = scan.nextInt();
 
             checkEvenNumber(num);
-
             System.out.println("This is an even Number");
 
-        } catch (Exception e) {
-            System.out.println("Invalid Input: " + e.getMessage());
+        }catch(NotEvenNumberException e) {
+        	System.out.println("This is not Even number."+e.getMessage());
+        }catch(InputMismatchException e) {
+        	System.out.println("Please Enter Numeric value."+e.getMessage());
+        }catch (Exception e) {
+        
+            System.out.println("An Unexcepted problem occured." +e.getMessage());
         }
     }
 
@@ -33,5 +38,6 @@ public class EvenNumberWithException {
         if (num%2 != 0) {
             throw new NotEvenNumberException("Please Enter an Even number.");
         }
+        
     }
 }
