@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"> -->
+
+</head>
+
+<body>
+    <div>
+        <form>
+            <br>
+            <h1>Registration</h1>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="username">First Name:</label>
+                    <input type="text" id="username" name="F_name" placeholder="Enter your first name" required
+                        class="input">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Last Name:</label>
+                    <input type="text" id="username" name="L_name" placeholder="Enter your last name" required
+                        class="input">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required class="input">
+                </div>
+                <div class="form-group">
+                    <label for="mobile-number">Mobile Number:</label>
+                    <input type="tel" id="mobile-number" name="mobile-number" placeholder="Enter your mobile number"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password"
+                        placeholder="Confirm your password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <div class="gender">
+                    <label><input type="radio" name="gender" value="male" required>Male</label>
+                    <label><input type="radio" name="gender" value="female" required>Female</label>
+                    <label><input type="radio" name="gender" value="other" required>Prefer not to say</label>
+                </div>
+
+
+            </div>
+
+            <!-- <button type="submit" value="Submit" onclick="validateForm()"> -->
+            <button type="submit" onclick="validateForm()">Register</button>
+        </form>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

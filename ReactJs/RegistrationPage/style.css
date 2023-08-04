@@ -1,0 +1,107 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    /* font-family: Arial, Helvetica, sans-serif; */
+   }
+  
+  body {
+    background-image: linear-gradient(to right, #de6262, #ffb88c);
+    margin-top: 4.5rem;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+  }
+  
+  h1 {
+    display: flex;
+    justify-content: left;
+    /* text-align: center; */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder !important;
+
+  }
+  /* #71b7e6, #9b59b6 */
+  form {
+    background-color: #e9e2e2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 40%;
+    margin: 0 auto;
+    
+  }
+  
+  .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* width: 100%; */
+    margin-bottom: 10px;
+    /* font-style: 'https://fonts.googleapis.com/css2?=Poppins:wght@200;300;400;500;600;700&display=swap'; */
+    font-family: 'Poppins', sans-serif;
+    /* font-family: cursive; */
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="tel"] {
+    flex-basis: calc(50% - 10px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-group input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  .radio-group label {
+    /* display: inline-flex; */
+    /* align-items: center; */
+    margin-right: 20px;
+  }
+  
+  .input{
+    width: 15rem !important;
+  }
+  button[type="submit"] {
+    background-image: linear-gradient(to right, #ee9ca7, #ffdde1);
+    font-weight: bold;
+    font-size: 1rem;
+    color: #241d1d;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-variant: full-width;
+    width: 100%;}
+  
+ 
+
+  .grid {
+    display: grid;
+    /* display: flex;
+    flex-direction: column;
+    position: relative; */
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gender {
+    display: grid;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    /* align-items: space-between; */
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
