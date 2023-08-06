@@ -1,0 +1,5 @@
+package com.krishna.emp.repository;
+
+public class EmployeeRepository {
+
+}

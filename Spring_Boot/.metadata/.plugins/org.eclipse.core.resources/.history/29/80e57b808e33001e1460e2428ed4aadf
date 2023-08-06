@@ -1,0 +1,62 @@
+package com.krishna.emp.services;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.krishna.emp.exception.EmployeeNotFoundException;
+import com.krishna.emp.model.Employee;
+import com.krishna.emp.repository.EmployeeRepository;
+
+
+@Service
+public class EmployeeService {
+
+	private EmployeeRepository employeeRepository;
+	
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		this.employeeRepository=employeeRepository;
+	}
+	
+	public List<Employee> getAllEmployee(){
+		
+		return employeeRepository.getAllEmployee(); 
+	}
+	
+	public Employee getEmployeeById(Long id) throws EmployeeNotFoundException {
+		
+		Employee employee=employeeRepository.getEmployeeById(id);
+		
+		if(employee==null) {
+			throw new EmployeeNotFoundException("Employee with ID " + id + " not found");
+		}
+		return employee;
+	}
+	
+	public Employee addEmployee(Employee employee) {
+		
+		return employeeRepository.addEmployee(employee);
+	}
+	
+	public Employee updateEmployee(Employee updateEmployee) throws EmployeeNotFoundException {
+		
+		Employee employee=employeeRepository.updateEmployee(updateEmployee);
+		
+		if(employee==null) {
+			throw new EmployeeNotFoundException("Employee with ID " + updateEmployee.getId()+ " not found");	
+		}
+		return employee;
+	}
+	
+	public void deleteEmployee(Long id) throws EmployeeNotFoundException {
+		
+		Employee employee= employeeRepository.getEmployeeById(id);
+		if(employee==null) {
+			throw new EmployeeNotFoundException("Employee with ID " + id + " not found");
+		}
+		
+		employeeRepository.deleteById(id);
+		
+	}
+	
+}

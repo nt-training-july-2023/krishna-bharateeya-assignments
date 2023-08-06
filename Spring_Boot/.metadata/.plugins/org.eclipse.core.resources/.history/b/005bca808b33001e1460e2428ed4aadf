@@ -1,0 +1,37 @@
+package com.krishna.emp.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.krishna.emp.model.Employee;
+
+public class EmployeeRepository {
+	
+	private List<Employee> employees=new ArrayList<>();
+	
+	private Long nextId=101L;
+	
+	
+	
+	public List<Employee> getAllEmployee(){
+		return employees;
+	}
+	
+	public Employee getEmployeeById(Long id) {
+		
+		for(Employee employee:employees) {
+			if(employee.getId().equals(id)) {
+				return employee;
+			}
+		}
+		return null;
+	}
+	
+	public Employee addEmployee(Employee employee) {
+		
+		employee.setId(nextId++);
+		
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.krishna.EmpMgmnt.service;
+
+public class EmployeeService {
+
+}

@@ -1,0 +1,8 @@
+# Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/EmployeeManagement
+spring.datasource.username=root
+spring.datasource.password=1234445
+
+# Hibernate Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true

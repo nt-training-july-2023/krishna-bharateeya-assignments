@@ -1,0 +1,23 @@
+package com.krishna.emp.services;
+
+import org.springframework.stereotype.Service;
+
+import com.krishna.emp.repository.EmployeeRepository;
+
+
+@Service
+public class EmployeeService {
+
+	private EmployeeRepository employeeRepository;
+	
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		this.employeeRepository=employeeRepository;
+	}
+	
+	public List<Employee> getAllEmployee(){
+		
+		return employeeRepository.getAllEmployee(); 
+	}
+	
+	
+}
