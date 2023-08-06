@@ -1,8 +1,0 @@
-package com.krishna.emp.exception;
-
-public class EmployeeNotFoundException extends Exception{
-	
-	EmployeeNotFoundException(String message){
-		super(message);
-	}
-}

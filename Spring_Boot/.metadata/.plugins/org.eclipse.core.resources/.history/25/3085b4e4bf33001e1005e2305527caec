@@ -1,5 +1,0 @@
-package com.krishna.EmpMgmnt.exception;
-
-public class EmployeeNotFoundException {
-
-}
