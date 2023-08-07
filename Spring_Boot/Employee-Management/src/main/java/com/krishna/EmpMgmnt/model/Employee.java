@@ -1,8 +1,15 @@
 package com.krishna.EmpMgmnt.model;
 
-public class Employee {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-	private Long id;
+@Entity
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id=101L;
     private String name;
     private int age;
     private String city;
