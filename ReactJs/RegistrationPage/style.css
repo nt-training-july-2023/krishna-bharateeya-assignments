@@ -1,108 +1,171 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-
-* {
-  box-sizing: border-box;
-}
-
 body {
-  background-image: linear-gradient(to right, #de6262, #ffb88c);
-  margin-top: 4.5rem;
-}
-
-h1 {
   display: flex;
-  justify-content: left;
-  font-family: 'Poppins', sans-serif;
-  font-weight: bolder !important;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(to right, #f096a2,#FFDDE1);
 }
 
-form {
-  background-color: #e9e2e2;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  width: 40%;
-  margin: 0 auto;
+.container {
+  max-width: 650px;
+  padding: 28px;
+  margin: 0 28px;
+  background-color: white;
 }
 
-/* Media Query for smaller screens */
-@media only screen and (max-width: 768px) {
-  form {
-    width: 80%;
-  }
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  text-align: left;
+  color: #2f4f4f;
+  padding-bottom: 8px;
+  border-bottom: 1px solid silver;
 
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="password"],
-  .form-group input[type="tel"] {
-    flex-basis: 100%;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .gender {
-    grid-template-columns: 1fr;
-  }
 }
 
-.form-group {
+.container .title::before {
+  content: ' ';
+  position: absolute;
+  height: 5px;
+  width: 50px;
+  background-color: rgb(155, 89, 182);
+  left: 0;
+  bottom: 0;
+}
+
+.main-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
+  padding: 20px 0;
 }
 
-.form-group label {
+.input-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  padding-bottom: 15px;
+}
+
+.input-box:nth-child() {
+  justify-content: end;
+
+}
+
+.input-box label,
+gender-title {
+  width: 95%;
+  color: #2f4f4f;
   font-weight: bold;
-  margin-bottom: 5px;
-  width: 100%;
+  margin: 5px 0;
+
+
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="tel"] {
-  flex-basis: calc(50% - 10px);
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-group input[type="radio"] {
-  margin-right: 10px;
-}
-
-.radio-group label {
+.gender-title {
+  font-size: 16px;
+  width: 95%;
+  color: #2f4f4f;
+  font-weight: bold;
+  margin: 5px 0;
   margin-right: 20px;
 }
 
-.input {
-  width: 15rem !important;
+.input-box input {
+  height: 40px;
+  width: 95%;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
 }
 
-button[type="submit"] {
-  background-image: linear-gradient(to right, #ee9ca7, #ffdde1);
-  font-weight: bold;
-  font-size: 1rem;
-  color: #241d1d;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
+.input-box input:is(focus, :valid) {
+  box-shadow: 0 3px 6px rgb(0, 0, 0, 0.2);
+
+}
+
+.gender-category {
+  padding-bottom: 15px;
+}
+
+.gender-category label {
+  padding: 0 20px 0 5px;
+  font-size: 14px;
+  flex: 0 0 auto;
+}
+
+.gender-category label,
+.gender-category input {
+  margin-right: 10px;
   cursor: pointer;
-  font-variant: full-width;
+}
+
+.alert p {
+  font-size: 14px;
+  font-style: italic;
+  color: dimgray;
+  margin: 5px, 0;
+  padding: 10px;
+}
+
+.alert a {
+  text-decoration: none;
+}
+
+.alert a:hover {
+  text-decoration: underline;
+}
+
+.button-container button {
   width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  display: block;
+  font-size: 20px;
+  color: #0e0b0b;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #f096a2,#FFDDE1);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.button-container button:hover {
+
+  background-image: linear-gradient(to left,
+      rgb(240, 171, 194),
+      rgb(28, 165, 142));
+
 }
 
-.gender {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: 1fr 1fr 1fr;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+@media(max-width:600px) {
+  .container {
+    min-width: 200px;
+  }
+
+  .content {
+    max-height: 380px;
+    overflow: auto;
+  }
+
+  .input-box {
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .input-box:nth-child(2n) {
+    justify-content: space-between;
+
+  }
+
+  .gender-category {
+    display: flex;
+    justify-content: space-between;
+  }
+
 }

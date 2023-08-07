@@ -2,54 +2,53 @@
 <html>
 
 <head>
-    <title>Registration Form</title>
     <link rel="stylesheet" href="style.css">
-    
+    <title>Registeration</title>
 
 </head>
 
 <body>
-    <div>
+    <div class="container">
+        <div class="title">Registeration</div>
         <form>
-            <br>
-            <h1>Registration</h1>
-            <div class="grid">
-                <div class="form-group">
+
+            <div class="main-content">
+                <div class="input-box">
                     <label for="username">First Name:</label>
                     <input type="text" id="username" name="F_name" placeholder="Enter your first name" required
                         class="input">
                 </div>
 
-                <div class="form-group">
+                <div class="input-box">
                     <label for="username">Last Name:</label>
                     <input type="text" id="username" name="L_name" placeholder="Enter your last name" required
                         class="input">
                 </div>
 
 
-                <div class="form-group">
+                <div class="input-box">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required class="input">
                 </div>
-                <div class="form-group">
+                <div class="input-box">
                     <label for="mobile-number">Mobile Number:</label>
                     <input type="tel" id="mobile-number" name="mobile-number" placeholder="Enter your mobile number"
                         required>
                 </div>
-                <div class="form-group">
+                <div class="input-box">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
-                <div class="form-group">
+                <div class="input-box">
                     <label for="confirm-password">Confirm Password:</label>
                     <input type="password" id="confirm-password" name="confirm-password"
                         placeholder="Confirm your password" required>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <div class="gender">
+            <div>
+                <div class="gender-category">
+                    <span class="gender-title"> Gender</span>
                     <label><input type="radio" name="gender" value="male" required>Male</label>
                     <label><input type="radio" name="gender" value="female" required>Female</label>
                     <label><input type="radio" name="gender" value="other" required>Prefer not to say</label>
@@ -58,8 +57,9 @@
 
             </div>
 
-            <!-- <button type="submit" value="Submit" onclick="validateForm()"> -->
-            <button type="submit" onclick="validateForm()">Register</button>
+            <div class="button-container">
+                <button type="submit" onclick="validateForm()">Register</button>
+            </div>
         </form>
     </div>
 
