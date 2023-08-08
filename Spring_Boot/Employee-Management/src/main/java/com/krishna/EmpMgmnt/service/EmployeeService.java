@@ -10,6 +10,7 @@ import com.krishna.EmpMgmnt.model.Employee;
 import com.krishna.EmpMgmnt.repository.EmployeeRepository;
 
 
+
 @Service
 public class EmployeeService {
 
@@ -37,10 +38,18 @@ public class EmployeeService {
         Employee existingEmployee = employeeRepository.findById(updatedEmployee.getId())
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee with ID " + updatedEmployee.getId() + " not found"));
 
-        existingEmployee.setName(updatedEmployee.getName());
-        existingEmployee.setAge(updatedEmployee.getAge());
-        existingEmployee.setCity(updatedEmployee.getCity());
-        existingEmployee.setDesignation(updatedEmployee.getDesignation());
+        if(updatedEmployee.getName()!=null)
+        	existingEmployee.setName(updatedEmployee.getName());
+        
+        if(updatedEmployee.getAge()!=0)
+        	existingEmployee.setAge(updatedEmployee.getAge());
+        	
+        
+        if(updatedEmployee.getCity()!=null)
+        	existingEmployee.setCity(updatedEmployee.getCity());
+        
+        if(updatedEmployee.getDesignation()!=null)
+        	existingEmployee.setDesignation(updatedEmployee.getDesignation());
 
         return employeeRepository.save(existingEmployee);
     }

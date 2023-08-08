@@ -28,7 +28,6 @@ body {
   position: absolute;
   height: 5px;
   width: 50px;
-  background-color: rgb(155, 89, 182);
   left: 0;
   bottom: 0;
 }
@@ -166,6 +165,7 @@ gender-title {
   .gender-category {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
 }
