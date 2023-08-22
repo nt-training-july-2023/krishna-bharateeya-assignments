@@ -1,6 +1,15 @@
-bin/
 .classpath
 .project
 /node_modules
 /.pnp
 .pnp.js
+.metadata/
+bin/
+tmp/
+*.tmp/
+*.bak/
+*.swp/
+*~.nib
+local.properties
+.settings/
+.loadpath

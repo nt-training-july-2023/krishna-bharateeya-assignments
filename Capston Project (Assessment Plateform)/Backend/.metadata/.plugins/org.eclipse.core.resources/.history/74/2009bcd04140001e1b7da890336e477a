@@ -1,0 +1,5 @@
+package com.nucleusteq.assessmentPlatform.entity;
+
+public class Registration {
+
+}
