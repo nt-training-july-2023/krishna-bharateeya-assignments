@@ -34,7 +34,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 			
 			Registration newregistration = new Registration(
 					0, 
-					registration.getUserName(),
+					registration.getFirstName(),
+					registration.getLastName(),
+					registration.getMobileNumber(),
 					"user",
 					registration.getEmail(),
 					this.passwordEncoder.encode(registration.getPassword())
@@ -45,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			} catch (Exception e) {
 				throw e;
 			}
-			return registration.getUserName() + " Registered Successfully";
+			return registration.getFirstName() + " Registered Successfully";
 
 		} else {
 			return ("registration object cannot be null");
@@ -64,6 +66,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 		if (foundregistration != null) {
 			String password = inputRegistration.getPassword();
 			String encodePassword = foundregistration.getPassword();
+			
+			System.out.println("password "+password);
+			System.out.println("encoded p"+encodePassword);
 			boolean isRightPassword = passwordEncoder.matches(password, encodePassword);
 			if (isRightPassword) {
 				Optional<Registration> optionalregistration = registrationRepository

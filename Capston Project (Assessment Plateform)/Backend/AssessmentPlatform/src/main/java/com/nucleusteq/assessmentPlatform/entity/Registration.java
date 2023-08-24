@@ -23,7 +23,14 @@ public class Registration {
 	int userId;
 	
 	@Column(nullable = false)
-	String userName;
+	String firstName;
+	
+	@Column(nullable = false)
+	String lastName;
+	
+	@Column(nullable = false, unique = true)
+	String mobileNumber;
+	
 	
 	@Column(nullable = false)
 	String userRole;
