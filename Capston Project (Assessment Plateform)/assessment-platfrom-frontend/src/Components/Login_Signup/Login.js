@@ -9,9 +9,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
+
     const redirect = () => {
         navigate('/registration')
     }
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -26,6 +28,9 @@ const Login = () => {
             if(response.data.role==='user')
                 navigate('/userHome')
               
+            localStorage.setItem('IsLoggedIn',response.data.status);
+            localStorage.setItem('userRole',response.data.role);
+
             console.log('Login successful!', response.data);
 
         } catch (error) {
@@ -63,7 +68,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-success">
                             Login
                         </button>
                     </div>
