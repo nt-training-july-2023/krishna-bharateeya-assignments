@@ -13,3 +13,6 @@ tmp/
 local.properties
 .settings/
 .loadpath
+*.mvn/
+*mvnw
+*mvnw.cmd

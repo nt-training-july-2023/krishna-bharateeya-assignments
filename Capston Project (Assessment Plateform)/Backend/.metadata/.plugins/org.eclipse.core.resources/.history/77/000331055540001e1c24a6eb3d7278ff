@@ -1,5 +1,0 @@
-package com.nucleusteq.assessmentPlatform.exception;
-
-public class DuplicateEmailException {
-
-}
