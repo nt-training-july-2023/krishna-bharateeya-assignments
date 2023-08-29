@@ -11,24 +11,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "reportSeq", initialValue = 6010, allocationSize = 1)
 public class Report {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reportSeq")
-	private int reportId;
-	
-	@ManyToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reportSeq")
+    private int reportId;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private Registration reportOfTheUser;
-	
-	private int totalMark;
-	private int obtainedMark;
-	private int wrongAnswers;
-	
-	
+
+    private int totalMark;
+    private int obtainedMark;
+    private int wrongAnswers;
+
 }

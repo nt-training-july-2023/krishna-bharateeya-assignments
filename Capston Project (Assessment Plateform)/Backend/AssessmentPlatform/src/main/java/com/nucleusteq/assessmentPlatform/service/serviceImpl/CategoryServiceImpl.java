@@ -13,72 +13,75 @@ import com.nucleusteq.assessmentPlatform.service.CategoryService;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-	@Autowired
-	CategoryRepository categoryRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
-	@Override
-	public String addCategory(Category category) {
+    @Override
+    public String addCategory(Category category) {
 
-		if (category != null) {
-			Category newCategory = new Category(0, category.getCategoryName(), category.getDescription());
+        if (category != null) {
+            Category newCategory = new Category(0, category.getCategoryName(),
+                    category.getDescription());
 
-			try {
-				categoryRepository.save(newCategory);
-				return category.getCategoryName() + " Added Successfully";
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		return "Please Enter all the field";
-	}
+            try {
+                categoryRepository.save(newCategory);
+                return category.getCategoryName() + " Added Successfully";
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+        return "Please Enter all the field";
+    }
 
-	@Override
-	public Category getCategoryById(int id) {
+    @Override
+    public Category getCategoryById(int id) {
 
-		Optional<Category> foundCategory = categoryRepository.findById(id);
+        Optional<Category> foundCategory = categoryRepository.findById(id);
 
-		if (foundCategory.isPresent()) {
-			Category category = foundCategory.get();
-			return category;
-		} else {
-			throw new RuntimeException("Category not found for id: " + id);
-		}
+        if (foundCategory.isPresent()) {
+            Category category = foundCategory.get();
+            return category;
+        } else {
+            throw new RuntimeException("Category not found for id: " + id);
+        }
 
-	}
+    }
 
-	@Override
-	public List<Category> getAllCategory() {
-		return categoryRepository.findAll();
-	}
-	@Override
-	public Category updateCategory(Category category) {
+    @Override
+    public List<Category> getAllCategory() {
+        return categoryRepository.findAll();
+    }
 
-	    Category existingCategory = categoryRepository.findById(category.getCategoryId()).orElse(null);
+    @Override
+    public Category updateCategory(Category category) {
 
-	    if (existingCategory != null) {
+        Category existingCategory = categoryRepository
+                .findById(category.getCategoryId()).orElse(null);
 
-	    	if(category.getCategoryName()!=null)
-	        existingCategory.setCategoryName(category.getCategoryName());
-	    	
-	    	if(category.getDescription()!=null)
-	        existingCategory.setDescription(category.getDescription());
+        if (existingCategory != null) {
 
-	        existingCategory = categoryRepository.save(existingCategory);
-	        
-	        return existingCategory;
-	    } else {
-	        
-	        return null;
-	    }
-	}
+            if (category.getCategoryName() != null)
+                existingCategory.setCategoryName(category.getCategoryName());
 
-	@Override
-	public void deleteCategory(int categoryId) {
-		Category category = null;
+            if (category.getDescription() != null)
+                existingCategory.setDescription(category.getDescription());
 
-		category = categoryRepository.findById(categoryId).orElse(null);
+            existingCategory = categoryRepository.save(existingCategory);
 
-		categoryRepository.delete(category);
-	}
+            return existingCategory;
+        } else {
+
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteCategory(int categoryId) {
+        Category category = null;
+
+        category = categoryRepository.findById(categoryId).orElse(null);
+
+        categoryRepository.delete(category);
+    }
 
 }

@@ -21,33 +21,31 @@ import com.nucleusteq.assessmentPlatform.service.CategoryService;
 @RequestMapping("/category")
 public class CategoryController {
 
-	@Autowired
-	CategoryService categoryService;
-	
-	@PostMapping(path = "/save")
-	public String saveUser(@RequestBody Category category) {
+    @Autowired
+    CategoryService categoryService;
 
-		return categoryService.addCategory(category);
-	}
-	
-	
+    @PostMapping(path = "/save")
+    public String saveUser(@RequestBody Category category) {
+
+        return categoryService.addCategory(category);
+    }
+
     @GetMapping
     public List<Category> getAllCategories() {
         List<Category> categorys = categoryService.getAllCategory();
         return categorys;
     }
-    
+
     @GetMapping("/{id}")
-	public Category getCategoryById(@PathVariable int id) {
-		return categoryService.getCategoryById(id);
-	}
-    
-    
-    
+    public Category getCategoryById(@PathVariable int id) {
+        return categoryService.getCategoryById(id);
+    }
+
     @PutMapping("update/{categoryId}")
-    public Category updateCategory(@PathVariable int categoryId, @RequestBody Category category) {
-    	category.setCategoryId(categoryId);
-    	return categoryService.updateCategory(category);
+    public Category updateCategory(@PathVariable int categoryId,
+            @RequestBody Category category) {
+        category.setCategoryId(categoryId);
+        return categoryService.updateCategory(category);
     }
 
     @DeleteMapping("delete/{categoryId}")

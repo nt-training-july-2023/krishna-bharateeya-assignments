@@ -12,22 +12,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "quizSeq", initialValue = 4010, allocationSize = 1)
 public class Quiz {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quizSeq")
-	private int quizId;
-	
-	@Column(nullable = false)
-	private int quizName;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quizSeq")
+    private int quizId;
+
+    @Column(nullable = false)
+    private int quizName;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-	
+
 }

@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
@@ -21,86 +24,135 @@ import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
-	
-	@Autowired
-	RegistrationRepository registrationRepository;
+    @Autowired
+    RegistrationRepository registrationRepository;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
-	
-	public String addUser(Registration registration) throws UserEmailDomainException, DuplicateMobileNumberException, DuplicateEmailException {
-	    if (registration != null && registration.getEmail() != null && registration.getPassword() != null) {
-	        final String EMAIL_DOMAIN = "nucleusteq.com";
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-	        if (!registration.getEmail().endsWith("@" + EMAIL_DOMAIN)) {
-	            throw new UserEmailDomainException("Email domain should be " + EMAIL_DOMAIN);
-	        }
+    @Autowired
+    private ModelMapper modelMapper;
 
-	        Optional<Registration> existingUserByMobile = registrationRepository.findByMobileNumber(registration.getMobileNumber());
-	        if (existingUserByMobile.isPresent()) {
-	            throw new DuplicateMobileNumberException("Mobile number already exists");
-	        }
+    public Registration dtoToRegistration(
+            final RegistrationDto registrationDto) {
+        Registration registration = new Registration();
 
-	        Optional<Registration> existingUserByEmail = registrationRepository.findByEmail(registration.getEmail());
-	        if (existingUserByEmail.isPresent()) {
-	            throw new DuplicateEmailException("Email address already exists");
-	        }
+        registration.setFirstName(registrationDto.getFirstName());
+        registration.setLastName(registrationDto.getLastName());
+        registration.setMobileNumber(registrationDto.getMobileNumber());
+        registration.setUserRole("user");
+        registration.setEmail(registrationDto.getEmail());
+        registration.setPassword(registrationDto.getPassword());
 
-	        Registration newregistration = new Registration(
-	                0,
-	                registration.getFirstName(),
-	                registration.getLastName(),
-	                registration.getMobileNumber(),
-	                "user",
-	                registration.getEmail(),
-	                this.passwordEncoder.encode(registration.getPassword())
-	        );
+//	   registration.setType(userDto.getType());
+        return registration;
+    }
 
-	        registrationRepository.save(newregistration);
+    /**
+     * Entity to dto conversion.
+     * 
+     * @param user entity
+     * @return converting entity to DTO
+     */
+    public RegistrationDto RegistrationToDto(final Registration registration) {
+        RegistrationDto registrationDto = new RegistrationDto();
+        registrationDto.setUserId(registration.getUserId());
+        registrationDto.setFirstName(registration.getFirstName());
+        registrationDto.setLastName(registration.getLastName());
+        registrationDto.setMobileNumber(registration.getMobileNumber());
+        registrationDto.setUserRole(registration.getUserRole());
+        registrationDto.setEmail(registration.getEmail());
+        registrationDto.setPassword(null);
+        return registrationDto;
+    }
 
-	        return registration.getFirstName() + " Registered Successfully";
-	    } else {
-	        return ("registration object cannot be null");
-	    }
-	}
-	
+    public String addUser(RegistrationDto registrationDto)
+            throws UserEmailDomainException, DuplicateMobileNumberException,
+            DuplicateEmailException {
+        if (registrationDto != null && registrationDto.getEmail() != null
+                && registrationDto.getPassword() != null) {
+            final String EMAIL_DOMAIN = "nucleusteq.com";
 
+            if (!registrationDto.getEmail().endsWith("@" + EMAIL_DOMAIN)) {
+                throw new UserEmailDomainException(
+                        "Email domain should be " + EMAIL_DOMAIN);
+            }
 
+            Optional<Registration> existingUserByMobile = registrationRepository
+                    .findByMobileNumber(registrationDto.getMobileNumber());
+            if (existingUserByMobile.isPresent()) {
+                throw new DuplicateMobileNumberException(
+                        "Mobile number already exists");
+            }
 
-	public List<Registration> getAllRegistrations() {
-		return registrationRepository.findAll();
-	}
-	
-	public Map<String, String> loginUser(Registration inputRegistration) throws LoginFailedException, UserNotFoundException {
-	    Map<String, String> response = new HashMap<>();
+            Optional<Registration> existingUserByEmail = registrationRepository
+                    .findByEmail(registrationDto.getEmail());
+            if (existingUserByEmail.isPresent()) {
+                throw new DuplicateEmailException(
+                        "Email address already exists");
+            }
 
-	    Registration foundRegistration = registrationRepository.getByEmail(inputRegistration.getEmail());
+            Registration newRegistration = dtoToRegistration(registrationDto);
+            newRegistration.setPassword(
+                    passwordEncoder.encode(registrationDto.getPassword()));
+            registrationRepository.save(newRegistration);
 
-	    if (foundRegistration != null) {
-	        String password = inputRegistration.getPassword();
-	        String encodedPassword = foundRegistration.getPassword();
+            return registrationDto.getFirstName() + " Registered Successfully";
+        } else {
+            return ("registration object cannot be null");
+        }
+    }
 
-	        boolean isRightPassword = passwordEncoder.matches(password, encodedPassword);
-	        if (isRightPassword) {
-	            Optional<Registration> optionalRegistration = registrationRepository
-	                    .findByEmailAndPassword(inputRegistration.getEmail(), encodedPassword);
+    public List<RegistrationDto> getAllRegistrations() {
+        List<Registration> registrations = registrationRepository.findAll();
+        return registrations.stream().map(this::RegistrationToDto)
+                .collect(Collectors.toList());
+    }
 
-	            if (optionalRegistration.isPresent()) {
-	                response.put("message", "Login Successfully");
-	                response.put("status", "true");
-	                response.put("role", foundRegistration.getUserRole());
-	            } else {
-	                throw new LoginFailedException("Login failed. Please check your credentials.");
-	            }
-	        } else {
-	            throw new LoginFailedException("Login failed. Please check your credentials.");
-	        }
-	    } else {
-	        throw new UserNotFoundException("User Does Not Exist");
-	    }
+    public Map<String, String> loginUser(RegistrationDto inputRegistrationDto)
+            throws LoginFailedException, UserNotFoundException {
+        Map<String, String> response = new HashMap<>();
 
-	    return response;
-	}
+        Registration foundRegistration = registrationRepository
+                .getByEmail(inputRegistrationDto.getEmail());
 
+        if (foundRegistration != null) {
+            String password = inputRegistrationDto.getPassword();
+            String encodedPassword = foundRegistration.getPassword();
+
+            boolean isRightPassword = passwordEncoder.matches(password,
+                    encodedPassword);
+            if (isRightPassword) {
+           Optional<Registration> optionalRegistration = registrationRepository
+                    .findByEmailAndPassword(inputRegistrationDto.getEmail(),
+                            encodedPassword);
+
+            if (optionalRegistration.isPresent()) {
+                response.put("message", "Login Successfully");
+                response.put("status", "true");
+                response.put("role", foundRegistration.getUserRole());
+            } else {
+                throw new LoginFailedException(
+                        "Login failed. Please check your credentials.");
+            }
+            } else {
+                throw new LoginFailedException(
+                        "Login failed. Please check your credentials.");
+            }
+        } else {
+            throw new UserNotFoundException("User Does Not Exist");
+        }
+
+        return response;
+    }
+
+    @Override
+    public RegistrationDto getUserById(int userId)
+            throws UserNotFoundException {
+        Registration registration = this.registrationRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(
+                        "User not found with ID: " + userId));
+        return RegistrationToDto(registration);
+    }
 
 }

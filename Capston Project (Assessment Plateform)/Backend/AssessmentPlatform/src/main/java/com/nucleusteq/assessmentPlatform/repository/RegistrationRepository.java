@@ -8,11 +8,16 @@ import org.springframework.stereotype.Repository;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
 
 @Repository
-public interface RegistrationRepository extends JpaRepository<Registration, Integer> {
+public interface RegistrationRepository
+        extends JpaRepository<Registration, Integer> {
 
-	Registration getByEmail(String email);
-	Optional<Registration> findByEmail(String email);
-	Optional<Registration> findByEmailAndPassword(String email, String encodePassword);
-	Optional<Registration> findByMobileNumber(String mobileNumber);
+    Registration getByEmail(String email);
+
+    Optional<Registration> findByEmail(String email);
+
+    Optional<Registration> findByEmailAndPassword(String email,
+            String encodePassword);
+
+    Optional<Registration> findByMobileNumber(String mobileNumber);
 
 }
