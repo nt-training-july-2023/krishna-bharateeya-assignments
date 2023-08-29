@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.entity.Registration;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
+import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
+import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
+import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 
@@ -24,74 +28,79 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public String addUser(Registration registration) {
-		if (registration != null && registration.getEmail() != null && registration.getPassword() != null) {
+	public String addUser(Registration registration) throws UserEmailDomainException, DuplicateMobileNumberException, DuplicateEmailException {
+	    if (registration != null && registration.getEmail() != null && registration.getPassword() != null) {
+	        final String EMAIL_DOMAIN = "nucleusteq.com";
 
-			 Optional<Registration> existingUserByEmail = registrationRepository.findByEmail(registration.getEmail());
-			 if (existingUserByEmail.isPresent()) {
-				 throw new DuplicateEmailException("Email address already exists");
-			 }
-			
-			Registration newregistration = new Registration(
-					0, 
-					registration.getFirstName(),
-					registration.getLastName(),
-					registration.getMobileNumber(),
-					"user",
-					registration.getEmail(),
-					this.passwordEncoder.encode(registration.getPassword())
-					);
+	        if (!registration.getEmail().endsWith("@" + EMAIL_DOMAIN)) {
+	            throw new UserEmailDomainException("Email domain should be " + EMAIL_DOMAIN);
+	        }
 
-			try {
-				registrationRepository.save(newregistration);
-			} catch (Exception e) {
-				throw e;
-			}
-			return registration.getFirstName() + " Registered Successfully";
+	        Optional<Registration> existingUserByMobile = registrationRepository.findByMobileNumber(registration.getMobileNumber());
+	        if (existingUserByMobile.isPresent()) {
+	            throw new DuplicateMobileNumberException("Mobile number already exists");
+	        }
 
-		} else {
-			return ("registration object cannot be null");
-		}
+	        Optional<Registration> existingUserByEmail = registrationRepository.findByEmail(registration.getEmail());
+	        if (existingUserByEmail.isPresent()) {
+	            throw new DuplicateEmailException("Email address already exists");
+	        }
+
+	        Registration newregistration = new Registration(
+	                0,
+	                registration.getFirstName(),
+	                registration.getLastName(),
+	                registration.getMobileNumber(),
+	                "user",
+	                registration.getEmail(),
+	                this.passwordEncoder.encode(registration.getPassword())
+	        );
+
+	        registrationRepository.save(newregistration);
+
+	        return registration.getFirstName() + " Registered Successfully";
+	    } else {
+	        return ("registration object cannot be null");
+	    }
 	}
+	
+
+
 
 	public List<Registration> getAllRegistrations() {
 		return registrationRepository.findAll();
 	}
+	
+	public Map<String, String> loginUser(Registration inputRegistration) throws LoginFailedException, UserNotFoundException {
+	    Map<String, String> response = new HashMap<>();
 
-	public Map<String, String> loginUser(Registration inputRegistration) {
-		Map<String, String> response = new HashMap<>();
+	    Registration foundRegistration = registrationRepository.getByEmail(inputRegistration.getEmail());
 
-		Registration foundregistration = registrationRepository.getByEmail(inputRegistration.getEmail());
+	    if (foundRegistration != null) {
+	        String password = inputRegistration.getPassword();
+	        String encodedPassword = foundRegistration.getPassword();
 
-		if (foundregistration != null) {
-			String password = inputRegistration.getPassword();
-			String encodePassword = foundregistration.getPassword();
-			
-			System.out.println("password "+password);
-			System.out.println("encoded p"+encodePassword);
-			boolean isRightPassword = passwordEncoder.matches(password, encodePassword);
-			if (isRightPassword) {
-				Optional<Registration> optionalregistration = registrationRepository
-						.findByEmailAndPassword(inputRegistration.getEmail(), encodePassword);
+	        boolean isRightPassword = passwordEncoder.matches(password, encodedPassword);
+	        if (isRightPassword) {
+	            Optional<Registration> optionalRegistration = registrationRepository
+	                    .findByEmailAndPassword(inputRegistration.getEmail(), encodedPassword);
 
-				if (optionalregistration.isPresent()) {
-					response.put("message", "Login Successfully");
-					response.put("status", "true");
-					response.put("role", foundregistration.getUserRole());
-				} else {
-					response.put("status", "false");
-					response.put("message", "Login Failed");
-				}
-			} else {
-				response.put("status", "false");
-				response.put("message", "Password Not Match");
-			}
-		} else {
-			response.put("status", "false");
-			response.put("message", "User does not Exists");
-		}
+	            if (optionalRegistration.isPresent()) {
+	                response.put("message", "Login Successfully");
+	                response.put("status", "true");
+	                response.put("role", foundRegistration.getUserRole());
+	            } else {
+	                throw new LoginFailedException("Login failed. Please check your credentials.");
+	            }
+	        } else {
+	            throw new LoginFailedException("Login failed. Please check your credentials.");
+	        }
+	    } else {
+	        throw new UserNotFoundException("User Does Not Exist");
+	    }
 
-		return response;
+	    return response;
 	}
+
 
 }

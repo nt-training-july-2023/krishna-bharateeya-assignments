@@ -1,25 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const AdminHome = () => {
-
   const navigate = useNavigate();
-  const handleLogout = () => {
 
+  const handleLogout = () => {
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
-
-    // navigate('/')
-
-    window.location.replace('/');
+    navigate('/login');
   };
-const CategoryHome= ()=>{
-  navigate('/categoryHome')
-}
+
+  const handleCategoryClick = () => {
+    navigate('/categoryHome');
+  };
 
   return (
     <div className="admin-dashboard">
       <h1>Welcome to the Admin Dashboard</h1>
-      <button onClick={CategoryHome}> Category</button>
+      <button onClick={handleCategoryClick}>Category</button>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

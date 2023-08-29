@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './Category.css';
 
 
 const CategoryHome = () => {
@@ -28,59 +28,49 @@ const CategoryHome = () => {
         }
     };
 
-
     return (
         <div className="wrapper">
-
             <div className="container">
-                <div className="card" style={{ boxShadow: '3px 3px 5px 5px #939fd4', marginTop: '20px' }}>
+                <div className="card">
                     <div className="card-header">
                         <h3>Manage Categories</h3>
                         <center>
-                            <Link className='button btn-user mx-3' to={`\addCategory`}>Add Category</Link>
+                            <Link className="button btn-user mx-3" to="/addCategory">Add Category</Link>
                         </center>
                     </div>
-
                     <div className="card-body">
-                        <table className="table">
-                            <thead className="table-secondary">
-                                <tr>
-                                    <th scope="col"><center>S.No.</center></th>
-                                    <th scope="col"><center>Name</center></th>
-                                    <th scope="col"><center>Description</center></th>
-                                    <th scope="col"><center>Actions</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    categories.map((category, index) => (
-                                        <tr key={index} >
-                                            <th scope="row" key={index}><center>{index + 1}</center></th>
-                                            <td><center>{category.categoryName}</center></td>
+                        <div className="table-wrapper">
+                            <table className="table">
+                                <thead className="table-secondary">
+                                    <tr>
+                                        <th scope="col">S.No.</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {categories.map((category, index) => (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{category.categoryName}</td>
+                                            <td>{category.description}</td>
                                             <td>
-                                            <center>{category.description}</center>
-                                            </td>
-                                            <td><center>
-                                                <Link className="button button-edit mx-2" to={`/editcategory/${''}`}> Update</Link>
+                                                <Link className="button button-edit" to={`/categoryHome/updateCategory/${category.categoryId}`}>Update</Link>
                                                 <button className="button button-delete" onClick={() => deleteCategories(category.categoryId)}>Delete</button>
-                                            </center>
-                                            </td>
-                                            <td>
-
                                             </td>
                                         </tr>
                                     ))}
-
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
-
+    
+    
 }
 
 export default CategoryHome;

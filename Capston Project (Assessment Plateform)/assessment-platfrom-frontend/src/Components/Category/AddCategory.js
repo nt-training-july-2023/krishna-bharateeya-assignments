@@ -23,7 +23,7 @@ const AddCategory = () => {
         try {
             const response = await axios.post('http://localhost:8080/category/save', formData);
             console.log(response.data);
-            navigate("/categoryHome"); // Redirect on success
+            navigate("/categoryHome"); 
 
         } catch (error) {
             console.error("An error occurred:", error);

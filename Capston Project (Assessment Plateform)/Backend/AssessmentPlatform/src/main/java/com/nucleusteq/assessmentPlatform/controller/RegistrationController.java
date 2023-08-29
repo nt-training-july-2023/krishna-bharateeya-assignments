@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.entity.Registration;
+import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
+import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 
 @CrossOrigin
@@ -21,14 +23,14 @@ public class RegistrationController {
 	RegistrationService registrationService;
 
 	@PostMapping(path = "/save")
-	public String saveUser(@RequestBody Registration user) {
-
+	public String saveUser(@RequestBody Registration user) throws UserEmailDomainException {
+		
 		return registrationService.addUser(user);
 
 	}
 
 	@PostMapping(path = "/login")
-	public Map<String, String> loginUser(@RequestBody Registration user) {
+	public Map<String, String> loginUser(@RequestBody Registration user) throws UserNotFoundException {
 		Map<String, String> response = registrationService.loginUser(user);
 		return response;
 	}

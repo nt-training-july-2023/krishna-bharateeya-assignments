@@ -1,39 +1,89 @@
-/* .Registration {
-    background-color: white;
-  } */
-  
-  .category-container {
+.wrapper {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card {
+    box-shadow: 3px 3px 5px 5px #939fd4;
+    margin-top: 20px;
+    border: none;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    padding: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-  .registration-form {
-    width: 420px;
-    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    border-radius: 8px;
-    background-color: whitesmoke;
-  }
-  
-  .form-content {
-    padding-left: 12%;
-    padding-right: 12%;
-  }
-  
-  .form-title {
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 1px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #d4c5c5; /* Set the desired background color for the table */
+}
+
+.table th, .table td {
+    padding: 10px;
     text-align: center;
-    margin-bottom: 1em;
-    font-size: 24px;
-    color: rgb(34, 34, 34);
-    font-weight: 800;
-  }
-  
-  label {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.table-secondary th {
+    color: white;
+    background-color: #101885;
+}
+
+.button {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
     font-size: 14px;
-    font-weight: 600;
-    color: rgb(34, 34, 34);
-  }
+}
+
+.button-edit {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+}
+
+.button-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    margin-left: 5px;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+   .table-secondary th{
+    font-size: 12px;
+    color: white;
+   }
+    }
