@@ -1,14 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
-  const handleLogout = () => {
-    
-    localStorage.removeItem('IsLoggedIn');
-    localStorage.removeItem('userRole');
-
-    
-    window.location.replace('/');
-  };
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('IsLoggedIn');
+        localStorage.removeItem('userRole');
+        navigate('/');
+      };
 
   return (
     <div>

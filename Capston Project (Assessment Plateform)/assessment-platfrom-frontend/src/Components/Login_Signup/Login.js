@@ -12,6 +12,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
+    const [response, setResponse] = useState({
+        status: false,
+        userRole: '',
+        message: '',
+      });
 
     const navigate = useNavigate();
 
@@ -55,7 +60,9 @@ const Login = () => {
                 email,
                 password
             });
-    
+            localStorage.setItem('IsLoggedIn', response.data.status);
+            localStorage.setItem('userRole', response.data.role);
+            
             if (response.data.role === 'admin') {
                 navigate('/adminHome');
             } else if (response.data.role === 'user') {
@@ -68,7 +75,7 @@ const Login = () => {
             toast.success(response.data.message);
             console.log('Login successful!', response.data);
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response);
             console.error('Login failed:', error);
         }
     };

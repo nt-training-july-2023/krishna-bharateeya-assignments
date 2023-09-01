@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,19 +20,34 @@ import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 
+/**
+ * Implementation of the RegistrationService interface for managing user
+ * registrations and logins.
+ */
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
+    /**
+     * This is Registration Repository object that is for calling.
+     * the repository methods.
+     */
     @Autowired
-    RegistrationRepository registrationRepository;
+    private RegistrationRepository registrationRepository;
 
+    /**
+     * This is password encoder object it is for encryption of password field.
+     *
+     */
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    public Registration dtoToRegistration(
+    /**
+     * Converts a RegistrationDto to a Registration entity.
+     *
+     * @param registrationDto The RegistrationDto to convert.
+     * @return The converted Registration entity.
+     */
+    public final Registration dtoToRegistration(
             final RegistrationDto registrationDto) {
         Registration registration = new Registration();
 
@@ -43,18 +57,17 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setUserRole("user");
         registration.setEmail(registrationDto.getEmail());
         registration.setPassword(registrationDto.getPassword());
-
-//	   registration.setType(userDto.getType());
         return registration;
     }
 
     /**
-     * Entity to dto conversion.
-     * 
-     * @param user entity
-     * @return converting entity to DTO
+     * Converts a Registration entity to a RegistrationDto.
+     *
+     * @param registration The Registration entity to convert.
+     * @return The converted RegistrationDto.
      */
-    public RegistrationDto RegistrationToDto(final Registration registration) {
+    public final RegistrationDto registrationToDto(
+            final Registration registration) {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setUserId(registration.getUserId());
         registrationDto.setFirstName(registration.getFirstName());
@@ -66,16 +79,28 @@ public class RegistrationServiceImpl implements RegistrationService {
         return registrationDto;
     }
 
-    public String addUser(RegistrationDto registrationDto)
+    /**
+     * Adds a new user registration.
+     *
+     * @param registrationDto The DTO containing user registration information.
+     * @return A message indicating the result of the operation.
+     * @throws UserEmailDomainException If the user's email domain is
+     *                                        invalid.
+     * @throws DuplicateMobileNumberException If the mobile number is already
+     *                                        registered.
+     * @throws DuplicateEmailException If the email address is already
+     *                                        registered.
+     */
+    public final String addUser(final RegistrationDto registrationDto)
             throws UserEmailDomainException, DuplicateMobileNumberException,
             DuplicateEmailException {
         if (registrationDto != null && registrationDto.getEmail() != null
                 && registrationDto.getPassword() != null) {
-            final String EMAIL_DOMAIN = "nucleusteq.com";
+            final String emailDomain = "nucleusteq.com";
 
-            if (!registrationDto.getEmail().endsWith("@" + EMAIL_DOMAIN)) {
+            if (!registrationDto.getEmail().endsWith("@" + emailDomain)) {
                 throw new UserEmailDomainException(
-                        "Email domain should be " + EMAIL_DOMAIN);
+                        "Email domain should be " + emailDomain);
             }
 
             Optional<Registration> existingUserByMobile = registrationRepository
@@ -103,14 +128,29 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 
-    public List<RegistrationDto> getAllRegistrations() {
+    /**
+     * Retrieves a list of all user registrations.
+     *
+     * @return A list of RegistrationDto objects representing user
+     *         registrations.
+     */
+    public final List<RegistrationDto> getAllRegistrations() {
         List<Registration> registrations = registrationRepository.findAll();
-        return registrations.stream().map(this::RegistrationToDto)
+        return registrations.stream().map(this::registrationToDto)
                 .collect(Collectors.toList());
     }
 
-    public Map<String, String> loginUser(RegistrationDto inputRegistrationDto)
-            throws LoginFailedException, UserNotFoundException {
+    /**
+     * Logs in a user.
+     *
+     * @param inputRegistrationDto The DTO containing user login credentials.
+     * @return A map containing login response information.
+     * @throws LoginFailedException  If the login attempt fails.
+     * @throws UserNotFoundException If the user is not found.
+     */
+    public final Map<String, String> loginUser(final
+            RegistrationDto inputRegistrationDto)throws
+             LoginFailedException, UserNotFoundException {
         Map<String, String> response = new HashMap<>();
 
         Registration foundRegistration = registrationRepository
@@ -123,11 +163,11 @@ public class RegistrationServiceImpl implements RegistrationService {
             boolean isRightPassword = passwordEncoder.matches(password,
                     encodedPassword);
             if (isRightPassword) {
-           Optional<Registration> optionalRegistration = registrationRepository
+            Optional<Registration> optionalRegistration = registrationRepository
                     .findByEmailAndPassword(inputRegistrationDto.getEmail(),
                             encodedPassword);
 
-            if (optionalRegistration.isPresent()) {
+          if (optionalRegistration.isPresent()) {
                 response.put("message", "Login Successfully");
                 response.put("status", "true");
                 response.put("role", foundRegistration.getUserRole());
@@ -135,10 +175,10 @@ public class RegistrationServiceImpl implements RegistrationService {
                 throw new LoginFailedException(
                         "Login failed. Please check your credentials.");
             }
-            } else {
-                throw new LoginFailedException(
-                        "Login failed. Please check your credentials.");
-            }
+          } else {
+            throw new LoginFailedException(
+                    "Login failed. Please check your credentials.");
+          }
         } else {
             throw new UserNotFoundException("User Does Not Exist");
         }
@@ -146,13 +186,20 @@ public class RegistrationServiceImpl implements RegistrationService {
         return response;
     }
 
+    /**
+     * Retrieves user information by user ID.
+     *
+     * @param userId The ID of the user to retrieve.
+     * @return The RegistrationDto representing the user.
+     * @throws UserNotFoundException If the user is not found.
+     */
     @Override
-    public RegistrationDto getUserById(int userId)
+    public final RegistrationDto getUserById(final int userId)
             throws UserNotFoundException {
         Registration registration = this.registrationRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(
                         "User not found with ID: " + userId));
-        return RegistrationToDto(registration);
+        return registrationToDto(registration);
     }
 
 }

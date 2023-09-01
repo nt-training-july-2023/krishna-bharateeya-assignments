@@ -5,41 +5,85 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * Entity class representing a question in a quiz.
+ */
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "quistionSeq", initialValue = 5010, allocationSize = 1)
+@SequenceGenerator(name = "quistionSeq",
+initialValue = Question.ID_INITIAL_VALUE, allocationSize = 1)
 public class Question {
 
+    /**
+     * Constant for initial value of question ID sequence.
+     */
+    public static final int ID_INITIAL_VALUE = 5010;
+
+    /**
+     * The ID of the question.
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quistionSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    generator = "quistionSeq")
     private int questionId;
 
+    /**
+     * The text of the question.
+     */
     @Column(nullable = false)
     private String questionText;
+
+    /**
+     * The first option for the question.
+     */
     @Column(nullable = false)
-    private String option_1;
+    private String optionOne;
+
+    /**
+     * The second option for the question.
+     */
     @Column(nullable = false)
-    private String option_2;
+    private String optionTwo;
+
+    /**
+     * The third option for the question.
+     */
     @Column(nullable = false)
-    private String option_3;
+    private String optionThree;
+
+    /**
+     * The forth option for the question.
+     */
     @Column(nullable = false)
-    private String option_4;
+    private String optionFour;
+
+    /**
+     * The correct option for the question.
+     */
     @Column(nullable = false)
     private int correctOption;
 
+    /**
+     * The option selected by the user (if applicable).
+     */
     private int userSelectedOption;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    /**
+     * The quiz to which the question belongs.
+     */
+//    @ManyToOne
+//    @JoinColumn(name = "quiz_id")
+//    private Quiz quiz;
 
 }

@@ -2,20 +2,52 @@ package com.nucleusteq.assessmentPlatform.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.nucleusteq.assessmentPlatform.entity.Category;
 
+import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+
+/**
+ * Service interface for managing categories.
+ */
 @Service
 public interface CategoryService {
 
-    public String addCategory(Category category);
+    /**
+     * Adds a new category.
+     *
+     * @param categoryDto The DTO containing category information.
+     * @return A message indicating the result of the operation.
+     */
+    String addCategory(CategoryDto categoryDto);
 
-    public Category getCategoryById(int id);
+    /**
+     * Retrieves a category by its ID.
+     *
+     * @param id The ID of the category to retrieve.
+     * @return The retrieved CategoryDto.
+     */
+    CategoryDto getCategoryById(int id);
 
-    public List<Category> getAllCategory();
+    /**
+     * Retrieves all categories.
+     *
+     * @return A list of all CategoryDtos.
+     */
+    List<CategoryDto> getAllCategory();
 
-//	Category updateCategory(Category category);
-    void deleteCategory(int categoryId);
+    /**
+     * Deletes a category.
+     *
+     * @param categoryId The ID of the category to delete.
+     * @return A message indicating the result of the operation.
+     */
+    String deleteCategory(int categoryId);
 
-    public Category updateCategory(Category category);
+    /**
+     * Updates a category.
+     *
+     * @param categoryDto The updated category information.
+     * @return The updated CategoryDto.
+     */
+    CategoryDto updateCategory(CategoryDto categoryDto);
 
 }

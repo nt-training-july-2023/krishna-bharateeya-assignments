@@ -6,34 +6,69 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+/**
+ * Entity class representing user registration information.
+ */
 @Entity
-@Data
-@SequenceGenerator(name = "userSeq", initialValue = 1010, allocationSize = 1)
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@SequenceGenerator(name = "userSeq",
+initialValue = Registration.ID_INITIAL_VALUE, allocationSize = 1)
 public class Registration {
 
+    /**
+     * Constant for initial value of Registration ID sequence.
+     */
+    public static final int ID_INITIAL_VALUE = 1010;
+
+    /**
+     * The ID of the user.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeq")
-    int userId;
+    private int userId;
 
+    /**
+     * The first name of the user.
+     */
     @Column(nullable = false)
-    String firstName;
+    private String firstName;
 
+    /**
+     * The last name of the user.
+     */
     @Column(nullable = false)
-    String lastName;
+    private String lastName;
 
+    /**
+     * The mobile number of the user.
+     */
     @Column(nullable = false, unique = true)
-    String mobileNumber;
+    private String mobileNumber;
 
+    /**
+     * The role of the user.
+     */
     @Column(nullable = false)
-    String userRole;
+    private String userRole;
 
+    /**
+     * The email address of the user.
+     */
     @Column(nullable = false, unique = true)
-    String email;
+    private String email;
 
+    /**
+     * The password of the user.
+     */
     @Column(nullable = false)
-    String password;
+    private String password;
 
 }
