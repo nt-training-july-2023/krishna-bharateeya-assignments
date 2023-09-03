@@ -96,9 +96,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             DuplicateEmailException {
         if (registrationDto != null && registrationDto.getEmail() != null
                 && registrationDto.getPassword() != null) {
-            final String emailDomain = "nucleusteq.com";
+            final String emailDomain = "@nucleusteq.com";
 
-            if (!registrationDto.getEmail().endsWith("@" + emailDomain)) {
+            if (!registrationDto.getEmail().endsWith(emailDomain)) {
                 throw new UserEmailDomainException(
                         "Email domain should be " + emailDomain);
             }

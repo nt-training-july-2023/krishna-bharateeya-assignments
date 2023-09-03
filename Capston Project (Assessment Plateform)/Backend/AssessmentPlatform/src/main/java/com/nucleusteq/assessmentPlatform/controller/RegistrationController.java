@@ -1,7 +1,9 @@
 package com.nucleusteq.assessmentPlatform.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,8 @@ import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * Controller class for handling user registration and login.
@@ -30,6 +34,12 @@ public class RegistrationController {
      */
     @Autowired
     private RegistrationService registrationService;
+    
+    /**
+     * this is logger object that is use to generate the object.
+     */
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(RegistrationController.class);
+    
 
     /**
      * Registers a new user.
@@ -41,9 +51,13 @@ public class RegistrationController {
     @PostMapping(path = "/save")
     public final String saveUser(@RequestBody final RegistrationDto user)
             throws UserEmailDomainException {
-
+        logger.info("Received a request to save a new user.");
+        try {
         return registrationService.addUser(user);
-
+        } catch (UserEmailDomainException e) {
+            logger.error("Error while saving user: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -57,8 +71,16 @@ public class RegistrationController {
     public final Map<String, String> loginUser(
             @RequestBody final RegistrationDto user)
             throws UserNotFoundException {
+        logger.info("Received a login request for user: {}", user.getFirstName());
+        try {
         Map<String, String> response = registrationService.loginUser(user);
+        logger.info("User {} logged in successfully.", user.getFirstName());
+
         return response;
+        }catch (UserNotFoundException e) {
+            logger.error("User login failed: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
@@ -73,9 +95,21 @@ public class RegistrationController {
     public final RegistrationDto getUserById(
             @PathVariable("id")final int userId)
             throws UserNotFoundException {
+        logger.info("Received a request for user id: {}", userId);
+        try {
         RegistrationDto registrationDto = this.registrationService
                 .getUserById(userId);
+        logger.info("User {} found successfully.", userId);
+
         return registrationDto;
+        }catch (UserNotFoundException e) {
+            logger.error("User does not exist: " + e.getMessage());
+            throw e;
+        }
     }
 
+    @GetMapping("/get/all")
+    public List<RegistrationDto> getAllUsers() {
+        return registrationService.getAllRegistrations();
+    }
 }

@@ -1,8 +1,7 @@
-package com.nucleusteq.assessmentPlatform.service;
+package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -29,11 +28,9 @@ import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
-import com.nucleusteq.assessmentPlatform.service.serviceImpl.RegistrationServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-class RegistrationServiceTest {
-
+class RegistrationServiceImplTest {
     @Mock
     private RegistrationRepository registrationRepository;
     
@@ -56,11 +53,10 @@ class RegistrationServiceTest {
         registrationDto.setLastName("User");
         registrationDto.setMobileNumber("1234567890");
 
-        // Mock behavior for UserRepository
+
         when(registrationRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         when(registrationRepository.findByMobileNumber(anyString())).thenReturn(Optional.empty());
 
-        // Mock behavior for PasswordEncoder
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
 
         String resultMessage = registrationService.addUser(registrationDto);
@@ -73,7 +69,6 @@ class RegistrationServiceTest {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setEmail("test@example.com");
 
-        // Mock behavior for UserRepository
         when(registrationRepository.findByEmail(anyString())).thenReturn(Optional.of(new Registration()));
 
         assertThrows(DuplicateEmailException.class, () -> registrationService.addUser(registrationDto));
@@ -84,7 +79,6 @@ class RegistrationServiceTest {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setMobileNumber("1234567890");
 
-        // Mock behavior for UserRepository
         when(registrationRepository.findByMobileNumber(anyString())).thenReturn(Optional.of(new Registration()));
 
         assertThrows(DuplicateMobileNumberException.class, () -> registrationService.addUser(registrationDto));
@@ -100,26 +94,25 @@ class RegistrationServiceTest {
     
     
     @Test
-    public void testRegisterUser_Success() throws LoginFailedException, UserNotFoundException {
-        RegistrationDto registrationDto = new RegistrationDto();
-        registrationDto.setEmail("test@nucleusteq.com");
-        registrationDto.setPassword("password");
+    public void testLoginUser_Success() throws LoginFailedException, UserNotFoundException {
+        RegistrationDto inputDto = new RegistrationDto();
+        inputDto.setEmail("test@nucleusteq.com");
+        inputDto.setPassword("password");
 
         Registration registration = new Registration();
-        registration.setEmail(registrationDto.getEmail());
-        registration.setPassword(registrationDto.getPassword());
+        registration.setEmail("test@nucleusteq.com");
+        registration.setPassword("password");
 
-        when(registrationRepository.getByEmail(anyString())).thenReturn(null);
-        when(passwordEncoder.encode(anyString())).thenReturn("hashedPassword");
-        when(registrationRepository.save(any(Registration.class))).thenReturn(registration);
+        when(registrationRepository.getByEmail(anyString())).thenReturn(registration);
 
-        Map<String, String> response = registrationService.loginUser(registrationDto);
+        when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
 
-        assertEquals("Registration Successful", response.get("message"));
+        Map<String, String> response = registrationService.loginUser(inputDto);
+
+        assertEquals("Login Successfully", response.get("message"));
         assertEquals("true", response.get("status"));
         assertEquals("user", response.get("role"));
     }
-
 
     @Test
     public void testLoginUser_WrongPassword() {
@@ -130,7 +123,6 @@ class RegistrationServiceTest {
         Registration registration = new Registration();
         registration.setEmail("test@example.com");
         registration.setPassword("encodedPassword");
-
 
         when(registrationRepository.getByEmail(anyString())).thenReturn(registration);
 
@@ -144,7 +136,6 @@ class RegistrationServiceTest {
         RegistrationDto inputDto = new RegistrationDto();
         inputDto.setEmail("test@example.com");
         inputDto.setPassword("password");
-
         when(registrationRepository.getByEmail(anyString())).thenReturn(null);
 
         assertThrows(UserNotFoundException.class, () -> registrationService.loginUser(inputDto));

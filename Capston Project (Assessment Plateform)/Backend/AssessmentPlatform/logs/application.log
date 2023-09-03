@@ -1,0 +1,654 @@
+2023-09-03 20:14:07 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Starting AssessmentPlatformApplication using Java 17.0.8 with PID 8136 (D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform\target\classes started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 20:14:07 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 20:14:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 20:14:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 2 JPA repository interfaces.
+2023-09-03 20:14:08 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-09-03 20:14:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-03 20:14:08 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-09-03 20:14:08 [restartedMain] INFO  o.a.c.c.C.[Tomcat-4].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-03 20:14:08 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 432 ms
+2023-09-03 20:14:08 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+2023-09-03 20:14:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2023-09-03 20:14:08 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-09-03 20:14:08 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+2023-09-03 20:35:27 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Starting AssessmentPlatformApplication using Java 17.0.8 with PID 8136 (D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform\target\classes started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 20:35:27 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 20:35:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 20:35:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 29 ms. Found 2 JPA repository interfaces.
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-09-03 20:35:28 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-03 20:35:28 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-09-03 20:35:28 [restartedMain] INFO  o.a.c.c.C.[Tomcat-5].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 697 ms
+2023-09-03 20:35:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 20:35:28 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 20:35:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2023-09-03 20:35:28 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@64ade267
+2023-09-03 20:35:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2023-09-03 20:35:28 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:28 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 20:35:28 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-09-03 20:35:28 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Started AssessmentPlatformApplication in 1.656 seconds (process running for 12852.569)
+2023-09-03 20:35:28 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2023-09-03 20:35:46 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 36 class path changes (0 additions, 5 deletions, 31 modifications)
+2023-09-03 20:35:46 [Thread-11] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2023-09-03 20:35:46 [Thread-11] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 20:35:46 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2023-09-03 20:35:46 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2023-09-03 20:35:47 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Starting AssessmentPlatformApplication using Java 17.0.8 with PID 8136 (D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform\target\classes started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 20:35:47 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 2 JPA repository interfaces.
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-09-03 20:35:47 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-03 20:35:47 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-09-03 20:35:47 [restartedMain] INFO  o.a.c.c.C.[Tomcat-5].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 435 ms
+2023-09-03 20:35:47 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 20:35:47 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 20:35:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2023-09-03 20:35:47 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@23fa1ea0
+2023-09-03 20:35:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2023-09-03 20:35:47 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:47 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 20:35:47 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 20:35:47 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-09-03 20:35:48 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-09-03 20:35:48 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Started AssessmentPlatformApplication in 1.115 seconds (process running for 12871.68)
+2023-09-03 20:35:48 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2023-09-03 20:35:52 [RMI TCP Connection(100)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2023-09-03 20:35:52 [RMI TCP Connection(100)-127.0.0.1] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2023-09-03 20:35:52 [RMI TCP Connection(100)-127.0.0.1] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 20:35:52 [RMI TCP Connection(100)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+2023-09-03 20:35:52 [RMI TCP Connection(100)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+2023-09-03 20:35:55 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Starting AssessmentPlatformApplication using Java 17.0.8 with PID 27000 (D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform\target\classes started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 20:35:55 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 20:35:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-03 20:35:55 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-03 20:35:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 20:35:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 91 ms. Found 2 JPA repository interfaces.
+2023-09-03 20:35:57 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-09-03 20:35:57 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-03 20:35:57 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-09-03 20:35:57 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-03 20:35:57 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1871 ms
+2023-09-03 20:35:57 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 20:35:57 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 20:35:57 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 20:35:57 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:57 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 20:35:57 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 20:35:58 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@63751753
+2023-09-03 20:35:58 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 20:35:58 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 20:35:59 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 20:35:59 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 20:36:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 20:36:00 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-09-03 20:36:00 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-09-03 20:36:00 [restartedMain] INFO  c.n.a.AssessmentPlatformApplication - Started AssessmentPlatformApplication in 6.133 seconds (process running for 7.019)
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 20:36:28 [http-nio-8080-exec-3] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 20:40:01 [http-nio-8080-exec-5] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 20:40:01 [http-nio-8080-exec-5] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 20:40:01 [http-nio-8080-exec-5] WARN  o.s.w.s.m.a.ResponseStatusExceptionResolver - Resolved [com.nucleusteq.assessmentPlatform.exception.LoginFailedException: Login failed. Please check your credentials.]
+2023-09-03 22:19:25 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h29m56s467ms954µs300ns).
+2023-09-03 22:28:08 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m43s185ms902µs100ns).
+2023-09-03 22:57:56 [http-nio-8080-exec-8] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 22:57:56 [http-nio-8080-exec-8] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 22:57:56 [http-nio-8080-exec-8] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 22:57:56 [http-nio-8080-exec-8] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:10:33 [http-nio-8080-exec-10] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:10:33 [http-nio-8080-exec-10] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:10:33 [http-nio-8080-exec-10] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:10:33 [http-nio-8080-exec-10] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:10:59 [http-nio-8080-exec-1] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:10:59 [http-nio-8080-exec-1] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:10:59 [http-nio-8080-exec-1] WARN  o.s.w.s.m.a.ResponseStatusExceptionResolver - Resolved [com.nucleusteq.assessmentPlatform.exception.LoginFailedException: Login failed. Please check your credentials.]
+2023-09-03 23:12:10 [http-nio-8080-exec-2] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:12:10 [http-nio-8080-exec-2] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:12:10 [http-nio-8080-exec-2] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:12:10 [http-nio-8080-exec-2] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:34:25 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 33540 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:34:25 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 33540 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:34:25 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:34:25 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:34:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:34:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 130 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:34:28 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:34:28 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 23:34:28 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 23:34:29 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:34:29 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:34:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 23:34:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bd15c71
+2023-09-03 23:34:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 23:34:31 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:34:32 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:34:32 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:34:33 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:34:34 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-03 23:34:34 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-03 23:34:34 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.362 seconds (process running for 19.281)
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.362 seconds (process running for 19.281)
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:34:34 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:34:34 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:34:34 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:34:34 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:34:34 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:34:35 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-03 23:34:35 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-03 23:34:35 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 33540 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:34:35 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:34:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:34:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:34:36 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:34:36 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:34:36 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:34:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-03 23:34:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c10a403
+2023-09-03 23:34:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-03 23:34:36 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:34:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:34:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:34:37 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:34:37 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.675 seconds (process running for 22.426)
+2023-09-03 23:34:38 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-03 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-03 23:34:39 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-03 23:34:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-03 23:50:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 25900 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:50:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 25900 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:50:47 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:50:47 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:50:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:50:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 132 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:50:50 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:50:50 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 23:50:50 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 23:50:51 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:50:51 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:50:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 23:50:52 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61deb03f
+2023-09-03 23:50:52 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 23:50:53 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:50:54 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:50:54 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:50:55 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:50:56 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-03 23:50:56 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-03 23:50:56 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.551 seconds (process running for 19.266)
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.551 seconds (process running for 19.266)
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:50:56 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:50:56 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:50:56 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:50:56 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:50:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:50:57 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:50:57 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:50:57 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-03 23:50:57 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-03 23:50:57 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 25900 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:50:57 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:50:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:50:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:50:58 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:50:58 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:50:58 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:50:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-03 23:50:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ab768c7
+2023-09-03 23:50:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-03 23:50:58 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:50:58 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:50:58 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:50:59 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:50:59 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.622 seconds (process running for 22.395)
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-03 23:51:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-03 23:51:29 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 6576 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:51:29 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 6576 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:51:29 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:51:29 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:51:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:51:31 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 126 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:51:32 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:51:32 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 23:51:32 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 23:51:33 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:51:33 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:51:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 23:51:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@281aecc8
+2023-09-03 23:51:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 23:51:35 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:51:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:51:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:37 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:51:38 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-03 23:51:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-03 23:51:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.623 seconds (process running for 19.455)
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.623 seconds (process running for 19.455)
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:51:38 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:51:38 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:51:38 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:51:38 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:51:38 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:51:39 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-03 23:51:39 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-03 23:51:39 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 6576 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:51:39 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:51:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:51:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:51:40 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:51:40 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:51:40 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:51:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-03 23:51:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f5e34c3
+2023-09-03 23:51:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-03 23:51:40 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:51:40 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:51:40 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:41 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:51:41 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.8 seconds (process running for 22.714)
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-03 23:51:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-03 23:52:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 24984 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:52:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 24984 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:52:47 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:52:47 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:52:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:52:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 149 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:52:50 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:52:50 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 23:52:50 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 23:52:51 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:52:51 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:52:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 23:52:52 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6eb5f95d
+2023-09-03 23:52:52 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 23:52:53 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:52:54 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:52:54 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:52:55 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:52:56 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-03 23:52:56 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-03 23:52:56 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.708 seconds (process running for 19.468)
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.708 seconds (process running for 19.468)
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:52:56 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:52:56 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:52:56 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:52:56 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:52:56 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:52:57 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-03 23:52:57 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-03 23:52:57 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 24984 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:52:57 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:52:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:52:58 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:52:58 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:52:58 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:52:58 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:52:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-03 23:52:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ff0bb6
+2023-09-03 23:52:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-03 23:52:58 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:52:58 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:52:58 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:52:59 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:52:59 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.821 seconds (process running for 22.868)
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-03 23:53:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-03 23:58:31 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 27992 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:58:31 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 27992 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:58:31 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:58:31 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:58:34 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:58:34 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-03 23:58:34 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-03 23:58:35 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:58:35 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:58:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-03 23:58:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44bc7dc9
+2023-09-03 23:58:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-03 23:58:37 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:58:38 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:58:38 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:58:39 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:58:40 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-03 23:58:40 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-03 23:58:40 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.502 seconds (process running for 18.95)
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.502 seconds (process running for 18.95)
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:58:40 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:58:40 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-03 23:58:40 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:58:40 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:58:40 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-03 23:58:41 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-03 23:58:41 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-03 23:58:41 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 27992 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-03 23:58:41 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-03 23:58:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-03 23:58:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
+2023-09-03 23:58:42 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-03 23:58:42 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:58:42 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-03 23:58:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-03 23:58:42 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6df3efab
+2023-09-03 23:58:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-03 23:58:42 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-03 23:58:42 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-03 23:58:42 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:58:42 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-03 23:58:43 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.749 seconds (process running for 22.074)
+2023-09-03 23:58:44 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:58:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-03 23:58:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-03 23:58:45 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-03 23:58:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-03 23:58:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-04 00:02:17 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 22156 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:02:17 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 22156 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:02:17 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:02:17 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:02:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:02:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 124 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:02:20 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:02:20 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-04 00:02:20 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-04 00:02:21 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:02:21 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:02:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-04 00:02:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4fc8ebe7
+2023-09-04 00:02:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-04 00:02:23 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:02:24 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:02:24 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:02:25 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:02:26 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-04 00:02:26 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-04 00:02:26 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.373 seconds (process running for 18.934)
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.373 seconds (process running for 18.934)
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:02:26 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:02:26 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:02:26 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:02:26 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:02:26 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:02:27 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-04 00:02:27 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-04 00:02:27 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 22156 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:02:27 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:02:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:02:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:02:28 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:02:28 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:02:28 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:02:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-04 00:02:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2aaa0bf1
+2023-09-04 00:02:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-04 00:02:28 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:02:28 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:02:28 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:02:29 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:02:29 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.788 seconds (process running for 22.124)
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-04 00:02:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-04 00:04:46 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 40760 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:04:46 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 40760 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:04:46 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:04:46 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:04:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:04:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 137 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:04:49 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:04:49 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-04 00:04:49 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-04 00:04:50 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:04:50 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:04:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-04 00:04:50 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58b709c9
+2023-09-04 00:04:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-04 00:04:51 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:04:53 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:04:53 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:04:54 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:04:54 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-04 00:04:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-04 00:04:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.408 seconds (process running for 18.773)
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.408 seconds (process running for 18.773)
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:04:54 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:04:54 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:04:54 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:04:55 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:04:55 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:04:55 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:04:56 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-04 00:04:56 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-04 00:04:56 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 40760 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:04:56 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:04:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:04:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:04:56 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:04:57 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:04:57 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:04:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-04 00:04:57 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@352ae819
+2023-09-04 00:04:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-04 00:04:57 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:04:57 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:04:57 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:04:57 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:04:57 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.644 seconds (process running for 21.82)
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-04 00:04:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-09-04 00:12:39 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 29416 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:12:39 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 29416 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:12:39 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:12:39 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:12:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:12:41 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:12:42 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:12:42 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-04 00:12:42 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-04 00:12:42 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:12:42 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:12:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-04 00:12:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@22678487
+2023-09-04 00:12:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-04 00:12:44 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:12:46 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:12:46 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:12:47 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:12:47 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-04 00:12:47 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-04 00:12:47 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.458 seconds (process running for 19.016)
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 9.458 seconds (process running for 19.016)
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:12:47 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:12:47 [main] ERROR c.n.a.c.RegistrationController - Error while saving user: Email domain should be @nucleusteq.com
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - User null logged in successfully.
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:12:47 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: null
+2023-09-04 00:12:48 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:12:48 [main] ERROR c.n.a.c.RegistrationController - User login failed: User Does Not Exist
+2023-09-04 00:12:48 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:12:48 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1012
+2023-09-04 00:12:48 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:12:48 [main] INFO  c.n.a.c.RegistrationController - User 1012 found successfully.
+2023-09-04 00:12:49 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-04 00:12:49 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-04 00:12:49 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 29416 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-04 00:12:49 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 00:12:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-04 00:12:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 2 JPA repository interfaces.
+2023-09-04 00:12:49 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-04 00:12:49 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:12:49 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-04 00:12:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-09-04 00:12:50 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@327ac426
+2023-09-04 00:12:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-09-04 00:12:50 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-04 00:12:50 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-04 00:12:50 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:12:50 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-04 00:12:50 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 1.742 seconds (process running for 22.118)
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-09-04 00:12:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
