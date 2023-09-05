@@ -12,6 +12,8 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 
+import jakarta.transaction.Transactional;
+
 /**
  * Implementation of the CategoryService interface for managing categories.
  */
@@ -77,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return A list of CategoryDto objects representing categories.
      */
     @Override
-    public final List<CategoryDto> getAllCategory() {
+    public List<CategoryDto> getAllCategory() {
 
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()

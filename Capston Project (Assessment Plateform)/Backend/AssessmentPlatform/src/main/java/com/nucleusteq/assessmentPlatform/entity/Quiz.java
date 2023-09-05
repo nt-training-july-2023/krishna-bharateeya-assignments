@@ -1,12 +1,13 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import javax.persistence.JoinColumn;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @SequenceGenerator(name = "quizSeq",
 initialValue = Quiz.ID_INITIAL_VALUE, allocationSize = 1)
 public class Quiz {
@@ -42,12 +42,62 @@ public class Quiz {
      */
     @Column(nullable = false)
     private String quizName;
+    
+    
+    @Column(nullable = false)
+    private String quizDescription;
 
     /**
      * The category to which the quiz belongs.
      */
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
+    
+    /**
+     * The time of the Quiz.
+     */
+    
+    private int timeInMinutes;
+    
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
+    
+    /**
+     * get category.
+     * @return category
+     */
+    public Category getCategory() {
+        return new Category(category.getCategoryId(),
+                category.getCategoryName(),
+                category.getDescription());
+    }
+    
+    
+    /**
+     * set Category.
+     * @param cate cate
+     */
+    public void setCategory(final Category cate) {
+        this.category = new Category(cate.getCategoryId(),
+                cate.getCategoryName(),
+                cate.getDescription());
+    }
+    
+    
+    /**
+     * parameter constructor for subcategory.
+     * @param subCategoryid subCategoryid
+     * @param subcategoryName subcategoryName
+     * @param subcategoryDescription subcategoryDescription
+     * @param timelimitInMinutes timelimitInMinutes
+     */
+    public Quiz(final int quizId,
+            final String quizName,
+            final String quizDescription,
+            final int timInMinutes) {
+        this.quizId = quizId;
+        this.quizName = quizName;
+        this.quizDescription = quizDescription;
+        this.timeInMinutes = timInMinutes;
+    }
 }
