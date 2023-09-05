@@ -48,6 +48,9 @@ const Registration = () => {
         if (number.length < 10) {
             return 'Please enter 10 digits mobile number';
         }
+        if (number.length > 10) {
+            return 'Please enter 10 digits mobile number only';
+        }
         return '';
     };
     const validateEmail = (value) => {

@@ -1,147 +1,123 @@
-/* AdminHome.css */
+.admin-home-container {
+  
+ 
+  box-shadow: 3px 3px 5px 5px #939fd4;
+  margin-top: 15px;
+  border: none;
+  
+}
 
-/* Body Styles */
-body {
-    background-color: #fcde57;
-  }
+
+
+.admin-home-wrapper {
   
-  /* Container Styles */
-  .admin-dashboard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-  }
+  box-sizing: border-box;
+}
+
+.admin-main-container{
+  display: flex;
   
-  .admin-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
+}
+
+.admin-column{
+  flex: 1;
+  padding: 5px;
+}
+
+.admin-home-card {
+  box-shadow: 3px 3px 5px 5px #939fd4;
+  margin-top: 15px;
+  border: none;
+  width: 100%;
+}
+
+.admin-home-card-header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-home-card-header h3 {
+  margin: 0;
+}
+
+.admin-home-card-body {
+  padding: 1px;
+}
+
+.admin-logout-button {
+  margin-top: 20px;
+  margin-right: auto;
+  width: 70px;
+  padding: 10px 0;
+  font-size: 18px; 
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  cursor: pointer;
+  transition: background-color 0.3s;
   
+}
+
+.admin-logout-button:hover {
+  background-color: #c0392b;
+}
+
+.admin-home-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-home-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #d4c5c5; 
+}
+
+.admin-home-table th, .admin-home-table td {
+  padding: 11px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.admin-home-table th {
+  background-color: #f8f9fa;
+}
+
+.admin-home-table-secondary th {
+  color: white;
+  background-color: #101885;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .admin-home-container {
+    max-width: 100%;
+    margin-left: 50px;
+  }
+
+  .admin-main-container {
+    flex-direction: column;
+  }
+
   .admin-column {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 5px;
+    width: 100%;
   }
-  
-  /* Button Styles */
-  .admin-button {
-    width: 180px; /* Fixed width for the buttons */
-    padding: 15px 0;
-    margin: 15px; /* Increased margin for spacing */
-    font-size: 18px; /* Increased font size */
-    background-color: #279123;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Rounded corners for a nicer look */
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  .admin-home-card {
+    width: 100%;
   }
-  
-  .admin-button:hover {
-    background-color: #16681a;
-  }
-  
+
   .admin-logout-button {
-    margin-top: 20px;
-    margin-right: auto;
-    width: 70px; /* Fixed width for the buttons */
-    padding: 10px 0;
-    font-size: 18px; /* Increased font size */
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Rounded corners for a nicer look */
-    cursor: pointer;
-    transition: background-color 0.3s;
-    
-  }
-  
-  .admin-logout-button:hover {
-    background-color: #c0392b;
-  }
-  
-  /* Login Form Styles */
-  
-  
-  .admin-homeContainer {
-    width: 900px;
-    box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    border-radius: 8px;
-    background-color: whitesmoke;
-  }
-  
-  .form-content {
-    padding-left: 12%;
-    padding-right: 12%;
-  }
-  
-  .form-title {
-    text-align: center;
-    margin-bottom: 1em;
-    font-size: 24px;
-    color: #222;
-    font-weight: 800;
-  }
-  
-  .form-group {
-    margin-top: 1.5rem;
-  }
-  
-  .form-control {
     width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
-  
-  .form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-  
-  .login-submit {
-    display: grid;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-  }
-  
-  .login-submit button {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    background-color: #09a122;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .login-submit button:hover {
-    background-color: #0e6b11;
-  }
-  
-  .link-primary {
-    cursor: pointer;
-    color: blue;
-  }
-  
-  .text-center {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
+
+}
+
+
+
+

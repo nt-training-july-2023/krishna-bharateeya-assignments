@@ -1,30 +1,64 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
+import './AddCategory.css';
+import Sidebar from "../AdminHome/Sidebar";
+import UnauthorizedAccess from "../UnauthrizedAccess/UnauthorizedAccess";
 const AddCategory = () => {
+
+    const [categoryName, setCategoryName] = useState('');
+    const [categoryNameError, setCategoryNameError] = useState('');
+
+    const [description, setDescription] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+
     const [formData, setFormData] = useState({
         categoryName: '',
         description: ''
     });
 
+    const validateNotEmpty = (value) => {
+        if (!value.trim()) {
+            return 'This field is required';
+        }
+        return '';
+    };
+
+    const handleCategoryNameChange = (value) => {
+        setCategoryName(value);
+        setCategoryNameError(validateNotEmpty(value));
+    };
+
+    const handleDescriptionChange = (value) => {
+        setDescription(value);
+        setDescriptionError(validateNotEmpty(value));
+    };
+
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormData((prevState) => ({ ...prevState, [id]: value }));
-    };
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        const categoryNameChangeValidation = validateNotEmpty(categoryName);
+        const descriptionChangeValidation = validateNotEmpty(description);
+
+        setCategoryNameError(categoryNameChangeValidation);
+        setDescriptionError(descriptionChangeValidation);
+
+        if (categoryNameChangeValidation || descriptionChangeValidation) {
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
-            const response = await axios.post('http://localhost:8080/category/save', formData);
+            const response = await axios.post('http://localhost:8080/category/save', {
+                categoryName,
+                description
+            });
             console.log(response.data);
-            navigate("/categoryHome"); 
-
+            navigate("/categoryHome");
         } catch (error) {
             console.error("An error occurred:", error);
         } finally {
@@ -32,65 +66,81 @@ const AddCategory = () => {
         }
     };
 
+    const userRole = localStorage.getItem('userRole');
+    if (userRole !== 'admin') {
+        return (
+            <UnauthorizedAccess/>
+        );
+    }
     return (
-        <div className="category-container">
-            <div className="container">
-                <div className="card" style={{ boxShadow: '3px 3px 5px 5px #939fd4', marginTop: '20px', minHeight: '60vh' }}>
-                    <div className="card-header">
-                        <h3>Add Category</h3>
-                    </div>
-                    <form onSubmit={handleFormSubmit} className="">
-                        <div className="card-body">
-                            <center>
-                                <div className="card" style={{ width: '70%', height: '35vh' }}>
-                                    <div className="card-body">
-                                        <div className="form-floating my-3 mb-3">
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="categoryName"
-                                                name="name"
-                                                placeholder="Category Name"
-                                                value={formData.categoryName}
-                                                onChange={handleInputChange}
-                                                required
-                                            />
-                                            <label htmlFor="name">Category Name</label>
-                                        </div>
 
-                                        <div className="form-floating my-3 mb-3">
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="description"
-                                                name="description"
-                                                placeholder="Category Description"
-                                                value={formData.description}
-                                                onChange={handleInputChange}
-                                                required
-                                            />
-                                            <label htmlFor="description">Category Description</label>
-                                        </div>
+        <div className="add-category-wrapper">
 
-                                        <div className="d-grid gap-2">
-                                            <button type="submit" className="button btn-user my-3 mb-3" disabled={isSubmitting}>
-                                                {isSubmitting ? 'Adding...' : 'Add'}
-                                            </button>
-                                        </div>
+            <div className="add-category-container">
 
-                                        <div className="d-grid gap-2">
-                                            <button type="button" className="button button-delete mb-3" onClick={() => navigate("/categoryHome")} >
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
+                <div className='add-category-siderbar-column'>
+                    <Sidebar />
+                </div>
+                <div className='add-category-column'>
+                    <form onSubmit={handleFormSubmit} className="add-category-form">
+                        <h2 className="category-title">Add Category</h2>
+                        <div className="add-category-form-content">
+                            <div className={`form-group ${categoryNameError ? 'has-error' : ''}`}>
+                                {categoryNameError && <p className="error-message">{categoryNameError}</p>}
+                                <div className={`category-form-container ${categoryNameError ? 'error-field' : ''}`}>
+                                    <input
+                                        type="text"
+                                        className="category-form-control"
+                                        id="categoryName"
+                                        name="name"
+                                        placeholder="Category Name"
+                                        value={categoryName}
+                                        onChange={(e) => handleCategoryNameChange(e.target.value)}
+                                    />
                                 </div>
-                            </center>
+                            </div>
+
+                            <div className={`form-group ${descriptionError ? 'has-error' : ''}`}>
+                                {descriptionError && <p className="error-message">{descriptionError}</p>}
+                                <div className={`category-form-container ${descriptionError ? 'error-field' : ''}`}>
+                                    <textarea
+                                        type="text"
+                                        className="category-form-control"
+                                        id="description"
+                                        name="description"
+                                        placeholder="Category Description"
+                                        value={description}
+                                        onChange={(e) => handleDescriptionChange(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div className="button-container">
+                                <button
+                                    type="submit"
+                                    className="category-submit-button"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? 'Adding...' : 'Add'}
+                                </button>
+                                <button
+                                    type="button"
+                                    className="category-cancel-button"
+                                    onClick={() => navigate("/categoryHome")}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
                         </div>
+
+
+
                     </form>
                 </div>
             </div>
         </div>
+
     );
 }
 

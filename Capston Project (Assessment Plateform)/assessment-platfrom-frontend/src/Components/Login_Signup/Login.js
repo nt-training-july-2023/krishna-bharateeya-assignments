@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
+import Sidebar from '../AdminHome/Sidebar';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -69,13 +69,10 @@ const Login = () => {
                 navigate('/userHome');
             }
     
-            localStorage.setItem('IsLoggedIn', response.data.status);
-            localStorage.setItem('userRole', response.data.role);
-    
             toast.success(response.data.message);
             console.log('Login successful!', response.data);
         } catch (error) {
-            toast.error(error.response);
+            toast.error(error.response.data.message);
             console.error('Login failed:', error);
         }
     };
@@ -85,12 +82,14 @@ const Login = () => {
 
     return (
         <div className="login-container">
+            {/* <Sidebar /> */}
             <form className="login-form" onSubmit={handleLogin}>
                 <h2 className="form-title">Login</h2>
                 <div className="form-content">
 
                     <div className={`form-group ${emailError ? 'has-error' : ''}`}>
                         {emailError && <p className="error-message">{emailError}</p>}
+                        
                         <input
                             type="text"
                             className={`form-control ${emailError ? 'error-field' : ''}`}

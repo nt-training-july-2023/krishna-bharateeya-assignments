@@ -1,0 +1,27 @@
+.unauthorized-access-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; 
+  }
+  
+  .unauthorized-access-content {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .unauthorized-access-title {
+    font-size: 24px;
+    color: #e74c3c; 
+  }
+  
+  .unauthorized-access-message {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333; 
+  }
+  

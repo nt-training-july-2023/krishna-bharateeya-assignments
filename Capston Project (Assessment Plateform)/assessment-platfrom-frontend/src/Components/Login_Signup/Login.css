@@ -1,8 +1,11 @@
 /* Login.css */
 body {
-  background-color: #fcde57;
+  background-color: #abc6e6;
 }
-
+/* #F4F5FF
+#E8F1FB
+#D9E7F7
+#673EE6 */
 .login-container {
   display: flex;
   justify-content: center;
@@ -71,9 +74,9 @@ body {
   background-color: #09a122;
   color: white;
   cursor: pointer;
-  /* transition: background-color 0.3s ease-in-out; */
+  
   &:hover {
-    background-color: #0e6b11; 
+    background-color: #038d08; 
 }
   
 }
@@ -86,14 +89,6 @@ body {
   margin-top: 1rem; 
 }
 
-.toast-success {
-  background-color: green;
-  color: white;
-}
 
-.toast-error {
-  background-color: red;
-  color: white;
-}
 
 
