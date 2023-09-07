@@ -14667,3 +14667,727 @@ Caused by: java.lang.IllegalArgumentException: object is not an instance of decl
 2023-09-07 17:30:46 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-07 17:30:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-09-07 17:30:46 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 17:36:54 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35908 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:36:54 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35908 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:36:54 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:36:54 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:36:55 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:36:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:36:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-07 17:36:55 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.643 seconds (process running for 5.796)
+2023-09-07 17:36:55 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.643 seconds (process running for 5.796)
+2023-09-07 17:36:55 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:36:55 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35908 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35908 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:36:55 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:36:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:36:55 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.266 seconds (process running for 6.155)
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.266 seconds (process running for 6.155)
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:36:55 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:36:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:36:56 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:36:56 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:36:56 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:36:56 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:36:56 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 17:36:56 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 35908 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:36:56 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:36:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 17:36:57 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 61 ms. Found 3 JPA repository interfaces.
+2023-09-07 17:36:57 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 17:36:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 17:36:57 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 17:36:58 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:36:58 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 17:36:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 17:36:58 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61e8e00b
+2023-09-07 17:36:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 17:36:59 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:37:00 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 17:37:00 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:37:00 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 17:37:00 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.312 seconds (process running for 11.132)
+2023-09-07 17:37:01 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:37:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 17:37:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 17:46:07 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 36252 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:07 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 36252 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:07 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:07 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:09 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:09 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:09 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-07 17:46:09 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.68 seconds (process running for 6.717)
+2023-09-07 17:46:09 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.68 seconds (process running for 6.717)
+2023-09-07 17:46:09 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:46:09 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 36252 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 36252 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:09 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:09 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:09 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 7.105)
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 7.105)
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:46:09 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:46:10 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:46:10 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 17:46:10 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 36252 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:10 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 17:46:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 3 JPA repository interfaces.
+2023-09-07 17:46:11 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 17:46:11 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 17:46:11 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 17:46:11 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:46:11 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 17:46:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 17:46:12 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1d4c39c2
+2023-09-07 17:46:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 17:46:12 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:46:13 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 17:46:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:46:14 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 17:46:14 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.258 seconds (process running for 11.972)
+2023-09-07 17:46:14 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:46:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 17:46:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 17:46:33 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 29212 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:33 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:34 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 17:46:34 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 3 JPA repository interfaces.
+2023-09-07 17:46:34 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 17:46:34 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 17:46:34 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 17:46:34 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:46:34 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 17:46:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 17:46:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@dae5e0
+2023-09-07 17:46:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 17:46:35 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:46:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 17:46:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:46:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 17:46:36 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 3.668 seconds (process running for 4.583)
+2023-09-07 17:46:37 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 17:46:37 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 17:46:37 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:46:37 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:37 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 17:46:37 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:46:37 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.QuizControllerTest
+2023-09-07 17:46:37 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 29212 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:37 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 29212 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:37 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:37 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:38 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 17:46:38 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.332 seconds (process running for 5.832)
+2023-09-07 17:46:38 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.332 seconds (process running for 5.832)
+2023-09-07 17:46:38 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:46:38 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 29212 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 29212 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:46:38 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:46:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:46:38 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.248 seconds (process running for 6.163)
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.248 seconds (process running for 6.163)
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:46:38 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:46:39 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:46:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 17:46:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 17:50:03 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 37052 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:03 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 37052 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:03 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:03 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:04 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:50:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:50:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:50:04 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.616 seconds (process running for 5.89)
+2023-09-07 17:50:04 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.616 seconds (process running for 5.89)
+2023-09-07 17:50:04 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:50:04 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 37052 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 37052 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:04 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:50:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:50:04 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.252 seconds (process running for 6.239)
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.252 seconds (process running for 6.239)
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:50:04 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:50:05 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:50:05 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 17:50:05 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 37052 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:05 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 17:50:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74 ms. Found 3 JPA repository interfaces.
+2023-09-07 17:50:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 17:50:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 17:50:06 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 17:50:06 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:50:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 17:50:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 17:50:07 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a02a31
+2023-09-07 17:50:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 17:50:08 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:50:08 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 17:50:09 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:50:09 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 17:50:09 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.227 seconds (process running for 11.157)
+2023-09-07 17:50:10 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:50:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 17:50:10 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 17:50:57 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35176 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:57 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35176 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:57 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:57 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:58 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:50:58 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:50:58 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-07 17:50:58 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.635 seconds (process running for 5.885)
+2023-09-07 17:50:58 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.635 seconds (process running for 5.885)
+2023-09-07 17:50:58 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:50:58 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35176 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35176 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:58 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 17:50:58 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 17:50:58 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.277 seconds (process running for 6.268)
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.277 seconds (process running for 6.268)
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:50:58 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 17:50:59 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 17:50:59 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 17:50:59 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 35176 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 17:50:59 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 17:50:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 17:50:59 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 3 JPA repository interfaces.
+2023-09-07 17:51:00 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 17:51:00 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 17:51:00 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 17:51:00 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:51:00 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 17:51:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 17:51:01 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1d4c39c2
+2023-09-07 17:51:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 17:51:01 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 17:51:02 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 17:51:02 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:51:03 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 17:51:03 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.312 seconds (process running for 11.224)
+2023-09-07 17:51:04 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 17:51:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 17:51:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:08:52 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 8644 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:08:52 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 8644 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:08:52 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:08:52 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:08:53 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:08:53 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:08:53 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:08:54 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.749 seconds (process running for 5.962)
+2023-09-07 18:08:54 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.749 seconds (process running for 5.962)
+2023-09-07 18:08:54 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:08:54 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 8644 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 8644 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:08:54 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:08:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:08:54 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.309 seconds (process running for 6.366)
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.309 seconds (process running for 6.366)
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:08:54 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:08:55 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:08:55 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 18:08:55 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 8644 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:08:55 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:08:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:08:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:08:56 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:08:56 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:08:56 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:08:56 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:08:56 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:08:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:08:57 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3df3c0c0
+2023-09-07 18:08:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:08:57 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:08:58 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:08:58 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:08:59 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:08:59 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.136 seconds (process running for 11.203)
+2023-09-07 18:08:59 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:08:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:08:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:09:16 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 14960 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:09:16 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:09:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:09:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:09:17 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:09:17 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:09:17 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:09:18 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:09:18 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:09:18 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:09:18 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@466fedfa
+2023-09-07 18:09:18 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:09:18 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:09:19 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:09:19 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:09:19 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:09:20 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 3.554 seconds (process running for 4.447)
+2023-09-07 18:09:20 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:20 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:20 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:09:20 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:20 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:20 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:09:21 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:09:21 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:09:21 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:09:21 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.QuizControllerTest
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 14960 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 14960 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:09:21 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.362 seconds (process running for 5.759)
+2023-09-07 18:09:21 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.362 seconds (process running for 5.759)
+2023-09-07 18:09:21 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:09:21 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 14960 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 14960 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:09:21 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:09:21 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 6.117)
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 6.117)
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:09:21 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:09:22 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:09:22 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:09:22 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:10:47 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35104 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:10:47 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 35104 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:10:47 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:10:47 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:10:49 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:10:49 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:10:49 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:10:49 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.716 seconds (process running for 5.936)
+2023-09-07 18:10:49 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.716 seconds (process running for 5.936)
+2023-09-07 18:10:49 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:10:49 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35104 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 35104 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:10:49 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:10:49 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:10:49 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.277 seconds (process running for 6.322)
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.277 seconds (process running for 6.322)
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:10:49 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:10:50 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:10:50 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 18:10:50 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 35104 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:10:50 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:10:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:10:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:10:51 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:10:51 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:10:51 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:10:51 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:10:51 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:10:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:10:52 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3df3c0c0
+2023-09-07 18:10:52 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:10:52 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:10:53 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:10:53 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:10:54 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:10:54 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.243 seconds (process running for 11.255)
+2023-09-07 18:10:54 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:10:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:10:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:11:15 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 3836 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:11:15 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:11:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:11:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:11:15 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:11:16 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:11:16 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:11:16 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:11:16 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:11:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:11:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@466fedfa
+2023-09-07 18:11:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:11:16 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:11:17 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:11:17 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:11:17 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:11:18 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 3.591 seconds (process running for 4.526)
+2023-09-07 18:11:18 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:18 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:11:19 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:11:19 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:11:19 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:11:19 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:11:19 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.QuizControllerTest
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 3836 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 3836 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:11:19 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.342 seconds (process running for 5.804)
+2023-09-07 18:11:19 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.342 seconds (process running for 5.804)
+2023-09-07 18:11:19 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:11:19 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 3836 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 3836 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:11:19 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:11:19 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.236 seconds (process running for 6.123)
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.236 seconds (process running for 6.123)
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:11:19 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:11:20 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:11:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:11:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:16:05 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 27228 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:16:05 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 27228 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:16:05 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:16:05 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:16:06 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:16:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:16:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:16:06 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.62 seconds (process running for 5.993)
+2023-09-07 18:16:06 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.62 seconds (process running for 5.993)
+2023-09-07 18:16:06 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:16:06 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 27228 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 27228 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:16:06 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:16:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:16:06 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.3 seconds (process running for 6.389)
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.3 seconds (process running for 6.389)
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:16:06 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:16:07 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:16:07 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 18:16:07 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 27228 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:16:07 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:16:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:16:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:16:08 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:16:08 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:16:08 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:16:08 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:16:08 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:16:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:16:09 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b6df63c
+2023-09-07 18:16:09 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:16:09 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:16:10 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:16:10 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:16:11 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:16:11 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.365 seconds (process running for 11.424)
+2023-09-07 18:16:12 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:16:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:16:12 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:20:46 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 10380 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:20:46 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 10380 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:20:46 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:20:46 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:20:48 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:20:48 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:20:48 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-07 18:20:48 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.768 seconds (process running for 6.219)
+2023-09-07 18:20:48 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.768 seconds (process running for 6.219)
+2023-09-07 18:20:48 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:20:48 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 10380 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 10380 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:20:48 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:20:48 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:20:48 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.322 seconds (process running for 6.65)
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.322 seconds (process running for 6.65)
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:20:48 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:20:49 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:20:49 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 18:20:49 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 10380 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:20:49 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:20:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:20:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:20:50 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:20:50 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:20:50 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:20:50 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:20:50 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:20:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:20:51 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ee6573e
+2023-09-07 18:20:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:20:51 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:20:52 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:20:52 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:20:53 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:20:53 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.138 seconds (process running for 11.467)
+2023-09-07 18:20:53 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:20:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:20:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:21:09 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 6432 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:21:09 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:21:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:21:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:21:10 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:21:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:21:10 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:21:11 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:21:11 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:21:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:21:11 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@dae5e0
+2023-09-07 18:21:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:21:11 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:21:12 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:21:12 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:21:12 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:21:13 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 3.551 seconds (process running for 4.519)
+2023-09-07 18:21:13 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:21:13 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:21:13 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:21:13 [main] INFO  o.s.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:21:14 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.QuizControllerTest]: QuizControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:21:14 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.QuizControllerTest
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 6432 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 6432 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:21:14 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:14 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:14 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.364 seconds (process running for 5.789)
+2023-09-07 18:21:14 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 0.364 seconds (process running for 5.789)
+2023-09-07 18:21:14 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:21:14 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 6432 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 6432 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:21:14 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:21:14 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:21:14 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.26 seconds (process running for 6.134)
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.26 seconds (process running for 6.134)
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:21:14 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:21:15 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:21:15 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:21:15 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-09-07 18:22:07 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 26000 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:22:07 [main] INFO  c.n.a.controller.QuizControllerTest - Starting QuizControllerTest using Java 17.0.8 with PID 26000 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:22:07 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:22:07 [main] INFO  c.n.a.controller.QuizControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:22:08 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:22:08 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:22:08 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 3 ms
+2023-09-07 18:22:08 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.684 seconds (process running for 5.925)
+2023-09-07 18:22:08 [main] INFO  c.n.a.controller.QuizControllerTest - Started QuizControllerTest in 1.684 seconds (process running for 5.925)
+2023-09-07 18:22:08 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest]: RegistrationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:22:08 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.controller.RegistrationControllerTest
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 26000 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - Starting RegistrationControllerTest using Java 17.0.8 with PID 26000 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:22:08 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-09-07 18:22:08 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-09-07 18:22:08 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 6.301)
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationControllerTest - Started RegistrationControllerTest in 0.274 seconds (process running for 6.301)
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a request to save a new user.
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a login request for user: John
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - User John logged in successfully.
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - Received a request for user id: 1
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:22:08 [main] INFO  c.n.a.c.RegistrationController - User 1 found successfully.
+2023-09-07 18:22:09 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests]: AssessmentPlatformApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-09-07 18:22:09 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.nucleusteq.assessmentPlatform.AssessmentPlatformApplication for test class com.nucleusteq.assessmentPlatform.AssessmentPlatformApplicationTests
+2023-09-07 18:22:09 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Starting AssessmentPlatformApplicationTests using Java 17.0.8 with PID 26000 (started by Krishna Bharateeya in D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform)
+2023-09-07 18:22:09 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2023-09-07 18:22:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-07 18:22:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
+2023-09-07 18:22:10 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-07 18:22:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-07 18:22:10 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2023-09-07 18:22:10 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:22:10 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-07 18:22:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-09-07 18:22:11 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@26414b51
+2023-09-07 18:22:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-09-07 18:22:12 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2023-09-07 18:22:12 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-07 18:22:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:22:13 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-07 18:22:13 [main] INFO  c.n.a.AssessmentPlatformApplicationTests - Started AssessmentPlatformApplicationTests in 4.308 seconds (process running for 11.257)
+2023-09-07 18:22:14 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-07 18:22:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-09-07 18:22:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -2,6 +2,7 @@ package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -99,47 +100,44 @@ class RegistrationServiceImplTest {
         assertThrows(DuplicateMobileNumberException.class, () -> registrationService.addUser(registration));
     }
     
-//    @Test
-//    public void testAddUser_DuplicateMobileNumber() {
-//        RegistrationDto registrationDto = new RegistrationDto();
-//        registrationDto.setMobileNumber("7777777777");
-//        registrationDto.setFirstName("Krishna");
-//        registrationDto.setLastName("Kumar");
-//        registrationDto.setUserRole("User");
-//        registrationDto.setEmail("kk@nucleusteq.com");
-//        registrationDto.setPassword("password123");
-//
-//        when(registrationRepository.findByMobileNumber(anyString())).thenReturn(Optional.of(new Registration()));
-//        when(modelMapper.map(registrationDto, Registration.class)).thenReturn(new Registration());
-//        
-//        assertThrows(DuplicateMobileNumberException.class, () -> registrationService.addUser(registrationDto));
-//    }
 
-//    @Test
-//    public void testAddUser_InvalidEmailDomain() {
-//        RegistrationDto registrationDto = new RegistrationDto();
-//        registrationDto.setEmail("test@gmail.com");
-//
-//        assertThrows(UserEmailDomainException.class, () -> registrationService.addUser(registrationDto));
-//    }
+
+    @Test
+    public void testAddUser_InvalidEmailDomain() {
+        RegistrationDto registration=new RegistrationDto();
+        registration.setUserId(101);
+        registration.setFirstName("Krishna");
+        registration.setLastName("kumar");
+        registration.setMobileNumber("7777777777");
+        registration.setUserRole("user");
+        registration.setEmail("vkss@gmail.com");
+        registration.setPassword("3456");
+
+        assertThrows(UserEmailDomainException.class, () -> registrationService.addUser(registration));
+    }
     
-//    
+    
 //    @Test
-//    public void testLoginUser_Success() throws LoginFailedException, UserNotFoundException {
-//        RegistrationDto inputDto = new RegistrationDto();
-//        inputDto.setEmail("test@nucleusteq.com");
-//        inputDto.setPassword("password");
+//    public void testLoginUser_Success() throws LoginFailedException, UserNotFoundException, DuplicateMobileNumberException, DuplicateEmailException, UserEmailDomainException {
+//        RegistrationDto registrationDto=new RegistrationDto();
+//      
+//        registrationDto.setEmail("vk@nucleusteq.com");
+//        registrationDto.setPassword("123");
 //
 //        Registration registration = new Registration();
-//        registration.setEmail("test@nucleusteq.com");
-//        registration.setPassword("password");
+//        registration.setEmail(registrationDto.getEmail());
+//        registration.setPassword(registrationDto.getPassword());
 //
-//        when(registrationRepository.getByEmail(anyString())).thenReturn(registration);
+//        //        when(registrationRepository.getByEmail(registrationDto.getEmail())).thenReturn(registration);
 //
-//        when(passwordEncoder.matches(anyString(), anyString())).thenReturn(true);
-//
-//        Map<String, String> response = registrationService.loginUser(inputDto);
-//
+//        when(registrationRepository.findByEmail(registrationDto.getEmail())).thenReturn(Optional.of(registration));
+//        when(passwordEncoder.matches(any(), any())).thenReturn(true);
+//        when(modelMapper.map(registrationDto, Registration.class)).thenReturn(registration);
+//        when(modelMapper.map(registration, RegistrationDto.class)).thenReturn(registrationDto);
+//        when(registrationRepository.save(any(Registration.class))).thenReturn(registration);
+//           
+//        Map<String, String> response = registrationService.loginUser(registrationDto);
+//        assertNotNull(response);      
 //        assertEquals("Login Successfully", response.get("message"));
 //        assertEquals("true", response.get("status"));
 //        assertEquals("user", response.get("role"));
