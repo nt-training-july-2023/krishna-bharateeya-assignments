@@ -25,18 +25,18 @@ public class QuizController {
     private QuizService quizService;
 
     @PostMapping
-    public ResponseEntity<QuizDTO> addQuiz(@RequestBody QuizDTO quizDTO) {
-        QuizDTO createdQuiz = quizService.addQuiz(quizDTO);
-        return new ResponseEntity<>(createdQuiz, HttpStatus.CREATED);
+    public String addQuiz(@RequestBody QuizDTO quizDTO) {
+        String createdQuiz = quizService.addQuiz(quizDTO);
+        return createdQuiz;
     }
 
     @PutMapping("/{quizId}")
-    public ResponseEntity<QuizDTO> updateQuiz(
+    public String updateQuiz(
         @PathVariable Integer quizId,
         @RequestBody QuizDTO quizDTO
     ) throws NotFoundException {
-        QuizDTO updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
-        return new ResponseEntity<>(updatedQuiz, HttpStatus.OK);
+        String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
+        return updatedQuiz;
     }
 
     @DeleteMapping("/{quizId}")

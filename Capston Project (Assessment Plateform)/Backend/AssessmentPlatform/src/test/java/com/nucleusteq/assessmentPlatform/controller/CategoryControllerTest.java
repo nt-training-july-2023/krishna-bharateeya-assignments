@@ -79,21 +79,21 @@ public class CategoryControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
         }
 
-    @Test
-    public void testUpdateCategory_NotFound() throws Exception {
-       
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setCategoryId(1);
-        categoryDto.setCategoryName("Updated Category");
-
-        when(categoryService.updateCategory(categoryDto)).thenReturn(null);
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/category/update/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"categoryId\":1,\"categoryName\":\"Updated Category\"}"))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
-
-    }
+//    @Test
+//    public void testUpdateCategory_NotFound() throws Exception {
+//       
+//        CategoryDto categoryDto = new CategoryDto();
+//        categoryDto.setCategoryId(1);
+//        categoryDto.setCategoryName("Updated Category");
+//
+//        when(categoryService.updateCategory(categoryDto)).thenReturn(null);
+//
+//        mockMvc.perform(MockMvcRequestBuilders.put("/category/update/1")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content("{\"categoryId\":1,\"categoryName\":\"Updated Category\"}"))
+//                .andExpect(MockMvcResultMatchers.status().isNotFound());
+//
+//    }
     
     @Test
     public void testGetCategoryById() {

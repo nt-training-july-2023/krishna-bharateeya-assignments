@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
@@ -26,14 +26,23 @@ public class QuizServiceImpl implements QuizService {
     private ModelMapper modelMapper;
 
     @Override
-    public QuizDTO addQuiz(QuizDTO quizDTO) {
+    public String addQuiz(QuizDTO quizDTO) {
+        if (quizDTO == null) {
+            throw new IllegalArgumentException("QuizDTO cannot be null");
+        }
+        Optional<Quiz> existingQuiz = quizRepository.findByQuizName(quizDTO.getQuizName());
+        if (existingQuiz.isPresent()) {
+            throw new AlreadyExistsException("Quiz with the same name already exists");
+        }
         Quiz quiz = convertToEntity(quizDTO);
         quizRepository.save(quiz);
-        return convertToDTO(quiz);
+        
+        return "Quiz added successfully";
     }
 
+
     @Override
-    public QuizDTO updateQuiz(Integer quizId, QuizDTO quizDTO) throws NotFoundException {
+    public String updateQuiz(Integer quizId, QuizDTO quizDTO) throws ResourceNotFoundException {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
         if (optionalQuiz.isPresent()) {
             Quiz quiz = optionalQuiz.get();
@@ -42,30 +51,31 @@ public class QuizServiceImpl implements QuizService {
             quiz.setTimeInMinutes(quizDTO.getTimeInMinutes());
             quiz.setCategory(categoryRepository.findById(quizDTO.getCategory().getCategoryId()).orElse(null));
             quizRepository.save(quiz);
-            return convertToDTO(quiz);
+            return "Quiz updated successfully";
         } else {
-            throw new NotFoundException();
+            throw new ResourceNotFoundException("Quiz with ID " + quizId + " not found");
         }
     }
 
+
     @Override
-    public void deleteQuiz(Integer quizId) throws NotFoundException {
+    public void deleteQuiz(Integer quizId) throws ResourceNotFoundException {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
         if (optionalQuiz.isPresent()) {
             quizRepository.deleteById(quizId);
         } else {
-            throw new NotFoundException();
+            throw new  ResourceNotFoundException("Quiz ID " + quizId + " not found");
         }
     }
 
     @Override
-    public QuizDTO getQuizById(Integer quizId) throws NotFoundException {
+    public QuizDTO getQuizById(Integer quizId) throws ResourceNotFoundException {
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
         if (optionalQuiz.isPresent()) {
             Quiz quiz = optionalQuiz.get();
             return convertToDTO(quiz);
         } else {
-            throw new NotFoundException();
+            throw new  ResourceNotFoundException("Quiz with ID " + quizId + " not found");
         }
     }
 

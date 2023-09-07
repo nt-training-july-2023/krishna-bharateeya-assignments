@@ -1,7 +1,5 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
-import com.nucleusteq.assessmentPlatform.entity.Category;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ public class QuizDTO {
     private String quizName;
     private String quizDescription;
     private int timeInMinutes;
-    private Category category;
+    private CategoryDto category;
 
    
 }

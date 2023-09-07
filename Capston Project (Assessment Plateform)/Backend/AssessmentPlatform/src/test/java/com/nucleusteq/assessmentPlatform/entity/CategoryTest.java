@@ -1,6 +1,10 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,5 +56,39 @@ class CategoryTest {
         assertEquals(103,allParaCategory.getCategoryId());
         assertEquals("java", allParaCategory.getCategoryName());
         assertEquals("Spring", allParaCategory.getDescription());
+    }
+    
+    @Test
+    void setQuizzes_SetsQuizzes() {
+        List<Quiz> quizzes = new ArrayList<>();
+        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30);
+        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45);
+        quizzes.add(quiz1);
+        quizzes.add(quiz2);
+
+        category.setQuizzes(quizzes);
+
+        List<Quiz> categoryQuizzes = category.getQuizzes();
+        assertNotNull(categoryQuizzes);
+        assertEquals(2, categoryQuizzes.size());
+        assertEquals(quiz1, categoryQuizzes.get(0));
+        assertEquals(quiz2, categoryQuizzes.get(1));
+    }
+
+    @Test
+    void getQuizzes_ReturnsQuizzes() {
+        List<Quiz> quizzes = new ArrayList<>();
+        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30);
+        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45);
+        quizzes.add(quiz1);
+        quizzes.add(quiz2);
+        category.setQuizzes(quizzes);
+
+        List<Quiz> categoryQuizzes = category.getQuizzes();
+
+        assertNotNull(categoryQuizzes);
+        assertEquals(2, categoryQuizzes.size());
+        assertEquals(quiz1, categoryQuizzes.get(0));
+        assertEquals(quiz2, categoryQuizzes.get(1));
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 
@@ -97,15 +98,12 @@ public class CategoryServiceImpl implements CategoryService {
     public final CategoryDto updateCategory(final CategoryDto categoryDto) {
 
         Category existingCategory = categoryRepository
-                .findById(categoryDto.getCategoryId()).orElse(null);
+                .findById(categoryDto.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("No category found with ID : " + categoryDto.getCategoryId()));
 
-        if (existingCategory != null) {
-            modelMapper.map(categoryDto, existingCategory);
-            existingCategory = categoryRepository.save(existingCategory);
-            return modelMapper.map(existingCategory, CategoryDto.class);
-        } else {
-            return null;
-        }
+        modelMapper.map(categoryDto, existingCategory);
+        existingCategory = categoryRepository.save(existingCategory);
+        return modelMapper.map(existingCategory, CategoryDto.class);
     }
 
     /**
