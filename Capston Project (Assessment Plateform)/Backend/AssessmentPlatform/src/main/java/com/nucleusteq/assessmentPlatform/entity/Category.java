@@ -49,40 +49,40 @@ public class Category {
      * The description of the category.
      */
     private String description;
-   
-    
-    
+    /**
+     * The quizzes map with category.
+     */
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Quiz> quizzes = new ArrayList<>();
-    
-    
+
     /**
      * get Quiz.
      * @return Quiz
      */
-    public List<Quiz> getQuizzes() {
+    public final List<Quiz> getQuizzes() {
         return new ArrayList<>(quizzes);
     }
+
     /**
      * set Quiz.
-     * @param subcategory Quiz
+     * @param qui Quiz.
      */
-    public void setQuizzes(final List<Quiz> quizzes) {
-        this.quizzes = new ArrayList<>(quizzes);
+    public final void setQuizzes(final List<Quiz> qui) {
+        this.quizzes = new ArrayList<>(qui);
     }
+
     /**
      * parameter constructor for category.
-     *@param categoryid categoryId
-     * @param categoryname categoryName
-     * @param categorydescription description
+     * @param cId   categoryId.
+     * @param cName categoryName.
+     * @param cDescription  description.
      */
-    public Category(final int categoryid,
-            final String categoryName,
-            final String description) {
-        this.categoryId = categoryid;
-        this.categoryName = categoryName;
-        this.description = description;
+    public Category(final int cId, final String cName,
+            final String cDescription) {
+        this.categoryId = cId;
+        this.categoryName = cName;
+        this.description = cDescription;
     }
 
 }

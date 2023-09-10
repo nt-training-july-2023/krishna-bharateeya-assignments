@@ -34,12 +34,12 @@ public class RegistrationController {
      */
     @Autowired
     private RegistrationService registrationService;
-    
+
     /**
      * this is logger object that is use to generate the object.
      */
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(RegistrationController.class);
-    
+    private static final Logger LOGGER = (Logger) LoggerFactory
+            .getLogger(RegistrationController.class);
 
     /**
      * Registers a new user.
@@ -51,11 +51,11 @@ public class RegistrationController {
     @PostMapping(path = "/save")
     public final String saveUser(@RequestBody final RegistrationDto user)
             throws UserEmailDomainException {
-        logger.info("Received a request to save a new user.");
+        LOGGER.info("Received a request to save a new user.");
         try {
-        return registrationService.addUser(user);
+            return registrationService.addUser(user);
         } catch (UserEmailDomainException e) {
-            logger.error("Error while saving user: " + e.getMessage());
+            LOGGER.error("Error while saving user: " + e.getMessage());
             throw e;
         }
     }
@@ -71,14 +71,15 @@ public class RegistrationController {
     public final Map<String, String> loginUser(
             @RequestBody final RegistrationDto user)
             throws UserNotFoundException {
-        logger.info("Received a login request for user: {}", user.getFirstName());
+        LOGGER.info("Received a login request for user: {}",
+                user.getFirstName());
         try {
-        Map<String, String> response = registrationService.loginUser(user);
-        logger.info("User {} logged in successfully.", user.getFirstName());
+            Map<String, String> response = registrationService.loginUser(user);
+            LOGGER.info("User {} logged in successfully.", user.getFirstName());
 
-        return response;
-        }catch (UserNotFoundException e) {
-            logger.error("User login failed: " + e.getMessage());
+            return response;
+        } catch (UserNotFoundException e) {
+            LOGGER.error("User login failed: " + e.getMessage());
             throw e;
         }
     }
@@ -93,23 +94,26 @@ public class RegistrationController {
      */
     @GetMapping("/get/{id}")
     public final RegistrationDto getUserById(
-            @PathVariable("id")final int userId)
-            throws UserNotFoundException {
-        logger.info("Received a request for user id: {}", userId);
+            @PathVariable("id") final int userId) throws UserNotFoundException {
+        LOGGER.info("Received a request for user id: {}", userId);
         try {
-        RegistrationDto registrationDto = this.registrationService
-                .getUserById(userId);
-        logger.info("User {} found successfully.", userId);
-
-        return registrationDto;
-        }catch (UserNotFoundException e) {
-            logger.error("User does not exist: " + e.getMessage());
+            RegistrationDto registrationDto = this.registrationService
+                    .getUserById(userId);
+            LOGGER.info("User {} found successfully.", userId);
+            return registrationDto;
+        } catch (UserNotFoundException e) {
+            LOGGER.error("User does not exist: " + e.getMessage());
             throw e;
         }
     }
 
+    /**
+     * Retrieves all user.
+     * @return The RegistrationDto object representing the retrieved user.
+     * found.
+     */
     @GetMapping("/get/all")
-    public List<RegistrationDto> getAllUsers() {
+    public final List<RegistrationDto> getAllUsers() {
         return registrationService.getAllRegistrations();
     }
 }

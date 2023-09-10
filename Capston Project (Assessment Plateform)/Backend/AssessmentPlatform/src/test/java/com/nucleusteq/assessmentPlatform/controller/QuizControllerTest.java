@@ -1,13 +1,18 @@
 package com.nucleusteq.assessmentPlatform.controller;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +27,7 @@ public class QuizControllerTest {
     @MockBean
     private QuizService quizService;
 
+    @Mock
     private QuizDTO sampleQuizDTO;
 
     @BeforeEach
@@ -66,28 +72,39 @@ public class QuizControllerTest {
     }
 
     @Test
-    public void testGetQuizById() throws Exception {
-        when(quizService.getQuizById(anyInt())).thenReturn(sampleQuizDTO);
+    void testGetQuizById() throws NotFoundException {
+        int quizId = 1;
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(quizId);
+        quizDto.setQuizName("React");
 
-        mockMvc.perform(get("/quizzes/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.quizId").value(sampleQuizDTO.getQuizId()))
-                .andExpect(jsonPath("$.quizName").value(sampleQuizDTO.getQuizName()))
-                .andExpect(jsonPath("$.quizDescription").value(sampleQuizDTO.getQuizDescription()))
-                .andExpect(jsonPath("$.timeInMinutes").value(sampleQuizDTO.getTimeInMinutes()));
+        QuizService quizService = mock(QuizService.class); 
+        when(quizService.getQuizById(quizId)).thenReturn(quizDto);
+
+        QuizController quizController = new QuizController(quizService); 
+
+        ResponseEntity<QuizDTO> result = quizController.getQuizById(quizId);
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(quizDto, result.getBody());
+        assertEquals("React", result.getBody().getQuizName());
+        verify(quizService).getQuizById(quizId);
     }
 
     @Test
-    public void testGetAllQuizzes() throws Exception {
+    void testGetAllQuizzes() {
         List<QuizDTO> quizDTOList = Collections.singletonList(sampleQuizDTO);
+
+        QuizService quizService = mock(QuizService.class); 
         when(quizService.getAllQuizzes()).thenReturn(quizDTOList);
 
+        QuizController quizController = new QuizController(quizService); 
 
-        mockMvc.perform(get("/quizzes"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].quizId").value(sampleQuizDTO.getQuizId()))
-                .andExpect(jsonPath("$[0].quizName").value(sampleQuizDTO.getQuizName()))
-                .andExpect(jsonPath("$[0].quizDescription").value(sampleQuizDTO.getQuizDescription()))
-                .andExpect(jsonPath("$[0].timeInMinutes").value(sampleQuizDTO.getTimeInMinutes()));
+        ResponseEntity<List<QuizDTO>> result = quizController.getAllQuizzes();
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(quizDTOList, result.getBody());
+        assertEquals(sampleQuizDTO.getQuizId(), result.getBody().get(0).getQuizId());
+        verify(quizService).getAllQuizzes();
     }
 }

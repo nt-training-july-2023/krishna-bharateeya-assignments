@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 
 /**
@@ -58,6 +60,17 @@ public class CategoryController {
     /**
      * Retrieves a category by its ID.
      *
+     * @param categoryId The ID of the category to retrieve.
+     * @return The CategoryDto object representing the retrieved category.
+     */
+    @GetMapping("quizzes/{categoryId}")
+    public final List<Quiz> getAllQuizByCategory(@PathVariable final int categoryId) {
+        return categoryService.getAllQuizByCategory(categoryId);
+    }
+
+    /**
+     * Retrieves a category by its ID.
+     *
      * @param id The ID of the category to retrieve.
      * @return The CategoryDto object representing the retrieved category.
      */
@@ -65,7 +78,6 @@ public class CategoryController {
     public final CategoryDto getCategoryById(@PathVariable final int id) {
         return categoryService.getCategoryById(id);
     }
-
     /**
      * Updates a category.
      *

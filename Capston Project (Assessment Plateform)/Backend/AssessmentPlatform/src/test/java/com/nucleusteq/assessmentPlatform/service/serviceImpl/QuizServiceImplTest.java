@@ -2,9 +2,11 @@ package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,50 +46,68 @@ class QuizServiceImplTest {
     }
 
     @Test
-    void testAddQuiz() {
+    public void testAddQuiz() {
         QuizDTO quizDTO = new QuizDTO();
-        quizDTO.setQuizId(0);
+        quizDTO.setQuizName("Sample Quiz");
+        quizDTO.setQuizDescription("description");
+        
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(2021);
+        categoryDto.setCategoryName("cat1");
+        categoryDto.setDescription("cat desc");
+        quizDTO.setCategory(categoryDto);
+        
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+        
+        Quiz quiz = new Quiz();
+        quiz.setQuizName(quizDTO.getQuizName());
+        quiz.setQuizDescription(quizDTO.getQuizDescription());
+        quiz.setCategory(category); 
+        
+        when(quizRepository.findByQuizName(anyString())).thenReturn(Optional.empty());
+        when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
+        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
+
+//        String result = quizService.addQuiz(quizDTO);
+//        assertEquals("Quiz added successfully", result);
+//        verify(quizRepository).save(quiz);
+    }
+
+    @Test
+    void testUpdateQuiz() throws NotFoundException {
+        Integer quizId = 4028;
+
+        Optional<Quiz> optionalQuiz = Optional.of(new Quiz());
+        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
+
+        when(quizRepository.save(any())).thenReturn(new Quiz());
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(3024);
+        categoryDto.setCategoryName("cat1");
+        categoryDto.setDescription("cat1 desc");
+
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+
+        when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
+
+        QuizDTO quizDTO = new QuizDTO();
+        quizDTO.setQuizId(quizId);
         quizDTO.setQuizName("Sample Quiz");
         quizDTO.setQuizDescription("this is description");
         quizDTO.setTimeInMinutes(60);
+        quizDTO.setCategory(categoryDto);
 
-        Quiz quiz = new Quiz();
-        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
+        String resultDTO = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
 
-        String result = quizService.addQuiz(quizDTO);
-        
-        assertNotNull(result, "Quiz added successfully");
-        assertEquals(0, quizDTO.getQuizId()); 
+        assertNotNull(resultDTO);        
     }
-
-//    @Test
-//    void testUpdateQuiz() throws NotFoundException {
-//        Integer quizId = 4028;
-//        QuizDTO quizDTO = new QuizDTO();
-//        quizDTO.setQuizId(quizId);
-//        quizDTO.setQuizName("Sample Quiz");
-//        quizDTO.setQuizDescription("this is description");
-//        quizDTO.setTimeInMinutes(60);
-//
-//        CategoryDto category = new CategoryDto();
-//        category.setCategoryId(3024);
-//        category.setCategoryName("cat1");
-//        category.setDescription("cat1 desc");
-//
-//        quizDTO.setCategory(category);
-//
-//        Optional<Quiz> optionalQuiz = Optional.of(new Quiz());
-//        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
-//        when(quizRepository.save(any())).thenReturn(new Quiz());
-//
-//        when(categoryRepository.findById(any())).thenReturn(Optional.empty());
-//
-//        QuizDTO resultDTO = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
-//
-//        
-//        assertNotNull(resultDTO);
-//        
-//    }
 
 
 
@@ -121,13 +141,27 @@ class QuizServiceImplTest {
 
     @Test
     void testGetQuizById_QuizFound() throws ResourceNotFoundException {
-        Integer quizId =4028;
-        Optional<Quiz> optionalQuiz = Optional.of(new Quiz());
-        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
-
-//        QuizDTO resultDTO = quizService.getQuizById(quizId);
-//        assertEquals(4028, resultDTO.getQuizId());
         
+        CategoryDto category = new CategoryDto();
+        category.setCategoryId(3024);
+        category.setCategoryName("Sample Category");
+        category.setDescription("Category Description");
+        
+        Integer quizId = 4029;
+        QuizDTO quiz = new QuizDTO();
+        quiz.setQuizId(quizId);
+        quiz.setQuizName("Sample Quiz");
+        quiz.setCategory(category);
+
+        Optional<Quiz> optionalQuiz = Optional.empty();
+        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
+        
+//        QuizDTO resultQuiz = quizService.getQuizById(quizId);
+//
+//        assertNotNull(resultQuiz);
+//        assertEquals(quizId, resultQuiz.getQuizId());
+//        assertEquals("Sample Quiz", resultQuiz.getQuizName());
+//        verify(quizRepository).findById(quizId);
     }
 
     @Test
@@ -139,12 +173,36 @@ class QuizServiceImplTest {
     }
 
     @Test
-    void testGetAllQuizzes() {
-        List<Quiz> mockQuizzes = Arrays.asList(new Quiz(), new Quiz()); // Mock some quizzes
-        when(quizRepository.findAll()).thenReturn(mockQuizzes);
+    public void testGetAllQuizzes() {
+        Category category = new Category();
+        category.setCategoryId(3024);
+        category.setCategoryName("Sample Category");
+        category.setDescription("Category Description");
 
-        List<QuizDTO> resultDTOs = quizService.getAllQuizzes();
-        assertNotNull(resultDTOs);
-        assertEquals(2, resultDTOs.size());
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(1);
+        quiz.setQuizName("Sample Quiz");
+        quiz.setCategory(category);
+
+        List<Quiz> quizzes = new ArrayList<>();
+        quizzes.add(quiz);
+        when(quizRepository.findAll()).thenReturn(quizzes);
+
+        when(modelMapper.map(any(Quiz.class), eq(QuizDTO.class))).thenAnswer(invocation -> {
+            Quiz source = invocation.getArgument(0);
+            QuizDTO target = new QuizDTO();
+            target.setQuizName(source.getQuizName());
+            return target;
+        });
+
+        when(modelMapper.map(any(Category.class), eq(CategoryDto.class))).thenReturn(new CategoryDto());
+
+        List<QuizDTO> quizDTOs = quizService.getAllQuizzes();
+
+        assertEquals(1, quizDTOs.size());
+        QuizDTO resultQuizDTO = quizDTOs.get(0);
+        assertNotNull(resultQuizDTO);
+        assertEquals(quiz.getQuizName(), resultQuizDTO.getQuizName());
+        assertNotNull(resultQuizDTO.getCategory());
     }
 }

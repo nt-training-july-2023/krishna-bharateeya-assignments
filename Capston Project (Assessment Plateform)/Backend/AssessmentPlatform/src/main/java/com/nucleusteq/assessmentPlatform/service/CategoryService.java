@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 
 /**
  * Service interface for managing categories.
@@ -50,4 +52,7 @@ public interface CategoryService {
      */
     CategoryDto updateCategory(CategoryDto categoryDto);
 
+    
+    List<Quiz> getAllQuizByCategory(int categoryId);
+    
 }

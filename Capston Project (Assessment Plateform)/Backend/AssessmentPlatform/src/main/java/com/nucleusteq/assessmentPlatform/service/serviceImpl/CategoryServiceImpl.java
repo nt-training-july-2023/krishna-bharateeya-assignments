@@ -8,12 +8,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
-
-import jakarta.transaction.Transactional;
 
 /**
  * Implementation of the CategoryService interface for managing categories.
@@ -22,12 +23,14 @@ import jakarta.transaction.Transactional;
 public class CategoryServiceImpl implements CategoryService {
 
     /**
-     * This is Registration Repository object that is for calling.
-     * the repository methods.
+     * This is Category Repository object that is for calling. the repository
+     * methods.
      */
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private QuizRepository quizRepository;
     /**
      * This is use to map the category with Dto and viceversa..
      */
@@ -80,7 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return A list of CategoryDto objects representing categories.
      */
     @Override
-    public List<CategoryDto> getAllCategory() {
+    public final List<CategoryDto> getAllCategory() {
 
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()
@@ -99,7 +102,9 @@ public class CategoryServiceImpl implements CategoryService {
 
         Category existingCategory = categoryRepository
                 .findById(categoryDto.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("No category found with ID : " + categoryDto.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No category found with ID : "
+                                + categoryDto.getCategoryId()));
 
         modelMapper.map(categoryDto, existingCategory);
         existingCategory = categoryRepository.save(existingCategory);
@@ -120,6 +125,13 @@ public class CategoryServiceImpl implements CategoryService {
 
         categoryRepository.delete(category);
         return "Category Deletd Successfully";
+    }
+
+    @Override
+    public List<Quiz> getAllQuizByCategory(int categoryId) {
+        Category category = new Category();
+        category.setCategoryId(categoryId);
+        return quizRepository.findByCategory(category);
     }
 
 }

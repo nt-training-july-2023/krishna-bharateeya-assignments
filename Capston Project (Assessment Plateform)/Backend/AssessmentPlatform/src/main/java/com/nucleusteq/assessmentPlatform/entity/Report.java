@@ -43,7 +43,7 @@ public class Report {
 //    @JoinColumn(name = "user_id")
 //    private Registration reportOfTheUser;
 
-    
+
     /**
      * The total marks in the assessment.
      */

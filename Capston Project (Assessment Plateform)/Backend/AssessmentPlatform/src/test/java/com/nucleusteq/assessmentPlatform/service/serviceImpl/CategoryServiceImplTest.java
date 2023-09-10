@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
-import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 
 import java.util.ArrayList;
@@ -149,5 +148,4 @@ public class CategoryServiceImplTest {
         assertEquals("Category Deletd Successfully", resultMessage);
     }
 
-    // Add more test cases as needed...
 }

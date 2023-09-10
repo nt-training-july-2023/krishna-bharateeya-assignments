@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,62 +41,63 @@ public class Quiz {
      */
     @Column(nullable = false)
     private String quizName;
-    
-    
+
+    /**
+     * The Description of the quiz .
+     */
     @Column(nullable = false)
     private String quizDescription;
 
     /**
      * The category to which the quiz belongs.
      */
-    
+
     /**
      * The time of the Quiz.
      */
-    
     private int timeInMinutes;
-    
+
+    /**
+     * The Category to the Quiz belong.
+     */
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    
     /**
      * get category.
      * @return category
      */
-    public Category getCategory() {
+    public final Category getCategory() {
         return new Category(category.getCategoryId(),
                 category.getCategoryName(),
                 category.getDescription());
     }
-    
-    
+
     /**
      * set Category.
-     * @param cate cate
+     * @param cate cate.
      */
-    public void setCategory(final Category cate) {
+    public final void setCategory(final Category cate) {
         this.category = new Category(cate.getCategoryId(),
                 cate.getCategoryName(),
                 cate.getDescription());
     }
-    
-    
+
     /**
-     * parameter constructor for subcategory.
-     * @param subCategoryid subCategoryid
-     * @param subcategoryName subcategoryName
-     * @param subcategoryDescription subcategoryDescription
-     * @param timelimitInMinutes timelimitInMinutes
+     * parameter constructor for sub-category.
+     * @param qId quiz Id
+     * @param quizNa quiz Name
+     * @param quizDes quiz Description
+     * @param timInMin time In Minutes
      */
-    public Quiz(final int quizId,
-            final String quizName,
-            final String quizDescription,
-            final int timInMinutes) {
-        this.quizId = quizId;
-        this.quizName = quizName;
-        this.quizDescription = quizDescription;
-        this.timeInMinutes = timInMinutes;
+    public Quiz(final int qId,
+        final String quizNa,
+        final String quizDes,
+        final int timInMin) {
+            this.quizId = qId;
+            this.quizName = quizNa;
+            this.quizDescription = quizDes;
+            this.timeInMinutes = timInMin;
     }
 }

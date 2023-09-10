@@ -3,6 +3,9 @@ package com.nucleusteq.assessmentPlatform.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Custom exception for indicating duplicate elements conflicts.
+ */
 @ResponseStatus(HttpStatus.CONFLICT)
 public class AlreadyExistsException extends RuntimeException {
 
