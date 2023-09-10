@@ -4,10 +4,12 @@ import axios from 'axios';
 import './Category.css';
 import Sidebar from '../AdminHome/Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
-
+// import Swal from 'sweetalert2';
 
 const CategoryHome = () => {
     const [categories, setCategories] = useState([]);
+    const [relatedQuizzes, setRelatedQuizzes] = useState({});
+
 
     const { categoryId } = useParams();
 
@@ -18,6 +20,13 @@ const CategoryHome = () => {
     const loadCategories = async () => {
         const result = await axios.get('http://localhost:8080/category');
         setCategories(result.data);
+
+        const quizzes = {};
+        for (const category of result.data) {
+            const quizResult = await axios.get(`http://localhost:8080/category/quizzes/${category.categoryId}`);
+            quizzes[category.categoryId] = quizResult.data;
+        }
+        setRelatedQuizzes(quizzes);
     };
 
     const deleteCategories = async (id) => {
@@ -33,7 +42,7 @@ const CategoryHome = () => {
     const userRole = localStorage.getItem('userRole');
     if (userRole !== 'admin') {
         return (
-            <UnauthorizedAccess/>
+            <UnauthorizedAccess />
         );
     }
     return (
@@ -61,6 +70,7 @@ const CategoryHome = () => {
                                             <th scope="col">S.No.</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
+                                            <th scope="col">Related Quiz</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -70,6 +80,17 @@ const CategoryHome = () => {
                                                 <td>{index + 1}</td>
                                                 <td>{category.categoryName}</td>
                                                 <td>{category.description}</td>
+
+                                                <div className="custom-select-container">
+                                                    <select className="custom-select">
+                                                        {relatedQuizzes[category.categoryId] &&
+                                                            relatedQuizzes[category.categoryId].map((quiz, index) => (
+                                                                <option key={index} className="custom-select-option">{quiz.quizName}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                    <div className="custom-select-arrow">&#9662;</div>
+                                                </div>
                                                 <td>
                                                     <Link className="button button-edit" to={`/categoryHome/updateCategory/${category.categoryId}`}>Update</Link>
                                                     <button className="button button-delete" onClick={() => deleteCategories(category.categoryId)}>Delete</button>

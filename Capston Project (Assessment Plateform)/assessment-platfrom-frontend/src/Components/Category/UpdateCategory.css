@@ -3,6 +3,7 @@
     margin: 0 auto;
     display: grid;
     gap: 5px;
+   
 }
 
 .update-category-container {
@@ -22,6 +23,7 @@
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: whitesmoke;
+    margin: auto;
 }
 
 .update-category-form-content {
@@ -78,6 +80,8 @@
     margin-top: 1.5rem;
 }
 
+
+
 .update-category-submit-button,
 .update-category-cancel-button {
     flex: 1;
@@ -111,4 +115,24 @@
 .text-center {
     text-align: center;
     margin-top: 1rem;
+}
+
+@media(max-width : 768px)
+{
+    .update-category-siderbar-column{
+        height: 100vh;
+    
+    }
+    /* .update-category-form {
+       width: 300px;      
+    }  */
+}
+
+@media(max-width : 700px)
+{
+   .update-category-form {
+       width: 300px;
+       margin-left: 17%;
+        
+    }
 }

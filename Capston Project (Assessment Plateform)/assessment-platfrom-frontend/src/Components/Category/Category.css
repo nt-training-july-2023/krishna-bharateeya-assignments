@@ -121,3 +121,64 @@
     
   }
   
+  /* Style for the custom select container */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+    max-width: 200px; 
+}
+
+/* Style for the custom select element */
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the custom select element when it's focused */
+.custom-select:focus {
+    outline: none;
+    border-color: #555;
+}
+
+
+
+/* Style for the custom select options */
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    width: 100%;
+    max-height: 150px; 
+    overflow-y: auto;
+}
+
+/* Style for the custom select options when visible */
+.custom-select.open .custom-select-options {
+    display: block;
+}
+
+/* Style for the custom select option items */
+.custom-select-option {
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Style for the custom select option items when hovered */
+.custom-select-option:hover {
+    background-color: #f0f0f0;
+}

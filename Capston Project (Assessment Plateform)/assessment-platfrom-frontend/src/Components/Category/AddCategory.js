@@ -3,7 +3,10 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './AddCategory.css';
 import Sidebar from "../AdminHome/Sidebar";
-import UnauthorizedAccess from "../UnauthrizedAccess/UnauthorizedAccess";
+import Swal from 'sweetalert2';
+
+
+import UnauthorizedAccess from "../UnauthrizedAccess/UnauthorizedAccess"
 const AddCategory = () => {
 
     const [categoryName, setCategoryName] = useState('');
