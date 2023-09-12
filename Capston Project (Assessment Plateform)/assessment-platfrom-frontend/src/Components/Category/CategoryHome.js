@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import './Category.css';
+import './CategoryHome.css';
 import Sidebar from '../AdminHome/Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 const CategoryHome = () => {
     const [categories, setCategories] = useState([]);
@@ -38,6 +40,24 @@ const CategoryHome = () => {
             console.log(error.response.data.message || 'An error occurred. Please try again.');
         }
     };
+
+    const confirmDelete = async (id) => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+            confirmButtonColor: '#d33',
+        });
+
+        if (result.isConfirmed) {
+            deleteCategories(id);
+            Swal.fire('Deleted!', 'Your quiz has been deleted.', 'success');
+        }
+    };
+
 
     const userRole = localStorage.getItem('userRole');
     if (userRole !== 'admin') {
@@ -92,8 +112,10 @@ const CategoryHome = () => {
                                                     <div className="custom-select-arrow">&#9662;</div>
                                                 </div>
                                                 <td>
-                                                    <Link className="button button-edit" to={`/categoryHome/updateCategory/${category.categoryId}`}>Update</Link>
-                                                    <button className="button button-delete" onClick={() => deleteCategories(category.categoryId)}>Delete</button>
+                                                    <Link className="button button-edit" to={`/updateCategory/${category.categoryId}`}>Update</Link>
+                                                    <button className="button button-delete-quiz" onClick={() => confirmDelete(category.categoryId)}>Delete</button>
+
+
                                                 </td>
                                             </tr>
                                         ))}

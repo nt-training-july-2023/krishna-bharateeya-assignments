@@ -1,37 +1,36 @@
-
-.update-category-wrapper{
+.add-category-wrapper {
     margin: 0 auto;
     display: grid;
     gap: 5px;
-   
 }
 
-.update-category-container {
-   
+.add-category-container {
     display: flex;
-    align-items: center;
 }
 
-.update-category-column{
+.add-category-column {
+
     flex: 1;
     padding: 5px;
 }
-.update-category-form {
+
+.add-category-form {
     width: 420px;
     box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: whitesmoke;
-    margin: auto;
+    margin-top: 100px;
+    margin-left: 500px;
 }
 
-.update-category-form-content {
+.add-category-form-content {
     padding-left: 12%;
     padding-right: 12%;
 }
 
-.update-category-title {
+.category-title {
     text-align: center;
     margin-bottom: 1em;
     font-size: 24px;
@@ -39,21 +38,17 @@
     font-weight: 800;
 }
 
-.update-category-form-group {
+.category-form-group {
     margin-top: 1.5rem;
 }
 
-.d-grid {
-    /* margin: 11px; */
-    margin-top: 1.5rem;
-}
 
-.update-category-form-control {
+.category-form-control {
     width: 100%;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
+    color: #000000;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -61,29 +56,33 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.update-category-form-control:focus {
+.error-field .category-form-control {
+    border: 1px solid red;
+}
+
+.category-form-control:focus {
     border-color: #80bdff;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.update-button-container {
-    margin:0px 100px ;
+.add-category-button-container {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
 }
 
-.update-category-submit {
+.category-submit {
     display: grid;
     gap: 0.5rem;
     margin-top: 1.5rem;
+    padding: 30px;
+    
 }
 
-
-
-.update-category-submit-button,
-.update-category-cancel-button {
+.add-category-submit-button,
+.add-category-cancel-button {
+    
     flex: 1;
     margin-right: 0.5rem;
     width: 100%;
@@ -94,13 +93,18 @@
     background-color: #09a122;
     color: white;
     cursor: pointer;
+    
 
     &:hover {
         background-color: #0e6b11;
     }
 }
 
-.update-category-cancel-button {
+.add-category-submit-button{
+    margin-left: 2rem;
+}
+
+.add-category-cancel-button {
 
 
     background-color: #ff0000;
@@ -119,18 +123,14 @@
 
 @media(max-width : 768px)
 {
-    .update-category-siderbar-column{
+    .add-category-siderbar-column{
         height: 100vh;
-    
     }
-    /* .update-category-form {
-       width: 300px;      
-    }  */
 }
 
 @media(max-width : 700px)
 {
-   .update-category-form {
+   .add-category-form {
        width: 300px;
        margin-left: 17%;
         

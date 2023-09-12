@@ -46,16 +46,15 @@
     font-size: 1rem;
     border: none;
     border-radius: 0.25rem;
-    background-color: #007bff;
+    background-color: #09a122;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    &:hover {
+        background-color: #038d08; 
+    }
     
 }
 
-.d-grid button:hover {
-    background-color: #0056b3;
-}
 
 .link-primary {
     cursor: pointer;
@@ -73,10 +72,6 @@
     text-align: center;
     margin-top: 1rem; 
 }
-
-
-
-
 
 .form-control {
     width: 100%;

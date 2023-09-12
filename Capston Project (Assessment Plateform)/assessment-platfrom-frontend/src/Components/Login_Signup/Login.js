@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import Sidebar from '../AdminHome/Sidebar';
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');

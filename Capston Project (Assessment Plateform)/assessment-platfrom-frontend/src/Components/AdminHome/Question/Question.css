@@ -1,3 +1,7 @@
 .question-container{
     display: flex;
 }
+
+.question-column{
+    margin-left: 157px;
+}

@@ -11,6 +11,7 @@
 .category-column{
     flex: 1;
     padding: 5px;
+    margin-left: 157px;
 }
 .category-card {
     box-shadow: 3px 3px 5px 5px #939fd4;
@@ -112,12 +113,16 @@
   
     .category-card-header {
       padding: 20px; 
+      width: 103%;
     }
   
     .add-category-button {
       width: auto; 
       margin-top: 10px; 
     }
+    .category-column{
+        margin-left: 5px;
+      }
     
   }
   

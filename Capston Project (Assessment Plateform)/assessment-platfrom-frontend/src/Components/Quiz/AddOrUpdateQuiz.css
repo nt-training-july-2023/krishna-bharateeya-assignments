@@ -1,37 +1,51 @@
-.add-category-wrapper {
+.add-Update-quiz-wrapper {
     margin: 0 auto;
     display: grid;
     gap: 5px;
 }
 
-.add-category-container {
+.add-Update-quiz-container {
 
     display: flex;
-    align-items: center;
+    
 }
-
-.add-category-column {
+.add-Update-field{
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #060607;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 0.5rem;
+}
+.add-Update-quiz-column {
 
     flex: 1;
     padding: 5px;
 }
 
-.add-category-form {
+.add-Update-quiz-form {
     width: 420px;
     box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: whitesmoke;
-    margin: auto;
+    /* margin: auto; */
+    margin-top: 43px;
+    margin-left: 500px;
 }
 
-.add-category-form-content {
+.add-Update-quiz-form-content {
     padding-left: 12%;
     padding-right: 12%;
 }
 
-.category-title {
+.add-Update-quiz-title {
     text-align: center;
     margin-bottom: 1em;
     font-size: 24px;
@@ -71,7 +85,10 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.button-container {
+.category-select{
+    width: 106%;
+  }
+.add-Update-button-container {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
@@ -82,9 +99,22 @@
     gap: 0.5rem;
     margin-top: 1.5rem;
 }
+.form-group {
+    margin-top: 1.5rem;
+}
+label {
+    display: block;
+    font-weight: bold;
+    padding: 1px;
+  }
 
-.category-submit-button,
-.category-cancel-button {
+  input[type="text"],
+textarea {
+  font-size: 16px;
+}
+
+.add-Update-quiz-submit-button,
+.add-Update-quiz-cancel-button {
     flex: 1;
     margin-right: 0.5rem;
     width: 100%;
@@ -101,7 +131,7 @@
     }
 }
 
-.category-cancel-button {
+.add-Update-quiz-cancel-button {
 
 
     background-color: #ff0000;
@@ -120,14 +150,14 @@
 
 @media(max-width : 768px)
 {
-    .add-category-siderbar-column{
+    .add-Update-quiz-sidebar-column{
         height: 100vh;
     }
 }
 
 @media(max-width : 700px)
 {
-   .add-category-form {
+   .add-Update-quiz-form {
        width: 300px;
        margin-left: 17%;
         
