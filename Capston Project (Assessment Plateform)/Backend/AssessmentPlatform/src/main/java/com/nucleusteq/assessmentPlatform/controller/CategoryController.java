@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
-import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 
@@ -86,7 +85,7 @@ public class CategoryController {
      * @return The updated CategoryDto object.
      */
     @PutMapping("update/{categoryId}")
-    public final CategoryDto updateCategory(@PathVariable final int categoryId,
+    public final String updateCategory(@PathVariable final int categoryId,
             @RequestBody final CategoryDto category) {
         category.setCategoryId(categoryId);
         return categoryService.updateCategory(category);

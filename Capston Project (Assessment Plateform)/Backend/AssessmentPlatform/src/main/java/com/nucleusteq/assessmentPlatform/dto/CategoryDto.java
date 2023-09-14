@@ -32,11 +32,11 @@ public class CategoryDto {
      *
      * @param category The CategoryDto object to create a copy from.
      */
-    public CategoryDto(final CategoryDto category) {
-        this.categoryId = category.categoryId;
-        this.categoryName = category.categoryName;
-        this.description = category.description;
-    }
+//    public CategoryDto(final CategoryDto category) {
+//        this.categoryId = category.categoryId;
+//        this.categoryName = category.categoryName;
+//        this.description = category.description;
+//    }
 
 
     /**

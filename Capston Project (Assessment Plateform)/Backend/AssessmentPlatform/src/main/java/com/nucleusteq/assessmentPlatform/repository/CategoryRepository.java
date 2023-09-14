@@ -11,6 +11,6 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-//    Optional findByQuizId(Long categoryId);
+
 
 }

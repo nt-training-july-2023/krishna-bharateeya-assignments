@@ -24,8 +24,8 @@ class QuestionTest {
         questionobj.setOptionTwo("two");
         questionobj.setOptionThree("three");
         questionobj.setOptionFour("Four");
-        questionobj.setCorrectOption(1);
-        questionobj.setUserSelectedOption(4);
+        questionobj.setCorrectOption("Four");
+        
         
         assertEquals(11,questionobj.getQuestionId());
         assertEquals("Question1",questionobj.getQuestionText());
@@ -33,8 +33,8 @@ class QuestionTest {
         assertEquals("two",questionobj.getOptionTwo());
         assertEquals("three",questionobj.getOptionThree());
         assertEquals("Four",questionobj.getOptionFour());
-        assertEquals(1,questionobj.getCorrectOption());
-        assertEquals(4,questionobj.getUserSelectedOption());
+        assertEquals("Four",questionobj.getCorrectOption());
+        
     }
     
     @Test
@@ -46,8 +46,8 @@ class QuestionTest {
         assertEquals(null,question.getOptionTwo());
         assertEquals(null,question.getOptionThree());
         assertEquals(null,question.getOptionFour());
-        assertEquals(0,question.getCorrectOption());
-        assertEquals(0,question.getUserSelectedOption());
+        assertEquals(null,question.getCorrectOption());
+        
     }
     @Test
     void allArgConstructor() {
@@ -58,8 +58,7 @@ class QuestionTest {
                 "two",
                 "three",
                 "four",
-                1,
-                4
+                "one"
                 );
         assertEquals(102,allParaQuestion.getQuestionId());
         assertEquals("question",allParaQuestion.getQuestionText());
@@ -67,8 +66,7 @@ class QuestionTest {
         assertEquals("two",allParaQuestion.getOptionTwo());
         assertEquals("three",allParaQuestion.getOptionThree());
         assertEquals("four",allParaQuestion.getOptionFour());
-        assertEquals(1,allParaQuestion.getCorrectOption());
-        assertEquals(4,allParaQuestion.getUserSelectedOption());
+        assertEquals("one",allParaQuestion.getCorrectOption());
     }
 
 }

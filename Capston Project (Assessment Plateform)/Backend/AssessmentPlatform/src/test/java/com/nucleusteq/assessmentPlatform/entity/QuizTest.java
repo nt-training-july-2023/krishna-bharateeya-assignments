@@ -50,7 +50,7 @@ public class QuizTest {
     void allArgConstructor() {
         Quiz allParaQuiz =new Quiz(
                 104,
-                "Demo Quiz", null, 12
+                "Demo Quiz", null, 12, category
                 );
         assertEquals(104,allParaQuiz.getQuizId());
         assertEquals("Demo Quiz", allParaQuiz.getQuizName());

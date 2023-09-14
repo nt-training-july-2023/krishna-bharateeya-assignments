@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
-import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
@@ -98,7 +97,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return The updated CategoryDto.
      */
     @Override
-    public final CategoryDto updateCategory(final CategoryDto categoryDto) {
+    public final String updateCategory(final CategoryDto categoryDto) {
 
         Category existingCategory = categoryRepository
                 .findById(categoryDto.getCategoryId())
@@ -108,7 +107,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         modelMapper.map(categoryDto, existingCategory);
         existingCategory = categoryRepository.save(existingCategory);
-        return modelMapper.map(existingCategory, CategoryDto.class);
+        return categoryDto.getCategoryName() + " Updated Successfully";
     }
 
     /**

@@ -44,7 +44,10 @@ public class QuizDTO {
      * @return A defensive copy of the CategoryDto object.
      */
     public final CategoryDto getCategory() {
-        return new CategoryDto(category);
+        return new CategoryDto(
+                category.getCategoryId(),
+                category.getCategoryName(),
+                category.getDescription());
     }
 
     /**
@@ -54,7 +57,10 @@ public class QuizDTO {
      *                 created to prevent external modification.
      */
     public final void setCategory(final CategoryDto cat) {
-        this.category = new CategoryDto(cat);
+        this.category = new CategoryDto(
+                cat.getCategoryId(),
+                cat.getCategoryName(),
+                cat.getDescription());
     }
 
     /**
@@ -74,7 +80,10 @@ public class QuizDTO {
         this.quizName = qName;
         this.quizDescription = qDescription;
         this.timeInMinutes = time;
-        this.category = new CategoryDto(cat);
+        this.category = new CategoryDto(
+                cat.getCategoryId(),
+                cat.getCategoryName(),
+                cat.getDescription());
     }
 
 }

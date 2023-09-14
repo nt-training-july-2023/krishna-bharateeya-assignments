@@ -1,13 +1,20 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.JoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,10 +72,33 @@ public class Quiz {
     private Category category;
 
     /**
+     * The quizzes map with category.
+     */
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Question> questions = new ArrayList<>();
+    /**
+     * get Quiz.
+     * @return Quiz
+     */
+    public final List<Question> getQuestions() {
+        return new ArrayList<>(questions);
+    }
+
+    /**
+     * set Quiz.
+     * @param qui Quiz.
+     */
+    public final void setQuestions(final List<Question> que) {
+        this.questions = new ArrayList<>(que);
+    }
+    
+    /**
      * get category.
      * @return category
      */
     public final Category getCategory() {
+        System.out.println("the question dfdfdf:"+category);
         return new Category(category.getCategoryId(),
                 category.getCategoryName(),
                 category.getDescription());
@@ -84,6 +114,16 @@ public class Quiz {
                 cate.getDescription());
     }
 
+    public Quiz(int quizId, String quizName, String quizDescription,
+            int timeInMinutes, Category category) {
+        super();
+        this.quizId = quizId;
+        this.quizName = quizName;
+        this.quizDescription = quizDescription;
+        this.timeInMinutes = timeInMinutes;
+        this.category = category;
+    }
+
     /**
      * parameter constructor for sub-category.
      * @param qId quiz Id
@@ -91,13 +131,14 @@ public class Quiz {
      * @param quizDes quiz Description
      * @param timInMin time In Minutes
      */
-    public Quiz(final int qId,
-        final String quizNa,
-        final String quizDes,
-        final int timInMin) {
-            this.quizId = qId;
-            this.quizName = quizNa;
-            this.quizDescription = quizDes;
-            this.timeInMinutes = timInMin;
-    }
+//    public Quiz(final int qId,
+//        final String quizNa,
+//        final String quizDes,
+//        final int timInMin) {
+//            this.quizId = qId;
+//            this.quizName = quizNa;
+//            this.quizDescription = quizDes;
+//            this.timeInMinutes = timInMin;
+//    }
+    
 }

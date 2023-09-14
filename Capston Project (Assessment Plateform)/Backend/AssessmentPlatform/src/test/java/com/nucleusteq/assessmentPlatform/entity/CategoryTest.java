@@ -61,8 +61,8 @@ class CategoryTest {
     @Test
     void setQuizzes_SetsQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
-        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30);
-        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45);
+        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30, category);
+        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45, category);
         quizzes.add(quiz1);
         quizzes.add(quiz2);
 
@@ -78,8 +78,8 @@ class CategoryTest {
     @Test
     void getQuizzes_ReturnsQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
-        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30);
-        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45);
+        Quiz quiz1 = new Quiz(1, "Quiz 1", "Quiz 1 Description", 30, category);
+        Quiz quiz2 = new Quiz(2, "Quiz 2", "Quiz 2 Description", 45, category);
         quizzes.add(quiz1);
         quizzes.add(quiz2);
         category.setQuizzes(quizzes);

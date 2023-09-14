@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.JoinColumn;
 //import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
@@ -20,7 +22,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @SequenceGenerator(name = "quistionSeq",
 initialValue = Question.ID_INITIAL_VALUE, allocationSize = 1)
 public class Question {
@@ -72,18 +73,54 @@ public class Question {
      * The correct option for the question.
      */
     @Column(nullable = false)
-    private int correctOption;
+    private String correctOption;
+
+
 
     /**
-     * The option selected by the user (if applicable).
+     * The quiz to which the quiz belongs.
      */
-    private int userSelectedOption;
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
     /**
-     * The quiz to which the question belongs.
+     * get category.
+     * @return category
      */
-//    @ManyToOne
-//    @JoinColumn(name = "quiz_id")
-//    private Quiz quiz;
+    public final Quiz getQuiz() {
+        return new Quiz(quiz.getQuizId(),
+                quiz.getQuizName(),
+                quiz.getQuizDescription(),
+                quiz.getTimeInMinutes(),
+                quiz.getCategory()
+                );
+    }
 
+    /**
+     * set Category.
+     * @param cate cate.
+     */
+    public final void setQuiz(final Quiz que) {
+        this.quiz = new Quiz(que.getQuizId(),
+                que.getQuizName(),
+                que.getQuizDescription(),
+                que.getTimeInMinutes(),
+                que.getCategory());
+    }
+
+    public Question(int questionId, String questionText, String optionOne,
+            String optionTwo, String optionThree, String optionFour,
+            String correctOption) {
+        super();
+        this.questionId = questionId;
+        this.questionText = questionText;
+        this.optionOne = optionOne;
+        this.optionTwo = optionTwo;
+        this.optionThree = optionThree;
+        this.optionFour = optionFour;
+        this.correctOption = correctOption;
+    }
+    
+    
 }

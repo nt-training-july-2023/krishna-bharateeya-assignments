@@ -20,7 +20,6 @@ class RegistrationDtoTest {
         assertEquals(null, registrationDto.getFirstName());
         assertEquals(null, registrationDto.getLastName());
         assertEquals(null, registrationDto.getMobileNumber());
-        assertEquals(null, registrationDto.getUserRole());
         assertEquals(null, registrationDto.getEmail());
         assertEquals(null, registrationDto.getPassword());
     }
@@ -31,14 +30,13 @@ class RegistrationDtoTest {
         parameterizedRegistrationDto.setFirstName("Krishna");
         parameterizedRegistrationDto.setLastName("kumar");
         parameterizedRegistrationDto.setMobileNumber("3455645345");
-        parameterizedRegistrationDto.setUserRole("user");
         parameterizedRegistrationDto.setEmail("kk@gmail.com");
         parameterizedRegistrationDto.setPassword("3456");
         assertEquals(101,parameterizedRegistrationDto.getUserId());
         assertEquals("Krishna", parameterizedRegistrationDto.getFirstName());
         assertEquals("kumar", parameterizedRegistrationDto.getLastName());
         assertEquals("3455645345", parameterizedRegistrationDto.getMobileNumber());
-        assertEquals("user", parameterizedRegistrationDto.getUserRole());
+
         assertEquals("kk@gmail.com", parameterizedRegistrationDto.getEmail());
         assertEquals("3456", parameterizedRegistrationDto.getPassword());
     }
