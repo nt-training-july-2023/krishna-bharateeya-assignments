@@ -63,7 +63,8 @@ public class CategoryController {
      * @return The CategoryDto object representing the retrieved category.
      */
     @GetMapping("quizzes/{categoryId}")
-    public final List<Quiz> getAllQuizByCategory(@PathVariable final int categoryId) {
+    public final List<Quiz> getAllQuizByCategory(
+            @PathVariable final int categoryId) {
         return categoryService.getAllQuizByCategory(categoryId);
     }
 
@@ -77,6 +78,7 @@ public class CategoryController {
     public final CategoryDto getCategoryById(@PathVariable final int id) {
         return categoryService.getCategoryById(id);
     }
+
     /**
      * Updates a category.
      *

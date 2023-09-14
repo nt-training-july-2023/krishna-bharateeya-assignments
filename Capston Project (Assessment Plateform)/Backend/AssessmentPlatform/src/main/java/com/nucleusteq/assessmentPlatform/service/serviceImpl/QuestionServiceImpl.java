@@ -13,6 +13,7 @@ import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
+import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
@@ -128,11 +129,11 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = new Question();
         question.setQuestionId(questionDto.getQuestionId());
         question.setQuestionText(questionDto.getQuestionText());
-        question.setOptionOne(questionDto.getOptionOne());
-        question.setOptionTwo(questionDto.getOptionTwo());
-        question.setOptionThree(questionDto.getOptionThree());
-        question.setOptionFour(questionDto.getOptionFour());
-        question.setCorrectOption(questionDto.getCorrectOption());
+        question.setOptionOne(questionDto.getOptions().getOptionOne());
+        question.setOptionTwo(questionDto.getOptions().getOptionTwo());
+        question.setOptionThree(questionDto.getOptions().getOptionThree());
+        question.setOptionFour(questionDto.getOptions().getOptionFour());
+        question.setCorrectOption(questionDto.getOptions().getCorrectOption());
 
         Category category = new Category();
         category.setCategoryId(
@@ -165,11 +166,13 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionDto questionDto = new QuestionDto();
         questionDto.setQuestionId(question.getQuestionId());
         questionDto.setQuestionText(question.getQuestionText());
-        questionDto.setOptionOne(question.getOptionOne());
-        questionDto.setOptionTwo(question.getOptionTwo());
-        questionDto.setOptionThree(question.getOptionThree());
-        questionDto.setOptionFour(question.getOptionFour());
-        questionDto.setCorrectOption(question.getCorrectOption());
+        QuestionOptions options = new QuestionOptions(
+                question.getOptionOne(),
+                question.getOptionTwo(),
+                question.getOptionThree(),
+                question.getOptionFour(),
+                question.getCorrectOption());
+        questionDto.setOptions(options);
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryId(
                 question.getQuiz().getCategory().getCategoryId());

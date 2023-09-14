@@ -6,7 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
@@ -32,39 +39,38 @@ public class QuestionController {
      * @return A ResponseEntity with a success and HTTP status 201 (Created).
      */
     @PostMapping("/add")
-    public ResponseEntity<String> addQuestion(
-            @RequestBody QuestionDto questionDto) {
+    public final ResponseEntity<String> addQuestion(
+            @RequestBody final QuestionDto questionDto) {
         String result = questionService.addQuestion(questionDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     /**
      * Updates an existing question in the assessment platform.
-     * 
      * @param questionId  The ID of the question to be updated.
      * @param questionDto The QuestionDto containing the updated question data.
      * @return A ResponseEntity with a success message and HTTP status 200 (OK).
      * @throws NotFoundException if the specified question is not found.
      */
     @PutMapping("/update/{questionId}")
-    public ResponseEntity<String> updateQuestion(
-            @PathVariable Integer questionId,
-            @RequestBody QuestionDto questionDto) throws NotFoundException {
+    public final ResponseEntity<String> updateQuestion(
+            @PathVariable final Integer questionId,
+            @RequestBody final QuestionDto questionDto)
+            throws NotFoundException {
         String result = questionService.updateQuestion(questionId, questionDto);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
      * Deletes a question from the assessment platform.
-     * 
      * @param questionId The ID of the question to be deleted.
      * @return A ResponseEntity with HTTP status 204 (No Content) on successful.
      *         deletion.
      * @throws NotFoundException if the specified question is not found.
      */
     @DeleteMapping("/delete/{questionId}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer questionId)
-            throws NotFoundException {
+    public final ResponseEntity<Void> deleteQuestion(
+            @PathVariable final Integer questionId) throws NotFoundException {
         questionService.deleteQuestion(questionId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -77,20 +83,19 @@ public class QuestionController {
      * @throws NotFoundException if the specified question is not found.
      */
     @GetMapping("/{questionId}")
-    public ResponseEntity<QuestionDto> getQuestionById(
-            @PathVariable Integer questionId) throws NotFoundException {
+    public final ResponseEntity<QuestionDto> getQuestionById(
+            @PathVariable final Integer questionId) throws NotFoundException {
         QuestionDto questionDto = questionService.getQuestionById(questionId);
         return new ResponseEntity<>(questionDto, HttpStatus.OK);
     }
 
     /**
      * Retrieves all questions available in the assessment platform.
-     * 
      * @return A ResponseEntity containing a list of QuestionDto objects and.
      *         HTTP status 200 (OK).
      */
     @GetMapping("/all")
-    public ResponseEntity<List<QuestionDto>> getAllQuestions() {
+    public final ResponseEntity<List<QuestionDto>> getAllQuestions() {
         List<QuestionDto> questions = questionService.getAllQuestion();
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }

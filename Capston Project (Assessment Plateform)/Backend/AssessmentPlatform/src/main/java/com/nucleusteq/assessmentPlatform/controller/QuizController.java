@@ -37,7 +37,7 @@ public class QuizController {
 
     /**
      * This is quiz controller object it call the quiz methods.
-     * @param quizService user to assign in the constructor.
+     * @param quService user to assign in the constructor.
      */
     @Autowired
     public QuizController(final QuizService quService) {

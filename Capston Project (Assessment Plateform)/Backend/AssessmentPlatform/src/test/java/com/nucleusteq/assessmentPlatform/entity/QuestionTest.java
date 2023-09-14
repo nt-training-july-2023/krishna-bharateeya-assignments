@@ -15,6 +15,33 @@ class QuestionTest {
     }
     
     @Test
+    public void testGetQuiz() {
+        
+        Category cat=new Category(1,"sample Cat","cat desc");
+        Quiz quiz = new Quiz(1, "Sample Quiz", "Description", 30,cat);
+        
+        Question question = new Question(1, "Question Text", "Option 1", "Option 2", "Option 3", "Option 4", "Correct Option");
+        question.setQuiz(quiz);
+
+        Quiz associatedQuiz = question.getQuiz();
+        assertEquals(quiz.getQuizName(), associatedQuiz.getQuizName());
+    }
+    
+    
+    @Test
+    public void testSetQuiz() {
+        Category category=new Category(1,"sample Cat","cat desc");
+
+        Quiz quiz = new Quiz(1, "Sample Quiz", "Description", 30, category);
+        
+        Question question = new Question(1, "Question Text", "Option 1", "Option 2", "Option 3", "Option 4", "Correct Option");
+        question.setQuiz(quiz);
+
+        Quiz associatedQuiz = question.getQuiz();
+
+        assertEquals(quiz.getQuizName(), associatedQuiz.getQuizName());
+    }
+    @Test
     void testNoArgGettersAndSetters() {
         
         Question questionobj=new Question();
