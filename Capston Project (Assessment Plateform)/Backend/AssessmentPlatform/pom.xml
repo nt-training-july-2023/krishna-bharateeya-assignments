@@ -109,9 +109,9 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
+				<!--<configuration>
 					<configLocation>D:\Assignment\Capston Project (Assessment Plateform)\Backend\AssessmentPlatform\checkstyle.xml</configLocation>
-				</configuration>
+				</configuration>-->
 			</plugin>
 
 

@@ -28,6 +28,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    /**
+     * This is use to call the quizRepository functions.
+     */
     @Autowired
     private QuizRepository quizRepository;
     /**
@@ -106,7 +109,7 @@ public class CategoryServiceImpl implements CategoryService {
                                 + categoryDto.getCategoryId()));
 
         modelMapper.map(categoryDto, existingCategory);
-        existingCategory = categoryRepository.save(existingCategory);
+        categoryRepository.save(existingCategory);
         return categoryDto.getCategoryName() + " Updated Successfully";
     }
 
@@ -126,8 +129,14 @@ public class CategoryServiceImpl implements CategoryService {
         return "Category Deletd Successfully";
     }
 
+    /**
+     * Gets all quiz By categoryId.
+     *
+     * @param categoryId The ID of the category to get the quiz.
+     * @return list of quiz related to this category.
+     */
     @Override
-    public List<Quiz> getAllQuizByCategory(int categoryId) {
+    public final List<Quiz> getAllQuizByCategory(final int categoryId) {
         Category category = new Category();
         category.setCategoryId(categoryId);
         return quizRepository.findByCategory(category);

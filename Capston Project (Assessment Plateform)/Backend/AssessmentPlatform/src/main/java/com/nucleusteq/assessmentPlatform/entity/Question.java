@@ -7,10 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,7 +33,7 @@ public class Question {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-    generator = "quistionSeq")
+        generator = "quistionSeq")
     private int questionId;
 
     /**
@@ -75,8 +72,6 @@ public class Question {
     @Column(nullable = false)
     private String correctOption;
 
-
-
     /**
      * The quiz to which the quiz belongs.
      */
@@ -89,38 +84,42 @@ public class Question {
      * @return category
      */
     public final Quiz getQuiz() {
-        return new Quiz(quiz.getQuizId(),
-                quiz.getQuizName(),
-                quiz.getQuizDescription(),
-                quiz.getTimeInMinutes(),
-                quiz.getCategory()
-                );
+        return new Quiz(quiz.getQuizId(), quiz.getQuizName(),
+                quiz.getQuizDescription(), quiz.getTimeInMinutes(),
+                quiz.getCategory());
     }
 
     /**
      * set Category.
-     * @param cate cate.
+     * @param que for question parameter.
      */
     public final void setQuiz(final Quiz que) {
-        this.quiz = new Quiz(que.getQuizId(),
-                que.getQuizName(),
-                que.getQuizDescription(),
-                que.getTimeInMinutes(),
+        this.quiz = new Quiz(que.getQuizId(), que.getQuizName(),
+                que.getQuizDescription(), que.getTimeInMinutes(),
                 que.getCategory());
     }
-
-    public Question(int questionId, String questionText, String optionOne,
-            String optionTwo, String optionThree, String optionFour,
-            String correctOption) {
+    /**
+     * Constructs a new Question object with the specified parameters.
+     *
+     * @param qId         The unique identifier for the question.
+     * @param qText       The text of the question.
+     * @param opOne       The first answer option for the question.
+     * @param opTwo       The second answer option for the question.
+     * @param opThree     The third answer option for the question.
+     * @param opFour      The fourth answer option for the question.
+     * @param corrOption  The correct answer option for the question.
+     */
+    public Question(final int qId, final String qText, final String opOne,
+            final String opTwo, final String opThree, final String opFour,
+            final String corrOption) {
         super();
-        this.questionId = questionId;
-        this.questionText = questionText;
-        this.optionOne = optionOne;
-        this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
-        this.optionFour = optionFour;
-        this.correctOption = correctOption;
+        questionId = qId;
+        questionText = qText;
+        optionOne = opOne;
+        optionTwo = opTwo;
+        optionThree = opThree;
+        optionFour = opFour;
+        correctOption = corrOption;
     }
-    
-    
+
 }

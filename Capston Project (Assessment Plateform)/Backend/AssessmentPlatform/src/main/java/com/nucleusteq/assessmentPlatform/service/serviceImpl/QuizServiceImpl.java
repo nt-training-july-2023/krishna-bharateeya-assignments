@@ -61,7 +61,8 @@ public class QuizServiceImpl implements QuizService {
                     "Quiz with the same name already exists");
         }
         Quiz quiz = convertToEntity(quizDTO);
-        System.out.println("printiing the quiz category description :"+quiz.getCategory().getDescription());
+        System.out.println("printiing the quiz category description :"
+                + quiz.getCategory().getDescription());
         quizRepository.save(quiz);
 
         return "Quiz added successfully";
@@ -69,7 +70,7 @@ public class QuizServiceImpl implements QuizService {
 
     /**
      * Updates a quiz.
-     *@param quizId The ID of the quiz.
+     * @param quizId  The ID of the quiz.
      * @param quizDTO The DTO containing updated quiz information.
      * @return The updated String.
      */
@@ -152,7 +153,8 @@ public class QuizServiceImpl implements QuizService {
     private QuizDTO convertToDTO(final Quiz quiz) {
         QuizDTO quizDTO = modelMapper.map(quiz, QuizDTO.class);
         if (quiz.getCategory() != null) {
-            CategoryDto categoryDto = modelMapper.map(quiz.getCategory(), CategoryDto.class);
+            CategoryDto categoryDto = modelMapper.map(quiz.getCategory(),
+                    CategoryDto.class);
             quizDTO.setCategory(categoryDto);
         }
         return quizDTO;
@@ -167,7 +169,8 @@ public class QuizServiceImpl implements QuizService {
     private Quiz convertToEntity(final QuizDTO quizDTO) {
         Quiz quiz = modelMapper.map(quizDTO, Quiz.class);
         if (quizDTO.getCategory() != null) {
-            Category category = modelMapper.map(quizDTO.getCategory(), Category.class);
+            Category category = modelMapper.map(quizDTO.getCategory(),
+                    Category.class);
             quiz.setCategory(category);
         }
         return quiz;

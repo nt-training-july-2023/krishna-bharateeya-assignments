@@ -14,12 +14,15 @@ import com.nucleusteq.assessmentPlatform.entity.Quiz;
 public interface QuizRepository extends JpaRepository<Quiz, Integer> {
     /**
      * Finds a Quiz entity by Quiz Name.
-     *
      * @param quizName The quiz Name to search for.
      * @return An Optional containing the found Registration entity, if any.
      */
     Optional<Quiz> findByQuizName(String quizName);
 
-    
+    /**
+     * Finds a Quiz entity by Quiz Name.
+     * @param category The category Object to search for.
+     * @return An Optional containing the found Quiz entity, if any.
+     */
     List<Quiz> findByCategory(Category category);
 }

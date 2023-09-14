@@ -6,53 +6,54 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
-import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 
+/**
+ * This is `QuestionService` interface.
+ */
 @Service
-public  interface QuestionService {
+public interface QuestionService {
 
     /**
      * Adds a new quiz.
-     *
-     * @param quizDTO The DTO containing quiz information.
+     * @param questionDto The DTO containing quiz information.
      * @return A message indicating the result of the operation.
      */
-     String addQuestion(QuestionDto questionDto);
+    String addQuestion(QuestionDto questionDto);
 
-     /**
-      * Updates a quiz.
-      * @param quizId The update the quiz information.
-      * @param quizDTO The updated quiz information.
-      * @return The updated quizDto.
-      * @throws NotFoundException If the quizId is invalid.
-      */
-     
-     String updateQuestion(Integer questionId, QuestionDto questionDto)throws NotFoundException;
+    /**
+     * Updates a quiz.
+     * @param questionId  The update the question information.
+     * @param questionDto The updated question information.
+     * @return The updated quizDto.
+     * @throws NotFoundException If the quizId is invalid.
+     */
+
+    String updateQuestion(Integer questionId, QuestionDto questionDto)
+            throws NotFoundException;
+
     /**
      * Deletes a quiz.
      *
-     * @param quizId The ID of the quiz to delete.
+     * @param questionId The ID of the question to delete.
      * @throws NotFoundException If the quizId is invalid.
      */
-     
+
     void deleteQuestion(Integer questionId) throws NotFoundException;
 
     /**
      * Retrieves a quiz by its ID.
      *
-     * @param quizId The ID of the quiz to retrieve.
-     * @return The retrieved quizDto.
+     * @param questionId The ID of the question to retrieve.
+     * @return The retrieved questionDto.
      * @throws NotFoundException If the quizId is invalid.
      */
     QuestionDto getQuestionById(Integer questionId) throws NotFoundException;
 
     /**
-     * Retrieves all quiz.
+     * Retrieves all questions.
      *
-     * @return A list of all quizzes.
+     * @return A list of all questions.
      */
     List<QuestionDto> getAllQuestion();
 
-    
 }

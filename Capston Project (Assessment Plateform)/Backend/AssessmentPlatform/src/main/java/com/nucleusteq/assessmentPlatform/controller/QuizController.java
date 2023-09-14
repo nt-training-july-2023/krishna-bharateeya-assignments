@@ -35,13 +35,18 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
+    /**
+     * This is quiz controller object it call the quiz methods.
+     * @param quizService user to assign in the constructor.
+     */
     @Autowired
-    public QuizController(QuizService quizService) {
-        this.quizService = Objects.requireNonNull(quizService, "quizService must not be null");
+    public QuizController(final QuizService quService) {
+        this.quizService = Objects.requireNonNull(quService,
+                "quizService must not be null");
     }
-/**
+
+    /**
      * Adds a new quiz.
-     *
      * @param quizDTO The QuizDTO object containing Quiz information.
      * @return A message indicating the result of the quiz addition.
      */
@@ -53,16 +58,14 @@ public class QuizController {
 
     /**
      * Updates a quiz.
-     * @param quizId The ID of the quiz to update.
+     * @param quizId  The ID of the quiz to update.
      * @param quizDTO The updated quizDto object.
      * @return The updated quizDto object.
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @PutMapping("/{quizId}")
-    public final String updateQuiz(
-        @PathVariable final Integer quizId,
-        @RequestBody final QuizDTO quizDTO
-    ) throws NotFoundException {
+    public final String updateQuiz(@PathVariable final Integer quizId,
+            @RequestBody final QuizDTO quizDTO) throws NotFoundException {
         String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
         return updatedQuiz;
     }
@@ -75,8 +78,7 @@ public class QuizController {
      */
     @DeleteMapping("/{quizId}")
     public final ResponseEntity<Void> deleteQuiz(
-            @PathVariable final Integer quizId)
-            throws NotFoundException {
+            @PathVariable final Integer quizId) throws NotFoundException {
         quizService.deleteQuiz(quizId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -89,8 +91,7 @@ public class QuizController {
      */
     @GetMapping("/{quizId}")
     public final ResponseEntity<QuizDTO> getQuizById(
-            @PathVariable final Integer quizId)
-            throws NotFoundException {
+            @PathVariable final Integer quizId) throws NotFoundException {
         QuizDTO quizDTO = quizService.getQuizById(quizId);
         return new ResponseEntity<>(quizDTO, HttpStatus.OK);
     }

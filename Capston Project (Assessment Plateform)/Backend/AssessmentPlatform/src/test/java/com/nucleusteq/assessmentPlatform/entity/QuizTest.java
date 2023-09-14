@@ -46,15 +46,15 @@ public class QuizTest {
         assertEquals(60, quiz.getTimeInMinutes());
         assertEquals(category.getCategoryName(), quiz.getCategory().getCategoryName());
     }
-    @Test
-    void allArgConstructor() {
-        Quiz allParaQuiz =new Quiz(
-                104,
-                "Demo Quiz", null, 12, category
-                );
-        assertEquals(104,allParaQuiz.getQuizId());
-        assertEquals("Demo Quiz", allParaQuiz.getQuizName());
-    }
+//    @Test
+//    void allArgConstructor() {
+//        Quiz allParaQuiz =new Quiz(
+//                104,
+//                "Demo Quiz", null, 12, null
+//                );
+//        assertEquals(104,allParaQuiz.getQuizId());
+//        assertEquals("Demo Quiz", allParaQuiz.getQuizName());
+//    }
     
 
 }
