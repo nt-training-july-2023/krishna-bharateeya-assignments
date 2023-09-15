@@ -1,19 +1,36 @@
 import './Sidebar.css'
 import React, { useState,useEffect } from 'react';
-
+import Swal from 'sweetalert2';
 import {  FaQuora,  FaBars,  FaRegChartBar,  FaQuestionCircle,  FaPowerOff,  FaThList,  FaHome} from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
 import './Sidebar.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("logout function called");
+    navigate('/');
+    toast.success("Logged Successfully");
+    localStorage.removeItem('IsLoggedIn');
+    localStorage.removeItem('userRole');
+  };
 
-  // const handleLogout = () => {
-  //   console.log("logout function classed");
-  //   localStorage.removeItem('IsLoggedIn');
-  //   localStorage.removeItem('userRole');
-  // };
+  const handleLogoutConfirmation =() =>{
+    Swal.fire({
+      text:"Confirm Logout?",
+      icon:"warning",
+      showCancelButton:true,
+      showConfirmButton:true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        handleLogout();
+      }
+      });
+  }
 
   const menuItem = [
     {
@@ -42,10 +59,9 @@ const Sidebar = ({ children }) => {
       icon: <FaRegChartBar />
     },
     {
-      path: "/",
       name: "Logout",
       icon: <FaPowerOff />,
-      // onClick: handleLogout
+      
 
     },
   ]
@@ -77,10 +93,20 @@ const Sidebar = ({ children }) => {
         </div>
         {
           menuItem.map((item, index) => (
-            <NavLink to={item.path} key={index} className="link" activeClassName="active">
-              <div className="icon">{item.icon}</div>
-              <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>
-            </NavLink>
+            <NavLink
+            to={item.path}
+            key={index}
+            className="link"
+            activeClassName="active"
+            onClick={() => {
+              if (item.name === "Logout") {
+                handleLogoutConfirmation(); 
+              }
+            }}
+          >
+            <div className="icon">{item.icon}</div>
+            <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>
+          </NavLink>
           ))
         }
       </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { CreateQuiz,UpdateQuiz,LoadCategories,LoadCategoryById,GetQuizById } from '../../ApiService/ApiService';
 const AddOrUpdateQuiz = () => {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -32,21 +32,15 @@ const AddOrUpdateQuiz = () => {
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/category')
-      .then((response) => setCategories(response.data))
-      .catch((error) =>
-        toast.error(
-          error.response?.data?.message ||
-            'An error occurred when fetching categories. Please try again.'
-        )
-      );
+    LoadCategories()
+    .then((categories) => setCategories(categories))
+    .catch((error) => toast.error(error.message));
 
     if (quizId) {
       axios
-        .get(`http://localhost:8080/quizzes/${quizId}`)
+      GetQuizById(quizId)
         .then((response) => {
-          const quizData = response.data;
+          const quizData = response;
           setSelectedCategory(quizData.category.categoryId);
           setQuizName(quizData.quizName);
           setQuizDescription(quizData.quizDescription);
@@ -56,7 +50,7 @@ const AddOrUpdateQuiz = () => {
         .catch((error) =>
           toast.error(
             error.response?.data?.message ||
-              'An error occurred when fetching quiz details. Please try again.'
+            'An error occurred when fetching quiz details. Please try again.'
           )
         );
     }
@@ -77,14 +71,14 @@ const AddOrUpdateQuiz = () => {
     setQuizDescription(value);
     setQuizDescriptionError(validateNotEmpty(value));
   };
-      
+
   const handleCategoryChange = (event) => {
     const categoryId = event.target.value;
 
     axios
-      .get(`http://localhost:8080/category/${categoryId}`)
+    LoadCategoryById(categoryId)
       .then((response) => {
-        const categoryObject = response.data;
+        const categoryObject = response;
         setSelectedCategoryObject(categoryObject);
         setSelectedCategory(categoryId);
         setSelectedCategoryError('');
@@ -94,25 +88,25 @@ const AddOrUpdateQuiz = () => {
         setSelectedCategory('');
         setSelectedCategoryError(
           error.response?.data?.message ||
-            'An error occurred when selecting a category. Please try again.'
+          'An error occurred when selecting a category. Please try again.'
         );
         toast.error(selectedCategoryError);
       });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const nameError = validateNotEmpty(quizName);
     const descriptionError = validateNotEmpty(quizDescription);
     const timeError = validateNotEmpty(quizTime);
     const categoryError = !selectedCategory ? 'Please select a category' : '';
-  
+
     setQuizNameError(nameError);
     setQuizDescriptionError(descriptionError);
     setQuizTimeError(timeError);
     setSelectedCategoryError(categoryError);
-  
+
     if (nameError || descriptionError || timeError || categoryError) {
       toast.error('Fields Are Mandatory!!');
       return;
@@ -125,33 +119,24 @@ const AddOrUpdateQuiz = () => {
       category: selectedCategoryObject,
     };
 
+    
+  try {
+    let result;
     if (quizId) {
-      axios
-        .put(`http://localhost:8080/quizzes/${quizId}`, payload)
-        .then(() => {
-          toast.success('Quiz updated successfully');
-          navigate('/quiz');
-        })
-        .catch((error) =>
-          toast.error(
-            error.response?.data?.message ||
-              'An error occurred when updating the quiz. Please try again.'
-          )
-        );
+      result=await UpdateQuiz(quizId, payload);
+      toast.success(result);
     } else {
-      axios
-        .post('http://localhost:8080/quizzes', payload)
-        .then(() => {
-          toast.success('Quiz Added successfully');
-          navigate('/quiz');
-        })
-        .catch((error) =>
-          toast.error(
-            error.response?.data?.message ||
-              'An error occurred when adding. Please try again.'
-          )
-        );
+       result=await CreateQuiz(payload);
+      toast.success('Quiz added successfully');
     }
+
+    navigate('/quiz');
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+        'An error occurred when updating/adding the quiz. Please try again.'
+    );
+  }
   };
 
   const userRole = localStorage.getItem('userRole');
@@ -174,9 +159,8 @@ const AddOrUpdateQuiz = () => {
               <div className="form-groups">
                 <label htmlFor="category-select">Category:</label>
                 <select
-                  className={`add-Update-field ${
-                    selectedCategoryError ? 'has-error' : ''
-                  }`}
+                  className={`add-Update-field ${selectedCategoryError ? 'a-u-q-error-field' : ''
+                    }`}
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
@@ -191,56 +175,55 @@ const AddOrUpdateQuiz = () => {
                   ))}
                 </select>
                 {selectedCategoryError && (
-                  <p className="error-message">{selectedCategoryError}</p>
+                  <p className='a-u-q-error-message'>{selectedCategoryError}</p>
                 )}
               </div>
+
+              {/* <div className={`form-group ${firstNameError ? 'has-error' : ''}`}></div> */}
               <div
-                className={`form-group ${
-                  quizNameError ? 'has-error' : ''
-                }`}
+                className={`form-group ${quizNameError ? 'has-error' : ''
+                  }`}
               >
                 <label htmlFor="quiz-name">Quiz Name:</label>
                 <input
                   type="text"
-                  className="add-Update-field"
+                  className={`add-Update-field ${quizNameError?'a-u-q-error-field':''}`}              
                   value={quizName}
                   onChange={handleQuizNameChange}
                 />
                 {quizNameError && (
-                  <p className="error-message">{quizNameError}</p>
+                  <p className='a-u-q-error-message'>{quizNameError}</p>
                 )}
               </div>
               <div
-                className={`form-group ${
-                  quizTimeError ? 'has-error' : ''
-                }`}
+                className={`form-group ${quizTimeError ? 'has-error' : ''
+                  }`}
               >
                 <label htmlFor="quiz-time">Quiz Time:</label>
                 <input
-                  type="text"
-                  className="add-Update-field"
+                  type="number"
+                  className={`add-Update-field ${quizTimeError?'a-u-q-error-field':''}`}              
                   value={quizTime}
                   onChange={handleQuizTimeChange}
                 />
                 {quizTimeError && (
-                  <p className="error-message">{quizTimeError}</p>
+                  <p className='a-u-q-error-message'>{quizTimeError}</p>
                 )}
               </div>
               <div
-                className={`form-group ${
-                  quizDescriptionError ? 'has-error' : ''
-                }`}
+                className={`form-group ${quizDescriptionError ? 'has-error' : ''
+                  }`}
               >
                 <label htmlFor="quiz-desc">Quiz Description:</label>
                 <textarea
                   type="text"
                   value={quizDescription}
                   onChange={handleQuizDescriptionChange}
-                  className="add-Update-field"
+                  className={`add-Update-field ${quizDescriptionError?'a-u-q-error-field':''}`}              
                   rows="2"
                 />
                 {quizDescriptionError && (
-                  <p className="error-message">{quizDescriptionError}</p>
+                  <p className='a-u-q-error-message'>{quizDescriptionError}</p>
                 )}
               </div>
               <div className="add-Update-button-container">

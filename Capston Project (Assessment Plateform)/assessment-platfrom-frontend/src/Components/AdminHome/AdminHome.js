@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import './AdminHome.css';
 import Sidebar from './Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { LoadUsers } from '../../ApiService/ApiService';
 
 const AdminHome = () => {
   const [users, setUsers] = useState([]);
@@ -15,15 +19,28 @@ const AdminHome = () => {
 
   const handleLogout = () => {
     console.log("logout function called");
+    toast.success("Logged Successfully");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
     navigate("/");
   };
 
+  const handleLogoutConfirmation =() =>{
+    Swal.fire({
+      text:"Confirm Logout?",
+      icon:"warning",
+      showCancelButton:true,
+      showConfirmButton:true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        handleLogout();
+      }
+      });
+  }
   const loadUsers = async () => {
     try {
-      const result = await axios.get('http://localhost:8080/users/get/all');
-      setUsers(result.data);
+      const result = await LoadUsers(); 
+      setUsers(result);
     } catch (error) {
       if (error.response) {
         console.error('Server Error:', error.response.data);
@@ -51,7 +68,7 @@ const AdminHome = () => {
               <div className="admin-home-card-header">
                 <h3>Welcome To Admin Dashboard</h3>
                 <center>
-                  <button className="admin-logout-button" onClick={handleLogout}>Logout</button>
+                  <button className="admin-logout-button" onClick={handleLogoutConfirmation}>Logout</button>
                 </center>
               </div>
               <div className="admin-home-card-body">

@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
+// import { ApiService } from '../../ApiService/ApiService';
+// import {Registration} from  '../../ApiService/ApiService'
+import { RegistrationService } from '../../ApiService/ApiService';
 const Registration = () => {
     const [firstName, setFirstName] = useState('');
     const [firstNameError, setFirstNameError] = useState('');
@@ -122,7 +124,7 @@ const Registration = () => {
         setConfirmPassword(value);
         setConfirmPasswordError(validatePasswordsMatch(password, value) || validateNotEmpty(value));
     };
-    
+
 
     const validatePasswordsMatch = (password, confirmPassword) => {
         if (password !== confirmPassword) {
@@ -135,21 +137,21 @@ const Registration = () => {
 
     const handleRegistration = async (e) => {
         e.preventDefault();
-    
+
         const firstNameError = validateNotEmpty(firstName);
         const lastNameError = validateNotEmpty(lastName);
         const mobileNumberError = validateNotEmpty(mobileNumber) || validateNumeric(mobileNumber);
         const emailError = validateNotEmpty(email) || validateEmail(email) || validateEmailDomainName(email);
         const passwordError = validateNotEmpty(password) || validatePasswordLength(password);
         const confirmPasswordError = validatePasswordsMatch(password, confirmPassword) || validateNotEmpty(confirmPassword);
-    
+
         setFirstNameError(firstNameError);
         setLastNameError(lastNameError);
         setMobileNumberError(mobileNumberError);
         setEmailError(emailError);
         setPasswordError(passwordError);
         setConfirmPasswordError(confirmPasswordError);
-    
+
         if (
             firstNameError ||
             lastNameError ||
@@ -161,24 +163,25 @@ const Registration = () => {
             console.log('Please fix validation errors before submitting.');
             return;
         }
-    
+
         try {
-            const response = await axios.post('http://localhost:8080/users/save', {
+            const userData = {
                 firstName,
                 lastName,
                 mobileNumber,
                 email,
                 password,
-            });
-            toast.success(response.data);
+            };
+
+            const response = await RegistrationService(userData);
+            toast.success(response);
             navigate('/');
-            console.log('Registration successful!', response.data);
+            console.log('Registration successful!', response);
         } catch (error) {
             toast.error(error.response.data.message)
-            console.error('Registration failed:', error);
         }
     };
-     
+
     return (
         <div className="registration-container">
             <form className="registration-form" onSubmit={handleRegistration}>

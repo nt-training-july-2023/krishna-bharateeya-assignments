@@ -1,11 +1,11 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './AddOrUpdateCategory.css';
 import Sidebar from "../AdminHome/Sidebar";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import UnauthorizedAccess from "../UnauthrizedAccess/UnauthorizedAccess"
-
+import { LoadCategoryById,SaveCategory } from "../../ApiService/ApiService";
 
 
 const AddOrUpdateCategory = () => {
@@ -26,20 +26,20 @@ const AddOrUpdateCategory = () => {
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setCategory({ ...category, [name]: value });
-  
+
     if (name === 'categoryName') {
       setCategoryNameError('');
     } else if (name === 'description') {
       setDescriptionError('');
     }
   };
-  
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Validate individual fields
+
     if (!category.categoryName.trim()) {
       setCategoryNameError('Category Name is required');
     } else {
@@ -61,14 +61,13 @@ const AddOrUpdateCategory = () => {
     try {
       let response;
       if (categoryId) {
-        response = await axios.put(
-          `http://localhost:8080/category/update/${categoryId}`,
-          category
-        );
-        toast.success(response.data);
+      
+        response = await SaveCategory(category, categoryId);
+
+        toast.success(response);
       } else {
-        response = await axios.post('http://localhost:8080/category/save', category);
-        toast.success('Category Added Successfully');
+        response = await SaveCategory(category);
+        toast.success(response);
       }
       navigate('/categoryHome');
     } catch (error) {
@@ -82,8 +81,8 @@ const AddOrUpdateCategory = () => {
 
   const loadCategory = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/category/${categoryId}`);
-      setCategory(response.data);
+      const response = await LoadCategoryById(categoryId);
+      setCategory(response);
     } catch (error) {
       toast.error('Failed to load category');
     }

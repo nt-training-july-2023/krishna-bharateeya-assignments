@@ -6,7 +6,7 @@ import Sidebar from '../AdminHome/Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import { LoadCategories,LoadQuizzesForCategory,DeleteCategory } from '../../ApiService/ApiService';
 
 const CategoryHome = () => {
     const [categories, setCategories] = useState([]);
@@ -20,20 +20,20 @@ const CategoryHome = () => {
     }, []);
 
     const loadCategories = async () => {
-        const result = await axios.get('http://localhost:8080/category');
-        setCategories(result.data);
+        const result = await await LoadCategories();
+        setCategories(result);
 
         const quizzes = {};
-        for (const category of result.data) {
-            const quizResult = await axios.get(`http://localhost:8080/category/quizzes/${category.categoryId}`);
-            quizzes[category.categoryId] = quizResult.data;
+        for (const category of result) {
+            const quizResult = await LoadQuizzesForCategory(category.categoryId);;
+            quizzes[category.categoryId] = quizResult;
         }
         setRelatedQuizzes(quizzes);
     };
 
     const deleteCategories = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/category/delete/${id}`);
+            await DeleteCategory(id);;
             loadCategories();
 
         } catch (error) {
@@ -112,6 +112,7 @@ const CategoryHome = () => {
                                                     <div className="custom-select-arrow">&#9662;</div>
                                                 </div>
                                                 <td>
+                                                
                                                     <Link className="button button-edit" to={`/updateCategory/${category.categoryId}`}>Update</Link>
                                                     <button className="button button-delete-quiz" onClick={() => confirmDelete(category.categoryId)}>Delete</button>
 

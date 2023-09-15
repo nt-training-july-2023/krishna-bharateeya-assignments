@@ -3,10 +3,9 @@ import Sidebar from '../AdminHome/Sidebar';
 import './Quiz.css'
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import { GetQuizzes,DeleteQuiz } from '../../ApiService/ApiService';
 const Quiz = () => {
 
   const [quizzes, setQuizzes] = useState([]);
@@ -17,13 +16,13 @@ const Quiz = () => {
   }, []);
 
   const loadQuizzes = async () => {
-    const result = await axios.get('http://localhost:8080/quizzes');
-    setQuizzes(result.data);
+    const result = await GetQuizzes() ;
+    setQuizzes(result);
   };
 
   const deleteQuiz = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/quizzes/${id}`);
+      await DeleteQuiz(id);
       loadQuizzes();
 
     } catch (error) {
@@ -95,9 +94,9 @@ const Quiz = () => {
                           </div>
                         </div>
                         <div className="quiz-card-footer">
-                          <button className="button button-update-time" to={`/categoryHome/updateCategory/${quiz.quizId}`}>Add/View Questions</button>
-                          <Link className="button button-update-quiz" to={`/update-quiz/${quiz.quizId}`}>Update Quiz</Link>
-                          <button className="button button-delete-quiz" onClick={() => confirmDelete(quiz.quizId)}>Delete Quiz</button>
+                          <button className="button-add-view-question" to={`/categoryHome/updateCategory/${quiz.quizId}`}>Add/View Questions</button>
+                          <Link className="button-update-quiz" to={`/update-quiz/${quiz.quizId}`}>Update Quiz</Link>
+                          <button className="button-delete-quiz" onClick={() => confirmDelete(quiz.quizId)}>Delete Quiz</button>
 
                         </div>
                       </div>

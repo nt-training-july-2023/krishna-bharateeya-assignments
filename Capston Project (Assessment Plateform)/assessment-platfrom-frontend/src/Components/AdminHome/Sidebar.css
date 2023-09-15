@@ -71,7 +71,6 @@
     position: fixed;
     z-index: 1;
     height: 100vh !important;
-    /* width: 50px;  */
     overflow-x: hidden;
     transition: 0.5s;
   }
