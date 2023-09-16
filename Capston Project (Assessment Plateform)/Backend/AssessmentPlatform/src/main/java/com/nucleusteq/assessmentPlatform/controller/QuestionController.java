@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.nucleusteq.assessmentPlatform.service.QuestionService;
  * to. managing questions in the assessment platform. It provides end points
  * for. adding, updating, deleting, and retrieving questions.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {

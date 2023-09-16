@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
+import com.nucleusteq.assessmentPlatform.entity.Question;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
 
 /**
@@ -104,5 +106,17 @@ public class QuizController {
     public final ResponseEntity<List<QuizDTO>> getAllQuizzes() {
         List<QuizDTO> quizzes = quizService.getAllQuizzes();
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
+    }
+    
+    /**
+     * Retrieves a category by its ID.
+     *
+     * @param quizId The ID of the category to retrieve.
+     * @return The list of questions entity.
+     */
+    @GetMapping("questions/{quizId}")
+    public final List<Question> getAllQuestionByQuiz(
+            @PathVariable final int quizId) {
+        return quizService.getAllQuestionByQuiz(quizId);
     }
 }

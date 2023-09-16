@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
 
@@ -23,6 +25,12 @@ import com.nucleusteq.assessmentPlatform.service.QuizService;
 @Service
 public class QuizServiceImpl implements QuizService {
 
+    /**
+     * This is Question Repository object that is for calling. the repository.
+     * methods.
+     */
+    @Autowired
+    private QuestionRepository questionRepository;
     /**
      * This is Quiz Repository object that is for calling. the repository.
      * methods.
@@ -174,5 +182,20 @@ public class QuizServiceImpl implements QuizService {
             quiz.setCategory(category);
         }
         return quiz;
+    }
+
+    /**
+     * Converts a quizDTO to a quiz entity.
+     *
+     * @param quizId To find the questions.
+     * @return The list of question entity.
+     */
+    @Override
+    public List<Question> getAllQuestionByQuiz(int quizId) {
+        
+        Quiz quiz=new Quiz();
+        quiz.setQuizId(quizId);
+        
+        return questionRepository.findByQuiz(quiz);
     }
 }

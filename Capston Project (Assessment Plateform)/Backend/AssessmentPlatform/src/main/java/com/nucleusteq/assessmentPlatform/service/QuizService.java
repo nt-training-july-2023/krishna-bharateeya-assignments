@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
+import com.nucleusteq.assessmentPlatform.entity.Question;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 
 /**
  * Service interface for managing quizzes.
@@ -51,4 +53,11 @@ public interface QuizService {
      * @throws NotFoundException If the quizId is invalid.
      */
     String updateQuiz(Integer quizId, QuizDTO quizDTO)throws NotFoundException;
+
+    /**
+     * Updates a category.
+     * @param quizId to get quiz by category .
+     * @return The List Of Questions  Entity.
+     */
+    List<Question> getAllQuestionByQuiz(int quizId);
 }

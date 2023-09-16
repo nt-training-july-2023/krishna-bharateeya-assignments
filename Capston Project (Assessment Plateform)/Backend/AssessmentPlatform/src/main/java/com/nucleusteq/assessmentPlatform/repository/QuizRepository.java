@@ -22,7 +22,7 @@ public interface QuizRepository extends JpaRepository<Quiz, Integer> {
     /**
      * Finds a Quiz entity by Quiz Name.
      * @param category The category Object to search for.
-     * @return An Optional containing the found Quiz entity, if any.
+     * @return A List containing the found Quiz entity, if any.
      */
     List<Quiz> findByCategory(Category category);
 }

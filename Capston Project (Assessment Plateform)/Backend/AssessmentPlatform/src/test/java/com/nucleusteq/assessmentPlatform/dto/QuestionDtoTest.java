@@ -46,7 +46,7 @@ class QuestionDtoTest {
         QuestionOptions options = new QuestionOptions("Option1", "Option2", "Option3", "Option4", "CorrectOption");
 
         QuizDTO quizDTO = new QuizDTO(1, "Sample Quiz", "Description", 30, new CategoryDto(1, "CategoryName", "CategoryDescription"));
-        
+
         QuestionDto questionDto = new QuestionDto(1, "Question Text", options, quizDTO);
 
         QuestionOptions retrievedOptions = questionDto.getOptions();
