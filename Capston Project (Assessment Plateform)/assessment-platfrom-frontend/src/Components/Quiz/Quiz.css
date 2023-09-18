@@ -100,7 +100,7 @@
   }
   
   button.button-add-view-question:hover {
-    background-color: #000000;
+    background-color: #03580a;
     color: white;
   }
   
@@ -128,7 +128,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    /* transition: background-color 0.3s ease, color 0.3s ease; */
     margin-left: 40px;
     background-color: #e74c3c;
     color: #fff;
@@ -140,8 +139,15 @@
   
   @media (max-width: 768px) {
     .quiz-card {
-      width: 100%;
+      width: 96%; 
       margin: 5px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      vertical-align: top;
+      background-color: #fff;
     }
   
     .quiz-container {

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
+import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Question;
-import com.nucleusteq.assessmentPlatform.entity.Quiz;
 
 /**
  * Service interface for managing quizzes.
@@ -59,5 +59,5 @@ public interface QuizService {
      * @param quizId to get quiz by category .
      * @return The List Of Questions  Entity.
      */
-    List<Question> getAllQuestionByQuiz(int quizId);
+    List<QuestionDto> getAllQuestionByQuiz(int quizId);
 }

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Question;
-import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
 
 /**
@@ -115,7 +115,7 @@ public class QuizController {
      * @return The list of questions entity.
      */
     @GetMapping("questions/{quizId}")
-    public final List<Question> getAllQuestionByQuiz(
+    public final List<QuestionDto> getAllQuestionByQuiz(
             @PathVariable final int quizId) {
         return quizService.getAllQuestionByQuiz(quizId);
     }

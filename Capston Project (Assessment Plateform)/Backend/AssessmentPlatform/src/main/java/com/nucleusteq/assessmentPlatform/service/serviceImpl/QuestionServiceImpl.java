@@ -60,6 +60,7 @@ public class QuestionServiceImpl implements QuestionService {
         if (optionalQuestion.isPresent()) {
 
             Question convertedQuestion = convertDtoToEntity(questionDto);
+            convertedQuestion.setQuestionId(questionId);
             questionRepository.save(convertedQuestion);
             return "Question updated successfully";
         } else {

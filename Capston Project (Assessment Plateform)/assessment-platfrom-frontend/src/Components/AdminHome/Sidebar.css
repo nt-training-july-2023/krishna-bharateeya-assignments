@@ -70,7 +70,7 @@
   .sidebar {
     position: fixed;
     z-index: 1;
-    height: 100vh !important;
+    height: 120vh !important;
     overflow-x: hidden;
     transition: 0.5s;
   }
@@ -89,3 +89,12 @@
   }
 }
 
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1;
+    height: 120vh !important;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+}

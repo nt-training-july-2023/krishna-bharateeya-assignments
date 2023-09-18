@@ -14,7 +14,7 @@ const Sidebar = ({ children }) => {
   const handleLogout = () => {
     console.log("logout function called");
     navigate('/');
-    toast.success("Logged Successfully");
+    toast.success("Logout successful");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
   };
@@ -43,16 +43,19 @@ const Sidebar = ({ children }) => {
       name: "Category",
       icon: <FaThList />
     },
-    {
-      path: "/question",
-      name: "Question",
-      icon: <FaQuestionCircle />
-    },
+    
     {
       path: "/quiz",
       name: "Quiz",
       icon: <FaQuora />
     },
+
+    {
+      path: "/question",
+      name: "Question",
+      icon: <FaQuestionCircle />
+    },
+    
     {
       path: "/report",
       name: "Report",

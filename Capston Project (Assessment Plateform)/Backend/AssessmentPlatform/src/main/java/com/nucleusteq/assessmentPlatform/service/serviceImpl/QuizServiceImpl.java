@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
+import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
@@ -78,6 +80,7 @@ public class QuizServiceImpl implements QuizService {
 
     /**
      * Updates a quiz.
+     * 
      * @param quizId  The ID of the quiz.
      * @param quizDTO The DTO containing updated quiz information.
      * @return The updated String.
@@ -191,11 +194,49 @@ public class QuizServiceImpl implements QuizService {
      * @return The list of question entity.
      */
     @Override
-    public List<Question> getAllQuestionByQuiz(int quizId) {
-        
-        Quiz quiz=new Quiz();
+    public List<QuestionDto> getAllQuestionByQuiz(int quizId) {
+
+        Quiz quiz = new Quiz();
         quiz.setQuizId(quizId);
-        
-        return questionRepository.findByQuiz(quiz);
+
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+        List<Question> questions = optionalQuiz.get().getQuestions();
+        return questions.stream().map(this::convertEntityToDto)
+                .collect(Collectors.toList());
     }
+
+    /**
+     * @param question The object to be converted.
+     *
+     * @return the converted into QuestionDto entity.
+     */
+    private QuestionDto convertEntityToDto(final Question question) {
+
+        QuestionDto questionDto = new QuestionDto();
+        questionDto.setQuestionId(question.getQuestionId());
+        questionDto.setQuestionText(question.getQuestionText());
+        QuestionOptions options = new QuestionOptions(question.getOptionOne(),
+                question.getOptionTwo(), question.getOptionThree(),
+                question.getOptionFour(), question.getCorrectOption());
+        questionDto.setOptions(options);
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(
+                question.getQuiz().getCategory().getCategoryId());
+        categoryDto.setCategoryName(
+                question.getQuiz().getCategory().getCategoryName());
+        categoryDto.setDescription(
+                question.getQuiz().getCategory().getDescription());
+
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(question.getQuiz().getQuizId());
+        quizDto.setQuizName(question.getQuiz().getQuizName());
+        quizDto.setQuizDescription(question.getQuiz().getQuizDescription());
+        quizDto.setTimeInMinutes(question.getQuiz().getTimeInMinutes());
+        quizDto.setCategory(categoryDto);
+
+        questionDto.setQuiz(quizDto);
+
+        return questionDto;
+    }
+
 }

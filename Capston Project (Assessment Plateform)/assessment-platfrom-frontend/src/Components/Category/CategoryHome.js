@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import './CategoryHome.css';
 import Sidebar from '../AdminHome/Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { LoadCategories,LoadQuizzesForCategory,DeleteCategory } from '../../ApiService/ApiService';
+import { LoadCategories, LoadQuizzesForCategory, DeleteCategory } from '../../ApiService/ApiService';
 
 const CategoryHome = () => {
     const [categories, setCategories] = useState([]);
     const [relatedQuizzes, setRelatedQuizzes] = useState({});
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
 
     const { categoryId } = useParams();
@@ -57,7 +58,15 @@ const CategoryHome = () => {
             Swal.fire('Deleted!', 'Your quiz has been deleted.', 'success');
         }
     };
+    const handleShowRelatedQuizzes = (categoryId) => {
+        setSelectedCategoryId(categoryId);
+        setPopupVisible(true);
+    };
 
+    const handleClosePopup = () => {
+        setSelectedCategoryId(null);
+        setPopupVisible(false);
+    };
 
     const userRole = localStorage.getItem('userRole');
     if (userRole !== 'admin') {
@@ -68,9 +77,7 @@ const CategoryHome = () => {
     return (
         <div className="category-wrapper">
             <div className="category-container">
-
                 <div className='category-sidebar-column'>
-
                     <Sidebar />
                 </div>
 
@@ -90,7 +97,6 @@ const CategoryHome = () => {
                                             <th scope="col">S.No.</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col">Related Quiz</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -100,23 +106,15 @@ const CategoryHome = () => {
                                                 <td>{index + 1}</td>
                                                 <td>{category.categoryName}</td>
                                                 <td>{category.description}</td>
-
-                                                <div className="custom-select-container">
-                                                    <select className="custom-select">
-                                                        {relatedQuizzes[category.categoryId] &&
-                                                            relatedQuizzes[category.categoryId].map((quiz, index) => (
-                                                                <option key={index} className="custom-select-option">{quiz.quizName}</option>
-                                                            ))
-                                                        }
-                                                    </select>
-                                                    <div className="custom-select-arrow">&#9662;</div>
-                                                </div>
                                                 <td>
-                                                
-                                                    <Link className="button button-edit" to={`/updateCategory/${category.categoryId}`}>Update</Link>
-                                                    <button className="button button-delete-quiz" onClick={() => confirmDelete(category.categoryId)}>Delete</button>
-
-
+                                                <button
+                                                        className="button-show-related-quizzes"
+                                                        onClick={() => handleShowRelatedQuizzes(category.categoryId)}
+                                                    >
+                                                        Quizzes
+                                                    </button>
+                                                    <Link className="category-home-update-button" to={`/updateCategory/${category.categoryId}`}>Update</Link>
+                                                    <button className="category-home-delete-button" onClick={() => confirmDelete(category.categoryId)}>Delete</button>
                                                 </td>
                                             </tr>
                                         ))}
@@ -127,6 +125,23 @@ const CategoryHome = () => {
                     </div>
                 </div>
             </div>
+
+            {selectedCategoryId !== null && (
+                <div className="related-quizzes-popup">
+                    <div className="related-quizzes-popup-content">
+                        
+                        <h3>Related Quizzes for Category</h3>
+                        <ul>
+                            {relatedQuizzes[selectedCategoryId].map((quiz, index) => (
+                                <li key={index}>{quiz.quizName}</li>
+                            ))}
+                        </ul>
+                        <button className="close-popup-button" onClick={handleClosePopup}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 

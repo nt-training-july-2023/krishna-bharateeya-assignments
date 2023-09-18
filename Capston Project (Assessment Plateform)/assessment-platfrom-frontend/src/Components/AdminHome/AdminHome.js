@@ -19,7 +19,7 @@ const AdminHome = () => {
 
   const handleLogout = () => {
     console.log("logout function called");
-    toast.success("Logged Successfully");
+    toast.success("Logout successful");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
     navigate("/");

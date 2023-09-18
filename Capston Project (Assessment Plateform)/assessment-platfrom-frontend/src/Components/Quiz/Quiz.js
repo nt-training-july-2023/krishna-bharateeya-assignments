@@ -94,7 +94,8 @@ const Quiz = () => {
                           </div>
                         </div>
                         <div className="quiz-card-footer">
-                          <button className="button-add-view-question" to={`/categoryHome/updateCategory/${quiz.quizId}`}>Add/View Questions</button>
+                          {/* <button className="button-add-view-question" to={`/question/${quiz.quizId}`}>Add/View Questions</button> */}
+                          <Link  className="button-add-view-question"  to={`/question/${quiz.quizId}`}>Add/View Questions</Link>
                           <Link className="button-update-quiz" to={`/update-quiz/${quiz.quizId}`}>Update Quiz</Link>
                           <button className="button-delete-quiz" onClick={() => confirmDelete(quiz.quizId)}>Delete Quiz</button>
 

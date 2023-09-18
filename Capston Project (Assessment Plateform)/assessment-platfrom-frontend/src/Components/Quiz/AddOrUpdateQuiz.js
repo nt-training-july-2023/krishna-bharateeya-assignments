@@ -178,8 +178,6 @@ const AddOrUpdateQuiz = () => {
                   <p className='a-u-q-error-message'>{selectedCategoryError}</p>
                 )}
               </div>
-
-              {/* <div className={`form-group ${firstNameError ? 'has-error' : ''}`}></div> */}
               <div
                 className={`form-group ${quizNameError ? 'has-error' : ''
                   }`}
