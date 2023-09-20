@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { CreateQuiz,UpdateQuiz,LoadCategories,LoadCategoryById,GetQuizById } from '../../ApiService/ApiService';
 const AddOrUpdateQuiz = () => {
+  const{categoryId}=useParams();
+  console.log("dfsdggsg",categoryId)
   const { quizId } = useParams();
   const navigate = useNavigate();
 
@@ -36,6 +38,9 @@ const AddOrUpdateQuiz = () => {
     .then((categories) => setCategories(categories))
     .catch((error) => toast.error(error.message));
 
+    if (categoryId) {
+      setSelectedCategory(categoryId);
+  }
     if (quizId) {
       axios
       GetQuizById(quizId)

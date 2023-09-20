@@ -17,9 +17,13 @@ export const RegistrationService = async (userData) => {
 //   };
 export const LoadUsers = async () => {
 
-    const result = await axios.get(`${BASE_URL}/users/get/all`);
-    return result.data;
+    const response = await axios.get(`${BASE_URL}/users/get/all`);
+    return response.data;
+}
 
+export const GetUserByEmail=async(email)=>{
+    const response = await axios.get(`${BASE_URL}/users/getUser/${email}`);
+    return response.data;
 }
 
 export const LoadCategories = async () => {

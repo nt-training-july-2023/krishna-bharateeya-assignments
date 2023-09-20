@@ -116,4 +116,22 @@ public class RegistrationController {
     public final List<RegistrationDto> getAllUsers() {
         return registrationService.getAllRegistrations();
     }
+    
+    /**
+     * Retrieves a user by their ID.
+     *
+     * @param userId The ID of the user to retrieve.
+     * @return The RegistrationDto object representing the retrieved user.
+     * @throws UserNotFoundException If the user with the specified ID is not
+     *                               found.
+     */
+    @GetMapping("/getUser/{email}")
+    public final RegistrationDto getUserByEmail(
+            @PathVariable("email") final String  email) throws UserNotFoundException { 
+            RegistrationDto registrationDto = this.registrationService
+                    .getUserByEmail(email);
+            
+            return registrationDto;
+       
+    }
 }

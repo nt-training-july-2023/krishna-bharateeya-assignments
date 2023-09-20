@@ -11,12 +11,14 @@ const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const navigate = useNavigate();
+  const userRole = localStorage.getItem('userRole');
   const handleLogout = () => {
     console.log("logout function called");
     navigate('/');
     toast.success("Logout successful");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('email');
   };
 
   const handleLogoutConfirmation =() =>{
@@ -34,7 +36,7 @@ const Sidebar = ({ children }) => {
 
   const menuItem = [
     {
-      path: "/adminHome",
+      path: userRole === 'admin' ? "/adminHome" : "/userHome",
       name: "Home",
       icon: <FaHome />
     },
@@ -96,6 +98,8 @@ const Sidebar = ({ children }) => {
         </div>
         {
           menuItem.map((item, index) => (
+            (item.name === "Question" && userRole !== "admin") ? null : (
+
             <NavLink
             to={item.path}
             key={index}
@@ -110,6 +114,7 @@ const Sidebar = ({ children }) => {
             <div className="icon">{item.icon}</div>
             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">{item.name}</div>
           </NavLink>
+            )
           ))
         }
       </div>

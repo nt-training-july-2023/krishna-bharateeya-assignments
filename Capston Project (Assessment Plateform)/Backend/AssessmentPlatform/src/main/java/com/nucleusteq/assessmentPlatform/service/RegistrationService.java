@@ -50,4 +50,12 @@ public interface RegistrationService {
     Map<String, String> loginUser(RegistrationDto inputRegistrationDto)
             throws UserNotFoundException;
 
+    /**
+     * Retrieves a user registration by its ID.
+     *
+     * @param email The ID of the user registration to retrieve.
+     * @return The retrieved RegistrationDto.
+     * @throws UserNotFoundException If the user is not found.
+     */
+    RegistrationDto getUserByEmail(String email) throws UserNotFoundException;
 }

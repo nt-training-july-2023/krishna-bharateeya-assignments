@@ -169,7 +169,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
           if (optionalRegistration.isPresent()) {
                 response.put("message", "Login Successfully");
-                response.put("status", "true");
+                response.put("email", foundRegistration.getEmail());
                 response.put("role", foundRegistration.getUserRole());
             } else {
                 throw new LoginFailedException(
@@ -200,6 +200,22 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .orElseThrow(() -> new UserNotFoundException(
                         "User not found with ID: " + userId));
         return registrationToDto(registration);
+    }
+
+    /**
+     * Retrieves user information by user ID.
+     *
+     * @param email The email of the user to retrieve.
+     * @return The RegistrationDto representing the user.
+     * @throws UserNotFoundException If the user is not found.
+     */
+    @Override
+    public RegistrationDto getUserByEmail(String email)
+            throws UserNotFoundException {
+
+        Registration foundRegistration = registrationRepository
+                .getByEmail(email);
+        return registrationToDto(foundRegistration);
     }
 
 }

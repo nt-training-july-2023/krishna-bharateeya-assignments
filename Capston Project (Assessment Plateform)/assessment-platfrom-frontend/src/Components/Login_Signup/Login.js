@@ -60,8 +60,9 @@ const Login = () => {
                 email,
                 password
             });
-            localStorage.setItem('IsLoggedIn', response.data.status);
+            localStorage.setItem('IsLoggedIn', true);
             localStorage.setItem('userRole', response.data.role);
+            localStorage.setItem('email', response.data.email);
             
             if (response.data.role === 'admin') {
                 navigate('/adminHome');

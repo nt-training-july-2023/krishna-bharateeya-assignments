@@ -7,6 +7,8 @@ import { GetQuizzes, AddQuestions, UpdateQuestions, GetQuestionsById, GetQuizByI
 
 const AddOrUpdateQuestion = () => {
     const { questionId } = useParams();
+    const { quizId } = useParams();
+    console.log("fdfdfdfd", quizId);
     const navigate = useNavigate();
 
     const [quizzes, setQuizzes] = useState([]);
@@ -20,18 +22,23 @@ const AddOrUpdateQuestion = () => {
         optionFour: '',
     });
     const [correctOption, setCorrectOption] = useState('');
+    const [allFieldsFilled, setAllFieldsFilled] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [questionTextError, setQuestionTextError] = useState('');
     const [optionsError, setOptionsError] = useState('');
     const [correctOptionError, setCorrectOptionError] = useState('');
-    const [allFieldsFilled, setAllFieldsFilled] = useState(false);
+    const [uniqueOptionError, setuniqueOptionError] = useState('');
 
     useEffect(() => {
         GetQuizzes()
             .then((data) => setQuizzes(data))
             .catch((error) => console.error('Error fetching quizzes:', error));
         console.log("fsdfdsf", quizzes);
+
+        if (quizId) {
+            setSelectedQuiz(quizId);
+        }
         if (questionId) {
             GetQuestionsById(questionId)
                 .then((response) => {
@@ -59,6 +66,11 @@ const AddOrUpdateQuestion = () => {
         }
     }, [questionId]);
 
+    const areOptionsUnique = () => {
+        const optionsArray = [options.optionOne.toLowerCase(), options.optionTwo.toLowerCase(), options.optionThree.toLowerCase(), options.optionFour.toLowerCase()];
+        const uniqueOptions = new Set(optionsArray);
+        return optionsArray.length === uniqueOptions.size;
+    };
     const validateNotEmpty = (value) => {
         if (typeof value === 'string' && !value.trim()) {
             return 'This field is required';
@@ -99,6 +111,11 @@ const AddOrUpdateQuestion = () => {
         const questionTextError = validateNotEmpty(questionText);
         const optionsError = Object.values(options).some((option) => !option.trim())
             ? 'All options are required' : '';
+
+        if (!areOptionsUnique()) {
+            console.log("Options must be unique");
+            return false;
+        }
         const correctOptionError = validateNotEmpty(correctOption);
 
         setQuestionTextError(questionTextError);
@@ -223,7 +240,7 @@ const AddOrUpdateQuestion = () => {
                                     onChange={(e) => setCorrectOption(e.target.value)}
                                     disabled={!allFieldsFilled}
                                 >
-                                    <option value=''>-- Select an Option --</option>
+                                    <option value='' disabled>-- Select an Option --</option>
                                     <option value={options.optionOne}>{options.optionOne}</option>
                                     <option value={options.optionTwo}>{options.optionTwo}</option>
                                     <option value={options.optionThree}>{options.optionThree}</option>
