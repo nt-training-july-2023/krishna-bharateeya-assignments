@@ -14,6 +14,7 @@ import AddOrUpdateQuiz from './Components/Quiz/AddOrUpdateQuiz';
 import QuestionHome from './Components/AdminHome/Question/QuestionHome';
 import AddOrUpdateQuestion from './Components/AdminHome/Question/AddOrUpdateQuestion';
 import QuizHome from './Components/Quiz/QuizHome';
+import UserTest from './Components/UserHome/UserTest';
 
 
 function App() {
@@ -66,7 +67,9 @@ function App() {
           <Route exact path="/add-question/:quizId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/update-question/:questionId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
-          
+          <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          {/* <Route exact path="/userQuestion/:quizId"  Component={UserTest} /> */}
+
           <Route exact path="/report" element={<PrivateRoute Component={Report} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
         </Routes>

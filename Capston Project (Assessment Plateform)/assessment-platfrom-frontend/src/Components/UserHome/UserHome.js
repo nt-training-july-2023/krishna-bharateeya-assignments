@@ -26,7 +26,6 @@ const UserHome = () => {
   };
 
   const userRole = localStorage.getItem('userRole');
-
   if (userRole !== 'user') {
     return <UnauthorizedAccess />;
   }

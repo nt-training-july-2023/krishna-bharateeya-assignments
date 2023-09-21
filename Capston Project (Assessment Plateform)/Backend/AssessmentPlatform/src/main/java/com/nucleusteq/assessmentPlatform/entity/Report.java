@@ -1,5 +1,6 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,23 +37,60 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reportSeq")
     private int reportId;
 
+    
     /**
-     * The user for whom the report is generated.
-     */
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private Registration reportOfTheUser;
-
-
+     *userName name attribute.
+    */
+    @Column(nullable = false)
+    private String userName;
+    
     /**
-     * The total marks in the assessment.
-     */
-    private int totalMark;
-
+     *userEmailId email attribute.
+    */
+    @Column(nullable = false)
+    private String userEmailId;
+    
     /**
-     * The obtained marks in the assessment.
-     */
-    private int obtainedMark;
+     *category name attribute.
+    */
+    @Column(nullable = false)
+    private String categoryName;
+    /**
+     *quiz name attribute.
+    */
+    @Column(nullable = false)
+    private String quizName;
+    
+    /**
+     *total marks of quiz attribute.
+    */
+    @Column(nullable = false)
+    private int totalMarks;
+    
+    /**
+     *marks obtained in quiz attribute.
+    */
+    @Column(nullable = false)
+    private int marksObtained;
+   
+    /**
+     *total questions in quiz attribute.
+    */
+    @Column(nullable = false)
+    private int totalQuestions;
+    
+    /**
+     *number of attempted questions attribute.
+    */
+    @Column(nullable = false)
+    private int attemptedQuestions;
+   
+    /**
+     *date and time attribute.
+    */
+    @Column(nullable = false)
+    private String dateAndTime;
+    
 
     /**
      * The count of wrong answers in the assessment.

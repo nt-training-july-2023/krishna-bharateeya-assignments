@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../AdminHome/Sidebar';
 import './QuizHome.css'
-import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+// import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import { useParams, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -107,7 +107,7 @@ const QuizHome = () => {
                         </div>
                         <div className="quiz-card-footer">
                           {userRole === 'user' ? (
-                            <Link className="start-quiz-button" to={`/question/${quiz.quizId}`}>Take Test</Link>
+                            <Link className="start-quiz-button" to={`/userQuestion/${quiz.quizId}`}>Take Test</Link>
                           ) : (
                             <>
                               <Link className="button-add-view-question" to={`/question/${quiz.quizId}`}>View Questions</Link>

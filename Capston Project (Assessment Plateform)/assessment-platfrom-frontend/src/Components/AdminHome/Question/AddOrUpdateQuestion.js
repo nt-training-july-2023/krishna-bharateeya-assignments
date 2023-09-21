@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import './AddOrUpdateQuestion.css';
 import UnauthorizedAccess from '../../UnauthrizedAccess/UnauthorizedAccess';
 import { GetQuizzes, AddQuestions, UpdateQuestions, GetQuestionsById, GetQuizById } from '../../../ApiService/ApiService';
-
 const AddOrUpdateQuestion = () => {
     const { questionId } = useParams();
     const { quizId } = useParams();
-    console.log("fdfdfdfd", quizId);
     const navigate = useNavigate();
 
     const [quizzes, setQuizzes] = useState([]);
@@ -22,23 +22,28 @@ const AddOrUpdateQuestion = () => {
         optionFour: '',
     });
     const [correctOption, setCorrectOption] = useState('');
-    const [allFieldsFilled, setAllFieldsFilled] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [questionTextError, setQuestionTextError] = useState('');
-    const [optionsError, setOptionsError] = useState('');
-    const [correctOptionError, setCorrectOptionError] = useState('');
-    const [uniqueOptionError, setuniqueOptionError] = useState('');
+    const [fieldErrors, setFieldErrors] = useState({
+        selectedQuiz: '',
+        questionText: '',
+        optionOne: '',
+        optionTwo: '',
+        optionThree: '',
+        optionFour: '',
+        correctOption: '',
+    });
 
     useEffect(() => {
+
         GetQuizzes()
             .then((data) => setQuizzes(data))
             .catch((error) => console.error('Error fetching quizzes:', error));
-        console.log("fsdfdsf", quizzes);
 
         if (quizId) {
             setSelectedQuiz(quizId);
         }
+
         if (questionId) {
             GetQuestionsById(questionId)
                 .then((response) => {
@@ -53,9 +58,6 @@ const AddOrUpdateQuestion = () => {
                     });
                     setCorrectOption(questionData.options.correctOption);
                     setSelectedQuizObject(questionData.quiz);
-                    const areOptionsFilled = Object.values(questionData.options).every((option) => option.trim() !== '');
-                    setAllFieldsFilled(areOptionsFilled);
-
                 })
                 .catch((error) =>
                     console.error(
@@ -64,18 +66,32 @@ const AddOrUpdateQuestion = () => {
                     )
                 );
         }
-    }, [questionId]);
+    }, [questionId, quizId]);
 
     const areOptionsUnique = () => {
-        const optionsArray = [options.optionOne.toLowerCase(), options.optionTwo.toLowerCase(), options.optionThree.toLowerCase(), options.optionFour.toLowerCase()];
+        const optionsArray = [
+            options.optionOne.toLowerCase(),
+            options.optionTwo.toLowerCase(),
+            options.optionThree.toLowerCase(),
+            options.optionFour.toLowerCase(),
+        ];
         const uniqueOptions = new Set(optionsArray);
         return optionsArray.length === uniqueOptions.size;
     };
-    const validateNotEmpty = (value) => {
+
+    const validateNotEmpty = (value, field) => {
         if (typeof value === 'string' && !value.trim()) {
-            return 'This field is required';
+            setFieldErrors((prevErrors) => ({
+                ...prevErrors,
+                [field]: 'This field is required',
+            }));
+            return false;
         }
-        return '';
+        setFieldErrors((prevErrors) => ({
+            ...prevErrors,
+            [field]: '',
+        }));
+        return true;
     };
 
     const handleQuizChange = async (event) => {
@@ -85,70 +101,86 @@ const AddOrUpdateQuestion = () => {
             const quizObject = await GetQuizById(selectedQuizId);
             setSelectedQuiz(selectedQuizId);
             setSelectedQuizObject(quizObject);
+            setFieldErrors((prevErrors) => ({
+                ...prevErrors,
+                selectedQuiz: '',
+            }));
         } catch (error) {
             console.error(
                 error.response?.data?.message ||
                 'An error occurred. Please try again.'
             );
+            setFieldErrors((prevErrors) => ({
+                ...prevErrors,
+                selectedQuiz: 'An error occurred. Please try again.',
+            }));
         }
     };
 
+    const handleQuestionTextChange = (event) => {
+        const value = event.target.value;
+        setQuestionText(value);
+        validateNotEmpty(value, 'questionText');
+    };
 
-    const handleQuestionFieldChange = (field, value) => {
-
+    const handleOptionChange = (field, value) => {
         setOptions((prevOptions) => ({
             ...prevOptions,
             [field]: value,
         }));
-
-        const areAllFieldsFilled = Object.values(options).every((option) => option.trim() !== '');
-        setAllFieldsFilled(areAllFieldsFilled);
+        validateNotEmpty(value, field);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const questionTextError = validateNotEmpty(questionText);
-        const optionsError = Object.values(options).some((option) => !option.trim())
-            ? 'All options are required' : '';
+        const isQuizValid = validateNotEmpty(selectedQuiz, 'selectedQuiz');
+        const isQuestionTextValid = validateNotEmpty(questionText, 'questionText');
+        const isOptionOneValid = validateNotEmpty(options.optionOne, 'optionOne');
+        const isOptionTwoValid = validateNotEmpty(options.optionTwo, 'optionTwo');
+        const isOptionThreeValid = validateNotEmpty(options.optionThree, 'optionThree');
+        const isOptionFourValid = validateNotEmpty(options.optionFour, 'optionFour');
+        const isCorrectOptionValid = validateNotEmpty(correctOption, 'correctOption');
+        const areOptionsUniqueValid = areOptionsUnique();
+        if (isQuizValid && isQuestionTextValid && isOptionOneValid && isOptionTwoValid
+            && isOptionThreeValid && isOptionFourValid && isCorrectOptionValid && areOptionsUniqueValid) {
 
-        if (!areOptionsUnique()) {
-            console.log("Options must be unique");
-            return false;
-        }
-        const correctOptionError = validateNotEmpty(correctOption);
+            const payload = {
+                quiz: selectedQuizObject,
+                questionText: questionText,
+                options: {
+                    optionOne: options.optionOne,
+                    optionTwo: options.optionTwo,
+                    optionThree: options.optionThree,
+                    optionFour: options.optionFour,
+                    correctOption: correctOption,
+                },
+            };
 
-        setQuestionTextError(questionTextError);
-        setOptionsError(optionsError);
-        setCorrectOptionError(correctOptionError);
+            try {
+                if (questionId) {
+                    console.log('Updating question with questionId:', questionId);
+                    await UpdateQuestions(questionId, payload);
+                    toast.success("Question Added Successfully.");
+                } else {
+                    await AddQuestions(payload);
+                    toast.success("Question Updated Successfully.");
+                }
 
-        if (questionTextError || optionsError || correctOptionError) {
-            return;
-        }
-
-        const questionData = {
-            quiz: selectedQuizObject,
-            questionText: questionText,
-            options: {
-                optionOne: options.optionOne,
-                optionTwo: options.optionTwo,
-                optionThree: options.optionThree,
-                optionFour: options.optionFour,
-                correctOption: correctOption,
-            },
-        };
-
-        try {
-            if (questionId) {
-                console.log('Updating question with questionId:', questionId);
-                await UpdateQuestions(questionId, questionData);
-            } else {
-                await AddQuestions(questionData);
+                navigate('/question');
+            } catch (error) {
+                console.error('Error:', error);
             }
-
-            navigate('/question');
-        } catch (error) {
-            console.error('Error:', error);
+        } else {
+            if (!areOptionsUniqueValid) {
+                setFieldErrors((prevErrors) => ({
+                    ...prevErrors,
+                    optionOne: 'Options must be unique',
+                    optionTwo: 'Options must be unique',
+                    optionThree: 'Options must be unique',
+                    optionFour: 'Options must be unique',
+                }));
+            }
         }
     };
 
@@ -173,7 +205,7 @@ const AddOrUpdateQuestion = () => {
                                 <label htmlFor='category-select'>Select Quiz:</label>
                                 <select
                                     id='quiz-select'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.selectedQuiz ? 'question-error-field' : ''}`}
                                     value={selectedQuiz}
                                     onChange={handleQuizChange}
                                 >
@@ -184,61 +216,73 @@ const AddOrUpdateQuestion = () => {
                                         </option>
                                     ))}
                                 </select>
+                                {fieldErrors.selectedQuiz && (
+                                    <p className='question-error-message'>{fieldErrors.selectedQuiz}</p>
+                                )}
                             </div>
-                            <div className={`form-group ${questionTextError ? 'has-error' : ''}`}>
+                            <div className={`form-group ${fieldErrors.questionText ? 'has-error' : ''}`}>
                                 <label htmlFor='question-text'>Question Text:</label>
                                 <input
                                     type='text'
                                     id='question-text'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.questionText ? 'question-error-field' : ''}`}
                                     value={questionText}
-                                    onChange={(e) => setQuestionText(e.target.value)}
+                                    onChange={handleQuestionTextChange}
                                 />
-                                {questionTextError && <p className='error-message'>{questionTextError}</p>}
+                                {fieldErrors.questionText && <p className='question-error-message'>{fieldErrors.questionText}</p>}
                             </div>
-                            <div className={`form-group ${optionsError ? 'has-error' : ''}`}>
+                            <div className={`form-group ${fieldErrors.optionOne ? 'has-error' : ''}`}>
                                 <label htmlFor='option-one'>Option One:</label>
                                 <input
                                     type='text'
                                     id='option-one'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.optionOne ? 'question-error-field' : ''}`}
                                     value={options.optionOne}
-                                    onChange={(e) => handleQuestionFieldChange('optionOne', e.target.value)}
+                                    onChange={(e) => handleOptionChange('optionOne', e.target.value)}
                                 />
+                                {fieldErrors.optionOne && <p className='question-error-message'>{fieldErrors.optionOne}</p>}
+                            </div>
+                            <div className={`form-group ${fieldErrors.optionTwo ? 'has-error' : ''}`}>
                                 <label htmlFor='option-two'>Option Two:</label>
                                 <input
                                     type='text'
                                     id='option-two'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.optionTwo ? 'question-error-field' : ''}`}
                                     value={options.optionTwo}
-                                    onChange={(e) => handleQuestionFieldChange('optionTwo', e.target.value)}
+                                    onChange={(e) => handleOptionChange('optionTwo', e.target.value)}
                                 />
+                                {fieldErrors.optionTwo && <p className='question-error-message'>{fieldErrors.optionTwo}</p>}
+                            </div>
+                            <div className={`form-group ${fieldErrors.optionThree ? 'has-error' : ''}`}>
                                 <label htmlFor='option-three'>Option Three:</label>
                                 <input
                                     type='text'
                                     id='option-three'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.optionThree ? 'question-error-field' : ''}`}
                                     value={options.optionThree}
-                                    onChange={(e) => handleQuestionFieldChange('optionThree', e.target.value)}
+                                    onChange={(e) => handleOptionChange('optionThree', e.target.value)}
                                 />
+                                {fieldErrors.optionThree && <p className='question-error-message'>{fieldErrors.optionThree}</p>}
+                            </div>
+                            <div className={`form-group ${fieldErrors.optionFour ? 'has-error' : ''}`}>
                                 <label htmlFor='option-four'>Option Four:</label>
                                 <input
                                     type='text'
                                     id='option-four'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.optionFour ? 'question-error-field' : ''}`}
                                     value={options.optionFour}
-                                    onChange={(e) => handleQuestionFieldChange('optionFour', e.target.value)}
+                                    onChange={(e) => handleOptionChange('optionFour', e.target.value)}
                                 />
-                                {optionsError && <p className='error-message'>{optionsError}</p>}
+                                {fieldErrors.optionFour && <p className='question-error-message'>{fieldErrors.optionFour}</p>}
                             </div>
-                            <div className={`form-group ${correctOptionError ? 'has-error' : ''}`}>
+                            <div className={`form-group ${fieldErrors.correctOption ? 'has-error' : ''}`}>
                                 <label htmlFor='correct-option'>Correct Option:</label>
                                 <select
                                     id='correct-option'
-                                    className='add-update-question-field'
+                                    className={`add-update-question-field ${fieldErrors.correctOption ? 'question-error-field' : ''}`}
                                     value={correctOption}
                                     onChange={(e) => setCorrectOption(e.target.value)}
-                                    disabled={!allFieldsFilled}
+                                    disabled={!questionText || !options.optionOne || !options.optionTwo || !options.optionThree || !options.optionFour}
                                 >
                                     <option value='' disabled>-- Select an Option --</option>
                                     <option value={options.optionOne}>{options.optionOne}</option>
@@ -246,9 +290,10 @@ const AddOrUpdateQuestion = () => {
                                     <option value={options.optionThree}>{options.optionThree}</option>
                                     <option value={options.optionFour}>{options.optionFour}</option>
                                 </select>
-                                {!allFieldsFilled && correctOptionError && (
-                                    <p className='error-message'>{correctOptionError}</p>
-                                )}
+                                {!questionText || !options.optionOne || !options.optionTwo || !options.optionThree || !options.optionFour
+                                    ? <p className='question-error-message'>{fieldErrors.correctOption}</p>
+                                    : null
+                                }
                             </div>
                         </div>
                         <div className='add-update-button-container'>

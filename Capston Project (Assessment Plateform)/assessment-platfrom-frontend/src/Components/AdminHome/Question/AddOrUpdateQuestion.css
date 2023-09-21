@@ -162,14 +162,14 @@ textarea {
     margin-top: 1rem;
 }
 
-.a-u-q-error-message {
+.question-error-message{
     color: red;
     font-size: 0.85rem;
     font-weight: bold;
     margin-top: 1px;
 }
 
-.a-u-q-error-field {
+.question-error-field {
     border-color: red;
 }
 

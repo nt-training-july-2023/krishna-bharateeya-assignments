@@ -11,8 +11,6 @@ const QuestionHome = () => {
 
   const { quizId } = useParams();
   const [questions, setQuestions] = useState([]);
-  const userRole = localStorage.getItem('userRole');
-
   useEffect(() => {
     loadQuestionsData();
   }, [quizId]);
@@ -23,13 +21,7 @@ const QuestionHome = () => {
       if (quizId) {
         data = await GetQuestionsByQuizId(quizId);
       } else {
-        if (userRole !== 'admin') {
-          // navigate(<UnauthorizedAccess />); 
-          // return;
-          return <UnauthorizedAccess />;
-        } else {
-          data = await LoadQuestions();
-        }
+        data = await LoadQuestions();
       }
       setQuestions(data);
 
@@ -72,18 +64,10 @@ const QuestionHome = () => {
     });
   };
 
-  const handleSubmit = async () => {
-    try {
-
-      const answers = Object.values(userAnswers);
-
-      console.log("User Answers:", answers);
-      Swal.fire('Answers Submitted!', 'Your answers have been submitted successfully.', 'success');
-    } catch (error) {
-      console.error('Error submitting answers:', error);
-      Swal.fire('Error', 'An error occurred while submitting your answers. Please try again.', 'error');
-    }
-  };
+  const userRole = localStorage.getItem('userRole');
+  if (userRole !== 'admin') {
+    return <UnauthorizedAccess />;
+  }
   return (
     <div className='question-wrapper'>
       <div className='question-container'>
@@ -93,19 +77,12 @@ const QuestionHome = () => {
         <div className='question-column'>
           <div className='question-main-card'>
             <div className='question-card-header-main'>
-              {userRole === 'user' ? (
-                <>
-                  <h3>Please attempt the Question</h3>
-                  <h2>Time : 90 Minuts </h2>
-                </>
-              ) : (
-                <>
-                  <h3>Question Home</h3>
-                  <center>
-                    <Link className='add-question-button' to={quizId ? `/add-question/${quizId}` : '/add-question'}>Add Question</Link>
-                  </center>
-                </>
-              )}
+
+              <h3>Question Home</h3>
+              <center>
+                <Link className='add-question-button' to={quizId ? `/add-question/${quizId}` : '/add-question'}>Add Question</Link>
+              </center>
+
             </div>
             <div className="question-card-body">
               <div className="question-table-wrapper">
@@ -139,30 +116,23 @@ const QuestionHome = () => {
                             <input type="radio" name={`option${index}`} value="optionFour" />
                             {question.options.optionFour}
                           </label>
-                          {userRole === 'admin' ? (
-                            <>
-                              <p><strong>Correct Option:</strong> {question.options.correctOption}</p>
-                              <p>Category: {question.quiz.category.categoryName}</p>
-                            </>
-                          ) : ('')}
+
+                          <p><strong>Correct Option:</strong> {question.options.correctOption}</p>
+                          <p>Category: {question.quiz.category.categoryName}</p>
+
                         </div>
                         <div className="question-card-footer">
-                          {userRole === 'admin' ? (
-                            <>
-                              <Link className="update-question-button" to={`/update-question/${question.questionId}`}>Update Question</Link>
-                              <button className="delete-question-button" onClick={() => confirmDelete(question.questionId)}>Delete Question</button>
-                            </>
-                          ) : ('')}
+
+                          <Link className="update-question-button" to={`/update-question/${question.questionId}`}>Update Question</Link>
+                          <button className="delete-question-button" onClick={() => confirmDelete(question.questionId)}>Delete Question</button>
+
+
                         </div>
                       </div>
                     ))}
                   </tbody>
                 </table>
-                <div className="question-card-footer">
-                  {userRole === 'user' ? (
-                    <button className="submit-answers-button" onClick={handleSubmit}>Submit Answers</button>
-                  ) : ('')}
-                </div>
+
               </div>
             </div>
           </div>
