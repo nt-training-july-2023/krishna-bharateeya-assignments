@@ -110,8 +110,26 @@ export const GetQuestionsById = async (questionId) => {
     const response = await axios.get(`${BASE_URL}/api/questions/${questionId}`);
     return response.data;
 }
+
 export const GetQuestionsByQuizId = async (quizId) => {
     const response = await axios.get(`${BASE_URL}/quizzes/questions/${quizId}`);
+    return response.data;
+}
+
+export const CreateReport=async (reportData)=>{
+
+    const response= await axios.post(`${BASE_URL}/api/reports`,reportData);
+    return response.data;
+}
+
+export const GetReportByEmail = async (email) => {
+    const response = await axios.get(`${BASE_URL}/api/reports/${email}`);
+    return response.data;
+}
+
+export const GetAllReport=async ()=>{
+
+    const response= await axios.get(`${BASE_URL}/api/reports/all`);
     return response.data;
 }
 

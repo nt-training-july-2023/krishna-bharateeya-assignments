@@ -6,7 +6,7 @@ import UserHome from './Components/UserHome/UserHome';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategoryHome from './Components/Category/CategoryHome';
-import Report from './Components/Report/Report';
+import TestReport from './Components/Report/TestReport';
 
 
 import AddOrUpdateCategory from './Components/Category/AddOrUpdateCategory';
@@ -68,9 +68,8 @@ function App() {
           <Route exact path="/update-question/:questionId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
           <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
-          {/* <Route exact path="/userQuestion/:quizId"  Component={UserTest} /> */}
-
-          <Route exact path="/report" element={<PrivateRoute Component={Report} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          
+          <Route exact path="/report" element={<PrivateRoute Component={TestReport} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
         </Routes>
       </Router>

@@ -1,10 +1,8 @@
-// import './QuestionHome.css'
 import React, { useState, useEffect } from "react";
-// import UnauthorizedAccess from '../../UnauthrizedAccess/UnauthorizedAccess';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { GetQuestionsByQuizId, GetUserByEmail } from "../../ApiService/ApiService";
+import { GetQuestionsByQuizId, GetUserByEmail, CreateReport } from "../../ApiService/ApiService";
 const UserTest = () => {
 
     const { quizId } = useParams();
@@ -14,105 +12,131 @@ const UserTest = () => {
 
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [totalMarks, setTotalMarks] = useState(0);
-    const [correctAnswers, setCorrectAnswers] = useState(0);
-    const [wrongAnswers, setWrongAnswers] = useState(0);
-    const [attemptedQuestions, setAttemptedQuestions] = useState(0);
+    // const [correctAnswers, setCorrectAnswers] = useState(0);
+    // const [wrongAnswers, setWrongAnswers] = useState(0);
     const [userName, setUserName] = useState('');
     const [userEmailId, setUserEmailId] = useState('');
     const [quizName, setQuizName] = useState('');
+    const [quizTime, setQuizTime] = useState(0);
     const [categoryName, setCategoryName] = useState('');
-    const [dateAndTime, setDateAndTime] = useState('');
+    const [remainingTime, setRemainingTime] = useState(0);
 
+    const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [submitted, setSubmitted] = useState(false);
     useEffect(() => {
         loadQuestionsData();
     }, [quizId]);
 
-    // useEffect(() => {
-    //     getUserDetails();
-    // }, []); 
-    // setUserEmailId(localStorage.getItem('email'));
-
-    //   const getUserDetails = async () => {
-    //     const result = await GetUserByEmail(email);
-    //     setUserName(result.firstName +result.lastName);
-    //     // setUserEmailId(result.email);
-
-    //     console.log("name :",userName);
-    //     // console.log("Email :",userEmailId);
-    //   };
-
-    useEffect(() => {
-        // Move this logic inside the useEffect
-        const getUserDetails = async () => {
-            const result = await GetUserByEmail(email);
-            setUserName();
-            console.log("eshan :",userName)
-            console.log("user Name :"+result.firstName + result.lastName)
-        };
-
-        getUserDetails(); // Call the function once inside the useEffect
-    }, [email]);
     const loadQuestionsData = async () => {
         try {
 
             const data = await GetQuestionsByQuizId(quizId);
-
             setQuestions(data);
-            console.log("fdfdsfsdfsdfsd", data[0].quiz)
-            console.log("fdfdsfsdfsdfsd", data[0].quiz.quizName)
-            const quiz=data[0].quiz.quizName;
+
             setTotalQuestions(data.length);
             setTotalMarks(data.length);
-            setCategoryName(quiz.category.categoryName);
-            setQuizName(quiz);
-
-            console.log("total Question :", data.length);
-            console.log("Total Mark :", data.length);
-            // console.log("Category Name :", data[0].quiz.category.categoryName);
-            console.log("Category Name :",categoryName);
-            console.log("quiz Name", data[0].quiz.quizName)
+            setCategoryName(data[0].quiz.category.categoryName);
+            setQuizName(data[0].quiz.quizName);
+            setQuizTime(data[0].quiz.timeInMinutes);
         } catch (error) {
             console.error('Error fetching questions:', error);
 
         }
     };
 
-    const handleOptionChange = (index, selectedOption) => {
+    useEffect(() => {
 
-        setAttemptedQuestions(attemptedQuestions + 1);
+        getUserDetails();
+    }, [email]);
 
-        if (selectedOption === questions[index].options.correctOption) {
-            setCorrectAnswers(correctAnswers + 1);
+    const getUserDetails = async () => {
+
+        const data = await GetUserByEmail(email);
+        setUserName(data.firstName + data.lastName);
+        setUserEmailId(data.email)
+    };
+
+    useEffect(() => {
+
+        setRemainingTime(quizTime * 60);
+        const timer = setInterval(() => {
+            setRemainingTime((prevTime) => {
+                if (prevTime > 0) {
+                    return prevTime - 1;
+                } else {
+
+                    handleSubmit();
+                    clearInterval(timer);
+                    return 0;
+                }
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [quizTime]);
+
+
+
+
+    const handleOptionChange = (questionId, selectedOption) => {
+        if (!submitted) {
+            setSelectedAnswers((prevSelectedAnswers) => ({
+                ...prevSelectedAnswers,
+                [questionId]: selectedOption,
+            }));
         }
-        if (selectedOption !== questions[index].options.correctOption) {
-            setWrongAnswers(wrongAnswers + 1);
-        }
-
     };
 
     const handleSubmit = async () => {
         try {
+            setSubmitted(true);
+            let correctAnswersCount = 0;
 
-            const answers = Object.values(userAnswers);
+            for (const question of questions) {
+                const questionId = question.questionId;
+                const selectedOption = selectedAnswers[questionId];
+                if (selectedOption === question.options.correctOption) {
+                    correctAnswersCount++;
+                }
+            }
 
-            console.log("User Answers:", answers);
+            const marksObtained = correctAnswersCount;
+            const totalAttemptedQuestions = (Object.keys(selectedAnswers).length);
+            const wrongAnswers = totalAttemptedQuestions - marksObtained;
+
+            const payload = {
+                userName,
+                userEmailId,
+                categoryName,
+                quizName,
+                totalMarks,
+                marksObtained,
+                wrongAnswers,
+                totalQuestions,
+                attemptedQuestions: totalAttemptedQuestions,
+                dateAndTime: new Date().toLocaleString(),
+            };
+
+            const result = await CreateReport(payload);
+            console.log("User Answers:", result);
             Swal.fire('Answers Submitted!', 'Your answers have been submitted successfully.', 'success');
         } catch (error) {
             console.error('Error submitting answers:', error);
-            Swal.fire('Error', 'An error occurred while submitting your answers. Please try again.', 'error');
+            Swal.fire('Error', 'An error occurred while submitting your answers.', 'error');
         }
     };
 
     if (userRole !== 'user') {
         return <UnauthorizedAccess />;
     }
+
     return (
         <div className='question-wrapper'>
             <div className='question-container'>
                 <div className='question-main-card'>
                     <div className='question-card-header-main'>
-                        <h3>Please attempt the Question</h3>
-                        <h2>Time : 90 Minuts </h2>
+                        <h3> Subject Name {quizName}</h3>
+                        <h2>Time Remaining: {Math.floor(remainingTime / 60)}:{remainingTime % 60}</h2>
                     </div>
                     <div className="question-card-body">
                         <div className="question-table-wrapper">
@@ -120,34 +144,52 @@ const UserTest = () => {
                                 <tbody className='quiz-table-content'>
                                     {questions.map((question, index) => (
                                         <div className="question-card" key={question.questionId}>
-                                            <div className="question-card-header">
-                                                <h3>{question.quiz.quizName}</h3>
-                                            </div>
                                             <div className="question-card-body">
-
-                                                <h4>{question.questionText}</h4>
+                                                <h4>{index + 1}. {question.questionText}</h4>
                                                 <label>
-                                                    <input type="radio" name={`option${index}`} value="optionOne" />
+                                                    <input
+                                                        type="radio"
+                                                        name={`option${index}`}
+                                                        value="optionOne"
+                                                        checked={selectedAnswers[question.questionId] === question.options.optionOne}
+                                                        onChange={() => handleOptionChange(question.questionId, question.options.optionOne)}
+                                                    />
                                                     {question.options.optionOne}
-
                                                 </label>
                                                 <br />
                                                 <label>
-                                                    <input type="radio" name={`option${index}`} value="optionTwo" />
+                                                    <input
+                                                        type="radio"
+                                                        name={`option${index}`}
+                                                        value="optionTwo"
+                                                        checked={selectedAnswers[question.questionId] === question.options.optionTwo}
+                                                        onChange={() => handleOptionChange(question.questionId, question.options.optionTwo)}
+                                                    />
                                                     {question.options.optionTwo}
                                                 </label>
                                                 <br />
                                                 <label>
-                                                    <input type="radio" name={`option${index}`} value="optionThree" />
+                                                    <input
+                                                        type="radio"
+                                                        name={`option${index}`}
+                                                        value="optionThree"
+                                                        checked={selectedAnswers[question.questionId] === question.options.optionThree}
+                                                        onChange={() => handleOptionChange(question.questionId, question.options.optionThree)}
+                                                    />
                                                     {question.options.optionThree}
                                                 </label>
                                                 <br />
                                                 <label>
-                                                    <input type="radio" name={`option${index}`} value="optionFour" />
+                                                    <input
+                                                        type="radio"
+                                                        name={`option${index}`}
+                                                        value="optionFour"
+                                                        checked={selectedAnswers[question.questionId] === question.options.optionFour}
+                                                        onChange={() => handleOptionChange(question.questionId, question.options.optionFour)}
+                                                    />
                                                     {question.options.optionFour}
                                                 </label>
                                             </div>
-
                                         </div>
                                     ))}
                                 </tbody>
@@ -158,10 +200,8 @@ const UserTest = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );
 };
-
 export default UserTest;

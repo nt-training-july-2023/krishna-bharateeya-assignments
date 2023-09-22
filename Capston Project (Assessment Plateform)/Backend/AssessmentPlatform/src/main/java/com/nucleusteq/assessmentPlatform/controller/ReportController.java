@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
@@ -34,7 +35,7 @@ public class ReportController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ReportDto>> getAllReports() {
         List<ReportDto> reportDtos = reportService.getAllReport();
         return ResponseEntity.ok(reportDtos);
