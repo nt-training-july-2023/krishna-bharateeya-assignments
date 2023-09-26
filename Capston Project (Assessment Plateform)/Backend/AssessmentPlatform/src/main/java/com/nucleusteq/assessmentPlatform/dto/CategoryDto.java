@@ -1,6 +1,6 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,13 +21,13 @@ public class CategoryDto {
     /**
      * The name of the category.
      */
-    @Column(nullable = false)
+    @NotBlank(message = "Category Name cannot be empty.")
     private String categoryName;
 
     /**
      * The description of the category.
      */
-    @Column(nullable = false)
+    @NotBlank(message = "Description Name cannot be empty.")
     private String description;
 
     /**

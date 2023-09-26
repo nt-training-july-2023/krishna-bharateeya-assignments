@@ -86,17 +86,20 @@
   color: white;
   text-decoration: none;
   padding: 4px 45px;
+  gap: 0px;
+  
 }
 .open{
-  margin-top: 203px; 
+  margin-top: 293px; 
 }
 .closed{
-  margin-top: 284px;
-  padding: 20px 20px;
+  margin-top: 373px; 
+  /* padding: 20px 20px; */
 }
 
-.sidebar-logout-button:hover{
+.sidebar-logout-button a:hover{
   background-color: #cc0000;
+  color: white;
 }
 .sidebar-logout-button .icon {
   font-size: 24px; 

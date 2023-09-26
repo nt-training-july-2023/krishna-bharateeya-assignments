@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,36 +40,40 @@ public class Registration {
      * The first name of the user.
      */
     @Column(nullable = false)
+    @NotBlank(message = "First name cannot be empty.")
     private String firstName;
 
     /**
      * The last name of the user.
      */
     @Column(nullable = false)
+    @NotBlank(message = "Last Name cannot be empty.")
     private String lastName;
 
     /**
      * The mobile number of the user.
      */
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Mobile Number cannot be empty.")
     private String mobileNumber;
 
     /**
      * The role of the user.
      */
-    @Column(nullable = false)
     private String userRole;
 
     /**
      * The email address of the user.
      */
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email cannot be empty.")
     private String email;
 
     /**
      * The password of the user.
      */
     @Column(nullable = false)
+    @NotBlank(message = "Password cannot be empty.")
     private String password;
 
 }

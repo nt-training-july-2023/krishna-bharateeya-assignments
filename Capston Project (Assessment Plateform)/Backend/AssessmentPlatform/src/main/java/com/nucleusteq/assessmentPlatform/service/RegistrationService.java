@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 
+import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
@@ -47,7 +48,7 @@ public interface RegistrationService {
      * @return A map containing authentication response.
      * @throws UserNotFoundException If the user is not found.
      */
-    Map<String, String> loginUser(RegistrationDto inputRegistrationDto)
+    Map<String, String> loginUser(LoginRequestDto inputRegistrationDto)
             throws UserNotFoundException;
 
     /**

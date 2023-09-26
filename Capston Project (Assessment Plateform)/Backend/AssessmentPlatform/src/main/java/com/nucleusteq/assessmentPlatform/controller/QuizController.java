@@ -21,6 +21,8 @@ import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
 
+import jakarta.validation.Valid;
+
 /**
  * Controller class for managing Quizzes.
  */
@@ -52,7 +54,7 @@ public class QuizController {
      * @return A message indicating the result of the quiz addition.
      */
     @PostMapping
-    public final String addQuiz(@RequestBody final QuizDTO quizDTO) {
+    public final String addQuiz(@Valid @RequestBody final QuizDTO quizDTO) {
         String createdQuiz = quizService.addQuiz(quizDTO);
         return createdQuiz;
     }
@@ -66,7 +68,7 @@ public class QuizController {
      */
     @PutMapping("/{quizId}")
     public final String updateQuiz(@PathVariable final Integer quizId,
-            @RequestBody final QuizDTO quizDTO) throws NotFoundException {
+            @Valid @RequestBody final QuizDTO quizDTO) throws NotFoundException {
         String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
         return updatedQuiz;
     }

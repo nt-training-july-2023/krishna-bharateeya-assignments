@@ -17,6 +17,8 @@ import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 
+import jakarta.validation.Valid;
+
 /**
  * Controller class for managing categories.
  */
@@ -40,7 +42,7 @@ public class CategoryController {
      * @return A message indicating the result of the category addition.
      */
     @PostMapping(path = "/save")
-    public final String saveUser(@RequestBody final CategoryDto categoryDto) {
+    public final String saveUser(@Valid @RequestBody final CategoryDto categoryDto) {
 
         return categoryService.addCategory(categoryDto);
     }
@@ -88,7 +90,7 @@ public class CategoryController {
      */
     @PutMapping("update/{categoryId}")
     public final String updateCategory(@PathVariable final int categoryId,
-            @RequestBody final CategoryDto category) {
+           @Valid @RequestBody final CategoryDto category) {
         category.setCategoryId(categoryId);
         return categoryService.updateCategory(category);
     }

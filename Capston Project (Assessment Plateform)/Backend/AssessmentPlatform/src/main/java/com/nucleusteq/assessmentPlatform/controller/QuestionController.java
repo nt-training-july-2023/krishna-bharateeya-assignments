@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
 
+import jakarta.validation.Valid;
+
 /**
  * This controller class, `QuestionController`, handles HTTP requests related
  * to. managing questions in the assessment platform. It provides end points
@@ -42,7 +44,7 @@ public class QuestionController {
      */
     @PostMapping("/add")
     public final ResponseEntity<String> addQuestion(
-            @RequestBody final QuestionDto questionDto) {
+            @Valid @RequestBody final QuestionDto questionDto) {
         String result = questionService.addQuestion(questionDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
@@ -57,7 +59,7 @@ public class QuestionController {
     @PutMapping("/update/{questionId}")
     public final ResponseEntity<String> updateQuestion(
             @PathVariable final Integer questionId,
-            @RequestBody final QuestionDto questionDto)
+            @Valid @RequestBody final QuestionDto questionDto)
             throws NotFoundException {
         String result = questionService.updateQuestion(questionId, questionDto);
         return new ResponseEntity<>(result, HttpStatus.OK);

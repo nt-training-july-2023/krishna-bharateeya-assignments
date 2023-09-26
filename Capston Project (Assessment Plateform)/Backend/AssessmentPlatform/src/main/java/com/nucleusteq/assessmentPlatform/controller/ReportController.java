@@ -2,6 +2,9 @@ package com.nucleusteq.assessmentPlatform.controller;
 
 import com.nucleusteq.assessmentPlatform.dto.ReportDto;
 import com.nucleusteq.assessmentPlatform.service.ReportService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +45,7 @@ public class ReportController {
      */
     @PostMapping
     public final ResponseEntity<String> createReport(
-            @RequestBody final ReportDto reportDto) {
+            @Valid @RequestBody final ReportDto reportDto) {
         String result = reportService.createReport(reportDto);
         return ResponseEntity.ok(result);
     }

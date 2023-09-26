@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 
 import ch.qos.logback.classic.Logger;
+import jakarta.validation.Valid;
 
 /**
  * Controller class for handling user registration and login.
@@ -48,15 +50,15 @@ public class RegistrationController {
      * @throws UserEmailDomainException If the user's email domain is invalid.
      */
     @PostMapping(path = "/save")
-    public final String saveUser(@RequestBody final RegistrationDto user)
+    public final String saveUser(@Valid @RequestBody final RegistrationDto user)
             throws UserEmailDomainException {
         LOGGER.info("Received a request to save a new user.");
-        try {
+//        try {
             return registrationService.addUser(user);
-        } catch (UserEmailDomainException e) {
-            LOGGER.error("Error while saving user: " + e.getMessage());
-            throw e;
-        }
+//        } catch (UserEmailDomainException e) {
+//            LOGGER.error("Error while saving user: " + e.getMessage());
+//            throw e;
+//        }
     }
 
     /**
@@ -68,13 +70,13 @@ public class RegistrationController {
      */
     @PostMapping(path = "/login")
     public final Map<String, String> loginUser(
-            @RequestBody final RegistrationDto user)
+            @Valid @RequestBody final LoginRequestDto user)
             throws UserNotFoundException {
         LOGGER.info("Received a login request for user: {}",
-                user.getFirstName());
+                user.getEmail());
         try {
             Map<String, String> response = registrationService.loginUser(user);
-            LOGGER.info("User {} logged in successfully.", user.getFirstName());
+            LOGGER.info("User {} logged in successfully.", user.getEmail());
 
             return response;
         } catch (UserNotFoundException e) {

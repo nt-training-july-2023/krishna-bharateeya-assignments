@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
@@ -92,16 +93,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      *                                        registered.
      */
     public final String addUser(final RegistrationDto registrationDto)
-            throws UserEmailDomainException, DuplicateMobileNumberException,
-            DuplicateEmailException {
-        if (registrationDto != null && registrationDto.getEmail() != null
-                && registrationDto.getPassword() != null) {
-            final String emailDomain = "@nucleusteq.com";
-
-            if (!registrationDto.getEmail().endsWith(emailDomain)) {
-                throw new UserEmailDomainException(
-                        "Email domain should be " + emailDomain);
-            }
+          {
 
             Optional<Registration> existingUserByMobile = registrationRepository
                     .findByMobileNumber(registrationDto.getMobileNumber());
@@ -123,9 +115,6 @@ public class RegistrationServiceImpl implements RegistrationService {
             registrationRepository.save(newRegistration);
 
             return registrationDto.getFirstName() + " Registered Successfully";
-        } else {
-            return ("registration object cannot be null");
-        }
     }
 
     /**
@@ -149,7 +138,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @throws UserNotFoundException If the user is not found.
      */
     public final Map<String, String> loginUser(final
-            RegistrationDto inputRegistrationDto)throws
+            LoginRequestDto inputRegistrationDto)throws
              LoginFailedException, UserNotFoundException {
         Map<String, String> response = new HashMap<>();
 

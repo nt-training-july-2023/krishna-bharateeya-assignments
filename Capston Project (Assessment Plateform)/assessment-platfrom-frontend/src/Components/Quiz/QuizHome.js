@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../AdminHome/Sidebar';
 import './QuizHome.css'
-// import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import { useNavigate } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -10,7 +10,7 @@ const QuizHome = () => {
 
   const [quizzes, setQuizzes] = useState([]);
   const { categoryId } = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     loadQuizzes();
   }, [categoryId]);
@@ -59,6 +59,36 @@ const QuizHome = () => {
   };
   const userRole = localStorage.getItem('userRole');
 
+  const handleOpenQuiz = (quizId) => {
+    Swal.fire({
+      icon: 'info',
+      title: "You are about to start the test!",
+      width: 900,
+      padding: '3em',
+      background: '#f5f5f5',
+      color: 'black',
+      backdrop: `
+      rgba(0,0,123,0.4)
+      left top
+      no-repeat
+    `,
+      html: `  <div style="text-align: left;">
+        <h2>Instructions</h2>
+        • Once you start the test you cannot leave without clicking the submit button.<br>
+        • If you leave without submitting then your result will not be stored.<br>
+        • Don't refresh the page while giving the test.<br>
+        • Don't press back button while giving the test.<br>
+      </div>`,
+      showCancelButton: true,
+      confirmButtonText: "Yes, I am Ready",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/userQuestion/${quizId}`);
+      }
+    });
+  }
+  
   return (
 
     <div className='quiz-wrapper'>
@@ -107,7 +137,9 @@ const QuizHome = () => {
                         </div>
                         <div className="quiz-card-footer">
                           {userRole === 'user' ? (
-                            <Link className="start-quiz-button" to={`/userQuestion/${quiz.quizId}`}>Take Test</Link>
+                            // <Link className="start-quiz-button" to={`/userQuestion/${quiz.quizId}`}>Take Test</Link>
+                            <button className="start-quiz-button" onClick={() => handleOpenQuiz(quiz.quizId)}>Take Test</button>
+
                           ) : (
                             <>
                               <Link className="button-add-view-question" to={`/question/${quiz.quizId}`}>View Questions</Link>
