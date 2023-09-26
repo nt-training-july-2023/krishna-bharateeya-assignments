@@ -56,10 +56,6 @@ public class Quiz {
     private String quizDescription;
 
     /**
-     * The category to which the quiz belongs.
-     */
-
-    /**
      * The time of the Quiz.
      */
     private int timeInMinutes;
@@ -108,8 +104,12 @@ public class Quiz {
      * @param cate cate.
      */
     public final void setCategory(final Category cate) {
-        this.category = new Category(cate.getCategoryId(),
-                cate.getCategoryName(), cate.getDescription());
+        if (cate != null) {
+          this.category = new Category(cate.getCategoryId(),
+            cate.getCategoryName(), cate.getDescription());
+        } else {
+            this.category = null;
+        }
     }
     /**
      * Constructs a new Quiz object with the specified parameters.

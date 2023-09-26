@@ -1,5 +1,6 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,11 +21,13 @@ public class CategoryDto {
     /**
      * The name of the category.
      */
+    @Column(nullable = false)
     private String categoryName;
 
     /**
      * The description of the category.
      */
+    @Column(nullable = false)
     private String description;
 
     /**

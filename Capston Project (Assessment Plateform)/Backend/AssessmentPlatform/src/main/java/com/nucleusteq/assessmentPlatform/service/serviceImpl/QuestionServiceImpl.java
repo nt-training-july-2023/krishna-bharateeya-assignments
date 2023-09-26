@@ -162,7 +162,6 @@ public class QuestionServiceImpl implements QuestionService {
      * @return the converted into QuestionDto entity.
      */
     private QuestionDto convertEntityToDto(final Question question) {
-        
         QuestionDto questionDto = new QuestionDto();
         questionDto.setQuestionId(question.getQuestionId());
         questionDto.setQuestionText(question.getQuestionText());

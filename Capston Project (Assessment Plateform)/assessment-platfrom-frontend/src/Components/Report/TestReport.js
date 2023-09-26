@@ -21,7 +21,13 @@ const Report = () => {
       } else {
         data = await GetAllReport();
       }
-      console.log("fdsfdsfsg", data);
+      
+      data.sort((a, b) => {
+        const dateA = new Date(a.dateAndTime).getTime();
+        const dateB = new Date(b.dateAndTime).getTime();
+        return dateB - dateA;
+      });
+
       setReports(data);
 
     } catch (error) {
@@ -31,33 +37,50 @@ const Report = () => {
   };
 
   return (
+    
     <div className='report-wrapper'>
       <div className='report-container'>
-
         <div className='report-sidebar-column'>
           <Sidebar />
         </div>
         <div className='report-column'>
+        
 
-          <div className='report-cards'>
-            {reports.map((report, index) => (
-              <div key={index} className='report-card'>
-                <h3>Report {index + 1}</h3>
-                <p>User Name: {report.userName}</p>
-                <p>User Email: {report.userEmailId}</p>
-                <p>Category Name: {report.categoryName}</p>
-                <p>Quiz Name: {report.quizName}</p>
-                <p>Total Marks: {report.totalMarks}</p>
-                <p>Marks Obtained: {report.marksObtained}</p>
-                <p>Wrong Answers: {report.wrongAnswers}</p>
-                <p>Total Questions: {report.totalQuestions}</p>
-                <p>Attempted Questions: {report.attemptedQuestions}</p>
-                <p>Date and Time: {report.dateAndTime}</p>
-              </div>
-            ))}
-          </div>
+<table className='report-table'>
+            <thead >
+              <tr>
+                <th>Sr. No.</th>
+                <th>User Name</th>
+                <th>User Email</th>
+                {/* <th>Category Name</th> */}
+                <th>Quiz Name</th>
+                <th>Total Marks</th>
+                <th>Marks Obtained</th>
+                <th>Wrong Answers</th>
+                <th>Total Questions</th>
+                <th>Attempted Questions</th>
+                <th>Date and Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reports.map((report, index) => (
+                <tr key={index} className='report-row'>
+                  <td>{index + 1}</td>
+                  <td>{report.userName}</td>
+                  <td>{report.userEmailId}</td>
+                  {/* <td>{report.categoryName}</td> */}
+                  <td>{report.quizName}</td>
+                  <td>{report.totalMarks}</td>
+                  <td>{report.marksObtained}</td>
+                  <td>{report.wrongAnswers}</td>
+                  <td>{report.totalQuestions}</td>
+                  <td>{report.attemptedQuestions}</td>
+                  <td>{report.dateAndTime}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-
       </div>
     </div>
 

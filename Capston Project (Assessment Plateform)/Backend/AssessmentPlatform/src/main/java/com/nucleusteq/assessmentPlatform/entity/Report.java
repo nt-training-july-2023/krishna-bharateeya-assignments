@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +24,8 @@ initialValue = Report.ID_INITIAL_VALUE, allocationSize = 1)
 public class Report {
 
     /**
-     * Constant for initial value of report ID sequence.
-     m*/
+     * Constant for initial value of report ID sequence. m
+     */
     public static final int ID_INITIAL_VALUE = 6010;
 
     /**
@@ -37,60 +35,58 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reportSeq")
     private int reportId;
 
-    
     /**
-     *userName name attribute.
-    */
+     * userName name attribute.
+     */
     @Column(nullable = false)
     private String userName;
-    
+
     /**
-     *userEmailId email attribute.
-    */
+     * userEmailId email attribute.
+     */
     @Column(nullable = false)
     private String userEmailId;
-    
+
     /**
-     *category name attribute.
-    */
+     * category name attribute.
+     */
     @Column(nullable = false)
     private String categoryName;
     /**
-     *quiz name attribute.
-    */
+     * quiz name attribute.
+     */
     @Column(nullable = false)
     private String quizName;
-    
+
     /**
-     *total marks of quiz attribute.
-    */
+     * total marks of quiz attribute.
+     */
     @Column(nullable = false)
     private int totalMarks;
-    
+
     /**
-     *marks obtained in quiz attribute.
-    */
+     * marks obtained in quiz attribute.
+     */
     @Column(nullable = false)
     private int marksObtained;
-   
+
     /**
-     *total questions in quiz attribute.
-    */
+     * total questions in quiz attribute.
+     */
     @Column(nullable = false)
     private int totalQuestions;
-    
+
     /**
-     *number of attempted questions attribute.
-    */
+     * number of attempted questions attribute.
+     */
     @Column(nullable = false)
     private int attemptedQuestions;
-   
+
     /**
-     *date and time attribute.
-    */
+     * date and time attribute.
+     */
     @Column(nullable = false)
     private String dateAndTime;
-    
 
     /**
      * The count of wrong answers in the assessment.

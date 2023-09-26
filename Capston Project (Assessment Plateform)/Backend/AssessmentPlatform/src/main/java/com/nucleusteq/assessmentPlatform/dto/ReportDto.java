@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Dto class representing a report.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
@@ -20,12 +23,12 @@ public class ReportDto {
      *userName name attribute.
     */
     private String userName;
-    
+
     /**
      *userEmailId email attribute.
     */
     private String userEmailId;
-    
+
     /**
      *category name attribute.
     */
@@ -34,17 +37,17 @@ public class ReportDto {
      *quiz name attribute.
     */
     private String quizName;
-    
+
     /**
      *total marks of quiz attribute.
     */
     private int totalMarks;
-    
+
     /**
      *marks obtained in quiz attribute.
     */
     private int marksObtained;
-    
+
     /**
      * The count of wrong answers in the assessment.
      */
@@ -53,12 +56,12 @@ public class ReportDto {
      *total questions in quiz attribute.
     */
     private int totalQuestions;
-    
+
     /**
      *number of attempted questions attribute.
     */
     private int attemptedQuestions;
-   
+
     /**
      *date and time attribute.
     */

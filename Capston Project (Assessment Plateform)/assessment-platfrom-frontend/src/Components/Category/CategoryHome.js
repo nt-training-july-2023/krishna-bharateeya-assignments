@@ -76,7 +76,7 @@ const CategoryHome = () => {
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className='category-tbody'>
                                         {categories.map((category, index) => (
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
@@ -84,7 +84,7 @@ const CategoryHome = () => {
                                                 <td>{category.description}</td>
                                                 <td>
                                                     {userRole === 'user' ? (
-                                                        <Link className="start-test-button" to={`/quiz/${category.categoryId}`}>Start Test</Link>
+                                                        <Link className="start-test-button" to={`/quiz/${category.categoryId}`}>Quizzes</Link>
                                                     ) : (
                                                         <>
                                                             <Link className="button-show-related-quizzes" to={`/quiz/${category.categoryId}`}>Quizzes</Link>

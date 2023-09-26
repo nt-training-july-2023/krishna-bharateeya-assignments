@@ -42,6 +42,17 @@ const AddOrUpdateQuestion = () => {
 
         if (quizId) {
             setSelectedQuiz(quizId);
+            GetQuizById(quizId)
+            .then((response) => {
+                const quizData = response;
+                setSelectedQuizObject(quizData);
+            })
+            .catch((error) =>
+                console.error(
+                    error.response?.data?.message ||
+                    'An error occurred. Please try again.'
+                )
+            );
         }
 
         if (questionId) {

@@ -210,7 +210,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @throws UserNotFoundException If the user is not found.
      */
     @Override
-    public RegistrationDto getUserByEmail(String email)
+    public final RegistrationDto getUserByEmail(final String email)
             throws UserNotFoundException {
 
         Registration foundRegistration = registrationRepository

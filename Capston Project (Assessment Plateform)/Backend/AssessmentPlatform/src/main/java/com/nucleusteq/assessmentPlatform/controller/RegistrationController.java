@@ -43,7 +43,6 @@ public class RegistrationController {
 
     /**
      * Registers a new user.
-     *
      * @param user The RegistrationDto object containing user information.
      * @return A message indicating the result of the user registration.
      * @throws UserEmailDomainException If the user's email domain is invalid.
@@ -86,7 +85,6 @@ public class RegistrationController {
 
     /**
      * Retrieves a user by their ID.
-     *
      * @param userId The ID of the user to retrieve.
      * @return The RegistrationDto object representing the retrieved user.
      * @throws UserNotFoundException If the user with the specified ID is not
@@ -110,28 +108,26 @@ public class RegistrationController {
     /**
      * Retrieves all user.
      * @return The RegistrationDto object representing the retrieved user.
-     * found.
+     *         found.
      */
     @GetMapping("/get/all")
     public final List<RegistrationDto> getAllUsers() {
         return registrationService.getAllRegistrations();
     }
-    
+
     /**
      * Retrieves a user by their ID.
-     *
-     * @param userId The ID of the user to retrieve.
+     * @param email The ID of the user to retrieve.
      * @return The RegistrationDto object representing the retrieved user.
      * @throws UserNotFoundException If the user with the specified ID is not
      *                               found.
      */
     @GetMapping("/getUser/{email}")
     public final RegistrationDto getUserByEmail(
-            @PathVariable("email") final String  email) throws UserNotFoundException { 
-            RegistrationDto registrationDto = this.registrationService
-                    .getUserByEmail(email);
-            
-            return registrationDto;
-       
+            @PathVariable("email") final String email)
+            throws UserNotFoundException {
+        RegistrationDto registrationDto = this.registrationService
+                .getUserByEmail(email);
+        return registrationDto;
     }
 }

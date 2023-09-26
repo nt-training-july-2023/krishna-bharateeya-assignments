@@ -1,118 +1,10 @@
-  /* .user-home-container {
-      box-sizing: border-box;
-      box-shadow: 3px 3px 5px 5px #c9b2a9;
-      background-color: #9edab9;
-      margin-top: 15px;
-      border: none;
-  }
-
-  .user-main-container {
-      display: flex;
-
-  }
-
-  .user-home-card {
-      box-shadow: 3px 3px 5px 5px #939fd4;
-      margin-top: 15px;
-      border: none;
-
-  }
-
-  .user-home-card-header {
-      background-color: #f8f9fa;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      position: sticky;
-      top: 0;
-      z-index: 1;
-
-  }
-
-  .user-home-card-body {
-      padding: 1px;
-  }
-
-  .user-logout-button {
-      margin-top: 20px;
-      margin-right: auto;
-      width: 70px;
-      padding: 10px 0;
-      font-size: 18px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-  }
-
-  .user-logout-button:hover {
-      background-color: #c0392b;
-  }
-
-  .user-home-table-wrapper {
-      overflow-x: auto;
-  }
-
-  .user-home-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #d4c5c5;
-  }
-
-  .user-home-table th,
-  .user-home-table td {
-      padding: 11px;
-      text-align: left;
-      border-bottom: 1px solid #dee2e6;
-  }
-
-  .user-home-table th {
-      background-color: #f8f9fa;
-  }
-
-  .user-home-table-secondary th {
-      color: white;
-      background-color: #101885;
-  }
-
-  
-  @media (max-width: 768px) {
-      .user-home-container {
-          max-width: 100%;
-          margin-left: 50px;
-      }
-
-      .user-main-container {
-          flex-direction: column;
-      }
-
-      .user-logout-button {
-          width: 100%;
-      }
-
-  }
- */
-
-
-
-  /* UserHome.css */
-/* UserHome.css */
-
-/* Reset some default styles */
-
-  
   .user-home-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
-  
+
   .user-home-card {
     background-color: #fff;
     width: 850px;
@@ -120,7 +12,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   .card-header {
     background-color: #0071bc;
     color: #fff;
@@ -128,26 +20,26 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-  
+
   .card-body {
     padding: 20px;
   }
-  
+
   .card-body h2 {
     font-size: 20px;
     margin-top: 10px;
   }
-  
+
   .card-body p {
     font-size: 16px;
     margin: 8px 0;
   }
-  
+
   .card-footer {
     text-align: center;
     margin-top: 20px;
   }
-  
+
   .continue-button {
     background-color: #0071bc;
     color: #fff;
@@ -158,8 +50,7 @@
     cursor: pointer;
     margin-bottom: 5px;
   }
-  
+
   .continue-button:hover {
     background-color: #005691;
   }
-  

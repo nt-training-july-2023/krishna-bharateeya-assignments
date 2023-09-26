@@ -71,8 +71,6 @@ public class QuizServiceImpl implements QuizService {
                     "Quiz with the same name already exists");
         }
         Quiz quiz = convertToEntity(quizDTO);
-        System.out.println("printiing the quiz category description :"
-                + quiz.getCategory().getDescription());
         quizRepository.save(quiz);
 
         return "Quiz added successfully";
@@ -80,7 +78,6 @@ public class QuizServiceImpl implements QuizService {
 
     /**
      * Updates a quiz.
-     * 
      * @param quizId  The ID of the quiz.
      * @param quizDTO The DTO containing updated quiz information.
      * @return The updated String.
@@ -194,7 +191,7 @@ public class QuizServiceImpl implements QuizService {
      * @return The list of question entity.
      */
     @Override
-    public List<QuestionDto> getAllQuestionByQuiz(int quizId) {
+    public final List<QuestionDto> getAllQuestionByQuiz(final int quizId) {
 
         Quiz quiz = new Quiz();
         quiz.setQuizId(quizId);

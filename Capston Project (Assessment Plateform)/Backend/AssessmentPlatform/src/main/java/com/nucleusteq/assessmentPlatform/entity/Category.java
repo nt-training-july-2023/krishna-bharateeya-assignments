@@ -48,6 +48,7 @@ public class Category {
     /**
      * The description of the category.
      */
+    @Column(nullable = false)
     private String description;
     /**
      * The quizzes map with category.

@@ -3,7 +3,8 @@ import { useNavigate, useLocation, Link, useParams } from 'react-router-dom';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import { GetUserByEmail} from '../../ApiService/ApiService';
 import './UserHome.css';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 const UserHome = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState('');

@@ -18,7 +18,9 @@
     margin-top: 15px;
     border: none;
 }
-
+.category-tbody{
+    min-height: 100vh;
+}
 .category-card-header {
   
     background-color: #f8f9fa;
@@ -45,6 +47,7 @@
     width: 100%;
     border-collapse: collapse;
     background-color: #d4c5c5; 
+    min-height: 81.3vh;
 }
 
 .category-table th, .category-table td {
@@ -85,7 +88,7 @@
 }
 
 .button-show-related-quizzes{
-    padding: 12px 12px;
+    padding: 9px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -116,7 +119,7 @@
     
         /* margin-bottom: 3px;
         margin-top: 5px; */
-        padding: 12px 12px;
+        padding: 12px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;

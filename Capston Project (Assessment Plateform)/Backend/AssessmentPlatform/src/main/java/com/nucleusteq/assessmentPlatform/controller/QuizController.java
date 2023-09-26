@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
 
 /**
@@ -107,7 +106,7 @@ public class QuizController {
         List<QuizDTO> quizzes = quizService.getAllQuizzes();
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
-    
+
     /**
      * Retrieves a category by its ID.
      *

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -43,38 +45,36 @@ class QuizServiceImplTest {
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
+        
     }
-
     @Test
     public void testAddQuiz() {
-        QuizDTO quizDTO = new QuizDTO();
-        quizDTO.setQuizName("Sample Quiz");
-        quizDTO.setQuizDescription("description");
-        
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryId(2021);
         categoryDto.setCategoryName("cat1");
         categoryDto.setDescription("cat desc");
-        quizDTO.setCategory(categoryDto);
-        
-        Category category = new Category();
-        category.setCategoryId(categoryDto.getCategoryId());
-        category.setCategoryName(categoryDto.getCategoryName());
-        category.setDescription(categoryDto.getDescription());
-        
-        Quiz quiz = new Quiz();
-        quiz.setQuizName(quizDTO.getQuizName());
-        quiz.setQuizDescription(quizDTO.getQuizDescription());
-        quiz.setCategory(category); 
-        
-        when(quizRepository.findByQuizName(anyString())).thenReturn(Optional.empty());
-        when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
-        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
 
-//        String result = quizService.addQuiz(quizDTO);
-//        assertEquals("Quiz added successfully", result);
-//        verify(quizRepository).save(quiz);
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(1);
+        quizDto.setQuizName("Sample Quiz");
+        quizDto.setCategory(categoryDto);
+
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(1);
+        quiz.setQuizName("Sample Quiz");
+
+        when(modelMapper.map(quizDto, Quiz.class)).thenReturn(quiz);
+        when(modelMapper.map(quiz, QuizDTO.class)).thenReturn(quizDto);
+        when(quizRepository.findByQuizName(quiz.getQuizName())).thenReturn(Optional.empty());
+        when(quizRepository.save(any(Quiz.class))).thenAnswer(invocation -> {
+            Quiz savedQuiz = invocation.getArgument(0);
+            return savedQuiz;
+        });
+
+        String resultQuizDto = quizService.addQuiz(quizDto);
+        assertNotNull(resultQuizDto);
     }
+
 
     @Test
     void testUpdateQuiz() throws NotFoundException {
@@ -157,11 +157,11 @@ class QuizServiceImplTest {
         when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
         
 //        QuizDTO resultQuiz = quizService.getQuizById(quizId);
-//
+
 //        assertNotNull(resultQuiz);
 //        assertEquals(quizId, resultQuiz.getQuizId());
 //        assertEquals("Sample Quiz", resultQuiz.getQuizName());
-//        verify(quizRepository).findById(quizId);
+
     }
 
     @Test

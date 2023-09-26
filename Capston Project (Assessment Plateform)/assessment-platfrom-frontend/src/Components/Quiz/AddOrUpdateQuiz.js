@@ -6,10 +6,9 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { CreateQuiz,UpdateQuiz,LoadCategories,LoadCategoryById,GetQuizById } from '../../ApiService/ApiService';
+import { CreateQuiz, UpdateQuiz, LoadCategories, LoadCategoryById, GetQuizById } from '../../ApiService/ApiService';
 const AddOrUpdateQuiz = () => {
-  const{categoryId}=useParams();
-  console.log("dfsdggsg",categoryId)
+  const { categoryId } = useParams();
   const { quizId } = useParams();
   const navigate = useNavigate();
 
@@ -33,14 +32,27 @@ const AddOrUpdateQuiz = () => {
     return '';
   };
 
+
   useEffect(() => {
     LoadCategories()
-    .then((categories) => setCategories(categories))
-    .catch((error) => toast.error(error.message));
+      .then((categories) => setCategories(categories))
+      .catch((error) => toast.error(error.message));
 
     if (categoryId) {
       setSelectedCategory(categoryId);
-  }
+      axios
+      LoadCategoryById(categoryId)
+        .then((response) => {
+          const categoryData = response;
+          setSelectedCategoryObject(categoryData);
+        })
+        .catch((error) =>
+          toast.error(
+            error.response?.data?.message ||
+            'An error occurred when fetching quiz details. Please try again.'
+          )
+        );
+    }
     if (quizId) {
       axios
       GetQuizById(quizId)
@@ -59,8 +71,8 @@ const AddOrUpdateQuiz = () => {
           )
         );
     }
-  }, [quizId]);
-
+  }, [quizId, categoryId]);
+  
   const handleQuizNameChange = (event) => {
     const value = event.target.value;
     setQuizName(value);
@@ -124,24 +136,24 @@ const AddOrUpdateQuiz = () => {
       category: selectedCategoryObject,
     };
 
-    
-  try {
-    let result;
-    if (quizId) {
-      result=await UpdateQuiz(quizId, payload);
-      toast.success(result);
-    } else {
-       result=await CreateQuiz(payload);
-      toast.success('Quiz added successfully');
-    }
 
-    navigate('/quiz');
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message ||
+    try {
+      let result;
+      if (quizId) {
+        result = await UpdateQuiz(quizId, payload);
+        toast.success(result);
+      } else {
+        result = await CreateQuiz(payload);
+        toast.success('Quiz added successfully');
+      }
+
+      navigate('/quiz');
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
         'An error occurred when updating/adding the quiz. Please try again.'
-    );
-  }
+      );
+    }
   };
 
   const userRole = localStorage.getItem('userRole');
@@ -190,7 +202,7 @@ const AddOrUpdateQuiz = () => {
                 <label htmlFor="quiz-name">Quiz Name:</label>
                 <input
                   type="text"
-                  className={`add-Update-field ${quizNameError?'a-u-q-error-field':''}`}              
+                  className={`add-Update-field ${quizNameError ? 'a-u-q-error-field' : ''}`}
                   value={quizName}
                   onChange={handleQuizNameChange}
                 />
@@ -205,7 +217,7 @@ const AddOrUpdateQuiz = () => {
                 <label htmlFor="quiz-time">Quiz Time:</label>
                 <input
                   type="number"
-                  className={`add-Update-field ${quizTimeError?'a-u-q-error-field':''}`}              
+                  className={`add-Update-field ${quizTimeError ? 'a-u-q-error-field' : ''}`}
                   value={quizTime}
                   onChange={handleQuizTimeChange}
                 />
@@ -222,7 +234,7 @@ const AddOrUpdateQuiz = () => {
                   type="text"
                   value={quizDescription}
                   onChange={handleQuizDescriptionChange}
-                  className={`add-Update-field ${quizDescriptionError?'a-u-q-error-field':''}`}              
+                  className={`add-Update-field ${quizDescriptionError ? 'a-u-q-error-field' : ''}`}
                   rows="2"
                 />
                 {quizDescriptionError && (
