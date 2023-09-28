@@ -3,8 +3,6 @@ package com.nucleusteq.assessmentPlatform.controller;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -18,15 +16,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Category;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
-import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
 
 class QuestionControllerTest {
@@ -89,26 +82,23 @@ class QuestionControllerTest {
     
     @Test
     public void testDeleteQuestion() throws NotFoundException {
-        
-        
-        CategoryDto categoryDto = new CategoryDto(1, "C. S.","CS Description");
-
-        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto); 
-        
+        CategoryDto categoryDto = new CategoryDto(1, "C. S.", "CS Description");
+        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto);
         QuestionDto questionDTO = new QuestionDto();
         questionDTO.setQuestionId(1);
         questionDTO.setQuestionText("Not a Programming Language :");
         QuestionOptions options = new QuestionOptions("java", "html", "hindi", "python", "hindi");
         questionDTO.setOptions(options);
         questionDTO.setQuiz(quizDTO);
-        
+
         Integer questionId = 1;
-        doNothing().when(service).deleteQuestion(eq(questionId));
+        when(service.deleteQuestion(eq(questionId))).thenReturn("Deletion successful");
 
         ResponseEntity<String> response = questionController.deleteQuestion(questionId);
 
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
 
 
 
@@ -138,7 +128,6 @@ class QuestionControllerTest {
 
     @Test
     public void testGetAllQuestions() {
-        Integer questionId = 1;
         CategoryDto categoryDto = new CategoryDto(1, "C. S.","CS Description");
 
         QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto); 

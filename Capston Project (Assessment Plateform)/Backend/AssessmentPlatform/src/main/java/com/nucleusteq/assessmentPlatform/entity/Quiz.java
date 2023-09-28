@@ -63,7 +63,7 @@ public class Quiz {
      * The time of the Quiz.
      */
     @Column(nullable = false)
-    @Min(value = 1,message = "Time will be minimum 1 minute.")
+    @Min(value = 1, message = "Time will be minimum 1 minute.")
     private int timeInMinutes;
 
     /**

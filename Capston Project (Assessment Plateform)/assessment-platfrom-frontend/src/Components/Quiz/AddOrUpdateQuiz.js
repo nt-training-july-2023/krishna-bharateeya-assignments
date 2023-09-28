@@ -72,16 +72,18 @@ const AddOrUpdateQuiz = () => {
         );
     }
   }, [quizId, categoryId]);
-  
+
   const handleQuizNameChange = (event) => {
     const value = event.target.value;
     setQuizName(value);
     setQuizNameError(validateNotEmpty(value));
   };
   const handleQuizTimeChange = (event) => {
-    const value = event.target.value;
-    setQuizTime(value);
-    setQuizTimeError(validateNotEmpty(value));
+    const rawValue = event.target.value;
+    const absoluteValue = Math.abs(parseInt(rawValue, 10));
+    setQuizTime(absoluteValue);
+    setQuizTimeError(validateNotEmpty(absoluteValue));
+
   };
   const handleQuizDescriptionChange = (event) => {
     const value = event.target.value;
@@ -146,8 +148,8 @@ const AddOrUpdateQuiz = () => {
         result = await CreateQuiz(payload);
         toast.success('Quiz added successfully');
       }
-
-      navigate('/quiz');
+      const navigationUrl = categoryId ? `/quiz/${categoryId}` : '/quiz';
+      navigate(navigationUrl);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -214,7 +216,7 @@ const AddOrUpdateQuiz = () => {
                 className={`form-group ${quizTimeError ? 'has-error' : ''
                   }`}
               >
-                <label htmlFor="quiz-time">Quiz Time:</label>
+                <label htmlFor="quiz-time">Quiz Time(in minutes):</label>
                 <input
                   type="number"
                   className={`add-Update-field ${quizTimeError ? 'a-u-q-error-field' : ''}`}
@@ -252,7 +254,7 @@ const AddOrUpdateQuiz = () => {
                 <button
                   type="button"
                   className="add-Update-quiz-cancel-button"
-                  onClick={() => navigate('/quiz')}
+                  onClick={() => navigate(categoryId ? `/quiz/${categoryId}` : '/quiz')}
                 >
                   Cancel
                 </button>

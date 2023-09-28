@@ -48,9 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
      */
     private static final Logger LOGGER = LoggerFactory
             .getLogger(CategoryServiceImpl.class);
+
     /**
      * Adds a new category.
-     *
      * @param categoryDto The DTO containing category information.
      * @return A message indicating the result of the operation.
      */
@@ -70,7 +70,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * Retrieves a category by ID.
-     *
      * @param id The ID of the category to retrieve.
      * @return The CategoryDto representing the category.
      * @throws RuntimeException If the category is not found.
@@ -84,7 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
             Category category = foundCategory.get();
             return entityToDTO(category);
         } else {
-            LOGGER.error("Category not found for id {}"+id);
+            LOGGER.error("Category not found for id {}" + id);
             throw new ResourceNotFoundException(
                     "Category not found for id: " + id);
         }
@@ -93,21 +92,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * Retrieves a list of all categories.
-     *
      * @return A list of CategoryDto objects representing categories.
      */
     @Override
     public final List<CategoryDto> getAllCategory() {
 
         List<Category> categories = categoryRepository.findAll();
-        return categories.stream()
-                .map(this::entityToDTO)
+        return categories.stream().map(this::entityToDTO)
                 .collect(Collectors.toList());
     }
 
     /**
      * Updates a category.
-     *
      * @param categoryDto The DTO containing updated category information.
      * @return The updated CategoryDto.
      */
@@ -115,36 +111,40 @@ public class CategoryServiceImpl implements CategoryService {
     public final String updateCategory(final CategoryDto categoryDto) {
 
         Category existingCategory = categoryRepository
-                .findById(categoryDto.getCategoryId())
-                .orElseThrow(() -> {
-                    LOGGER.error("Category not found with ID: {}", categoryDto.getCategoryId());
-                    return new ResourceNotFoundException("No category found with ID: " + categoryDto.getCategoryId());
+                .findById(categoryDto.getCategoryId()).orElseThrow(() -> {
+                    LOGGER.error("Category not found with ID: {}",
+                            categoryDto.getCategoryId());
+                    return new ResourceNotFoundException(
+                            "No category found with ID: "
+                                    + categoryDto.getCategoryId());
                 });
-        if (!existingCategory.getCategoryName().equals(categoryDto.getCategoryName())
+        if (!existingCategory.getCategoryName()
+                .equals(categoryDto.getCategoryName())
                 && categoryRepository
                         .findByCategoryName(categoryDto.getCategoryName())
                         .isPresent()) {
             LOGGER.error("This category Already Exist.");
             throw new AlreadyExistsException("This category Already Exist.");
         }
-        existingCategory= dtoToEntity(categoryDto);
+        existingCategory = dtoToEntity(categoryDto);
         categoryRepository.save(existingCategory);
         return categoryDto.getCategoryName() + " Updated Successfully";
     }
 
     /**
      * Deletes a category.
-     *
      * @param categoryId The ID of the category to delete.
      * @return A message indicating the result of the operation.
      */
     @Override
     public final String deleteCategory(final int categoryId) {
 
-        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> {
-            LOGGER.error("Category not found with ID: {}", categoryId);
-            return new ResourceNotFoundException("No category found with ID: " + categoryId);
-        });
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> {
+                    LOGGER.error("Category not found with ID: {}", categoryId);
+                    return new ResourceNotFoundException(
+                            "No category found with ID: " + categoryId);
+                });
 
         categoryRepository.delete(category);
         return "Category Deletd Successfully";
@@ -152,7 +152,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * Gets all quiz By categoryId.
-     *
      * @param categoryId The ID of the category to get the quiz.
      * @return list of quiz related to this category.
      */
@@ -163,11 +162,10 @@ public class CategoryServiceImpl implements CategoryService {
         return quizRepository.findByCategory(category);
     }
 
-
     /**
      * Converts UserDTO to User entity.
-     * @param RegistrationDto The UserDTO object.
-     * @return Registration object.
+     * @param categoryDto The UserDTO object.
+     * @return Category object.
      */
     final Category dtoToEntity(final CategoryDto categoryDto) {
         return this.modelMapper.map(categoryDto, Category.class);
@@ -175,8 +173,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     /**
      * Converts User entity to UserDTO.
-     * @param Registration User object.
-     * @return RegistrationDto object.
+     * @param category category object.
+     * @return CategoryDto object.
      */
     final CategoryDto entityToDTO(final Category category) {
         return this.modelMapper.map(category, CategoryDto.class);

@@ -72,13 +72,18 @@ const QuizHome = () => {
       left top
       no-repeat
     `,
-      html: `  <div style="text-align: left;">
-        <h2>Instructions</h2>
-        • Once you start the test you cannot leave without clicking the submit button.<br>
-        • If you leave without submitting then your result will not be stored.<br>
-        • Don't refresh the page while giving the test.<br>
-        • Don't press back button while giving the test.<br>
-      </div>`,
+      html: `   <div style="text-align: left; font-family:sans-serif ;line-height: 1.6">
+            
+      <ul>
+      <li>Please do not reload  the page.</li>
+      <li>The examination will comprise of Objective type Multiple Choice Questions.</li>
+      <li>The duration of examination, will be different based on the course.</li>
+      <li>There will be <Strong>NO NEGATIVE MARKING</Strong> for the wrong answers.</li>
+      <li>The Time remaining is shown in the Top Left Corner of the screen.</li>
+      <li>Mark your answers before the deadline.</li>
+      </ul>
+      
+    </div>`,
       showCancelButton: true,
       confirmButtonText: "Yes, I am Ready",
       cancelButtonText: "Cancel"
@@ -137,9 +142,7 @@ const QuizHome = () => {
                         </div>
                         <div className="quiz-card-footer">
                           {userRole === 'user' ? (
-                            // <Link className="start-quiz-button" to={`/userQuestion/${quiz.quizId}`}>Take Test</Link>
                             <button className="start-quiz-button" onClick={() => handleOpenQuiz(quiz.quizId)}>Take Test</button>
-
                           ) : (
                             <>
                               <Link className="button-add-view-question" to={`/question/${quiz.quizId}`}>View Questions</Link>

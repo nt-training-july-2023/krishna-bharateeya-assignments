@@ -44,6 +44,7 @@ public class QuestionController {
      */
     private static final Logger LOGGER = LoggerFactory
             .getLogger(QuestionController.class);
+
     /**
      * Adds a new question to the assessment platform.
      * @param questionDto The DTO representing the question to be added.
@@ -80,29 +81,31 @@ public class QuestionController {
      * Deletes a question from the assessment platform.
      * @param questionId The ID of the question to be deleted.
      * @return A ResponseEntity with HTTP status 204 (No Content) on successful.
-     *         deletion.
+     * deletion.
      * @throws NotFoundException if the specified question is not found.
      */
     @DeleteMapping("/delete/{questionId}")
     public final ResponseEntity<String> deleteQuestion(
             @PathVariable final Integer questionId) throws NotFoundException {
-        LOGGER.info("Received a request to Delete a question with id :{}"+questionId);
-        String response=questionService.deleteQuestion(questionId);
+        LOGGER.info("Received a request to Delete a question with id :{}"
+                + questionId);
+        String response = questionService.deleteQuestion(questionId);
         LOGGER.info("Question deleted Successfully.");
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
      * Retrieves a question by its unique ID.
      * @param questionId The ID of the question to be retrieved.
      * @return A ResponseEntity containing the QuestionDto and HTTP status 200.
-     *         (OK).
+     * (OK).
      * @throws NotFoundException if the specified question is not found.
      */
     @GetMapping("/{questionId}")
     public final ResponseEntity<QuestionDto> getQuestionById(
             @PathVariable final Integer questionId) throws NotFoundException {
-        LOGGER.info("Received Request to get question by QuestionId :{}"+questionId);
+        LOGGER.info("Received Request to get question by QuestionId :{}"
+                + questionId);
         QuestionDto questionDto = questionService.getQuestionById(questionId);
         LOGGER.info("Question Retrived Successfully.");
         return new ResponseEntity<>(questionDto, HttpStatus.OK);
@@ -111,7 +114,7 @@ public class QuestionController {
     /**
      * Retrieves all questions available in the assessment platform.
      * @return A ResponseEntity containing a list of QuestionDto objects and.
-     *         HTTP status 200 (OK).
+     * HTTP status 200 (OK).
      */
     @GetMapping("/all")
     public final ResponseEntity<List<QuestionDto>> getAllQuestions() {

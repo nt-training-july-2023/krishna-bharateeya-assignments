@@ -13,9 +13,8 @@ const Sidebar = ({ children }) => {
   const navigate = useNavigate();
   const userRole = localStorage.getItem('userRole');
   const handleLogout = () => {
-    console.log("logout function called");
     navigate('/');
-    toast.success("Logout successful");
+    toast.success("Logout successfully.");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
     localStorage.removeItem('email');
@@ -125,7 +124,8 @@ const Sidebar = ({ children }) => {
             className="link"
             onClick={handleLogoutConfirmation}
           >
-            <div className="icon"><FaPowerOff />
+            <div className="icon">
+              <FaPowerOff />
             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">Logout</div>
             </div>
           </NavLink>

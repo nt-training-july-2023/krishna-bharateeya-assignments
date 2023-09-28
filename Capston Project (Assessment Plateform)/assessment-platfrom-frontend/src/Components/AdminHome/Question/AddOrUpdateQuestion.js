@@ -172,13 +172,14 @@ const AddOrUpdateQuestion = () => {
                 if (questionId) {
                     console.log('Updating question with questionId:', questionId);
                     await UpdateQuestions(questionId, payload);
-                    toast.success("Question Added Successfully.");
+                    toast.success("Question Updated Successfully.");
+                    navigate(`/question/${quizId}`)
                 } else {
                     await AddQuestions(payload);
-                    toast.success("Question Updated Successfully.");
+                    toast.success("Question Added Successfully.");
+                    navigate('/question');
                 }
 
-                navigate('/question');
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -318,7 +319,8 @@ const AddOrUpdateQuestion = () => {
                             <button
                                 type='button'
                                 className='add-queston-cancel-button'
-                                onClick={() => navigate('/question')}
+                                // onClick={() => navigate('/question')}
+                                onClick={() => navigate(quizId ? `/question/${quizId}` : '/question')}
                             >
                                 Cancel
                             </button>

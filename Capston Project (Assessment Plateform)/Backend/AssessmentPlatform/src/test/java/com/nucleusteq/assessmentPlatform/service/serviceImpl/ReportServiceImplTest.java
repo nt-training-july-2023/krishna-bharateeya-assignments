@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,26 +56,26 @@ class ReportServiceImplTest {
     @Test
     public void testFindReportByEmailId() {
         String email = "piyush@nucleusteq.com";
-        List<Report> reports = new ArrayList<>();
         
-        // Create some sample Report objects if needed and add them to the 'reports' list
-        
-        List<ReportDto> reportDtos = reports.stream()
-                .map(this::convertIntoDto) // Use the convertIntoDto method
-                .collect(Collectors.toList());
+        Report report1=new Report();
+        report1.setReportId(1);
+        report1.setUserEmailId("piyush@nucleusteq.com");
+
+        Report report2=new Report();
+        report2.setReportId(2);
+        report2.setUserEmailId("piyush@nucleusteq.com");
+          
+
+        List<Report> reports = Arrays.asList(report1,report2); 
 
         when(reportRepository.findByUserEmailId(email)).thenReturn(reports);
 
         List<ReportDto> result = reportService.findReportByEmailId(email);
 
         verify(reportRepository, times(1)).findByUserEmailId(email);
-        assertEquals(reportDtos, result);
+        assertEquals(2, result.size());
     }
 
-    public ReportDto convertIntoDto(Report report) {
-        return modelMapper.map(report, ReportDto.class);
-    }
- 
     @Test
     public void testGetAllReport() {
         List<Report> reports = new ArrayList<>();

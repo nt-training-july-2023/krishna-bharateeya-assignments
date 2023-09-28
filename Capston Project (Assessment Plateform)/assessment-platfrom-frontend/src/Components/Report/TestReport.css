@@ -28,7 +28,6 @@
 .report-table td {
   padding: 4px;
   text-align: center;
-  /* border: 1px solid #ccc; */
 }
 
 .report-table th {
@@ -42,8 +41,7 @@
 }
 
 .report-row:nth-child(even) {
-  /* color: #0a0881; */
-  background-color: #f0f0f0; /* Set a different background color for even rows */
+  background-color: #f0f0f0; 
 }
 
 .report-row:nth-child(odd) {

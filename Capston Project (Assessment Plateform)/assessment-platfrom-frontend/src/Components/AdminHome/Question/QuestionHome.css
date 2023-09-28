@@ -94,11 +94,11 @@
   border-radius: 4px;
   cursor: pointer;
   margin-left: 20px;
-  background-color: #ff1900;
+  background-color: #ED0800;
   color: #fff;
   font-size: 1rem;
   &:hover {
-      background-color: #7c0f0f;
+      background-color: #b91300;
   }
 }
 .question-card {

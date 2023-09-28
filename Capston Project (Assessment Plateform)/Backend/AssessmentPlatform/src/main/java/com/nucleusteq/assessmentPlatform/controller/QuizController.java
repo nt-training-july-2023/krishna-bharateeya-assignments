@@ -45,39 +45,37 @@ public class QuizController {
             .getLogger(QuizController.class);
     /**
      * Adds a new quiz.
-     * 
      * @param quizDTO The QuizDTO object containing Quiz information.
      * @return A message indicating the result of the quiz addition.
      */
     @PostMapping
-    public final ResponseEntity<String> addQuiz(@Valid @RequestBody final QuizDTO quizDTO) {
+    public final ResponseEntity<String> addQuiz(@Valid @RequestBody
+            final QuizDTO quizDTO) {
         LOGGER.info("Received a request to save a new quiz.");
         String createdQuiz = quizService.addQuiz(quizDTO);
         LOGGER.info("Quiz Created Successfully.");
-        return new ResponseEntity<>(createdQuiz,HttpStatus.CREATED);
+        return new ResponseEntity<>(createdQuiz, HttpStatus.CREATED);
     }
 
     /**
      * Updates a quiz.
-     * 
      * @param quizId  The ID of the quiz to update.
      * @param quizDTO The updated quizDto object.
      * @return The updated quizDto object.
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @PutMapping("/{quizId}")
-    public final ResponseEntity<String> updateQuiz(@PathVariable final Integer quizId,
-            @Valid @RequestBody final QuizDTO quizDTO)
+    public final ResponseEntity<String> updateQuiz(@PathVariable
+            final Integer quizId, @Valid @RequestBody final QuizDTO quizDTO)
             throws NotFoundException {
         LOGGER.info("Received a request to update quiz.");
         String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
         LOGGER.info("Quiz Updated Successfully.");
-        return new ResponseEntity<>(updatedQuiz,HttpStatus.OK);
+        return new ResponseEntity<>(updatedQuiz, HttpStatus.OK);
     }
 
     /**
      * Deletes a quiz by its ID.
-     * 
      * @param quizId The ID of the quiz to delete.
      * @return A message indicating the result of the quiz deletion.
      * @throws NotFoundException If the user's email domain is invalid.
@@ -85,13 +83,12 @@ public class QuizController {
     @DeleteMapping("/{quizId}")
     public final ResponseEntity<String> deleteQuiz(
             @PathVariable final Integer quizId) throws NotFoundException {
-        String response=quizService.deleteQuiz(quizId);
+        String response = quizService.deleteQuiz(quizId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
      * Retrieves a quiz by its ID.
-     * 
      * @param quizId The ID of the quiz to retrieve.
      * @return The quizDto object representing the retrieved quiz.
      * @throws NotFoundException If the user's email domain is invalid.
@@ -107,7 +104,6 @@ public class QuizController {
 
     /**
      * Retrieves a list of all quizzes.
-     * 
      * @return A list of quizDto objects representing all quizzes.
      */
     @GetMapping
@@ -131,6 +127,6 @@ public class QuizController {
                 "Received a request to get all question by quizId :" + quizId);
         List<QuestionDto> questions = quizService.getAllQuestionByQuiz(quizId);
         LOGGER.info("List of Questions Retrived Successfully.");
-        return new ResponseEntity<>(questions,HttpStatus.OK);
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

@@ -89,7 +89,6 @@ public class QuizServiceImpl implements QuizService {
 
     /**
      * Updates a quiz.
-     * 
      * @param quizId  The ID of the quiz.
      * @param quizDTO The DTO containing updated quiz information.
      * @return The updated String.
@@ -182,7 +181,7 @@ public class QuizServiceImpl implements QuizService {
      * @param quiz The quiz entity to convert.
      * @return The converted QuizDTO.
      */
-    private QuizDTO convertToDTO(final Quiz quiz) {
+    QuizDTO convertToDTO(final Quiz quiz) {
         QuizDTO quizDTO = modelMapper.map(quiz, QuizDTO.class);
         if (quiz.getCategory() != null) {
             CategoryDto categoryDto = modelMapper.map(quiz.getCategory(),
@@ -198,7 +197,7 @@ public class QuizServiceImpl implements QuizService {
      * @param quizDTO The quizDTO to convert.
      * @return The converted quiz entity.
      */
-    private Quiz convertToEntity(final QuizDTO quizDTO) {
+    Quiz convertToEntity(final QuizDTO quizDTO) {
         Quiz quiz = modelMapper.map(quizDTO, Quiz.class);
         if (quizDTO.getCategory() != null) {
             Category category = modelMapper.map(quizDTO.getCategory(),

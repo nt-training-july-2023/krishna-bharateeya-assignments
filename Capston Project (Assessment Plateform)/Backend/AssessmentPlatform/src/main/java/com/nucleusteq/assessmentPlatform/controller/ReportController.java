@@ -41,7 +41,6 @@ public class ReportController {
 
     /**
      * Adds a new quiz.
-     * 
      * @param reportDto The reportDto object containing report information.
      * @return A message indicating the result of the report addition.
      */
@@ -51,28 +50,27 @@ public class ReportController {
         LOGGER.info("Request received to generate the new Report.");
         String result = reportService.createReport(reportDto);
         LOGGER.info("Report Generated Successfully.");
-        return new ResponseEntity<>(result,HttpStatus.CREATED);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     /**
      * Retrieves a list of all reports.
-     * 
      * @param email The email to belongs report information.
      * @return A list of reportDto objects representing all reports.
      */
     @GetMapping("/{email}")
     public final ResponseEntity<List<ReportDto>> findByEmailId(
             @PathVariable final String email) {
-        LOGGER.info("Request received to find the Reports by Email Id:{}"+email);
+        LOGGER.info(
+                "Request received to find the Reports by Email Id:{}" + email);
         List<ReportDto> reportDto = reportService.findReportByEmailId(email);
         LOGGER.info("Reports retrived Successfully.");
-        return new ResponseEntity<>(reportDto,HttpStatus.OK);
+        return new ResponseEntity<>(reportDto, HttpStatus.OK);
 
     }
 
     /**
      * Retrieves a list of all reports.
-     * 
      * @return A list of reportDto objects representing all reports.
      */
     @GetMapping("/all")
@@ -80,6 +78,6 @@ public class ReportController {
         LOGGER.info("Received a request for Get all user.");
         List<ReportDto> reportDtos = reportService.getAllReport();
         LOGGER.info("All Reports retrived Successfully.");
-        return new ResponseEntity<>(reportDtos,HttpStatus.OK);
+        return new ResponseEntity<>(reportDtos, HttpStatus.OK);
     }
 }

@@ -158,7 +158,7 @@ const Registration = () => {
             passwordError ||
             confirmPasswordError
         ) {
-            console.log('Please fix validation errors before submitting.');
+            toast.error('Please enter correct information before submitting.');
             return;
         }
 
@@ -174,7 +174,6 @@ const Registration = () => {
             const response = await RegistrationService(userData);
             toast.success(response);
             navigate('/');
-            console.log('Registration successful!', response);
         } catch (error) {
             toast.error(error.response?.data);
         }

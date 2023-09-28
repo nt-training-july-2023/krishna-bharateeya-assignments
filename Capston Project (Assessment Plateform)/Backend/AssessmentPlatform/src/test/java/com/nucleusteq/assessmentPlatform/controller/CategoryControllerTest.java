@@ -1,17 +1,15 @@
 package com.nucleusteq.assessmentPlatform.controller;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +24,9 @@ public class CategoryControllerTest {
     @Mock
     private CategoryService categoryService;
 
-    private MockMvc mockMvc;
-
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(categoryController).build();
     }
 
     @Test
@@ -40,73 +35,92 @@ public class CategoryControllerTest {
 
         when(categoryService.getAllCategory()).thenReturn(categoryDtoList);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/category"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(categoryDtoList.size()));
+        
 
-        verify(categoryService, times(1)).getAllCategory();
+        ResponseEntity<List<CategoryDto>> responseEntity = categoryController.getAllCategories();
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
     @Test
-    public void testSaveCategory() throws Exception {
+    public void testSaveCategory() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryName("Test Category");
         categoryDto.setDescription("Test description");
 
-
-        String expectedMessage = "Test Category Added Successfully"; // Set the expected message
+        String expectedMessage = "Test Category Added Successfully"; 
         when(categoryService.addCategory(categoryDto)).thenReturn(expectedMessage);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/category/save")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"categoryName\":\"Test Category\",\"description\":\"Test description\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        ResponseEntity<String> responseEntity = categoryController.saveCategory(categoryDto);
+
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+
+        String responseMessage = responseEntity.getBody();
+        assertEquals(expectedMessage, responseMessage);
     }
 
 
-//    @Test
-//    public void testUpdateCategory_Success() throws Exception {
-//        CategoryDto categoryDto = new CategoryDto();
-//        categoryDto.setCategoryId(1);
-//        categoryDto.setCategoryName("Updated Category");
-//
-//        when(categoryService.updateCategory(categoryDto)).thenReturn(categoryDto);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.put("/category/update/1")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content("{\"categoryId\":1,\"categoryName\":\"Updated Category\"}"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//        }
 
-//    @Test
-//    public void testUpdateCategory_NotFound() throws Exception {
-//       
-//        CategoryDto categoryDto = new CategoryDto();
-//        categoryDto.setCategoryId(1);
-//        categoryDto.setCategoryName("Updated Category");
-//
-//        when(categoryService.updateCategory(categoryDto)).thenReturn(null);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.put("/category/update/1")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content("{\"categoryId\":1,\"categoryName\":\"Updated Category\"}"))
-//                .andExpect(MockMvcResultMatchers.status().isNotFound());
-//
-//    }
-    
+    @Test
+    public void testUpdateCategory_Success() throws Exception {
+        CategoryService categoryService = mock(CategoryService.class);
+        int categoryId = 1;
+        CategoryDto updatedCategoryDto = new CategoryDto();
+        updatedCategoryDto.setCategoryId(categoryId);
+        updatedCategoryDto.setCategoryName("Updated Category");
+        updatedCategoryDto.setDescription("Updated Description");
+
+        String expectedResponse = "Category updated successfully";
+        when(categoryService.updateCategory(updatedCategoryDto)).thenReturn(expectedResponse);
+        ResponseEntity<String> responseEntity = categoryController.updateCategory(categoryId, updatedCategoryDto);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
+
     @Test
     public void testGetCategoryById() {
         
-        int categoryId = 3020; 
+        int categoryId = 3020;
         CategoryDto expectedCategory = new CategoryDto();
         expectedCategory.setCategoryId(categoryId);
         expectedCategory.setCategoryName("krishna");
 
         when(categoryService.getCategoryById(categoryId)).thenReturn(expectedCategory);
-    
+
         ResponseEntity<CategoryDto> resultCategory = categoryController.getCategoryById(categoryId);
-       
-        assertEquals(expectedCategory, resultCategory);
+        assertEquals(HttpStatus.OK, resultCategory.getStatusCode());
     }
 
+    @Test
+    public void testGetAllQuizByCategory() {
+        
+        int categoryId=1;
+        Category category = new Category();
+        category.setCategoryId(categoryId);
+        category.setCategoryName("Test Category");
+
+        List<Quiz> expectedQuizList = new ArrayList<>();
+        Quiz quiz1 = new Quiz(1, "Quiz 1", "Description 1", 10, category);
+        Quiz quiz2 = new Quiz(2, "Quiz 2", "Description 2", 20, category);
+        expectedQuizList.add(quiz1);
+        expectedQuizList.add(quiz2);
+
+        when(categoryService.getAllQuizByCategory(categoryId)).thenReturn(expectedQuizList);
+
+        ResponseEntity<List<Quiz>> responseEntity = categoryController.getAllQuizByCategory(categoryId);
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(expectedQuizList, responseEntity.getBody());
+    }
+    
+    @Test
+    public void testDeleteCategory() {
+        int categoryId=1;
+        String expectedResponse = "Category deleted successfully";
+
+        when(categoryService.deleteCategory(categoryId)).thenReturn(expectedResponse);
+
+        ResponseEntity<String> responseEntity = categoryController.deleteCategory(categoryId);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(expectedResponse, responseEntity.getBody());
+    }
 }

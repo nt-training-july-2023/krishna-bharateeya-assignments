@@ -19,6 +19,7 @@ import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
 
 /**
@@ -33,12 +34,19 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Autowired
     private QuestionRepository questionRepository;
-
+    /**
+     * this is use to call the quiz repository object.
+     */
+    @Autowired
+    private QuizRepository quizRepository;
+    /**
+     * Creating a instance of Logger Class.
+     */
     private static final Logger LOGGER = LoggerFactory
             .getLogger(QuestionServiceImpl.class);
+
     /**
      * Adds a new question to the assessment platform.
-     * 
      * @param questionDto The DTO (Data Transfer Object).
      * @return A message indicating the success of the operation.
      */
@@ -53,16 +61,21 @@ public class QuestionServiceImpl implements QuestionService {
                 && !checkCorrectAnswer.equals(resQue.getOptionThree())
                 && !checkCorrectAnswer.equals(resQue.getOptionFour())) {
             LOGGER.error("Correct Answer Not Match with any options.");
-            throw new ResourceNotFoundException("Correct Answer Not Match with any options.");
+            throw new ResourceNotFoundException(
+                    "Correct Answer Not Match with any options.");
         }
-
+        Optional<Quiz> existingQuiz = quizRepository
+                .findById(resQue.getQuiz().getQuizId());
+        if (existingQuiz.isEmpty()) {
+            throw new ResourceNotFoundException("Quiz with id:"
+                    + resQue.getQuiz().getQuizId() + " doesnot exists");
+        }
         questionRepository.save(resQue);
         return "Question added successfully";
     }
 
     /**
      * Updates an existing question in the assessment platform.
-     *
      * @param questionId  The ID of the question to be updated.
      * @param questionDto The DTO containing the updated question data.
      * @return A message indicating the success of the operation.
@@ -84,9 +97,11 @@ public class QuestionServiceImpl implements QuestionService {
         if (!checkCorrectAnswer.equals(updatedQuestion.getOptionOne())
                 && !checkCorrectAnswer.equals(updatedQuestion.getOptionTwo())
                 && !checkCorrectAnswer.equals(updatedQuestion.getOptionThree())
-                && !checkCorrectAnswer.equals(updatedQuestion.getOptionFour())) {
+                && !checkCorrectAnswer
+                        .equals(updatedQuestion.getOptionFour())) {
             LOGGER.error("Correct Answer Not Match with any options.");
-            throw new ResourceNotFoundException("Correct Answer Not Match with any options.");
+            throw new ResourceNotFoundException(
+                    "Correct Answer Not Match with any options.");
         }
         updatedQuestion.setQuestionId(questionId);
         questionRepository.save(updatedQuestion);
@@ -95,7 +110,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * Deletes a question from the assessment platform.
-     *
      * @param questionId The ID of the question to be deleted.
      * @throws NotFoundException if the specified question is not found.
      */
@@ -110,12 +124,11 @@ public class QuestionServiceImpl implements QuestionService {
                     "Question with not found with Id :" + questionId);
         }
         questionRepository.delete(optionalQuestion.get());
-        return "Question Deleted Successfully with id : "+questionId;
+        return "Question Deleted Successfully with id : " + questionId;
     }
 
     /**
      * Retrieves a question by its unique ID.
-     *
      * @param questionId The ID of the question to be retrieved.
      * @return The DTO representing the retrieved question.
      * @throws NotFoundException if the specified question is not found.
@@ -138,7 +151,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * Retrieves all questions available in the assessment platform.
-     *
      * @return A list of DTOs representing all available questions.
      */
     @Override
@@ -151,7 +163,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * @param questionDto The object to be converted.
-     *
      * @return the converted into question entity.
      */
     private Question convertDtoToEntity(final QuestionDto questionDto) {
@@ -186,7 +197,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * @param question The object to be converted.
-     *
      * @return the converted into QuestionDto entity.
      */
     private QuestionDto convertEntityToDto(final Question question) {

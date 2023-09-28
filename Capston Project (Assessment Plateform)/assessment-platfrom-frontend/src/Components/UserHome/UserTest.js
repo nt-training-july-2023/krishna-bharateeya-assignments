@@ -28,7 +28,6 @@ const UserTest = () => {
 
     useEffect(() => {
         loadQuestionsData();
-        showUserInformation();
     }, [quizId]);
 
     useEffect(() => {
@@ -107,7 +106,7 @@ const UserTest = () => {
     const getUserDetails = async () => {
 
         const data = await GetUserByEmail(email);
-        setUserName(data.firstName + data.lastName);
+        setUserName(data.firstName+" "+ data.lastName);
         setUserEmailId(data.email)
     };
 
@@ -143,6 +142,9 @@ const UserTest = () => {
             const totalAttemptedQuestions = (Object.keys(selectedAnswers).length);
             const wrongAnswers = totalAttemptedQuestions - marksObtained;
 
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const time = new Date().toLocaleString('en-US', options);
+            
             const payload = {
                 userName,
                 userEmailId,
@@ -153,7 +155,7 @@ const UserTest = () => {
                 wrongAnswers,
                 totalQuestions,
                 attemptedQuestions: totalAttemptedQuestions,
-                dateAndTime: new Date().toLocaleString(),
+                dateAndTime: time,
             };
 
             const result = await CreateReport(payload);
@@ -166,37 +168,6 @@ const UserTest = () => {
         }
     };
 
-
-
-    const showUserInformation = () => {
-        Swal.fire({
-            title: `Information & Instructions`,
-            width: 900,
-            padding: '3em',
-            background: '#f5f5f5',
-            color: 'black',
-            backdrop: `
-            rgba(0,0,123,0.4)
-            left top
-            no-repeat
-          `,
-
-            html: `
-            <div style="text-align: left; font-family:sans-serif ;line-height: 1.6">
-            
-              <ul>
-              <li>Please do not reload  the page.</li>
-              <li>The examination will comprise of Objective type Multiple Choice Questions.</li>
-              <li>The duration of examination, will be different based on the course.</li>
-              <li>There will be <Strong>NO NEGATIVE MARKING</Strong> for the wrong answers.</li>
-              <li>The Time remaining is shown in the Right Top Corner of the screen.</li>
-              <li>Mark your answers before the deadline.</li>
-              </ul>
-              
-            </div>
-          `
-        });
-    }
     if (userRole !== 'user') {
         return <UnauthorizedAccess />;
     }

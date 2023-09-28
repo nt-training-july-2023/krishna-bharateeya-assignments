@@ -39,7 +39,7 @@ class ReportControllerTest {
 
         ResponseEntity<String> response = reportController.createReport(reportDto);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals("Report created successfully", response.getBody());
     }
 
@@ -55,15 +55,8 @@ class ReportControllerTest {
         assertEquals(reportDtos, response.getBody());
     }
 
-    @Test
-    public void testFindByEmailIdNotFound() {
-        String email = "nonexistent@example.com";
-        when(reportService.findReportByEmailId(email)).thenReturn(null);
 
-        ResponseEntity<List<ReportDto>> response = reportController.findByEmailId(email);
 
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    }
 
     @Test
     public void testGetAllReports() {

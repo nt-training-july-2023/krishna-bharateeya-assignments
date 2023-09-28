@@ -39,7 +39,7 @@ public class QuizDTO {
     /**
      * The time of the quiz.
      */
-    @Min(value = 1,message = "Time will be minimum 1 minute.")
+    @Min(value = 1, message = "Time will be minimum 1 minute.")
     private int timeInMinutes;
 
     /**

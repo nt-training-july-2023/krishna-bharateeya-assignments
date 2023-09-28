@@ -33,17 +33,14 @@ public interface QuestionService {
 
     /**
      * Deletes a quiz.
-     *
      * @param questionId The ID of the question to delete.
-     * @return 
+     * @return a successful message.
      * @throws NotFoundException If the quizId is invalid.
      */
-
     String deleteQuestion(Integer questionId) throws NotFoundException;
 
     /**
      * Retrieves a quiz by its ID.
-     *
      * @param questionId The ID of the question to retrieve.
      * @return The retrieved questionDto.
      * @throws NotFoundException If the quizId is invalid.
@@ -52,7 +49,6 @@ public interface QuestionService {
 
     /**
      * Retrieves all questions.
-     *
      * @return A list of all questions.
      */
     List<QuestionDto> getAllQuestion();

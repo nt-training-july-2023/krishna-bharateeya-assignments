@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
-import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 
@@ -47,7 +46,6 @@ public class RegistrationController {
 
     /**
      * Registers a new user.
-     * 
      * @param user The RegistrationDto object containing user information.
      * @return A message indicating the result of the user registration.
      * @throws UserEmailDomainException If the user's email domain is invalid.
@@ -58,7 +56,7 @@ public class RegistrationController {
         LOGGER.info("Received a request to save a new user.");
         String response = registrationService.addUser(user);
         LOGGER.info("User Registration Successful.");
-        return new ResponseEntity<>(response,HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     /**
@@ -77,12 +75,11 @@ public class RegistrationController {
         Map<String, String> response = registrationService.loginUser(user);
         LOGGER.info("User {} logged in successfully.", user.getEmail());
 
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
      * Retrieves a user by their ID.
-     * 
      * @param userId The ID of the user to retrieve.
      * @return The RegistrationDto object representing the retrieved user.
      * @throws UserNotFoundException If the user with the specified ID is not
@@ -95,28 +92,27 @@ public class RegistrationController {
         RegistrationDto registrationDto = this.registrationService
                 .getUserById(userId);
         LOGGER.info("User {} found successfully.", userId);
-        return new ResponseEntity<>(registrationDto,HttpStatus.OK);
+        return new ResponseEntity<>(registrationDto, HttpStatus.OK);
     }
 
     /**
      * Retrieves all user.
-     * 
      * @return The RegistrationDto object representing the retrieved user.
-     *         found.
+     * found.
      */
     @GetMapping("/get/all")
     public final ResponseEntity<List<RegistrationDto>> getAllUsers() {
         LOGGER.info("Received a request for Get all user.");
-        return new ResponseEntity<>(registrationService.getAllRegistrations(),HttpStatus.OK);
+        return new ResponseEntity<>(registrationService.getAllRegistrations(),
+                HttpStatus.OK);
     }
 
     /**
      * Retrieves a user by their ID.
-     * 
      * @param email The ID of the user to retrieve.
      * @return The RegistrationDto object representing the retrieved user.
      * @throws UserNotFoundException If the user with the specified ID is not
-     *                               found.
+     * found.
      */
     @GetMapping("/getUser/{email}")
     public final ResponseEntity<RegistrationDto> getUserByEmail(
@@ -125,6 +121,6 @@ public class RegistrationController {
         LOGGER.info("Received a request for Get all user.");
         RegistrationDto registrationDto = this.registrationService
                 .getUserByEmail(email);
-        return new ResponseEntity<>(registrationDto,HttpStatus.OK);
+        return new ResponseEntity<>(registrationDto, HttpStatus.OK);
     }
 }

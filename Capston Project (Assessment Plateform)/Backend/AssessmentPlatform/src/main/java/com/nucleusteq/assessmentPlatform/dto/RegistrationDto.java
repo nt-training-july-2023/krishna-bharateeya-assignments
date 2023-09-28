@@ -2,7 +2,6 @@ package com.nucleusteq.assessmentPlatform.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,7 +37,8 @@ public class RegistrationDto {
      * The mobile number of the user.
      */
     @NotBlank(message = "Mobile Number cannot be empty.")
-    @Pattern(regexp="^\\d{10}$",message="Mobile Number should be only 10 digit.")
+    @Pattern(regexp = "^\\d{10}$",
+    message = "Mobile Number should be only 10 digit.")
     private String mobileNumber;
 
     /**
