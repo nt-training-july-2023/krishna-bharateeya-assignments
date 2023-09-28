@@ -1,5 +1,8 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +13,7 @@ import lombok.Setter;
 /**
  * Data Transfer Object (DTO) class representing a quiz.
  */
+@Validated
 @Setter
 @Getter
 @NoArgsConstructor
@@ -42,6 +46,7 @@ public class QuizDTO {
      * The category belong to quiz.
      */
     @NotNull(message = "Category Object cannot be empty.")
+    @Valid
     private CategoryDto category;
 
     /**

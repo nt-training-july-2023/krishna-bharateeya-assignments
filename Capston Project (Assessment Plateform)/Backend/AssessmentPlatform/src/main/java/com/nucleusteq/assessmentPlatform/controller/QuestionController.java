@@ -2,6 +2,8 @@ package com.nucleusteq.assessmentPlatform.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -38,14 +40,21 @@ public class QuestionController {
     private QuestionService questionService;
 
     /**
+     * this is logger object that is use to generate log.
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(QuestionController.class);
+    /**
      * Adds a new question to the assessment platform.
      * @param questionDto The DTO representing the question to be added.
      * @return A ResponseEntity with a success and HTTP status 201 (Created).
      */
     @PostMapping("/add")
     public final ResponseEntity<String> addQuestion(
-            @Valid @RequestBody final QuestionDto questionDto) {
+            @RequestBody @Valid final QuestionDto questionDto) {
+        LOGGER.info("Received a request to Create a new question.");
         String result = questionService.addQuestion(questionDto);
+        LOGGER.info("Question Created Successfully.");
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -61,7 +70,9 @@ public class QuestionController {
             @PathVariable final Integer questionId,
             @Valid @RequestBody final QuestionDto questionDto)
             throws NotFoundException {
+        LOGGER.info("Received a request to Create a new question.");
         String result = questionService.updateQuestion(questionId, questionDto);
+        LOGGER.info("Question Updated Successfully.");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -73,10 +84,12 @@ public class QuestionController {
      * @throws NotFoundException if the specified question is not found.
      */
     @DeleteMapping("/delete/{questionId}")
-    public final ResponseEntity<Void> deleteQuestion(
+    public final ResponseEntity<String> deleteQuestion(
             @PathVariable final Integer questionId) throws NotFoundException {
-        questionService.deleteQuestion(questionId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        LOGGER.info("Received a request to Delete a question with id :{}"+questionId);
+        String response=questionService.deleteQuestion(questionId);
+        LOGGER.info("Question deleted Successfully.");
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     /**
@@ -89,7 +102,9 @@ public class QuestionController {
     @GetMapping("/{questionId}")
     public final ResponseEntity<QuestionDto> getQuestionById(
             @PathVariable final Integer questionId) throws NotFoundException {
+        LOGGER.info("Received Request to get question by QuestionId :{}"+questionId);
         QuestionDto questionDto = questionService.getQuestionById(questionId);
+        LOGGER.info("Question Retrived Successfully.");
         return new ResponseEntity<>(questionDto, HttpStatus.OK);
     }
 
@@ -100,6 +115,7 @@ public class QuestionController {
      */
     @GetMapping("/all")
     public final ResponseEntity<List<QuestionDto>> getAllQuestions() {
+        LOGGER.info("Retriveing all Questions.");
         List<QuestionDto> questions = questionService.getAllQuestion();
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }

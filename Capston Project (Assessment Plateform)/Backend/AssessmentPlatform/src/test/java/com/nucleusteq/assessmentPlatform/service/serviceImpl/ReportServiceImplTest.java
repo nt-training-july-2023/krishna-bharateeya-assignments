@@ -54,14 +54,16 @@ class ReportServiceImplTest {
 
     @Test
     public void testFindReportByEmailId() {
-        String email = "krishna@nucleusteq.com";
-        List<Report> reports = new ArrayList<>(); 
+        String email = "piyush@nucleusteq.com";
+        List<Report> reports = new ArrayList<>();
+        
+        // Create some sample Report objects if needed and add them to the 'reports' list
+        
         List<ReportDto> reportDtos = reports.stream()
-                .map(report -> modelMapper.map(report, ReportDto.class))
+                .map(this::convertIntoDto) // Use the convertIntoDto method
                 .collect(Collectors.toList());
 
         when(reportRepository.findByUserEmailId(email)).thenReturn(reports);
-        when(modelMapper.map(any(Report.class), eq(ReportDto.class))).thenReturn(new ReportDto());
 
         List<ReportDto> result = reportService.findReportByEmailId(email);
 
@@ -69,6 +71,10 @@ class ReportServiceImplTest {
         assertEquals(reportDtos, result);
     }
 
+    public ReportDto convertIntoDto(Report report) {
+        return modelMapper.map(report, ReportDto.class);
+    }
+ 
     @Test
     public void testGetAllReport() {
         List<Report> reports = new ArrayList<>();

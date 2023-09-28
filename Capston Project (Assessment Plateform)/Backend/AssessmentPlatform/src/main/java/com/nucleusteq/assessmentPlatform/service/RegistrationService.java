@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
+import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 
@@ -22,8 +23,7 @@ public interface RegistrationService {
      * @return A message indicating the result of the operation.
      * @throws UserEmailDomainException If the user's email domain is invalid.
      */
-    String addUser(RegistrationDto registrationDto)
-            throws UserEmailDomainException;
+    String addUser(RegistrationDto registrationDto);
 
     /**
      * Retrieves a user registration by its ID.
@@ -46,10 +46,10 @@ public interface RegistrationService {
      *
      * @param inputRegistrationDto The DTO containing login information.
      * @return A map containing authentication response.
+     * @throws LoginFailedException 
      * @throws UserNotFoundException If the user is not found.
      */
-    Map<String, String> loginUser(LoginRequestDto inputRegistrationDto)
-            throws UserNotFoundException;
+    Map<String, String> loginUser(LoginRequestDto inputRegistrationDto) throws LoginFailedException, UserNotFoundException;
 
     /**
      * Retrieves a user registration by its ID.

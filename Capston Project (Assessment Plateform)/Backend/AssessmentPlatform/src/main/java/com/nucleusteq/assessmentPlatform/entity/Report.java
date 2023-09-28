@@ -69,7 +69,7 @@ public class Report {
      */
     @Column(nullable = false)
     @NotNull(message = "Total Marks cannot be empty.")
-    private int totalMarks;
+    private Integer totalMarks;
 
     /**
      * marks obtained in quiz attribute.

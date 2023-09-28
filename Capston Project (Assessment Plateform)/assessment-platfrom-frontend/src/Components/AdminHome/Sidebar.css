@@ -89,13 +89,13 @@
   gap: 0px;
   
 }
-.open{
-  margin-top: 293px; 
+/* .open{
+  margin-top: 120%; 
 }
 .closed{
   margin-top: 373px; 
-  /* padding: 20px 20px; */
-}
+  
+} */
 
 .sidebar-logout-button a:hover{
   background-color: #cc0000;

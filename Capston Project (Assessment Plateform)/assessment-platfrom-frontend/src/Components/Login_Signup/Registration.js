@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-// import { ApiService } from '../../ApiService/ApiService';
-// import {Registration} from  '../../ApiService/ApiService'
 import { RegistrationService } from '../../ApiService/ApiService';
 const Registration = () => {
     const [firstName, setFirstName] = useState('');
@@ -178,7 +176,7 @@ const Registration = () => {
             navigate('/');
             console.log('Registration successful!', response);
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data);
         }
     };
 

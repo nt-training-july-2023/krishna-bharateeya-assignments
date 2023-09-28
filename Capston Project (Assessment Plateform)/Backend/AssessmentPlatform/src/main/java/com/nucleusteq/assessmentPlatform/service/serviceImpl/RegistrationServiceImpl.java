@@ -16,10 +16,15 @@ import com.nucleusteq.assessmentPlatform.entity.Registration;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Implementation of the RegistrationService interface for managing user
@@ -41,6 +46,16 @@ public class RegistrationServiceImpl implements RegistrationService {
      */
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    /**
+     * Creating a instance of Logger Class.
+     */
+    /**
+     * Creating a instance of Logger Class.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory
+                    .getLogger(RegistrationServiceImpl.class);
 
     /**
      * Converts a RegistrationDto to a Registration entity.
@@ -98,6 +113,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             Optional<Registration> existingUserByMobile = registrationRepository
                     .findByMobileNumber(registrationDto.getMobileNumber());
             if (existingUserByMobile.isPresent()) {
+                LOGGER.error("Mobile number already exists");
                 throw new DuplicateMobileNumberException(
                         "Mobile number already exists");
             }
@@ -105,6 +121,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             Optional<Registration> existingUserByEmail = registrationRepository
                     .findByEmail(registrationDto.getEmail());
             if (existingUserByEmail.isPresent()) {
+                LOGGER.error("Email address already exists");
                 throw new DuplicateEmailException(
                         "Email address already exists");
             }
@@ -161,14 +178,17 @@ public class RegistrationServiceImpl implements RegistrationService {
                 response.put("email", foundRegistration.getEmail());
                 response.put("role", foundRegistration.getUserRole());
             } else {
+                LOGGER.error("Login failed. Please check your credentials.");
                 throw new LoginFailedException(
                         "Login failed. Please check your credentials.");
             }
           } else {
+              LOGGER.error("Login failed. Please check your credentials.");
             throw new LoginFailedException(
                     "Login failed. Please check your credentials.");
           }
         } else {
+            LOGGER.error("User Does Not Exist.");
             throw new UserNotFoundException("User Does Not Exist");
         }
 
@@ -180,14 +200,17 @@ public class RegistrationServiceImpl implements RegistrationService {
      *
      * @param userId The ID of the user to retrieve.
      * @return The RegistrationDto representing the user.
-     * @throws UserNotFoundException If the user is not found.
+     * @throws UserNotFoundException 
      */
     @Override
-    public final RegistrationDto getUserById(final int userId)
-            throws UserNotFoundException {
+    public final RegistrationDto getUserById(final int userId) throws UserNotFoundException {
         Registration registration = this.registrationRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(
-                        "User not found with ID: " + userId));
+                .orElse(null);
+
+        if (registration == null) {
+            LOGGER.error("User not found with ID {}"+userId);
+            throw new UserNotFoundException("User not found with ID: " + userId);
+        }
         return registrationToDto(registration);
     }
 
@@ -201,7 +224,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public final RegistrationDto getUserByEmail(final String email)
             throws UserNotFoundException {
+        Optional<Registration> user = registrationRepository.findByEmail(email);
 
+        if (!user.isPresent()) {
+            LOGGER.error("User not found with email {}"+email);
+            throw new ResourceNotFoundException("User not found for Email :" + email);
+        }
         Registration foundRegistration = registrationRepository
                 .getByEmail(email);
         return registrationToDto(foundRegistration);

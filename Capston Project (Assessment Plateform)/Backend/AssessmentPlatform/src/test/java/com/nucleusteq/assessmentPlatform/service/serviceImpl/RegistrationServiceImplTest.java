@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
@@ -143,7 +144,7 @@ class RegistrationServiceImplTest {
 
     @Test
     public void testLoginUser_WrongPassword() {
-        RegistrationDto inputDto = new RegistrationDto();
+        LoginRequestDto inputDto = new LoginRequestDto();
         inputDto.setEmail("test@example.com");
         inputDto.setPassword("wrongPassword");
 
@@ -160,7 +161,7 @@ class RegistrationServiceImplTest {
 
     @Test
     public void testLoginUser_UserNotFound() {
-        RegistrationDto inputDto = new RegistrationDto();
+        LoginRequestDto inputDto = new LoginRequestDto();
         inputDto.setEmail("test@example.com");
         inputDto.setPassword("password");
         when(registrationRepository.getByEmail(anyString())).thenReturn(null);

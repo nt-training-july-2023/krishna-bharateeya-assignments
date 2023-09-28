@@ -105,7 +105,7 @@ class QuestionControllerTest {
         Integer questionId = 1;
         doNothing().when(service).deleteQuestion(eq(questionId));
 
-        ResponseEntity<Void> response = questionController.deleteQuestion(questionId);
+        ResponseEntity<String> response = questionController.deleteQuestion(questionId);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }

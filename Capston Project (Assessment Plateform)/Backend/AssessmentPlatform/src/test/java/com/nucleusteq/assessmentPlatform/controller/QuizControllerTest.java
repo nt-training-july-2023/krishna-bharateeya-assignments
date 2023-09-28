@@ -27,6 +27,9 @@ public class QuizControllerTest {
     @MockBean
     private QuizService quizService;
 
+    @MockBean
+    private QuizController quizController;
+    
     @Mock
     private QuizDTO sampleQuizDTO;
 
@@ -81,7 +84,7 @@ public class QuizControllerTest {
         QuizService quizService = mock(QuizService.class); 
         when(quizService.getQuizById(quizId)).thenReturn(quizDto);
 
-        QuizController quizController = new QuizController(quizService); 
+//        QuizController quizController = new QuizController(quizService); 
 
         ResponseEntity<QuizDTO> result = quizController.getQuizById(quizId);
 
@@ -98,7 +101,7 @@ public class QuizControllerTest {
         QuizService quizService = mock(QuizService.class); 
         when(quizService.getAllQuizzes()).thenReturn(quizDTOList);
 
-        QuizController quizController = new QuizController(quizService); 
+//        QuizController quizController = new QuizController(quizService); 
 
         ResponseEntity<List<QuizDTO>> result = quizController.getAllQuizzes();
 

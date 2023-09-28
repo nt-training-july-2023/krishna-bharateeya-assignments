@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 import java.util.Collections;
@@ -53,7 +55,7 @@ public class RegistrationControllerTest {
     public void testLoginUser() throws Exception {
         Map<String, String> authResponse = new HashMap<>();
         authResponse.put("message", "Login successful");
-        when(registrationService.loginUser(any(RegistrationDto.class))).thenReturn(authResponse);
+        when(registrationService.loginUser(any(LoginRequestDto.class))).thenReturn(authResponse);
         
         mockMvc.perform(post("/users/login")
                 .contentType(MediaType.APPLICATION_JSON)

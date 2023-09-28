@@ -2,7 +2,11 @@ package com.nucleusteq.assessmentPlatform.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +39,11 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
+     * this is logger object that is use to generate log.
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(CategoryController.class);
+    /**
      * Adds a new category.
      *
      * @param categoryDto The CategoryDto object containing category
@@ -42,9 +51,11 @@ public class CategoryController {
      * @return A message indicating the result of the category addition.
      */
     @PostMapping(path = "/save")
-    public final String saveUser(@Valid @RequestBody final CategoryDto categoryDto) {
-
-        return categoryService.addCategory(categoryDto);
+    public final ResponseEntity<String> saveCategory(@Valid @RequestBody final CategoryDto categoryDto) {
+        LOGGER.info("Received a request to save a new category.");
+        String response= categoryService.addCategory(categoryDto);
+        LOGGER.info("Category Created Successfully.");
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     /**
@@ -53,9 +64,11 @@ public class CategoryController {
      * @return A list of CategoryDto objects representing all categories.
      */
     @GetMapping
-    public final List<CategoryDto> getAllCategories() {
+    public final ResponseEntity<List<CategoryDto>> getAllCategories() {
+        LOGGER.info("Received a request to get all category.");
         List<CategoryDto> categoryes = categoryService.getAllCategory();
-        return categoryes;
+        LOGGER.info("All category Retrived successfully.");
+        return new ResponseEntity<>(categoryes,HttpStatus.OK);
     }
 
     /**
@@ -65,9 +78,12 @@ public class CategoryController {
      * @return The CategoryDto object representing the retrieved category.
      */
     @GetMapping("quizzes/{categoryId}")
-    public final List<Quiz> getAllQuizByCategory(
+    public final ResponseEntity<List<Quiz>> getAllQuizByCategory(
             @PathVariable final int categoryId) {
-        return categoryService.getAllQuizByCategory(categoryId);
+        LOGGER.info("Received a request to get all quiz by Category Id {}"+categoryId);
+        List<Quiz> quiz= categoryService.getAllQuizByCategory(categoryId);
+        LOGGER.info("All Category Retrived Successfully.");
+        return new ResponseEntity<>(quiz,HttpStatus.OK);
     }
 
     /**
@@ -77,8 +93,11 @@ public class CategoryController {
      * @return The CategoryDto object representing the retrieved category.
      */
     @GetMapping("/{id}")
-    public final CategoryDto getCategoryById(@PathVariable final int id) {
-        return categoryService.getCategoryById(id);
+    public final ResponseEntity<CategoryDto> getCategoryById(@PathVariable final int id) {
+        LOGGER.info("Received a request to get Category by Id {}"+id);
+        CategoryDto category= categoryService.getCategoryById(id);
+        LOGGER.info("Category Retrived Successfully.");
+        return new ResponseEntity<>(category,HttpStatus.OK);
     }
 
     /**
@@ -89,10 +108,14 @@ public class CategoryController {
      * @return The updated CategoryDto object.
      */
     @PutMapping("update/{categoryId}")
-    public final String updateCategory(@PathVariable final int categoryId,
+    public final ResponseEntity<String> updateCategory(@PathVariable final int categoryId,
            @Valid @RequestBody final CategoryDto category) {
+        LOGGER.info("Received a request to update Category for Id {}"+categoryId);
         category.setCategoryId(categoryId);
-        return categoryService.updateCategory(category);
+        String response= categoryService.updateCategory(category);
+        LOGGER.info("Category Updated Successfully.");
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     /**
@@ -102,7 +125,10 @@ public class CategoryController {
      * @return A message indicating the result of the category deletion.
      */
     @DeleteMapping("delete/{categoryId}")
-    public final String deleteCategory(@PathVariable final int categoryId) {
-        return categoryService.deleteCategory(categoryId);
+    public final ResponseEntity<String> deleteCategory(@PathVariable final int categoryId) {
+        LOGGER.info("Received a request to delete Category for Id {}"+categoryId);
+        String response= categoryService.deleteCategory(categoryId);
+        LOGGER.info("Category Deleted Successfully.");
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

@@ -1,11 +1,15 @@
 package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
+
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
@@ -49,11 +53,17 @@ public class CategoryServiceImplTest {
         assertEquals("Test Category Added Successfully", resultMessage);
     }
 
+    
     @Test
     public void testAddCategory_NullCategoryDto() {
+        Logger mockLogger = Mockito.mock(Logger.class);
+        when(LoggerFactory.getLogger(CategoryServiceImpl.class)).thenReturn(mockLogger);
+
         String resultMessage = categoryService.addCategory(null);
-        assertEquals("Please Enter all the field", resultMessage);
+        verify(mockLogger).error("CategoryDto is null.");
+        assertEquals("CategoryDto is null. Please provide valid input.", resultMessage);
     }
+
 
     @Test
     public void testGetCategoryById_Success() {

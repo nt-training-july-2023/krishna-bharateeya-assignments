@@ -35,10 +35,11 @@ public interface QuestionService {
      * Deletes a quiz.
      *
      * @param questionId The ID of the question to delete.
+     * @return 
      * @throws NotFoundException If the quizId is invalid.
      */
 
-    void deleteQuestion(Integer questionId) throws NotFoundException;
+    String deleteQuestion(Integer questionId) throws NotFoundException;
 
     /**
      * Retrieves a quiz by its ID.
