@@ -22,6 +22,7 @@ const AdminHome = () => {
     toast.success("Logout successful");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('email');
     navigate("/");
   };
 

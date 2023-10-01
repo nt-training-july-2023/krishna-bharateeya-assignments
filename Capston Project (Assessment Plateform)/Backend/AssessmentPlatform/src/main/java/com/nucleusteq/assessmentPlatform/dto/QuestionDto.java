@@ -1,7 +1,14 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+
+
+import org.springframework.validation.annotation.Validated;
+
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +18,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@Validated
 public class QuestionDto {
 
     /**
@@ -21,17 +29,21 @@ public class QuestionDto {
     /**
      * The text of the question.
      */
+    @NotBlank(message = "Question Text cannot be empty.")
     private String questionText;
 
     /**
      * The answer options for the question.
      */
+    @NotNull(message = "Question Text cannot be empty.")
+    @Valid
     private QuestionOptions options;
 
     /**
      * Gets the answer options for the question.
      * @return The answer options for the question.
      */
+//    @NotNull(message = "Question Options Object cannot be empty.")
     public final QuestionOptions getOptions() {
         return new QuestionOptions(
                 options.getOptionOne(),
@@ -59,6 +71,7 @@ public class QuestionDto {
     /**
      * The quiz to which the quiz belongs.
      */
+    @NotNull(message = "Quiz Options Object cannot be empty.")
     private QuizDTO quiz;
 
     /**

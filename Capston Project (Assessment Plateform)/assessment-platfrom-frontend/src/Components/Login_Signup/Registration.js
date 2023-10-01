@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-// import { ApiService } from '../../ApiService/ApiService';
-// import {Registration} from  '../../ApiService/ApiService'
 import { RegistrationService } from '../../ApiService/ApiService';
 const Registration = () => {
     const [firstName, setFirstName] = useState('');
@@ -160,7 +158,7 @@ const Registration = () => {
             passwordError ||
             confirmPasswordError
         ) {
-            console.log('Please fix validation errors before submitting.');
+            toast.error('Please enter correct information before submitting.');
             return;
         }
 
@@ -176,9 +174,8 @@ const Registration = () => {
             const response = await RegistrationService(userData);
             toast.success(response);
             navigate('/');
-            console.log('Registration successful!', response);
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data);
         }
     };
 

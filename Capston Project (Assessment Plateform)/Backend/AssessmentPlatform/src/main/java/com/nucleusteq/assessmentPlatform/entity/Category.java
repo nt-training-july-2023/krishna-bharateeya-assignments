@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,11 +44,14 @@ public class Category {
      * The name of the category.
      */
     @Column(nullable = false)
+    @NotBlank(message = "Category Name cannot be empty.")
     private String categoryName;
 
     /**
      * The description of the category.
      */
+    @Column(nullable = false)
+    @NotBlank(message = "Description cannot be empty.")
     private String description;
     /**
      * The quizzes map with category.

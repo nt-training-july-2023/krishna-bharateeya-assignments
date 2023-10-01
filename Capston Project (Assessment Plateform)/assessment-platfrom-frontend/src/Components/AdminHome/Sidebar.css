@@ -31,8 +31,14 @@
   padding: 20px 15px;
 }
 
-.logo {
-  font-size: 20px;
+.home-logo {
+  display: block;
+  width: 55px; 
+  height: auto;
+}
+
+.home-logo[style*="display: none"] {
+  display: none;
 }
 
 .bars {
@@ -64,6 +70,38 @@
   color: #000;
 }
 
+.sidebar-logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+.sidebar-logout-button a {
+  flex-direction: column;
+  align-items: center;
+  background-color: #ED0800;
+  color: white;
+  text-decoration: none;
+  padding: 4px 45px;
+  gap: 0px;
+  
+}
+
+
+.sidebar-logout-button a:hover{
+  background-color: #cc0000;
+  color: white;
+}
+.sidebar-logout-button .icon {
+  font-size: 24px; 
+}
+
+.logout-button button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
 
 /* Media query for mobile and tablet view */
 @media (max-width: 768px) {

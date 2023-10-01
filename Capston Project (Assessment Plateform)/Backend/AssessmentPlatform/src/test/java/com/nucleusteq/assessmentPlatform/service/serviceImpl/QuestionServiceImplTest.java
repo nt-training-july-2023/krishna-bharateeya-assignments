@@ -23,11 +23,16 @@ import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 
 class QuestionServiceImplTest {
 
     @InjectMocks
     private QuestionServiceImpl questionService;
+    
+    @Mock
+    private QuizRepository quizRepository;
+    
     @Mock
     private QuestionServiceImpl questionService2;
     @Mock
@@ -51,6 +56,9 @@ class QuestionServiceImplTest {
       QuestionOptions options = new QuestionOptions("java", "html", "hindi", "python", "hindi");
       questionDTO.setOptions(options);
       questionDTO.setQuiz(quizDTO);
+
+      
+      when(quizRepository.findById(questionDTO.getQuiz().getQuizId())).thenReturn(Optional.of(new Quiz()));
 
         when(questionRepository.save(any(Question.class))).thenReturn(new Question());
 
@@ -102,7 +110,7 @@ class QuestionServiceImplTest {
 
         when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
 
-        assertThrows(NotFoundException.class, () -> questionService.updateQuestion(questionId, questionDTO));
+        assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.updateQuestion(questionId, questionDTO));
     }
 
 @Test
@@ -122,7 +130,7 @@ public void testDeleteQuestionNotFound() {
 
     when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
 
-    assertThrows(NotFoundException.class, () -> questionService.deleteQuestion(questionId));
+    assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.deleteQuestion(questionId));
 }
 
 @Test
@@ -160,8 +168,9 @@ public void testGetQuestionByIdNotFound() {
 
     when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
 
-    assertThrows(NotFoundException.class, () -> questionService.getQuestionById(questionId));
+    assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.getQuestionById(questionId));
 }
+
 
 @Test
 public void testGetAllQuestion() {

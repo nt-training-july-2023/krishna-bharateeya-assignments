@@ -1,5 +1,6 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,24 +21,14 @@ public class CategoryDto {
     /**
      * The name of the category.
      */
+    @NotBlank(message = "Category Name cannot be empty.")
     private String categoryName;
 
     /**
      * The description of the category.
      */
+    @NotBlank(message = "Description Name cannot be empty.")
     private String description;
-
-    /**
-     * Copy constructor for the CategoryDto class.
-     *
-     * @param category The CategoryDto object to create a copy from.
-     */
-//    public CategoryDto(final CategoryDto category) {
-//        this.categoryId = category.categoryId;
-//        this.categoryName = category.categoryName;
-//        this.description = category.description;
-//    }
-
 
     /**
      * Copy constructor for the CategoryDto class.

@@ -60,8 +60,9 @@ const Login = () => {
                 email,
                 password
             });
-            localStorage.setItem('IsLoggedIn', response.data.status);
+            localStorage.setItem('IsLoggedIn', true);
             localStorage.setItem('userRole', response.data.role);
+            localStorage.setItem('email', response.data.email);
             
             if (response.data.role === 'admin') {
                 navigate('/adminHome');
@@ -70,10 +71,8 @@ const Login = () => {
             }
     
             toast.success(response.data.message);
-            console.log('Login successful!', response.data);
-        } catch (error) {
-            toast.error(error.response.data.message);
-            console.error('Login failed:', error);
+        } catch (error) { 
+            toast.error(error.response?.data);
         }
     };
     

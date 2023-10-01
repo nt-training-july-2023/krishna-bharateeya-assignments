@@ -1,5 +1,11 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +13,7 @@ import lombok.Setter;
 /**
  * Data Transfer Object (DTO) class representing a quiz.
  */
+@Validated
 @Setter
 @Getter
 @NoArgsConstructor
@@ -20,21 +27,26 @@ public class QuizDTO {
     /**
      * The name of the quiz.
      */
+    @NotBlank(message = "Quiz Name cannot be empty.")
     private String quizName;
 
     /**
      * The Description of the quiz.
      */
+    @NotBlank(message = "Quiz Description cannot be empty.")
     private String quizDescription;
 
     /**
      * The time of the quiz.
      */
+    @Min(value = 1, message = "Time will be minimum 1 minute.")
     private int timeInMinutes;
 
     /**
      * The category belong to quiz.
      */
+    @NotNull(message = "Category Object cannot be empty.")
+    @Valid
     private CategoryDto category;
 
     /**

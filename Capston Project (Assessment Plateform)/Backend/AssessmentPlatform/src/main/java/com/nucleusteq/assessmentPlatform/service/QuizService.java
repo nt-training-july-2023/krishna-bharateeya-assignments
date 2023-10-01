@@ -6,7 +6,6 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 
 /**
  * Service interface for managing quizzes.
@@ -15,7 +14,6 @@ public interface QuizService {
 
     /**
      * Adds a new quiz.
-     *
      * @param quizDTO The DTO containing quiz information.
      * @return A message indicating the result of the operation.
      */
@@ -23,15 +21,14 @@ public interface QuizService {
 
     /**
      * Deletes a quiz.
-     *
      * @param quizId The ID of the quiz to delete.
+     * @return response to in string format.
      * @throws NotFoundException If the quizId is invalid.
      */
-    void deleteQuiz(Integer quizId) throws NotFoundException;
+    String deleteQuiz(Integer quizId) throws NotFoundException;
 
     /**
      * Retrieves a quiz by its ID.
-     *
      * @param quizId The ID of the quiz to retrieve.
      * @return The retrieved quizDto.
      * @throws NotFoundException If the quizId is invalid.

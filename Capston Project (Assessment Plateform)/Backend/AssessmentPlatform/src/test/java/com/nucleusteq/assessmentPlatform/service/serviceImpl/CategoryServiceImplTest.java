@@ -7,9 +7,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
+
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +33,10 @@ public class CategoryServiceImplTest {
 
     @InjectMocks
     private CategoryServiceImpl categoryService;
-
+    
+    @Mock
+    private QuizRepository quizRepository;
+    
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
@@ -47,12 +55,6 @@ public class CategoryServiceImplTest {
 
         String resultMessage = categoryService.addCategory(categoryDto);
         assertEquals("Test Category Added Successfully", resultMessage);
-    }
-
-    @Test
-    public void testAddCategory_NullCategoryDto() {
-        String resultMessage = categoryService.addCategory(null);
-        assertEquals("Please Enter all the field", resultMessage);
     }
 
     @Test
@@ -103,37 +105,37 @@ public class CategoryServiceImplTest {
         assertEquals(dto2, result.get(1));
     }
 
-//    @Test
-//    public void testUpdateCategory_Success() {
-//        CategoryDto categoryDto = new CategoryDto();
-//        categoryDto.setCategoryId(1);
-//        categoryDto.setCategoryName("Updated Category");
-//
-//        Category existingCategory = new Category();
-//        existingCategory.setCategoryId(1);
-//        existingCategory.setCategoryName("Original Category");
-//
-//        Category updatedCategory = new Category();
-//        updatedCategory.setCategoryId(1);
-//        updatedCategory.setCategoryName("Updated Category");
-//
-//        when(categoryRepository.findById(1)).thenReturn(Optional.of(existingCategory));
-//        when(modelMapper.map(categoryDto, Category.class)).thenReturn(updatedCategory);
-//        when(categoryRepository.save(updatedCategory)).thenReturn(updatedCategory);
-//
-//        CategoryDto resultDto = categoryService.updateCategory(categoryDto);
-//        assertEquals(categoryDto, resultDto);
-//    }
+    @Test
+    public void testUpdateCategory_Success() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("Updated Category");
 
-//    @Test
-//    public void testUpdateCategory_CategoryNotFound() {
-//        CategoryDto categoryDto = new CategoryDto();
-//        categoryDto.setCategoryId(100);
-//
-//        when(categoryRepository.findById(1)).thenReturn(Optional.empty());
-//
-//        assertThrows(ResourceNotFoundException.class, () -> categoryService.updateCategory(categoryDto));
-//    }
+        Category existingCategory = new Category();
+        existingCategory.setCategoryId(1);
+        existingCategory.setCategoryName("Original Category");
+
+        Category updatedCategory = new Category();
+        updatedCategory.setCategoryId(1);
+        updatedCategory.setCategoryName("Updated Category");
+
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(existingCategory));
+        when(modelMapper.map(categoryDto, Category.class)).thenReturn(updatedCategory);
+        when(categoryRepository.save(updatedCategory)).thenReturn(updatedCategory);
+
+        String result = categoryService.updateCategory(categoryDto);
+        assertEquals(result, categoryDto.getCategoryName() + " Updated Successfully");
+    }
+
+    @Test
+    public void testUpdateCategory_CategoryNotFound() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(100);
+
+        when(categoryRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> categoryService.updateCategory(categoryDto));
+    }
 
     @Test
     public void testDeleteCategory() {
@@ -148,4 +150,61 @@ public class CategoryServiceImplTest {
         assertEquals("Category Deletd Successfully", resultMessage);
     }
 
+    @Test
+    public void testGetAllQuizByCategory() {
+        int categoryId = 1;
+        List<Quiz> expectedQuizzes = new ArrayList<>();
+        expectedQuizzes.add(new Quiz());
+        expectedQuizzes.add(new Quiz());
+        expectedQuizzes.add(new Quiz());
+
+        when(quizRepository.findByCategory(any(Category.class))).thenReturn(expectedQuizzes);
+        List<Quiz> resultQuizzes = categoryService.getAllQuizByCategory(categoryId);
+        verify(quizRepository, times(1)).findByCategory(any(Category.class));
+        assertEquals(expectedQuizzes, resultQuizzes);
+    }
+    
+    @Test
+    public void testAddCategory_CategoryAlreadyExists() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("ExistingCategory");
+        categoryDto.setDescription("description");
+
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+        
+        when(categoryRepository.findByCategoryName("ExistingCategory")).thenReturn(Optional.of(category));
+        when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
+
+        assertThrows(AlreadyExistsException.class, () -> {
+            categoryService.addCategory(categoryDto);
+        });
+    }
+    
+    @Test
+    public void testUpdateCategory_CategoryAlreadyExists() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("ExistingCategory");
+        categoryDto.setDescription("description");
+
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+        Category existingCategory = new Category();
+        existingCategory.setCategoryId(1);
+        existingCategory.setCategoryName("Category Existing");
+        existingCategory.setDescription(categoryDto.getDescription());
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(existingCategory));
+        when(categoryRepository.findByCategoryName("ExistingCategory")).thenReturn(Optional.of(category));
+        when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
+
+        assertThrows(AlreadyExistsException.class, () -> {
+            categoryService.updateCategory(categoryDto);
+        });
+    }
 }

@@ -1,12 +1,8 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.nucleusteq.assessmentPlatform.entity.Category;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 
 class QuestionDtoTest {

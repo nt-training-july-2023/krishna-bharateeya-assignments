@@ -2,7 +2,6 @@ package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -43,45 +42,47 @@ class QuizServiceImplTest {
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
+        
     }
-
     @Test
     public void testAddQuiz() {
-        QuizDTO quizDTO = new QuizDTO();
-        quizDTO.setQuizName("Sample Quiz");
-        quizDTO.setQuizDescription("description");
-        
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryId(2021);
         categoryDto.setCategoryName("cat1");
         categoryDto.setDescription("cat desc");
-        quizDTO.setCategory(categoryDto);
         
         Category category = new Category();
-        category.setCategoryId(categoryDto.getCategoryId());
-        category.setCategoryName(categoryDto.getCategoryName());
-        category.setDescription(categoryDto.getDescription());
+        category.setCategoryId(2021);
+        category.setCategoryName("cat1");
+        category.setDescription("cat desc");
         
-        Quiz quiz = new Quiz();
-        quiz.setQuizName(quizDTO.getQuizName());
-        quiz.setQuizDescription(quizDTO.getQuizDescription());
-        quiz.setCategory(category); 
-        
-        when(quizRepository.findByQuizName(anyString())).thenReturn(Optional.empty());
-        when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
-        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(1);
+        quizDto.setQuizName("Sample Quiz");
+        quizDto.setCategory(categoryDto);
 
-//        String result = quizService.addQuiz(quizDTO);
-//        assertEquals("Quiz added successfully", result);
-//        verify(quizRepository).save(quiz);
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(1);
+        quiz.setQuizName("Sample Quiz");
+        when(categoryRepository.findById(2021)).thenReturn(Optional.of(category));
+        when(modelMapper.map(quizDto, Quiz.class)).thenReturn(quiz);
+        when(modelMapper.map(quiz, QuizDTO.class)).thenReturn(quizDto);
+        when(quizRepository.findByQuizName(quiz.getQuizName())).thenReturn(Optional.empty());
+        when(quizRepository.save(any(Quiz.class))).thenAnswer(invocation -> {
+            Quiz savedQuiz = invocation.getArgument(0);
+            return savedQuiz;
+        });
+
+        String resultQuizDto = quizService.addQuiz(quizDto);
+        assertNotNull(resultQuizDto);
     }
+
 
     @Test
     void testUpdateQuiz() throws NotFoundException {
         Integer quizId = 4028;
 
-        Optional<Quiz> optionalQuiz = Optional.of(new Quiz());
-        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
+      
 
         when(quizRepository.save(any())).thenReturn(new Quiz());
 
@@ -94,7 +95,6 @@ class QuizServiceImplTest {
         category.setCategoryId(categoryDto.getCategoryId());
         category.setCategoryName(categoryDto.getCategoryName());
         category.setDescription(categoryDto.getDescription());
-
         when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
 
         QuizDTO quizDTO = new QuizDTO();
@@ -103,7 +103,17 @@ class QuizServiceImplTest {
         quizDTO.setQuizDescription("this is description");
         quizDTO.setTimeInMinutes(60);
         quizDTO.setCategory(categoryDto);
-
+        
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(quizId);
+        quiz.setQuizName("Sample Quiz");
+        quiz.setQuizDescription("this is description");
+        quiz.setTimeInMinutes(60);
+        quiz.setCategory(category);
+        
+        Optional<Quiz> optionalQuiz = Optional.of(quiz);
+        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
+        when(modelMapper.map(quizDTO, Quiz.class)).thenReturn(quiz);
         String resultDTO = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
 
         assertNotNull(resultDTO);        
@@ -157,11 +167,11 @@ class QuizServiceImplTest {
         when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
         
 //        QuizDTO resultQuiz = quizService.getQuizById(quizId);
-//
+
 //        assertNotNull(resultQuiz);
 //        assertEquals(quizId, resultQuiz.getQuizId());
 //        assertEquals("Sample Quiz", resultQuiz.getQuizName());
-//        verify(quizRepository).findById(quizId);
+
     }
 
     @Test
@@ -205,4 +215,27 @@ class QuizServiceImplTest {
         assertEquals(quiz.getQuizName(), resultQuizDTO.getQuizName());
         assertNotNull(resultQuizDTO.getCategory());
     }
+ 
+    @Test
+    public void testConvertQuizEntityToDTO() {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("ExistingCategory");
+        categoryDto.setDescription("description");
+
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+
+        Quiz sampleQuiz = new Quiz();
+        sampleQuiz.setQuizId(1);
+        sampleQuiz.setQuizName("Sample Quiz");
+        sampleQuiz.setCategory(category);
+        when(modelMapper.map(sampleQuiz, QuizDTO.class)).thenReturn(
+                new QuizDTO(1, "Sample Quiz", "Sample Quiz Description", 60, categoryDto));
+        when(modelMapper.map(category, CategoryDto.class)).thenReturn(categoryDto);
+    }
+
+
 }

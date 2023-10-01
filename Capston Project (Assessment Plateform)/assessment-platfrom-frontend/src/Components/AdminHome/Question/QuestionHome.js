@@ -10,9 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 const QuestionHome = () => {
 
   const { quizId } = useParams();
-
   const [questions, setQuestions] = useState([]);
-
   useEffect(() => {
     loadQuestionsData();
   }, [quizId]);
@@ -59,13 +57,17 @@ const QuestionHome = () => {
     }
   };
 
+  const handleOptionChange = (index, selectedOption) => {
+    setUserAnswers({
+      ...userAnswers,
+      [index]: selectedOption,
+    });
+  };
+
   const userRole = localStorage.getItem('userRole');
   if (userRole !== 'admin') {
-    return (
-      <UnauthorizedAccess />
-    );
+    return <UnauthorizedAccess />;
   }
-
   return (
     <div className='question-wrapper'>
       <div className='question-container'>
@@ -75,10 +77,12 @@ const QuestionHome = () => {
         <div className='question-column'>
           <div className='question-main-card'>
             <div className='question-card-header-main'>
+
               <h3>Question Home</h3>
               <center>
-                <Link className='add-question-button' to={"/add-question"}>Add Question</Link>
+                <Link className='add-question-button' to={quizId ? `/add-question/${quizId}` : '/add-question'}>Add Question</Link>
               </center>
+
             </div>
             <div className="question-card-body">
               <div className="question-table-wrapper">
@@ -115,15 +119,20 @@ const QuestionHome = () => {
 
                           <p><strong>Correct Option:</strong> {question.options.correctOption}</p>
                           <p>Category: {question.quiz.category.categoryName}</p>
+
                         </div>
                         <div className="question-card-footer">
+
                           <Link className="update-question-button" to={`/update-question/${question.questionId}`}>Update Question</Link>
                           <button className="delete-question-button" onClick={() => confirmDelete(question.questionId)}>Delete Question</button>
+
+
                         </div>
                       </div>
                     ))}
                   </tbody>
                 </table>
+
               </div>
             </div>
           </div>

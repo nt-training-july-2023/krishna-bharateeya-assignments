@@ -16,7 +16,7 @@ public class AssessmentPlatformApplication {
      *
      * @param args Command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(AssessmentPlatformApplication.class, args);
     }
 

@@ -16,6 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,21 +49,21 @@ public class Quiz {
      * The name of the quiz.
      */
     @Column(nullable = false)
+    @NotBlank(message = "Quiz Name cannot be empty.")
     private String quizName;
 
     /**
      * The Description of the quiz .
      */
     @Column(nullable = false)
+    @NotBlank(message = "Quiz Description cannot be empty.")
     private String quizDescription;
-
-    /**
-     * The category to which the quiz belongs.
-     */
 
     /**
      * The time of the Quiz.
      */
+    @Column(nullable = false)
+    @Min(value = 1, message = "Time will be minimum 1 minute.")
     private int timeInMinutes;
 
     /**
@@ -108,8 +110,12 @@ public class Quiz {
      * @param cate cate.
      */
     public final void setCategory(final Category cate) {
-        this.category = new Category(cate.getCategoryId(),
-                cate.getCategoryName(), cate.getDescription());
+        if (cate != null) {
+          this.category = new Category(cate.getCategoryId(),
+            cate.getCategoryName(), cate.getDescription());
+        } else {
+            this.category = null;
+        }
     }
     /**
      * Constructs a new Quiz object with the specified parameters.

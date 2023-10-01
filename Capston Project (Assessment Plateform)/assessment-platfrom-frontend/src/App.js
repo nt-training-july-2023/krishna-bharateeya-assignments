@@ -6,16 +6,15 @@ import UserHome from './Components/UserHome/UserHome';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategoryHome from './Components/Category/CategoryHome';
-import Quiz from './Components/Quiz/Quiz';
-
-import Report from './Components/Report/Report';
+import TestReport from './Components/Report/TestReport';
 
 
 import AddOrUpdateCategory from './Components/Category/AddOrUpdateCategory';
 import AddOrUpdateQuiz from './Components/Quiz/AddOrUpdateQuiz';
-import Question from './Components/AdminHome/Question/QuestionHome';
 import QuestionHome from './Components/AdminHome/Question/QuestionHome';
 import AddOrUpdateQuestion from './Components/AdminHome/Question/AddOrUpdateQuestion';
+import QuizHome from './Components/Quiz/QuizHome';
+import UserTest from './Components/UserHome/UserTest';
 
 
 function App() {
@@ -49,23 +48,28 @@ function App() {
 
          
           <Route exact path="/categoryHome" element={<PrivateRoute Component={CategoryHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
-          
+                    <Route exact path="/question/:quizId" element={<PrivateRoute Component={QuestionHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+
           <Route exact path="/addCategory" element={<PrivateRoute Component={AddOrUpdateCategory} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/updateCategory/:categoryId" element={<PrivateRoute Component={AddOrUpdateCategory} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
 
          
-          <Route exact path="/quiz" element={<PrivateRoute Component={Quiz} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
-          
+          <Route exact path="/quiz" element={<PrivateRoute Component={QuizHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/quiz/:categoryId" element={<PrivateRoute Component={QuizHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+
           <Route exact path="/add-quiz" element={<PrivateRoute Component={AddOrUpdateQuiz} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/add-quiz/:categoryId" element={<PrivateRoute Component={AddOrUpdateQuiz} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/update-quiz/:quizId" element={<PrivateRoute Component={AddOrUpdateQuiz} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
           <Route exact path="/question" element={<PrivateRoute Component={QuestionHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/question/:quizId" element={<PrivateRoute Component={QuestionHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/add-question" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/add-question/:quizId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/update-question/:questionId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
+          <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
-          <Route exact path="/report" element={<PrivateRoute Component={Report} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/report" element={<PrivateRoute Component={TestReport} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
         </Routes>
       </Router>

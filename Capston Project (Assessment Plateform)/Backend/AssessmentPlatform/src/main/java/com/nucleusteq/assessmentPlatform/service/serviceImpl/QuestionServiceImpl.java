@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,9 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
+import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
 
 /**
@@ -30,6 +34,16 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Autowired
     private QuestionRepository questionRepository;
+    /**
+     * this is use to call the quiz repository object.
+     */
+    @Autowired
+    private QuizRepository quizRepository;
+    /**
+     * Creating a instance of Logger Class.
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(QuestionServiceImpl.class);
 
     /**
      * Adds a new question to the assessment platform.
@@ -40,13 +54,28 @@ public class QuestionServiceImpl implements QuestionService {
     public final String addQuestion(final QuestionDto questionDto) {
 
         Question resQue = convertDtoToEntity(questionDto);
+
+        String checkCorrectAnswer = resQue.getCorrectOption();
+        if (!checkCorrectAnswer.equals(resQue.getOptionOne())
+                && !checkCorrectAnswer.equals(resQue.getOptionTwo())
+                && !checkCorrectAnswer.equals(resQue.getOptionThree())
+                && !checkCorrectAnswer.equals(resQue.getOptionFour())) {
+            LOGGER.error("Correct Answer Not Match with any options.");
+            throw new ResourceNotFoundException(
+                    "Correct Answer Not Match with any options.");
+        }
+        Optional<Quiz> existingQuiz = quizRepository
+                .findById(resQue.getQuiz().getQuizId());
+        if (existingQuiz.isEmpty()) {
+            throw new ResourceNotFoundException("Quiz with id:"
+                    + resQue.getQuiz().getQuizId() + " doesnot exists");
+        }
         questionRepository.save(resQue);
         return "Question added successfully";
     }
 
     /**
      * Updates an existing question in the assessment platform.
-     *
      * @param questionId  The ID of the question to be updated.
      * @param questionDto The DTO containing the updated question data.
      * @return A message indicating the success of the operation.
@@ -57,38 +86,49 @@ public class QuestionServiceImpl implements QuestionService {
             final QuestionDto questionDto) throws NotFoundException {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
-        if (optionalQuestion.isPresent()) {
-
-            Question convertedQuestion = convertDtoToEntity(questionDto);
-            convertedQuestion.setQuestionId(questionId);
-            questionRepository.save(convertedQuestion);
-            return "Question updated successfully";
-        } else {
-            throw new NotFoundException();
+        if (!optionalQuestion.isPresent()) {
+            LOGGER.error("Question with not found with Id :" + questionId);
+            throw new ResourceNotFoundException(
+                    "Question with not found with Id :" + questionId);
         }
+
+        Question updatedQuestion = convertDtoToEntity(questionDto);
+        String checkCorrectAnswer = updatedQuestion.getCorrectOption();
+        if (!checkCorrectAnswer.equals(updatedQuestion.getOptionOne())
+                && !checkCorrectAnswer.equals(updatedQuestion.getOptionTwo())
+                && !checkCorrectAnswer.equals(updatedQuestion.getOptionThree())
+                && !checkCorrectAnswer
+                        .equals(updatedQuestion.getOptionFour())) {
+            LOGGER.error("Correct Answer Not Match with any options.");
+            throw new ResourceNotFoundException(
+                    "Correct Answer Not Match with any options.");
+        }
+        updatedQuestion.setQuestionId(questionId);
+        questionRepository.save(updatedQuestion);
+        return "Question updated successfully";
     }
 
     /**
      * Deletes a question from the assessment platform.
-     *
      * @param questionId The ID of the question to be deleted.
      * @throws NotFoundException if the specified question is not found.
      */
     @Override
-    public final void deleteQuestion(final Integer questionId)
+    public final String deleteQuestion(final Integer questionId)
             throws NotFoundException {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
-        if (optionalQuestion.isPresent()) {
-            questionRepository.delete(optionalQuestion.get());
-        } else {
-            throw new NotFoundException();
+        if (!optionalQuestion.isPresent()) {
+            LOGGER.error("Question with not found with Id :" + questionId);
+            throw new ResourceNotFoundException(
+                    "Question with not found with Id :" + questionId);
         }
+        questionRepository.delete(optionalQuestion.get());
+        return "Question Deleted Successfully with id : " + questionId;
     }
 
     /**
      * Retrieves a question by its unique ID.
-     *
      * @param questionId The ID of the question to be retrieved.
      * @return The DTO representing the retrieved question.
      * @throws NotFoundException if the specified question is not found.
@@ -98,19 +138,19 @@ public class QuestionServiceImpl implements QuestionService {
             throws NotFoundException {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
-        if (optionalQuestion.isPresent()) {
-            Question question = optionalQuestion.get();
-
-            QuestionDto resultQueDto = convertEntityToDto(question);
-            return resultQueDto;
-        } else {
-            throw new NotFoundException();
+        if (!optionalQuestion.isPresent()) {
+            LOGGER.error("Question with not found with Id :" + questionId);
+            throw new ResourceNotFoundException(
+                    "Question with not found with Id :" + questionId);
         }
+        Question question = optionalQuestion.get();
+        QuestionDto resultQueDto = convertEntityToDto(question);
+        return resultQueDto;
+
     }
 
     /**
      * Retrieves all questions available in the assessment platform.
-     *
      * @return A list of DTOs representing all available questions.
      */
     @Override
@@ -123,7 +163,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * @param questionDto The object to be converted.
-     *
      * @return the converted into question entity.
      */
     private Question convertDtoToEntity(final QuestionDto questionDto) {
@@ -158,20 +197,15 @@ public class QuestionServiceImpl implements QuestionService {
 
     /**
      * @param question The object to be converted.
-     *
      * @return the converted into QuestionDto entity.
      */
     private QuestionDto convertEntityToDto(final Question question) {
-        
         QuestionDto questionDto = new QuestionDto();
         questionDto.setQuestionId(question.getQuestionId());
         questionDto.setQuestionText(question.getQuestionText());
-        QuestionOptions options = new QuestionOptions(
-                question.getOptionOne(),
-                question.getOptionTwo(),
-                question.getOptionThree(),
-                question.getOptionFour(),
-                question.getCorrectOption());
+        QuestionOptions options = new QuestionOptions(question.getOptionOne(),
+                question.getOptionTwo(), question.getOptionThree(),
+                question.getOptionFour(), question.getCorrectOption());
         questionDto.setOptions(options);
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryId(
