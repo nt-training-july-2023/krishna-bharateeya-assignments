@@ -3,6 +3,8 @@ import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class CategoryControllerTest {
@@ -47,16 +50,16 @@ public class CategoryControllerTest {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryName("Test Category");
         categoryDto.setDescription("Test description");
+ 
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Category created successfully.");
 
-        String expectedMessage = "Test Category Added Successfully"; 
-        when(categoryService.addCategory(categoryDto)).thenReturn(expectedMessage);
+        when(categoryService.addCategory(categoryDto)).thenReturn(successResponse);
 
-        ResponseEntity<String> responseEntity = categoryController.saveCategory(categoryDto);
+        ResponseEntity<SuccessResponse> response = categoryController.saveCategory(categoryDto);
 
-        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-
-        String responseMessage = responseEntity.getBody();
-        assertEquals(expectedMessage, responseMessage);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(successResponse, response.getBody());
     }
 
 
@@ -70,10 +73,14 @@ public class CategoryControllerTest {
         updatedCategoryDto.setCategoryName("Updated Category");
         updatedCategoryDto.setDescription("Updated Description");
 
-        String expectedResponse = "Category updated successfully";
-        when(categoryService.updateCategory(updatedCategoryDto)).thenReturn(expectedResponse);
-        ResponseEntity<String> responseEntity = categoryController.updateCategory(categoryId, updatedCategoryDto);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(),"Category updated successfully.");
+
+        when(categoryService.updateCategory(updatedCategoryDto)).thenReturn(successResponse);
+
+        ResponseEntity<SuccessResponse> response = categoryController.updateCategory(categoryId, updatedCategoryDto);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
@@ -115,12 +122,17 @@ public class CategoryControllerTest {
     @Test
     public void testDeleteCategory() {
         int categoryId=1;
-        String expectedResponse = "Category deleted successfully";
+        
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Category deleted successfully.");
+        
 
-        when(categoryService.deleteCategory(categoryId)).thenReturn(expectedResponse);
+        when(categoryService.deleteCategory(categoryId)).thenReturn(successResponse);
 
-        ResponseEntity<String> responseEntity = categoryController.deleteCategory(categoryId);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(expectedResponse, responseEntity.getBody());
+        ResponseEntity<SuccessResponse> response = categoryController.deleteCategory(categoryId);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(successResponse, response.getBody());
+        
     }
 }

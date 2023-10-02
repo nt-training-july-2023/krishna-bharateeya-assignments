@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
+import com.nucleusteq.assessmentPlatform.utility.QuestionLoggerMessage;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import jakarta.validation.Valid;
 
@@ -51,11 +53,11 @@ public class QuestionController {
      * @return A ResponseEntity with a success and HTTP status 201 (Created).
      */
     @PostMapping("/add")
-    public final ResponseEntity<String> addQuestion(
+    public final ResponseEntity<SuccessResponse> addQuestion(
             @RequestBody @Valid final QuestionDto questionDto) {
-        LOGGER.info("Received a request to Create a new question.");
-        String result = questionService.addQuestion(questionDto);
-        LOGGER.info("Question Created Successfully.");
+        LOGGER.info(QuestionLoggerMessage.ADD_QUESTION_REQUEST);
+        SuccessResponse result = questionService.addQuestion(questionDto);
+        LOGGER.info(QuestionLoggerMessage.QUESTION_CREATED_SUCCESSFULLY);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -67,13 +69,14 @@ public class QuestionController {
      * @throws NotFoundException if the specified question is not found.
      */
     @PutMapping("/update/{questionId}")
-    public final ResponseEntity<String> updateQuestion(
+    public final ResponseEntity<SuccessResponse> updateQuestion(
             @PathVariable final Integer questionId,
             @Valid @RequestBody final QuestionDto questionDto)
             throws NotFoundException {
-        LOGGER.info("Received a request to Create a new question.");
-        String result = questionService.updateQuestion(questionId, questionDto);
-        LOGGER.info("Question Updated Successfully.");
+        LOGGER.info(QuestionLoggerMessage.UPDATE_QUESTION_REQUEST);
+        SuccessResponse result =
+                questionService.updateQuestion(questionId, questionDto);
+        LOGGER.info(QuestionLoggerMessage.QUESTION_UPDATED_SUCCESSFULLY);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -85,12 +88,11 @@ public class QuestionController {
      * @throws NotFoundException if the specified question is not found.
      */
     @DeleteMapping("/delete/{questionId}")
-    public final ResponseEntity<String> deleteQuestion(
+    public final ResponseEntity<SuccessResponse> deleteQuestion(
             @PathVariable final Integer questionId) throws NotFoundException {
-        LOGGER.info("Received a request to Delete a question with id :{}"
-                + questionId);
-        String response = questionService.deleteQuestion(questionId);
-        LOGGER.info("Question deleted Successfully.");
+        LOGGER.info(QuestionLoggerMessage.DELETE_QUESTION_REQUEST + questionId);
+        SuccessResponse response = questionService.deleteQuestion(questionId);
+        LOGGER.info(QuestionLoggerMessage.QUESTION_DELETED_SUCCESSFULLY);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -104,10 +106,10 @@ public class QuestionController {
     @GetMapping("/{questionId}")
     public final ResponseEntity<QuestionDto> getQuestionById(
             @PathVariable final Integer questionId) throws NotFoundException {
-        LOGGER.info("Received Request to get question by QuestionId :{}"
-                + questionId);
+        LOGGER.info(
+                QuestionLoggerMessage.GET_QUESTION_BY_ID_REQUEST + questionId);
         QuestionDto questionDto = questionService.getQuestionById(questionId);
-        LOGGER.info("Question Retrived Successfully.");
+        LOGGER.info(QuestionLoggerMessage.QUESTION_UPDATED_SUCCESSFULLY);
         return new ResponseEntity<>(questionDto, HttpStatus.OK);
     }
 
@@ -118,8 +120,10 @@ public class QuestionController {
      */
     @GetMapping("/all")
     public final ResponseEntity<List<QuestionDto>> getAllQuestions() {
-        LOGGER.info("Retriveing all Questions.");
+        LOGGER.info(QuestionLoggerMessage.GET_ALL_QUESTIONS_REQUEST);
         List<QuestionDto> questions = questionService.getAllQuestion();
+        LOGGER.info(
+              QuestionLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

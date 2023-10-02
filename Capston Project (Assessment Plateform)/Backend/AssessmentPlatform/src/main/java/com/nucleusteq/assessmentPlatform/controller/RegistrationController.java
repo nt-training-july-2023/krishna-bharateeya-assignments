@@ -20,6 +20,8 @@ import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
+import com.nucleusteq.assessmentPlatform.utility.RegistrationLoggerMessage;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import jakarta.validation.Valid;
 
@@ -51,11 +53,11 @@ public class RegistrationController {
      * @throws UserEmailDomainException If the user's email domain is invalid.
      */
     @PostMapping(path = "/save")
-    public final ResponseEntity<String> saveUser(
+    public final ResponseEntity<SuccessResponse> saveUser(
             @Valid @RequestBody final RegistrationDto user) {
-        LOGGER.info("Received a request to save a new user.");
-        String response = registrationService.addUser(user);
-        LOGGER.info("User Registration Successful.");
+        LOGGER.info(RegistrationLoggerMessage.SAVE_USER);
+        SuccessResponse response = registrationService.addUser(user);
+        LOGGER.info(RegistrationLoggerMessage.REGISTERED_SUCCESSFULLY);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -70,10 +72,11 @@ public class RegistrationController {
     public final ResponseEntity<Map<String, String>> loginUser(
             @Valid @RequestBody final LoginRequestDto user)
             throws UserNotFoundException {
-        LOGGER.info("Received a login request for user: {}", user.getEmail());
+        LOGGER.info(RegistrationLoggerMessage.LOGIN_REQUEST, user.getEmail());
 
         Map<String, String> response = registrationService.loginUser(user);
-        LOGGER.info("User {} logged in successfully.", user.getEmail());
+      LOGGER.info(
+      RegistrationLoggerMessage.USER_LOGGED_IN_SUCCESSFULLY, user.getEmail());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -88,10 +91,10 @@ public class RegistrationController {
     @GetMapping("/get/{id}")
     public final ResponseEntity<RegistrationDto> getUserById(
             @PathVariable("id") final int userId) throws UserNotFoundException {
-        LOGGER.info("Received a request for user id: {}", userId);
+        LOGGER.info(RegistrationLoggerMessage.USER_ID_REQUEST, userId);
         RegistrationDto registrationDto = this.registrationService
                 .getUserById(userId);
-        LOGGER.info("User {} found successfully.", userId);
+        LOGGER.info(RegistrationLoggerMessage.USER_FOUND_SUCCESSFULLY, userId);
         return new ResponseEntity<>(registrationDto, HttpStatus.OK);
     }
 
@@ -102,9 +105,11 @@ public class RegistrationController {
      */
     @GetMapping("/get/all")
     public final ResponseEntity<List<RegistrationDto>> getAllUsers() {
-        LOGGER.info("Received a request for Get all user.");
-        return new ResponseEntity<>(registrationService.getAllRegistrations(),
-                HttpStatus.OK);
+        LOGGER.info(RegistrationLoggerMessage.GET_ALL_USERS);
+        List<RegistrationDto> result =
+                registrationService.getAllRegistrations();
+        LOGGER.info(RegistrationLoggerMessage.GET_ALL_USERS_SUCCESS);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
@@ -118,9 +123,10 @@ public class RegistrationController {
     public final ResponseEntity<RegistrationDto> getUserByEmail(
             @PathVariable("email") final String email)
             throws UserNotFoundException {
-        LOGGER.info("Received a request for Get all user.");
+        LOGGER.info(RegistrationLoggerMessage.USER_BY_EMAIL);
         RegistrationDto registrationDto = this.registrationService
                 .getUserByEmail(email);
+        LOGGER.info(RegistrationLoggerMessage.USER_BY_EMAIL_SUCCESS);
         return new ResponseEntity<>(registrationDto, HttpStatus.OK);
     }
 }

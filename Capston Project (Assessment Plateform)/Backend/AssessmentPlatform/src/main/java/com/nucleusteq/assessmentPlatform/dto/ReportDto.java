@@ -1,5 +1,7 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
+import com.nucleusteq.assessmentPlatform.utility.ValidationMessage;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,59 +26,59 @@ public class ReportDto {
     /**
      *userName name attribute.
     */
-    @NotBlank(message = "User Name cannot be empty.")
+    @NotBlank(message = ValidationMessage.USER_NAME_EMPTY)
     private String userName;
 
     /**
      *userEmailId email attribute.
     */
-    @NotBlank(message = "User Email Id cannot be empty.")
+    @NotBlank(message = ValidationMessage.USER_EMAIL_ID_EMPTY)
     private String userEmailId;
 
     /**
      *category name attribute.
     */
-    @NotBlank(message = "Category Name cannot be empty.")
+    @NotBlank(message = ValidationMessage.REPORT_CATEGORY_NAME_EMPTY)
     private String categoryName;
     /**
      *quiz name attribute.
     */
-    @NotBlank(message = "Quiz Name cannot be empty.")
+    @NotBlank(message = ValidationMessage.REPORT_QUIZ_NAME_EMPTY)
     private String quizName;
 
     /**
      *total marks of quiz attribute.
     */
-    @NotNull(message = "Total Marks cannot be empty.")
+    @NotNull(message = ValidationMessage.TOTAL_MARKS_NULL)
     private int totalMarks;
 
     /**
      *marks obtained in quiz attribute.
     */
-    @NotNull(message = "Obtained Marks cannot be empty.")
+    @NotNull(message = ValidationMessage.MARKS_OBTAINED_NULL)
     private int marksObtained;
 
     /**
      * The count of wrong answers in the assessment.
      */
-    @NotNull(message = "Total Questions Marks cannot be empty.")
+    @NotNull(message = ValidationMessage.WRONG_ANSWERS_NULL)
     private int wrongAnswers;
     /**
      *total questions in quiz attribute.
     */
-    @NotNull(message = "Total Questions Marks cannot be empty.")
+    @NotNull(message = ValidationMessage.TOTAL_QUESTIONS_NULL)
     private int totalQuestions;
 
     /**
      *number of attempted questions attribute.
     */
-    @NotNull(message = "Attempted Questions cannot be empty.")
+    @NotNull(message = ValidationMessage.ATTEMPTED_QUESTIONS_NULL)
     private int attemptedQuestions;
 
     /**
      *date and time attribute.
     */
-    @NotBlank(message = "Date And Time cannot be empty.")
+    @NotBlank(message = ValidationMessage.DATE_AND_TIME_EMPTY)
     private String dateAndTime;
 
 }

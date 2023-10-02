@@ -6,11 +6,14 @@ import com.nucleusteq.assessmentPlatform.entity.Report;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.ReportRepository;
 import com.nucleusteq.assessmentPlatform.service.ReportService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,10 +50,12 @@ public class ReportServiceImpl implements ReportService {
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String createReport(final ReportDto reportDto) {
+    public final SuccessResponse createReport(final ReportDto reportDto) {
         Report report = convertIntoEntity(reportDto);
         reportRepository.save(report);
-        return "Report created successfully.";
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+                Message.REPORT_CREATED_SUCCESSFULLY);
+
     }
 
     /**
@@ -62,9 +67,9 @@ public class ReportServiceImpl implements ReportService {
 
         List<Report> reports = reportRepository.findByUserEmailId(email);
         if (reports.isEmpty()) {
-            LOGGER.error("No reports found with email: {}", email);
+            LOGGER.error(Message.REPORT_NOT_FOUND, email);
             throw new ResourceNotFoundException(
-                    "No reports found with email: " + email);
+                    Message.REPORT_NOT_FOUND + email);
         }
         return reports.stream().map(this::convertIntoDto)
                 .collect(Collectors.toList());

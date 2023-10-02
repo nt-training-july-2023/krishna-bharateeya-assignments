@@ -16,8 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,21 +47,18 @@ public class Quiz {
      * The name of the quiz.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Quiz Name cannot be empty.")
     private String quizName;
 
     /**
      * The Description of the quiz .
      */
     @Column(nullable = false)
-    @NotBlank(message = "Quiz Description cannot be empty.")
     private String quizDescription;
 
     /**
      * The time of the Quiz.
      */
     @Column(nullable = false)
-    @Min(value = 1, message = "Time will be minimum 1 minute.")
     private int timeInMinutes;
 
     /**

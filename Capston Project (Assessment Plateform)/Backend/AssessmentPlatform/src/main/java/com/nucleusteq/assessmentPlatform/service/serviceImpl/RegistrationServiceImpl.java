@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,29 +101,30 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @throws DuplicateEmailException        If the email address is already
      *                                        registered.
      */
-    public final String addUser(final RegistrationDto registrationDto) {
+    public final SuccessResponse addUser(
+            final RegistrationDto registrationDto) {
 
         registrationRepository
                 .findByMobileNumber(registrationDto.getMobileNumber())
                 .ifPresent(existingUser -> {
-                    LOGGER.error("Mobile number already exists");
+                    LOGGER.error(Message.DUPLICATE_MOBILE_NUMBER);
                     throw new DuplicateMobileNumberException(
-                            "Mobile number already exists");
+                            Message.DUPLICATE_MOBILE_NUMBER);
                 });
 
         registrationRepository.findByEmail(registrationDto.getEmail())
                 .ifPresent(existingUser -> {
-                    LOGGER.error("Email address already exists");
+                    LOGGER.error(Message.DUPLICATE_EMAIL);
                     throw new DuplicateEmailException(
-                            "Email address already exists");
+                            Message.DUPLICATE_EMAIL);
                 });
 
         Registration newRegistration = dtoToRegistration(registrationDto);
         newRegistration.setPassword(
                 passwordEncoder.encode(registrationDto.getPassword()));
         registrationRepository.save(newRegistration);
-
-        return registrationDto.getFirstName() + " Registered Successfully";
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+           registrationDto.getFirstName() + Message.REGISTERED_SUCCESSFULLY);
     }
 
     /**
@@ -150,8 +154,8 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .getByEmail(inputRegistrationDto.getEmail());
 
         if (foundRegistration == null) {
-            LOGGER.error("User Does Not Exist.");
-            throw new UserNotFoundException("User Does Not Exist");
+            LOGGER.error(Message.USER_NOT_FOUND);
+            throw new UserNotFoundException(Message.USER_NOT_FOUND);
         }
 
         String password = inputRegistrationDto.getPassword();
@@ -161,13 +165,13 @@ public class RegistrationServiceImpl implements RegistrationService {
                 encodedPassword);
 
         if (isRightPassword) {
-            response.put("message", "Logged successfully.");
+            response.put("message", Message.LOGIN_SUCCESSFULLY);
             response.put("email", foundRegistration.getEmail());
             response.put("role", foundRegistration.getUserRole());
         } else {
-            LOGGER.error("Login failed. Please check your credentials.");
+            LOGGER.error(Message.LOGIN_FAILED);
             throw new LoginFailedException(
-                    "Login failed. Please check your credentials.");
+                    Message.LOGIN_FAILED);
         }
         return response;
     }
@@ -185,9 +189,9 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .orElse(null);
 
         if (registration == null) {
-            LOGGER.error("User not found with ID {}" + userId);
+            LOGGER.error(Message.RESOURCE_NOT_FOUND + userId);
             throw new UserNotFoundException(
-                    "User not found with ID: " + userId);
+                    Message.RESOURCE_NOT_FOUND + userId);
         }
         return registrationToDto(registration);
     }
@@ -208,9 +212,9 @@ public class RegistrationServiceImpl implements RegistrationService {
                     foundRegistration);
             return registrationDto;
         }).orElseThrow(() -> {
-            LOGGER.error("User not found with email {}", email);
+            LOGGER.error(Message.RESOURCE_NOT_FOUND + email);
             return new ResourceNotFoundException(
-                    "User not found for Email :" + email);
+                    Message.RESOURCE_NOT_FOUND + email);
         });
     }
 

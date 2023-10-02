@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
@@ -24,6 +25,7 @@ import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 class QuizServiceImplTest {
 
@@ -73,8 +75,11 @@ class QuizServiceImplTest {
             return savedQuiz;
         });
 
-        String resultQuizDto = quizService.addQuiz(quizDto);
-        assertNotNull(resultQuizDto);
+        SuccessResponse response = quizService.addQuiz(quizDto);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals("Quiz created successfully.", response.getMessage());
+
     }
 
 
@@ -114,9 +119,12 @@ class QuizServiceImplTest {
         Optional<Quiz> optionalQuiz = Optional.of(quiz);
         when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
         when(modelMapper.map(quizDTO, Quiz.class)).thenReturn(quiz);
-        String resultDTO = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
+        SuccessResponse response = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
 
-        assertNotNull(resultDTO);        
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals("Quiz updated successfully.", response.getMessage());
+        
     }
 
 

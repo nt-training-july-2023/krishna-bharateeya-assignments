@@ -18,10 +18,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 
 import com.nucleusteq.assessmentPlatform.dto.ReportDto;
 import com.nucleusteq.assessmentPlatform.entity.Report;
 import com.nucleusteq.assessmentPlatform.repository.ReportRepository;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 class ReportServiceImplTest {
 
@@ -46,11 +48,11 @@ class ReportServiceImplTest {
         Report report = new Report(); 
         when(modelMapper.map(reportDto, Report.class)).thenReturn(report);
 
-        String result = reportService.createReport(reportDto);
+        SuccessResponse response = reportService.createReport(reportDto);
 
-        verify(reportRepository, times(1)).save(report);
-        assertEquals("Report created successfully.", result);
-        assertEquals("Krishna kumar", reportDto.getUserName());
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals("Report created successfully.", response.getMessage());
     }
 
     @Test

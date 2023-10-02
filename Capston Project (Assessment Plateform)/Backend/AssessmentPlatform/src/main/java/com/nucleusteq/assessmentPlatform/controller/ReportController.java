@@ -2,6 +2,8 @@ package com.nucleusteq.assessmentPlatform.controller;
 
 import com.nucleusteq.assessmentPlatform.dto.ReportDto;
 import com.nucleusteq.assessmentPlatform.service.ReportService;
+import com.nucleusteq.assessmentPlatform.utility.ReportLoggerMessage;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import jakarta.validation.Valid;
 
@@ -45,11 +47,11 @@ public class ReportController {
      * @return A message indicating the result of the report addition.
      */
     @PostMapping
-    public final ResponseEntity<String> createReport(
+    public final ResponseEntity<SuccessResponse> createReport(
             @Valid @RequestBody final ReportDto reportDto) {
-        LOGGER.info("Request received to generate the new Report.");
-        String result = reportService.createReport(reportDto);
-        LOGGER.info("Report Generated Successfully.");
+        LOGGER.info(ReportLoggerMessage.CREATE_REPORT_REQUEST);
+        SuccessResponse result = reportService.createReport(reportDto);
+        LOGGER.info(ReportLoggerMessage.REPORT_GENERATED_SUCCESSFULLY);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -61,10 +63,9 @@ public class ReportController {
     @GetMapping("/{email}")
     public final ResponseEntity<List<ReportDto>> findByEmailId(
             @PathVariable final String email) {
-        LOGGER.info(
-                "Request received to find the Reports by Email Id:{}" + email);
+        LOGGER.info(ReportLoggerMessage.FIND_REPORT_BY_EMAIL_REQUEST + email);
         List<ReportDto> reportDto = reportService.findReportByEmailId(email);
-        LOGGER.info("Reports retrived Successfully.");
+        LOGGER.info(ReportLoggerMessage.REPORTS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(reportDto, HttpStatus.OK);
 
     }
@@ -75,9 +76,9 @@ public class ReportController {
      */
     @GetMapping("/all")
     public final ResponseEntity<List<ReportDto>> getAllReports() {
-        LOGGER.info("Received a request for Get all user.");
+        LOGGER.info(ReportLoggerMessage.GET_ALL_REPORTS_REQUEST);
         List<ReportDto> reportDtos = reportService.getAllReport();
-        LOGGER.info("All Reports retrived Successfully.");
+        LOGGER.info(ReportLoggerMessage.ALL_REPORTS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(reportDtos, HttpStatus.OK);
     }
 }

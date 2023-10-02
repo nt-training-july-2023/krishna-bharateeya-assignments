@@ -5,6 +5,7 @@ package com.nucleusteq.assessmentPlatform.dto;
 import org.springframework.validation.annotation.Validated;
 
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
+import com.nucleusteq.assessmentPlatform.utility.ValidationMessage;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -29,13 +30,13 @@ public class QuestionDto {
     /**
      * The text of the question.
      */
-    @NotBlank(message = "Question Text cannot be empty.")
+    @NotBlank(message = ValidationMessage.QUESTION_TEXT_EMPTY)
     private String questionText;
 
     /**
      * The answer options for the question.
      */
-    @NotNull(message = "Question Text cannot be empty.")
+    @NotNull(message = ValidationMessage.OPTIONS_NULL)
     @Valid
     private QuestionOptions options;
 
@@ -43,7 +44,6 @@ public class QuestionDto {
      * Gets the answer options for the question.
      * @return The answer options for the question.
      */
-//    @NotNull(message = "Question Options Object cannot be empty.")
     public final QuestionOptions getOptions() {
         return new QuestionOptions(
                 options.getOptionOne(),
@@ -71,7 +71,7 @@ public class QuestionDto {
     /**
      * The quiz to which the quiz belongs.
      */
-    @NotNull(message = "Quiz Options Object cannot be empty.")
+    @NotNull(message = ValidationMessage.QUIZ_NULL)
     private QuizDTO quiz;
 
     /**

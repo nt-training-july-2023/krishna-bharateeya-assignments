@@ -1,20 +1,22 @@
+//orginal
 import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
-import Login from './Components/Login_Signup/Login';
-import Registration from './Components/Login_Signup/Registration';
-import AdminHome from './Components/AdminHome/AdminHome';
-import UserHome from './Components/UserHome/UserHome';
+import Login from './Pages/Login_Signup/Login';
+import Registration from './Pages/Login_Signup/Registration';
+import AdminHome from './Pages/AdminHome/AdminHome';
+import UserHome from './Pages/UserHome/UserHome';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CategoryHome from './Components/Category/CategoryHome';
-import TestReport from './Components/Report/TestReport';
+import CategoryHome from './Pages/Category/CategoryHome';
+import TestReport from './Pages/Report/TestReport';
 
 
-import AddOrUpdateCategory from './Components/Category/AddOrUpdateCategory';
-import AddOrUpdateQuiz from './Components/Quiz/AddOrUpdateQuiz';
-import QuestionHome from './Components/AdminHome/Question/QuestionHome';
-import AddOrUpdateQuestion from './Components/AdminHome/Question/AddOrUpdateQuestion';
-import QuizHome from './Components/Quiz/QuizHome';
-import UserTest from './Components/UserHome/UserTest';
+import AddOrUpdateCategory from './Pages/Category/AddOrUpdateCategory';
+import AddOrUpdateQuiz from './Pages/Quiz/AddOrUpdateQuiz';
+import QuestionHome from './Pages/Question/QuestionHome';
+import AddOrUpdateQuestion from './Pages/Question/AddOrUpdateQuestion';
+
+import QuizHome from './Pages/Quiz/QuizHome';
+import UserTest from './Pages/UserHome/UserTest';
 
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
 
          
           <Route exact path="/categoryHome" element={<PrivateRoute Component={CategoryHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
-                    <Route exact path="/question/:quizId" element={<PrivateRoute Component={QuestionHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/question/:quizId" element={<PrivateRoute Component={QuestionHome} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
 
           <Route exact path="/addCategory" element={<PrivateRoute Component={AddOrUpdateCategory} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/updateCategory/:categoryId" element={<PrivateRoute Component={AddOrUpdateCategory} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />

@@ -3,6 +3,7 @@ package com.nucleusteq.assessmentPlatform.service;
 import java.util.List;
 
 import com.nucleusteq.assessmentPlatform.dto.ReportDto;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Service interface for managing Report.
@@ -14,7 +15,7 @@ public interface ReportService {
      * @param reportDto The DTO containing report information.
      * @return A message indicating the result of the operation.
      */
-    String createReport(ReportDto reportDto);
+    SuccessResponse createReport(ReportDto reportDto);
 
     /**
      * Updates a category.

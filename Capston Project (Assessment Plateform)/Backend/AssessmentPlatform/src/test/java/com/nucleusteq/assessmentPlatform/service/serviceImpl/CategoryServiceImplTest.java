@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-
+import org.springframework.http.HttpStatus;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
@@ -15,6 +15,7 @@ import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,10 @@ public class CategoryServiceImplTest {
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(category);
 
-        String resultMessage = categoryService.addCategory(categoryDto);
-        assertEquals("Test Category Added Successfully", resultMessage);
+        SuccessResponse response = categoryService.addCategory(categoryDto);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals("Category created successfully.", response.getMessage());
+
     }
 
     @Test
@@ -123,8 +126,12 @@ public class CategoryServiceImplTest {
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(updatedCategory);
         when(categoryRepository.save(updatedCategory)).thenReturn(updatedCategory);
 
-        String result = categoryService.updateCategory(categoryDto);
-        assertEquals(result, categoryDto.getCategoryName() + " Updated Successfully");
+        SuccessResponse response = categoryService.updateCategory(categoryDto);
+       
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals("Category updated successfully.", response.getMessage());
+
     }
 
     @Test
@@ -146,8 +153,11 @@ public class CategoryServiceImplTest {
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
 
-        String resultMessage = categoryService.deleteCategory(categoryId);
-        assertEquals("Category Deletd Successfully", resultMessage);
+        SuccessResponse response = categoryService.deleteCategory(categoryId);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals("Category deleted successfully.", response.getMessage());
+
     }
 
     @Test

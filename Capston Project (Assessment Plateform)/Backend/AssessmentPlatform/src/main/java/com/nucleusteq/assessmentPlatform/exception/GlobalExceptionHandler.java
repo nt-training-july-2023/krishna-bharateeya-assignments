@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.nucleusteq.assessmentPlatform.utility.ErrorResponse;
+
 import org.springframework.validation.FieldError;
 
 @ControllerAdvice
@@ -20,8 +23,8 @@ public class GlobalExceptionHandler {
      * @param exp methodArgumentNotValidException
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public final ResponseEntity<Map<String, String>>
-    handleMethodArgumentNotValidException(
+    public final ResponseEntity<ErrorResponse>
+      handleMethodArgumentNotValidException(
             final MethodArgumentNotValidException exp) {
         Map<String, String> response = new HashMap<>();
         exp.getBindingResult().getAllErrors().forEach((error) -> {
@@ -29,8 +32,9 @@ public class GlobalExceptionHandler {
             String message = error.getDefaultMessage();
             response.put(fieldName, message);
         });
-        return new ResponseEntity<Map<String, String>>(response,
-                HttpStatus.BAD_REQUEST);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(), response);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -40,10 +44,11 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Not Found" status and an error message.
      */
     @ExceptionHandler(NoSuchElementException.class)
-    public final ResponseEntity<String> handleNoSuchElement(
+    public final ResponseEntity<ErrorResponse> handleNoSuchElement(
             final NoSuchElementException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -53,10 +58,11 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Conflict" status and an error message.
      */
     @ExceptionHandler(AlreadyExistsException.class)
-    public final ResponseEntity<String> handleAlreadyExistException(
+    public final ResponseEntity<ErrorResponse> handleAlreadyExistException(
             final AlreadyExistsException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.CONFLICT);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     /**
@@ -66,10 +72,11 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Conflict" status and an error message.
      */
     @ExceptionHandler(DuplicateEmailException.class)
-    public final ResponseEntity<String> handleDuplicateEmail(
+    public final ResponseEntity<ErrorResponse> handleDuplicateEmail(
             final DuplicateEmailException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.CONFLICT);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     /**
@@ -80,10 +87,11 @@ public class GlobalExceptionHandler {
      *         message.
      */
     @ExceptionHandler(LoginFailedException.class)
-    public final ResponseEntity<String> handleWrongCredentialException(
+    public final ResponseEntity<ErrorResponse> handleWrongCredentialException(
             final LoginFailedException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.UNAUTHORIZED);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
     /**
@@ -93,10 +101,11 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Not Found" status and an error message.
      */
     @ExceptionHandler(ResourceNotFoundException.class)
-    public final ResponseEntity<String> handleResourceNotFound(
+    public final ResponseEntity<ErrorResponse> handleResourceNotFound(
             final ResourceNotFoundException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -106,10 +115,11 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Conflict" status and an error message.
      */
     @ExceptionHandler(DuplicateMobileNumberException.class)
-    public final ResponseEntity<String> handleDuplicateMobileNumber(
+    public final ResponseEntity<ErrorResponse> handleDuplicateMobileNumber(
             final DuplicateMobileNumberException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.CONFLICT);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     /**
@@ -119,11 +129,12 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Bad Request" status and an error
      *         message.
      */
-    @ExceptionHandler(UserEmailDomainException.class)
-    public final ResponseEntity<String> handleEmailDomain(
-            final UserEmailDomainException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(DuplicateOptionException.class)
+    public final ResponseEntity<ErrorResponse> handleEmailDomain(
+            final DuplicateOptionException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     /**
@@ -133,9 +144,10 @@ public class GlobalExceptionHandler {
      * @return A ResponseEntity with a "Not Found" status and an error message.
      */
     @ExceptionHandler(UserNotFoundException.class)
-    public final ResponseEntity<String> handleUserNotFound(
+    public final ResponseEntity<ErrorResponse> handleUserNotFound(
             final UserNotFoundException exception) {
-        return new ResponseEntity<String>(exception.getMessage(),
-                HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(), exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }

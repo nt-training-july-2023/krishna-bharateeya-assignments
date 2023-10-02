@@ -8,6 +8,7 @@ import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Service interface for managing user registrations and login.
@@ -21,7 +22,7 @@ public interface RegistrationService {
      * @return A message indicating the result of the operation.
      * @throws UserEmailDomainException If the user's email domain is invalid.
      */
-    String addUser(RegistrationDto registrationDto);
+    SuccessResponse addUser(RegistrationDto registrationDto);
 
     /**
      * Retrieves a user registration by its ID.

@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
@@ -24,6 +25,7 @@ import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 class QuestionServiceImplTest {
 
@@ -62,9 +64,11 @@ class QuestionServiceImplTest {
 
         when(questionRepository.save(any(Question.class))).thenReturn(new Question());
 
-        String result = questionService.addQuestion(questionDTO);
+        SuccessResponse response = questionService.addQuestion(questionDTO);
 
-        assertEquals("Question added successfully", result);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals("Question created successfully.", response.getMessage());
     }
     
     @Test
@@ -88,9 +92,11 @@ class QuestionServiceImplTest {
         when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
         when(questionRepository.save(any(Question.class))).thenReturn(new Question());
 
-        String result = questionService.updateQuestion(questionId, questionDTO);
+        SuccessResponse response = questionService.updateQuestion(questionId, questionDTO);
 
-        assertEquals("Question updated successfully", result);
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals("Question updated successfully.", response.getMessage());
     }
     
     @Test

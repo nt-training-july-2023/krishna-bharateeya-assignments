@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,42 +41,36 @@ public class Question {
      * The text of the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Question Text cannot be empty.")
     private String questionText;
 
     /**
      * The first option for the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Option One Text cannot be empty.")
     private String optionOne;
 
     /**
      * The second option for the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Option Two Text cannot be empty.")
     private String optionTwo;
 
     /**
      * The third option for the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Option Three Text cannot be empty.")
     private String optionThree;
 
     /**
      * The forth option for the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "Option Four Text cannot be empty.")
     private String optionFour;
 
     /**
      * The correct option for the question.
      */
     @Column(nullable = false)
-    @NotBlank(message = "correct Option Text cannot be empty.")
     private String correctOption;
 
     /**

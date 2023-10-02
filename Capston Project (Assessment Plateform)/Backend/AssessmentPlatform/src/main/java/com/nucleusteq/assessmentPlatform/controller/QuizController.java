@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
+import com.nucleusteq.assessmentPlatform.utility.QuizLoggerMessage;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 import jakarta.validation.Valid;
 
@@ -49,11 +51,11 @@ public class QuizController {
      * @return A message indicating the result of the quiz addition.
      */
     @PostMapping
-    public final ResponseEntity<String> addQuiz(@Valid @RequestBody
+    public final ResponseEntity<SuccessResponse> addQuiz(@Valid @RequestBody
             final QuizDTO quizDTO) {
-        LOGGER.info("Received a request to save a new quiz.");
-        String createdQuiz = quizService.addQuiz(quizDTO);
-        LOGGER.info("Quiz Created Successfully.");
+        LOGGER.info(QuizLoggerMessage.ADD_QUIZ_REQUEST);
+        SuccessResponse createdQuiz = quizService.addQuiz(quizDTO);
+        LOGGER.info(QuizLoggerMessage.QUIZ_CREATED_SUCCESSFULLY);
         return new ResponseEntity<>(createdQuiz, HttpStatus.CREATED);
     }
 
@@ -65,12 +67,12 @@ public class QuizController {
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @PutMapping("/{quizId}")
-    public final ResponseEntity<String> updateQuiz(@PathVariable
+    public final ResponseEntity<SuccessResponse> updateQuiz(@PathVariable
             final Integer quizId, @Valid @RequestBody final QuizDTO quizDTO)
             throws NotFoundException {
-        LOGGER.info("Received a request to update quiz.");
-        String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
-        LOGGER.info("Quiz Updated Successfully.");
+        LOGGER.info(QuizLoggerMessage.UPDATE_QUIZ_REQUEST);
+        SuccessResponse updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
+        LOGGER.info(QuizLoggerMessage.QUIZ_UPDATED_SUCCESSFULLY);
         return new ResponseEntity<>(updatedQuiz, HttpStatus.OK);
     }
 
@@ -81,9 +83,12 @@ public class QuizController {
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @DeleteMapping("/{quizId}")
-    public final ResponseEntity<String> deleteQuiz(
+    public final ResponseEntity<SuccessResponse> deleteQuiz(
             @PathVariable final Integer quizId) throws NotFoundException {
-        String response = quizService.deleteQuiz(quizId);
+        LOGGER.info(QuizLoggerMessage.DELETE_QUIZ_REQUEST + quizId);
+        SuccessResponse response = quizService.deleteQuiz(quizId);
+        LOGGER.info(
+                QuizLoggerMessage.DELETE_QUIZ_REQUEST_SUCCESSFULLY + quizId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -96,9 +101,9 @@ public class QuizController {
     @GetMapping("/{quizId}")
     public final ResponseEntity<QuizDTO> getQuizById(
             @PathVariable final Integer quizId) throws NotFoundException {
-        LOGGER.info("Received a request to get quiz by id :" + quizId);
+        LOGGER.info(QuizLoggerMessage.GET_QUIZ_BY_ID_REQUEST + quizId);
         QuizDTO quizDTO = quizService.getQuizById(quizId);
-        LOGGER.info("Quiz Updated Successfully.");
+        LOGGER.info(QuizLoggerMessage.QUIZ_UPDATED_SUCCESSFULLY);
         return new ResponseEntity<>(quizDTO, HttpStatus.OK);
     }
 
@@ -108,9 +113,9 @@ public class QuizController {
      */
     @GetMapping
     public final ResponseEntity<List<QuizDTO>> getAllQuizzes() {
-        LOGGER.info("Received a request to get all quiz.");
+        LOGGER.info(QuizLoggerMessage.GET_ALL_QUIZZES_REQUEST);
         List<QuizDTO> quizzes = quizService.getAllQuizzes();
-        LOGGER.info("List of Quiz Retrived Successfully.");
+        LOGGER.info(QuizLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
 
@@ -124,9 +129,9 @@ public class QuizController {
     public final ResponseEntity<List<QuestionDto>> getAllQuestionByQuiz(
             @PathVariable final int quizId) {
         LOGGER.info(
-                "Received a request to get all question by quizId :" + quizId);
+                QuizLoggerMessage.GET_ALL_QUESTIONS_BY_QUIZ_REQUEST + quizId);
         List<QuestionDto> questions = quizService.getAllQuestionByQuiz(quizId);
-        LOGGER.info("List of Questions Retrived Successfully.");
+        LOGGER.info(QuizLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

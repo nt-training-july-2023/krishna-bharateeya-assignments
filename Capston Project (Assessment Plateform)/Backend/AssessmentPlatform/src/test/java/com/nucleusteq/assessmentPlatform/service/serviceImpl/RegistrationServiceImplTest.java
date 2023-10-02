@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
@@ -28,9 +29,9 @@ import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
 import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
-import com.nucleusteq.assessmentPlatform.exception.UserEmailDomainException;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 @ExtendWith(MockitoExtension.class)
 class RegistrationServiceImplTest {
@@ -53,7 +54,7 @@ class RegistrationServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    public void testAddUser_Success() throws DuplicateMobileNumberException, DuplicateEmailException, UserEmailDomainException {
+    public void testAddUser_Success() throws DuplicateMobileNumberException, DuplicateEmailException {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setUserRole("user");
         registrationDto.setEmail("test@nucleusteq.com");
@@ -68,8 +69,11 @@ class RegistrationServiceImplTest {
 
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
 
-        String resultMessage = registrationService.addUser(registrationDto);
-        assertEquals("Test Registered Successfully", resultMessage);
+        SuccessResponse response = registrationService.addUser(registrationDto);
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals("Test Registered Successfully.", response.getMessage());
+
     }
     
 
@@ -112,31 +116,31 @@ class RegistrationServiceImplTest {
     @Test
     public void testLoginUser_Success() throws LoginFailedException, UserNotFoundException {
         LoginRequestDto loginRequestDto = new LoginRequestDto();
-        loginRequestDto.setEmail("test@example.com");
+        loginRequestDto.setEmail("test@nucleusteq.com");
         loginRequestDto.setPassword("password123");
 
         Registration foundRegistration = new Registration();
-        foundRegistration.setEmail("test@example.com");
+        foundRegistration.setEmail("test@nucleusteq.com");
         foundRegistration.setPassword(passwordEncoder.encode("password123"));
         foundRegistration.setUserRole("user");
 
-        when(registrationRepository.getByEmail("test@example.com")).thenReturn(foundRegistration);
+        when(registrationRepository.getByEmail("test@nucleusteq.com")).thenReturn(foundRegistration);
         when(passwordEncoder.matches("password123", foundRegistration.getPassword())).thenReturn(true);
 
         Map<String, String> response = registrationService.loginUser(loginRequestDto);
 
-        assertEquals("Logged successfully.", response.get("message"));
-        assertEquals("test@example.com", response.get("email"));
+        assertEquals("Logged in successfully.", response.get("message"));
+        assertEquals("test@nucleusteq.com", response.get("email"));
         assertEquals("user", response.get("role"));
     }
     @Test
     public void testLoginUser_WrongPassword() {
         LoginRequestDto inputDto = new LoginRequestDto();
-        inputDto.setEmail("test@example.com");
+        inputDto.setEmail("test@nucleusteq.com");
         inputDto.setPassword("wrongPassword");
 
         Registration registration = new Registration();
-        registration.setEmail("test@example.com");
+        registration.setEmail("test@nucleusteq.com");
         registration.setPassword("encodedPassword");
 
         when(registrationRepository.getByEmail(anyString())).thenReturn(registration);
@@ -149,7 +153,7 @@ class RegistrationServiceImplTest {
     @Test
     public void testLoginUser_UserNotFound() {
         LoginRequestDto inputDto = new LoginRequestDto();
-        inputDto.setEmail("test@example.com");
+        inputDto.setEmail("test@nucleusteq.com");
         inputDto.setPassword("password");
         when(registrationRepository.getByEmail(anyString())).thenReturn(null);
 
@@ -160,14 +164,14 @@ class RegistrationServiceImplTest {
     public void testGetUserById_Success() throws UserNotFoundException {
         Registration registration = new Registration();
         registration.setUserId(1);
-        registration.setEmail("test@example.com");
+        registration.setEmail("test@nucleusteq.com");
 
         when(registrationRepository.findById(anyInt())).thenReturn(Optional.of(registration));
 
         RegistrationDto resultDto = registrationService.getUserById(1);
 
         assertEquals(1, resultDto.getUserId());
-        assertEquals("test@example.com", resultDto.getEmail());
+        assertEquals("test@nucleusteq.com", resultDto.getEmail());
     }
 
     @Test
@@ -181,11 +185,11 @@ class RegistrationServiceImplTest {
     public void testGetAllRegistrations() {
         Registration registration1 = new Registration();
         registration1.setUserId(1);
-        registration1.setEmail("test1@example.com");
+        registration1.setEmail("test@nucleusteq.com");
 
         Registration registration2 = new Registration();
         registration2.setUserId(2);
-        registration2.setEmail("test2@example.com");
+        registration2.setEmail("test2@nucleusteq.com");
 
         List<Registration> registrationList = Arrays.asList(registration1, registration2);
 
@@ -195,9 +199,9 @@ class RegistrationServiceImplTest {
 
         assertEquals(2, resultDtoList.size());
         assertEquals(1, resultDtoList.get(0).getUserId());
-        assertEquals("test1@example.com", resultDtoList.get(0).getEmail());
+        assertEquals("test@nucleusteq.com", resultDtoList.get(0).getEmail());
         assertEquals(2, resultDtoList.get(1).getUserId());
-        assertEquals("test2@example.com", resultDtoList.get(1).getEmail());
+        assertEquals("test2@nucleusteq.com", resultDtoList.get(1).getEmail());
     }
     
     @Test

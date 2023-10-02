@@ -1,5 +1,6 @@
 package com.nucleusteq.assessmentPlatform.controller;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import java.util.List;
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.service.serviceImpl.QuizServiceImpl;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 public class QuizControllerTest {
     
     @InjectMocks
@@ -34,10 +36,15 @@ public class QuizControllerTest {
         quizDto.setQuizId(1);
         quizDto.setQuizName("Maths");
         quizDto.setQuizDescription("Maths Category");
-        when(quizService.addQuiz(quizDto)).thenReturn("Quiz: "+quizDto.getQuizName()+", added successfully!");
-        ResponseEntity<String> response = quizController.addQuiz(quizDto);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Quiz created successfully.");
+
+        when(quizService.addQuiz(quizDto)).thenReturn(successResponse);
+
+        ResponseEntity<SuccessResponse> response = quizController.addQuiz(quizDto);
+
+        assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Quiz: "+quizDto.getQuizName()+", added successfully!", response.getBody());
+        assertEquals(successResponse, response.getBody());
     }
 
     @Test
@@ -45,26 +52,28 @@ public class QuizControllerTest {
         Integer quizId = 1;
         QuizDTO quizDTO = createSampleQuiz();
 
-        String expectedResponse = "Quiz updated successfully";
-        when(quizService.updateQuiz(quizId, quizDTO)).thenReturn(expectedResponse);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(),"Quiz updated successfully.");
 
-        ResponseEntity<String> responseEntity = quizController.updateQuiz(quizId, quizDTO);
-
+        when(quizService.updateQuiz(eq(quizId), any(QuizDTO.class))).thenReturn(successResponse);
+        ResponseEntity<SuccessResponse> responseEntity = quizController.updateQuiz(quizId, quizDTO);
+        verify(quizService).updateQuiz(eq(quizId), any(QuizDTO.class));
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(expectedResponse, responseEntity.getBody());
+        assertEquals("Quiz updated successfully.", responseEntity.getBody().getMessage());
     }
 
     @Test
     public void testDeleteQuiz() throws NotFoundException {
         Integer quizId = 1;
 
-        String expectedResponse = "Quiz deleted successfully";
-        when(quizService.deleteQuiz(quizId)).thenReturn(expectedResponse);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(),"Quiz deleted successfully.");
 
-        ResponseEntity<String> responseEntity = quizController.deleteQuiz(quizId);
+        when(quizService.deleteQuiz(quizId)).thenReturn(successResponse);
 
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(expectedResponse, responseEntity.getBody());
+        ResponseEntity<SuccessResponse> response = quizController.deleteQuiz(quizId);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(successResponse, response.getBody());
     }
 
     @Test

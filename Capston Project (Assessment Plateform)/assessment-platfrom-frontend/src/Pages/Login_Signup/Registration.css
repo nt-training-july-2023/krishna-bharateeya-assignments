@@ -1,0 +1,116 @@
+/* Registration.css */
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.registration-form {
+    width: 420px;
+    box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
+    padding-top: -10px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+}
+
+.registration-form-content {
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+.registration-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: #222;
+    font-weight: 800;
+}
+
+.registration-form-group {
+    margin-top: 1.5rem;
+}
+
+
+.registration-submit {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.registration-submit button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #09a122;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #038d08;
+    }
+
+}
+
+
+.registration-link-primary {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.registration-link-primary:hover {
+    color: #004085;
+    text-decoration: underline;
+}
+
+.registration-text-center {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.registration-form-control {
+    width: 100%;
+    padding: 6px;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.registration-form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+.registration-link-primary {
+    cursor: pointer;
+    color: blue;
+}
+
+.registration-text-center {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.registration-error-message {
+    color: red;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: -20px;
+}
+
+.registration-error-field {
+    border-color: red;
+}

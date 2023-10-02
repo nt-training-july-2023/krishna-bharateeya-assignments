@@ -3,6 +3,8 @@ import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -37,13 +39,17 @@ public class RegistrationControllerTest {
         userDto.setEmail("krishan@example.com");
         userDto.setPassword("password123");
 
-        String expectedResponse = "User registered successfully";
-        when(registrationService.addUser(userDto)).thenReturn(expectedResponse);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Krishna Registered Successfully.");
+        when(registrationService.addUser(userDto)).thenReturn(successResponse);
 
-        ResponseEntity<String> responseEntity = registrationController.saveUser(userDto);
+        ResponseEntity<SuccessResponse> responseEntity = registrationController.saveUser(userDto);
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-        assertEquals(expectedResponse, responseEntity.getBody());
+        assertEquals(successResponse, responseEntity.getBody());
+
+        verify(registrationService).addUser(userDto);
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertEquals(successResponse, responseEntity.getBody());
     }
 
     @Test

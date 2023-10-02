@@ -1,6 +1,7 @@
 package com.nucleusteq.assessmentPlatform.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nucleusteq.assessmentPlatform.dto.ReportDto;
 import com.nucleusteq.assessmentPlatform.service.ReportService;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 class ReportControllerTest {
 
@@ -35,12 +37,14 @@ class ReportControllerTest {
     @Test
     public void testCreateReport() throws Exception {
         ReportDto reportDto = new ReportDto();
-        when(reportService.createReport(reportDto)).thenReturn("Report created successfully");
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Report created successfully.");
 
-        ResponseEntity<String> response = reportController.createReport(reportDto);
+        when(reportService.createReport(reportDto)).thenReturn(successResponse);
 
+        ResponseEntity<SuccessResponse> response = reportController.createReport(reportDto);
+        assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Report created successfully", response.getBody());
+        assertEquals(successResponse, response.getBody());
     }
 
     @Test

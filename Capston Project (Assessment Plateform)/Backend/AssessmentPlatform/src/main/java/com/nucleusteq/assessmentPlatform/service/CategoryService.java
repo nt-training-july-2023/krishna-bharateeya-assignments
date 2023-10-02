@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Service interface for managing categories.
@@ -17,7 +18,7 @@ public interface CategoryService {
      * @param categoryDto The DTO containing category information.
      * @return A message indicating the result of the operation.
      */
-    String addCategory(CategoryDto categoryDto);
+    SuccessResponse addCategory(CategoryDto categoryDto);
 
     /**
      * Retrieves a category by its ID.
@@ -37,14 +38,14 @@ public interface CategoryService {
      * @param categoryId The ID of the category to delete.
      * @return A message indicating the result of the operation.
      */
-    String deleteCategory(int categoryId);
+    SuccessResponse deleteCategory(int categoryId);
 
     /**
      * Updates a category.
      * @param categoryDto The updated category information.
      * @return The updated CategoryDto.
      */
-    String updateCategory(CategoryDto categoryDto);
+    SuccessResponse updateCategory(CategoryDto categoryDto);
 
     /**
      * Updates a category.

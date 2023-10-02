@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
@@ -18,6 +19,8 @@ import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Implementation of the CategoryService interface for managing categories.
@@ -55,17 +58,18 @@ public class CategoryServiceImpl implements CategoryService {
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String addCategory(final CategoryDto categoryDto) {
+    public final SuccessResponse addCategory(final CategoryDto categoryDto) {
 
         Category newCategory = dtoToEntity(categoryDto);
         Optional<Category> existingCategory = categoryRepository
                 .findByCategoryName(newCategory.getCategoryName());
         if (existingCategory.isPresent()) {
-            LOGGER.error("Category already exists");
-            throw new AlreadyExistsException("This category Already Exist.");
+            LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
+            throw new AlreadyExistsException(Message.CATEGORY_ALREADY_EXISTS);
         }
         categoryRepository.save(newCategory);
-        return categoryDto.getCategoryName() + " Added Successfully";
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+                Message.CATEGORY_CREATED_SUCCESSFULLY);
     }
 
     /**
@@ -83,9 +87,9 @@ public class CategoryServiceImpl implements CategoryService {
             Category category = foundCategory.get();
             return entityToDTO(category);
         } else {
-            LOGGER.error("Category not found for id {}" + id);
+            LOGGER.error(Message.CATEGORY_NOT_FOUND + id);
             throw new ResourceNotFoundException(
-                    "Category not found for id: " + id);
+                    Message.CATEGORY_NOT_FOUND + id);
         }
 
     }
@@ -108,14 +112,14 @@ public class CategoryServiceImpl implements CategoryService {
      * @return The updated CategoryDto.
      */
     @Override
-    public final String updateCategory(final CategoryDto categoryDto) {
+    public final SuccessResponse updateCategory(final CategoryDto categoryDto) {
 
         Category existingCategory = categoryRepository
                 .findById(categoryDto.getCategoryId()).orElseThrow(() -> {
-                    LOGGER.error("Category not found with ID: {}",
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND,
                             categoryDto.getCategoryId());
                     return new ResourceNotFoundException(
-                            "No category found with ID: "
+                            Message.CATEGORY_NOT_FOUND
                                     + categoryDto.getCategoryId());
                 });
         if (!existingCategory.getCategoryName()
@@ -123,12 +127,13 @@ public class CategoryServiceImpl implements CategoryService {
                 && categoryRepository
                         .findByCategoryName(categoryDto.getCategoryName())
                         .isPresent()) {
-            LOGGER.error("This category Already Exist.");
-            throw new AlreadyExistsException("This category Already Exist.");
+            LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
+            throw new AlreadyExistsException(Message.CATEGORY_ALREADY_EXISTS);
         }
         existingCategory = dtoToEntity(categoryDto);
         categoryRepository.save(existingCategory);
-        return categoryDto.getCategoryName() + " Updated Successfully";
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.CATEGORY_UPDATED_SUCCESSFULLY);
     }
 
     /**
@@ -137,17 +142,18 @@ public class CategoryServiceImpl implements CategoryService {
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String deleteCategory(final int categoryId) {
+    public final SuccessResponse deleteCategory(final int categoryId) {
 
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> {
-                    LOGGER.error("Category not found with ID: {}", categoryId);
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND, categoryId);
                     return new ResourceNotFoundException(
-                            "No category found with ID: " + categoryId);
+                            Message.CATEGORY_NOT_FOUND + categoryId);
                 });
 
         categoryRepository.delete(category);
-        return "Category Deletd Successfully";
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.CATEGORY_DELETED_SUCCESSFULLY);
     }
 
     /**

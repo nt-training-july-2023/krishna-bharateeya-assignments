@@ -1,13 +1,16 @@
 package com.nucleusteq.assessmentPlatform.service.serviceImpl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
@@ -17,10 +20,13 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateOptionException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuestionService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * This class, `QuestionServiceImpl`, is the implementation of the.
@@ -51,27 +57,40 @@ public class QuestionServiceImpl implements QuestionService {
      * @return A message indicating the success of the operation.
      */
     @Override
-    public final String addQuestion(final QuestionDto questionDto) {
+    public final SuccessResponse addQuestion(final QuestionDto questionDto) {
 
         Question resQue = convertDtoToEntity(questionDto);
+
+        Set<String> optionSet = new HashSet<>();
+        optionSet.add(resQue.getOptionOne());
+        optionSet.add(resQue.getOptionTwo());
+        optionSet.add(resQue.getOptionThree());
+        optionSet.add(resQue.getOptionFour());
+
+        if (optionSet.size() < 4) {
+          LOGGER.error(Message.DUPLICATE_OPTION_ERROR);
+          throw new DuplicateOptionException(Message.DUPLICATE_OPTION_ERROR);
+        }
 
         String checkCorrectAnswer = resQue.getCorrectOption();
         if (!checkCorrectAnswer.equals(resQue.getOptionOne())
                 && !checkCorrectAnswer.equals(resQue.getOptionTwo())
                 && !checkCorrectAnswer.equals(resQue.getOptionThree())
                 && !checkCorrectAnswer.equals(resQue.getOptionFour())) {
-            LOGGER.error("Correct Answer Not Match with any options.");
+            LOGGER.error(Message.CORRECT_OPTION_ERROR);
             throw new ResourceNotFoundException(
-                    "Correct Answer Not Match with any options.");
+                    Message.CORRECT_OPTION_ERROR);
         }
         Optional<Quiz> existingQuiz = quizRepository
                 .findById(resQue.getQuiz().getQuizId());
         if (existingQuiz.isEmpty()) {
-            throw new ResourceNotFoundException("Quiz with id:"
-                    + resQue.getQuiz().getQuizId() + " doesnot exists");
+            throw new ResourceNotFoundException(
+                    Message.QUIZ_NOT_FOUND + resQue.getQuiz().getQuizId());
         }
         questionRepository.save(resQue);
-        return "Question added successfully";
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+                Message.QUESTION_CREATED_SUCCESSFULLY);
+
     }
 
     /**
@@ -82,14 +101,14 @@ public class QuestionServiceImpl implements QuestionService {
      * @throws NotFoundException if the specified question is not found.
      */
     @Override
-    public final String updateQuestion(final Integer questionId,
+    public final SuccessResponse updateQuestion(final Integer questionId,
             final QuestionDto questionDto) throws NotFoundException {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
         if (!optionalQuestion.isPresent()) {
-            LOGGER.error("Question with not found with Id :" + questionId);
+            LOGGER.error(Message.QUESTION_NOT_FOUND + questionId);
             throw new ResourceNotFoundException(
-                    "Question with not found with Id :" + questionId);
+                    Message.QUESTION_NOT_FOUND + questionId);
         }
 
         Question updatedQuestion = convertDtoToEntity(questionDto);
@@ -99,13 +118,15 @@ public class QuestionServiceImpl implements QuestionService {
                 && !checkCorrectAnswer.equals(updatedQuestion.getOptionThree())
                 && !checkCorrectAnswer
                         .equals(updatedQuestion.getOptionFour())) {
-            LOGGER.error("Correct Answer Not Match with any options.");
+            LOGGER.error(Message.CORRECT_OPTION_ERROR);
             throw new ResourceNotFoundException(
-                    "Correct Answer Not Match with any options.");
+                    Message.CORRECT_OPTION_ERROR);
         }
         updatedQuestion.setQuestionId(questionId);
         questionRepository.save(updatedQuestion);
-        return "Question updated successfully";
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.QUESTION_UPDATED_SUCCESSFULLY);
+
     }
 
     /**
@@ -114,17 +135,19 @@ public class QuestionServiceImpl implements QuestionService {
      * @throws NotFoundException if the specified question is not found.
      */
     @Override
-    public final String deleteQuestion(final Integer questionId)
+    public final SuccessResponse deleteQuestion(final Integer questionId)
             throws NotFoundException {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
         if (!optionalQuestion.isPresent()) {
-            LOGGER.error("Question with not found with Id :" + questionId);
+            LOGGER.error(Message.QUESTION_NOT_FOUND + questionId);
             throw new ResourceNotFoundException(
-                    "Question with not found with Id :" + questionId);
+                    Message.QUESTION_NOT_FOUND + questionId);
         }
         questionRepository.delete(optionalQuestion.get());
-        return "Question Deleted Successfully with id : " + questionId;
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.QUESTION_DELETED_SUCCESSFULLY);
+
     }
 
     /**
@@ -139,9 +162,9 @@ public class QuestionServiceImpl implements QuestionService {
         Optional<Question> optionalQuestion = questionRepository
                 .findById(questionId);
         if (!optionalQuestion.isPresent()) {
-            LOGGER.error("Question with not found with Id :" + questionId);
+            LOGGER.error(Message.QUESTION_NOT_FOUND  + questionId);
             throw new ResourceNotFoundException(
-                    "Question with not found with Id :" + questionId);
+                    Message.QUESTION_NOT_FOUND  + questionId);
         }
         Question question = optionalQuestion.get();
         QuestionDto resultQueDto = convertEntityToDto(question);
