@@ -217,8 +217,8 @@ const AddOrUpdateQuestion = () => {
                             {questionId ? 'Update Question' : 'Add Question'}
                         </h2>
                         <div className='question-from-container'>
-                            <div className='form-groups'>
-                                <label htmlFor='category-select'>Select Quiz:</label>
+                            <div className='add-que-form-groups'>
+                                <label className='select-quiz' htmlFor='category-select'>Select Quiz:</label>
                                 <select
                                     id='quiz-select'
                                     className={`add-update-question-field ${fieldErrors.selectedQuiz ? 'question-error-field' : ''}`}
@@ -236,8 +236,8 @@ const AddOrUpdateQuestion = () => {
                                     <p className='question-error-message'>{fieldErrors.selectedQuiz}</p>
                                 )}
                             </div>
-                            <div className={`form-group ${fieldErrors.questionText ? 'has-error' : ''}`}>
-                                <label htmlFor='question-text'>Question Text:</label>
+                            <div className={`add-que-form-group ${fieldErrors.questionText ? 'has-error' : ''}`}>
+                                <label htmlFor='question-text' className='quiz-label'>Question Text:</label>
                                 <InputField
                                     type='text'
                                     id='question-text'
@@ -247,52 +247,64 @@ const AddOrUpdateQuestion = () => {
                                 />
                                 {fieldErrors.questionText && <p className='question-error-message'>{fieldErrors.questionText}</p>}
                             </div>
-                            <div className={`form-group ${fieldErrors.optionOne ? 'has-error' : ''}`}>
-                                <label htmlFor='option-one'>Option One:</label>
-                                <InputField
-                                    type='text'
-                                    id='option-one'
-                                    className={`add-update-question-field ${fieldErrors.optionOne ? 'question-error-field' : ''}`}
-                                    value={options.optionOne}
-                                    onChange={(e) => handleOptionChange('optionOne', e.target.value)}
-                                />
-                                {fieldErrors.optionOne && <p className='question-error-message'>{fieldErrors.optionOne}</p>}
+
+                            <div className='option-div'>
+                                <div className='option-col1'>
+                                    <div className={`add-que-form-group ${fieldErrors.optionOne ? 'has-error' : ''}`}>
+                                        <label htmlFor='option-one' className='quiz-label'>Option One:</label>
+                                        <InputField
+                                            type='text'
+                                            id='option-one'
+                                            className={`add-update-question-field ${fieldErrors.optionOne ? 'question-error-field' : ''}`}
+                                            value={options.optionOne}
+                                            onChange={(e) => handleOptionChange('optionOne', e.target.value)}
+                                        />
+                                        {fieldErrors.optionOne && <p className='question-error-message'>{fieldErrors.optionOne}</p>}
+                                    </div>
+                                    <div className={`add-que-form-group ${fieldErrors.optionTwo ? 'has-error' : ''}`}>
+                                        <label htmlFor='option-two' className='quiz-label'>Option Two:</label>
+                                        <InputField
+                                            type='text'
+                                            id='option-two'
+                                            className={`add-update-question-field ${fieldErrors.optionTwo ? 'question-error-field' : ''}`}
+                                            value={options.optionTwo}
+                                            onChange={(e) => handleOptionChange('optionTwo', e.target.value)}
+                                        />
+                                        {fieldErrors.optionTwo && <p className='question-error-message'>{fieldErrors.optionTwo}</p>}
+                                    </div>
+
+                                </div>
+                                <div className='option-col2'>
+                                    <div className={`add-que-form-group ${fieldErrors.optionThree ? 'has-error' : ''}`}>
+                                        <label htmlFor='option-three' className='quiz-label'>Option Three:</label>
+                                        <InputField
+                                            type='text'
+                                            id='option-three'
+                                            className={`add-update-question-field ${fieldErrors.optionThree ? 'question-error-field' : ''}`}
+                                            value={options.optionThree}
+                                            onChange={(e) => handleOptionChange('optionThree', e.target.value)}
+                                        />
+                                        {fieldErrors.optionThree && <p className='question-error-message'>{fieldErrors.optionThree}</p>}
+                                    </div>
+                                    <div className={`add-que-form-group ${fieldErrors.optionFour ? 'has-error' : ''}`}>
+                                        <label htmlFor='option-four' className='quiz-label'>Option Four:</label>
+                                        <InputField
+                                            type='text'
+                                            id='option-four'
+                                            className={`add-update-question-field ${fieldErrors.optionFour ? 'question-error-field' : ''}`}
+                                            value={options.optionFour}
+                                            onChange={(e) => handleOptionChange('optionFour', e.target.value)}
+                                        />
+                                        {fieldErrors.optionFour && <p className='question-error-message'>{fieldErrors.optionFour}</p>}
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div className={`form-group ${fieldErrors.optionTwo ? 'has-error' : ''}`}>
-                                <label htmlFor='option-two'>Option Two:</label>
-                                <InputField
-                                    type='text'
-                                    id='option-two'
-                                    className={`add-update-question-field ${fieldErrors.optionTwo ? 'question-error-field' : ''}`}
-                                    value={options.optionTwo}
-                                    onChange={(e) => handleOptionChange('optionTwo', e.target.value)}
-                                />
-                                {fieldErrors.optionTwo && <p className='question-error-message'>{fieldErrors.optionTwo}</p>}
-                            </div>
-                            <div className={`form-group ${fieldErrors.optionThree ? 'has-error' : ''}`}>
-                                <label htmlFor='option-three'>Option Three:</label>
-                                <InputField
-                                    type='text'
-                                    id='option-three'
-                                    className={`add-update-question-field ${fieldErrors.optionThree ? 'question-error-field' : ''}`}
-                                    value={options.optionThree}
-                                    onChange={(e) => handleOptionChange('optionThree', e.target.value)}
-                                />
-                                {fieldErrors.optionThree && <p className='question-error-message'>{fieldErrors.optionThree}</p>}
-                            </div>
-                            <div className={`form-group ${fieldErrors.optionFour ? 'has-error' : ''}`}>
-                                <label htmlFor='option-four'>Option Four:</label>
-                                <InputField
-                                    type='text'
-                                    id='option-four'
-                                    className={`add-update-question-field ${fieldErrors.optionFour ? 'question-error-field' : ''}`}
-                                    value={options.optionFour}
-                                    onChange={(e) => handleOptionChange('optionFour', e.target.value)}
-                                />
-                                {fieldErrors.optionFour && <p className='question-error-message'>{fieldErrors.optionFour}</p>}
-                            </div>
-                            <div className={`form-group ${fieldErrors.correctOption ? 'has-error' : ''}`}>
-                                <label htmlFor='correct-option'>Correct Option:</label>
+
+
+                            <div className={`add-que-form-group ${fieldErrors.correctOption ? 'has-error' : ''}`}>
+                                <label className='select-quiz'  htmlFor='correct-option'>Correct Option:</label>
                                 <select
                                     id='correct-option'
                                     className={`add-update-question-field ${fieldErrors.correctOption ? 'question-error-field' : ''}`}

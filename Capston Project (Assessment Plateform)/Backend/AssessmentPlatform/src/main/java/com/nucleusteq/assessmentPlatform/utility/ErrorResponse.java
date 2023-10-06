@@ -1,10 +1,13 @@
 package com.nucleusteq.assessmentPlatform.utility;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,6 +15,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@NoArgsConstructor
 public class ErrorResponse {
 
     /**
@@ -41,7 +45,7 @@ public class ErrorResponse {
      */
     public ErrorResponse(final int stasCode, final Map<String, String> errs) {
         this.statusCode = stasCode;
-        this.errors = errs;
+        this.errors = errs != null ? new HashMap<>(errs) : null;
     }
 
     /**
@@ -54,5 +58,35 @@ public class ErrorResponse {
     public ErrorResponse(final int stasCode, final String msg) {
         this.statusCode = stasCode;
         this.message = msg;
+    }
+
+    /**
+     *  Getter for field error.
+     * @return map containing errors.
+     */
+    public Map<String, String> getErrors() {
+        return errors != null ? Collections.unmodifiableMap(errors) : null;
+    }
+
+   /**
+    * Setter for field error.
+    * @param inputErrors as parameter.
+    */
+    public void setErrors(final Map<String, String> inputErrors) {
+        this.errors = inputErrors != null ? new HashMap<>(inputErrors) : null;
+    }
+
+    /**
+     * All argument constructor of error fields.
+     * @param status as a parameter.
+     * @param msg as a parameter.
+     * @param inputErrors as a parameter.
+     */
+    public ErrorResponse(final int status, final String msg,
+            final Map<String, String> inputErrors) {
+        super();
+        this.statusCode = status;
+        this.message = msg;
+        this.errors = inputErrors != null ? new HashMap<>(inputErrors) : null;
     }
 }

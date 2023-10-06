@@ -20,7 +20,21 @@ const Login = () => {
         message: '',
     });
 
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('IsLoggedIn');
+        const userRole = localStorage.getItem('userRole');
+
+        if (isLoggedIn === 'true') {
+            if (userRole === 'admin') {
+                navigate('/adminHome');
+            } else if (userRole === 'user') {
+                navigate('/categoryHome');
+            }
+        }
+    }, [navigate]);
 
     const redirect = () => {
         navigate('/registration');
@@ -74,7 +88,7 @@ const Login = () => {
 
             toast.success(response.data.message);
         } catch (error) {
-            toast.error(error.response?.data);
+            toast.error(error.response.data.message);
         }
     };
 

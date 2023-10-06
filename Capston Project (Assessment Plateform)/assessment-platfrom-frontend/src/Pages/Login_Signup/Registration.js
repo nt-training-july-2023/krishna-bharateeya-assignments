@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Registration.css';
@@ -27,6 +27,19 @@ const Registration = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('IsLoggedIn');
+        const userRole = localStorage.getItem('userRole');
+
+        if (isLoggedIn === 'true') {
+            if (userRole === 'admin') {
+                navigate('/adminHome');
+            } else if (userRole === 'user') {
+                navigate('/categoryHome');
+            }
+        }
+    }, [navigate]);
 
     const redirect = () => {
         navigate('/');
@@ -186,84 +199,94 @@ const Registration = () => {
             <form className="registration-form" onSubmit={handleRegistration}>
                 <div className="registration-form-content">
                     <h2 className="registration-form-title">Registration</h2>
-                    <div className={`registration-form-group ${firstNameError ? 'has-error' : ''}`}>
-                        {firstNameError && <p className="registration-error-message">{firstNameError}</p>}
-                        <InputField
-                            type="text"
-                            className={`registration-form-control ${firstNameError ? 'registration-error-field' : ''}`}
-                            name="firstName"
-                            placeholder="First Name"
-                            value={firstName}
-                            onChange={(e) => handleFirstNameChange(e.target.value)}
 
-                        />
+                    <div className='main-column'>
+                        <div className='col1'>
+                            <div className={`registration-form-group ${firstNameError ? 'has-error' : ''}`}>
+                                {firstNameError && <p className="registration-error-message">{firstNameError}</p>}
+                                <InputField
+                                    type="text"
+                                    className={`registration-form-control ${firstNameError ? 'registration-error-field' : ''}`}
+                                    name="firstName"
+                                    placeholder="First Name"
+                                    value={firstName}
+                                    onChange={(e) => handleFirstNameChange(e.target.value)}
+
+                                />
+                            </div>
+
+                            <div className={`form-group ${lastNameError ? 'has-error' : ''}`}>
+                                {lastNameError && <p className="registration-error-message">{lastNameError}</p>}
+                                <InputField
+                                    type="text"
+                                    className={`registration-form-control ${lastNameError ? 'registration-error-field' : ''}`}
+                                    name="lastName"
+                                    placeholder="Last name"
+                                    value={lastName}
+                                    onChange={(e) => handleLastNameChange(e.target.value)}
+
+                                />
+                            </div>
+
+                            <div className={`registration-form-group ${mobileNumberError ? 'has-error' : ''}`}>
+                                {mobileNumberError && <p className="registration-error-message">{mobileNumberError}</p>}
+                                <InputField
+                                    type="tel"
+                                    className={`registration-form-control ${mobileNumberError ? 'registration-error-field' : ''}`}
+                                    name="mobileNumber"
+                                    placeholder="Mobile Number"
+                                    value={mobileNumber}
+                                    onChange={(e) => handleMobileNumberChange(e.target.value)}
+
+                                />
+                            </div>
+
+
+
+                        </div>
+
+                        <div className='col2'>
+                            <div className={`registration-form-group ${emailError ? 'has-error' : ''}`}>
+                                {emailError && <p className="registration-error-message">{emailError}</p>}
+                                <InputField
+                                    type="text"
+                                    className={`registration-form-control ${emailError ? 'registration-error-field' : ''}`}
+                                    name="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => handleEmailChange(e.target.value)}
+
+                                />
+                            </div>
+
+                            <div className={`registration-form-group ${passwordError ? 'has-error' : ''}`}>
+                                {passwordError && <p className="registration-error-message">{passwordError}</p>}
+                                <InputField
+                                    type="password"
+                                    className={`registration-form-control ${passwordError ? 'registration-error-field' : ''}`}
+                                    name="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => handlePasswordChange(e.target.value)}
+
+                                />
+                            </div>
+
+                            <div className={`registration-form-group ${confirmPasswordError ? 'has-error' : ''}`}>
+                                {confirmPasswordError && <p className="registration-error-message">{confirmPasswordError}</p>}
+                                <InputField
+                                    type="password"
+                                    className={`registration-form-control ${confirmPasswordError ? 'registration-error-field' : ''}`}
+                                    name="confirmPassword"
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(e) => handleConfirmPasswordChange(e.target.value)}
+
+                                />
+                            </div>
+                        </div>
+
                     </div>
-
-                    <div className={`form-group ${lastNameError ? 'has-error' : ''}`}>
-                        {lastNameError && <p className="registration-error-message">{lastNameError}</p>}
-                        <InputField
-                            type="text"
-                            className={`registration-form-control ${lastNameError ? 'registration-error-field' : ''}`}
-                            name="lastName"
-                            placeholder="Last name"
-                            value={lastName}
-                            onChange={(e) => handleLastNameChange(e.target.value)}
-
-                        />
-                    </div>
-
-                    <div className={`registration-form-group ${mobileNumberError ? 'has-error' : ''}`}>
-                        {mobileNumberError && <p className="registration-error-message">{mobileNumberError}</p>}
-                        <InputField
-                            type="tel"
-                            className={`registration-form-control ${mobileNumberError ? 'registration-error-field' : ''}`}
-                            name="mobileNumber"
-                            placeholder="Mobile Number"
-                            value={mobileNumber}
-                            onChange={(e) => handleMobileNumberChange(e.target.value)}
-
-                        />
-                    </div>
-
-                    <div className={`registration-form-group ${emailError ? 'has-error' : ''}`}>
-                        {emailError && <p className="registration-error-message">{emailError}</p>}
-                        <InputField
-                            type="text"
-                            className={`registration-form-control ${emailError ? 'registration-error-field' : ''}`}
-                            name="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => handleEmailChange(e.target.value)}
-
-                        />
-                    </div>
-
-                    <div className={`registration-form-group ${passwordError ? 'has-error' : ''}`}>
-                        {passwordError && <p className="registration-error-message">{passwordError}</p>}
-                        <InputField
-                            type="password"
-                            className={`registration-form-control ${passwordError ? 'registration-error-field' : ''}`}
-                            name="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => handlePasswordChange(e.target.value)}
-
-                        />
-                    </div>
-
-                    <div className={`registration-form-group ${confirmPasswordError ? 'has-error' : ''}`}>
-                        {confirmPasswordError && <p className="registration-error-message">{confirmPasswordError}</p>}
-                        <InputField
-                            type="password"
-                            className={`registration-form-control ${confirmPasswordError ? 'registration-error-field' : ''}`}
-                            name="confirmPassword"
-                            placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => handleConfirmPasswordChange(e.target.value)}
-
-                        />
-                    </div>
-
                     <div className="registration-submit">
                         <Button onClick={handleRegistration} className="button" type="submit" children='Submit'></Button>
                     </div>

@@ -17,10 +17,15 @@ import AddOrUpdateQuestion from './Pages/Question/AddOrUpdateQuestion';
 
 import QuizHome from './Pages/Quiz/QuizHome';
 import UserTest from './Pages/UserHome/UserTest';
-
+import React, { useState} from "react";
 
 function App() {
-
+  
+  const[isRefresh, setIsRefresh]=useState(false)
+   function setTrue() {
+   setIsRefresh(true);
+  }
+  
   return (
     <div>
        <ToastContainer
@@ -69,7 +74,7 @@ function App() {
           <Route exact path="/add-question/:quizId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           <Route exact path="/update-question/:questionId" element={<PrivateRoute Component={AddOrUpdateQuestion} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           
-          <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
+          <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')}  isRefresh={isRefresh} setTrue={setTrue}/>} />
           
           <Route exact path="/report" element={<PrivateRoute Component={TestReport} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
           

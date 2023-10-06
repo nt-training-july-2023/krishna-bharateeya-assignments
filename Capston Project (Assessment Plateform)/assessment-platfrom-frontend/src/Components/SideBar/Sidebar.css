@@ -18,7 +18,7 @@
   color: #fff;
   height: 100vh;
   margin-top: 0px !important;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   overflow-x: hidden;
   position: fixed;
 }
@@ -52,13 +52,13 @@
   color: #fff;
   padding: 10px 15px;
   gap: 15px;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
 }
 
 .link:hover {
   background: lightskyblue;
   color: #000;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
 }
 
 .link_text {
@@ -85,9 +85,10 @@
   background-color: #ED0800;
   color: white;
   text-decoration: none;
-  padding: 4px 45px;
-  gap: 0px;
-  
+  padding: 4px 46px;
+  margin-top: 452px;
+  position: fixed;
+  top: 123px; 
 }
 
 
@@ -100,10 +101,13 @@
 }
 
 .logout-button button:hover {
-  background-color: #cc0000; /* Darker red on hover */
+  background-color: #cc0000; 
+}
+.powerOff-icon{
+  height: 33px;
+  margin-left: 19px;
 }
 
-/* Media query for mobile and tablet view */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -125,14 +129,13 @@
   .container {
     position: relative;
   }
-}
-
-@media (max-width: 900px) {
-  .sidebar {
-    position: fixed;
-    z-index: 1;
-    height: 120vh !important;
-    overflow-x: hidden;
-    transition: 0.5s;
+  .sidebar-logout-button a {
+    padding: 4px 13px;
+    padding: 10px 13px; 
   }
+  .powerOff-icon{
+    height: 33px;
+    margin-left: 0px;
+  }
+ 
 }

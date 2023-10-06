@@ -40,9 +40,10 @@
     margin-left: 500px;
 }
 
-.add-Update-quiz-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
+.add-Update-quiz-content {
+    /* padding-left: 15%;
+    padding-right: 15%; */
+    padding: 8%;
 }
 
 .add-Update-quiz-title {
@@ -54,7 +55,7 @@
 }
 
 .category-form-group {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
 }
 
 .d-grid {

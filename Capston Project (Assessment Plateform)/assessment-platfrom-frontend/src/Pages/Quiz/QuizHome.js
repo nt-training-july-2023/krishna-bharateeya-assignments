@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { GetQuizzes, DeleteQuiz, LoadQuizzesForCategory } from '../../ApiService/ApiService';
 import Button from '../../Components/Button/Button';
+import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
 const QuizHome = () => {
 
   const [quizzes, setQuizzes] = useState([]);
@@ -94,7 +95,7 @@ const QuizHome = () => {
       }
     });
   }
-  
+
   return (
 
     <div className='quiz-wrapper'>
@@ -113,50 +114,54 @@ const QuizHome = () => {
                 <>
                   <h3>Quiz Home</h3>
                   <center>
-                    
+
                     <Link className='add-quiz-button' to={categoryId ? `/add-quiz/${categoryId}` : '/add-quiz'}>Add Quiz</Link>
                   </center>
                 </>
               )}
             </div>
             <div className="category-card-body">
-              <div className="table-wrapper">
-                <table className="quiz-table">
+              {quizzes.length === 0 ? ( 
+                <NoDataMessage message="No Quiz found." />
+              ) : (
+                <div className="table-wrapper">
+                  <table className="quiz-table">
 
-                  <tbody className='quiz-table-content'>
-                    {quizzes.map((quiz, index) => (
-                      <div className="quiz-card" key={index}>
-                        <div className="quiz-card-header">
-                          <h3>{quiz.quizName}</h3>
-                          <p>{quiz.quizDescription}</p>
-                        </div>
-
-                        <div className="quiz-card-body">
-                          <div className="quiz-card-detail">
-                            <p><strong>Category Name: </strong>{quiz.category.categoryName}</p>
-
+                    <tbody className='quiz-table-content'>
+                      {quizzes.map((quiz, index) => (
+                        <div className="quiz-card" key={index}>
+                          <div className="quiz-card-header">
+                            <h3>{quiz.quizName}</h3>
+                            <p>{quiz.quizDescription}</p>
                           </div>
 
-                          <div className="quiz-card-detail">
-                            <p><strong>Time:</strong> {quiz.timeInMinutes} minutes</p>
+                          <div className="quiz-card-body">
+                            <div className="quiz-card-detail">
+                              <p><strong>Category Name: </strong>{quiz.category.categoryName}</p>
+
+                            </div>
+
+                            <div className="quiz-card-detail">
+                              <p><strong>Time:</strong> {quiz.timeInMinutes} minutes</p>
+                            </div>
+                          </div>
+                          <div className="quiz-card-footer">
+                            {userRole === 'user' ? (
+                              <Button className="start-quiz-button" onClick={() => handleOpenQuiz(quiz.quizId)}>Take Test</Button>
+                            ) : (
+                              <>
+                                <Link className="button-add-view-question" to={`/question/${quiz.quizId}`}>Questions</Link>
+                                <Link className="button-update-quiz" to={`/update-quiz/${quiz.quizId}`}>Update</Link>
+                                <Button className="button-delete-quiz" onClick={() => confirmDelete(quiz.quizId)}>Delete</Button>
+                              </>
+                            )}
                           </div>
                         </div>
-                        <div className="quiz-card-footer">
-                          {userRole === 'user' ? (
-                            <Button className="start-quiz-button" onClick={() => handleOpenQuiz(quiz.quizId)}>Take Test</Button>
-                          ) : (
-                            <>
-                              <Link className="button-add-view-question" to={`/question/${quiz.quizId}`}>View Questions</Link>
-                              <Link className="button-update-quiz" to={`/update-quiz/${quiz.quizId}`}>Update Quiz</Link>
-                              <Button className="button-delete-quiz" onClick={() => confirmDelete(quiz.quizId)}>Delete Quiz</Button>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         </div>

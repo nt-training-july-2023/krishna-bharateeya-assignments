@@ -52,6 +52,11 @@ public class QuestionServiceImpl implements QuestionService {
             .getLogger(QuestionServiceImpl.class);
 
     /**
+     * Creating a instance to check duplicate.
+     */
+    private static final int EXPECTED_NUMBER_OF_OPTIONS = 4;
+
+    /**
      * Adds a new question to the assessment platform.
      * @param questionDto The DTO (Data Transfer Object).
      * @return A message indicating the success of the operation.
@@ -67,7 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
         optionSet.add(resQue.getOptionThree());
         optionSet.add(resQue.getOptionFour());
 
-        if (optionSet.size() < 4) {
+        if (optionSet.size() < EXPECTED_NUMBER_OF_OPTIONS) {
           LOGGER.error(Message.DUPLICATE_OPTION_ERROR);
           throw new DuplicateOptionException(Message.DUPLICATE_OPTION_ERROR);
         }

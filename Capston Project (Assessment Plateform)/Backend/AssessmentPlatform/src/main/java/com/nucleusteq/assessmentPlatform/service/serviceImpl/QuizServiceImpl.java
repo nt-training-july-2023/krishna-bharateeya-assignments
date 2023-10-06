@@ -69,9 +69,9 @@ public class QuizServiceImpl implements QuizService {
         Optional<Quiz> existingQuiz = quizRepository
                 .findByQuizName(quizDTO.getQuizName());
         if (existingQuiz.isPresent()) {
-            LOGGER.error(Message.QUIZ__ALREADY_EXISTS);
+            LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
             throw new AlreadyExistsException(
-                    Message.QUIZ__ALREADY_EXISTS);
+                    Message.QUIZ_ALREADY_EXISTS);
         }
         Optional<Category> categoryDto = categoryRepository
                 .findById(quizDTO.getCategory().getCategoryId());
@@ -109,8 +109,8 @@ public class QuizServiceImpl implements QuizService {
         if (!existingQuiz.getQuizName().equals(quizDTO.getQuizName())
                 && quizRepository.findByQuizName(quizDTO.getQuizName())
                         .isPresent()) {
-            LOGGER.error(Message.QUIZ__ALREADY_EXISTS);
-            throw new AlreadyExistsException(Message.QUIZ__ALREADY_EXISTS);
+            LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
+            throw new AlreadyExistsException(Message.QUIZ_ALREADY_EXISTS);
         }
 
         existingQuiz.setQuizName(quizDTO.getQuizName());

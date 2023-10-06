@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import './AddOrUpdateCategory.css';
 import Sidebar from "../../Components/SideBar/Sidebar";
 import { toast } from "react-toastify";
@@ -65,7 +67,7 @@ const AddOrUpdateCategory = () => {
       if (categoryId) {
 
         response = await SaveCategory(category, categoryId);
-        console.log("Create category message :",response)
+        console.log("Create category message :", response)
         toast.success(response.message);
       } else {
         response = await SaveCategory(category);
@@ -73,9 +75,14 @@ const AddOrUpdateCategory = () => {
       }
       navigate('/categoryHome');
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || 'An error occurred. Please try again.'
-      );
+
+      const errorMessage =
+        error.response?.data?.message || 'An error occurred. Please try again.';
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -111,8 +118,8 @@ const AddOrUpdateCategory = () => {
           <form className="add-category-form" onSubmit={handleFormSubmit}>
             <h2 className="category-title">{categoryId ? 'Update Category' : 'Add Category'}</h2>
             <div className="add-category-form-content">
-              
-              <div className= {`category-form-group ${categoryNameError ? 'has-error' : ''}`}>
+
+              <div className={`category-form-group ${categoryNameError ? 'has-error' : ''}`}>
                 {categoryNameError && <p className="category-error-message">{categoryNameError}</p>}
                 <InputField
                   type="text"

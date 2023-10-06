@@ -81,7 +81,6 @@
 
 .add-category-button-container {
     display: flex;
-    justify-content: space-between;
     margin-top: 1.5rem;
 }
 
@@ -97,7 +96,6 @@
 .add-category-cancel-button {
     
     flex: 1;
-    margin-right: 0.5rem;
     width: 100%;
     padding: 0.75rem;
     font-size: 1rem;
@@ -113,8 +111,10 @@
     }
 }
 
+
 .add-category-submit-button{
-    margin-left: 2rem;
+    margin-left: 1rem;
+    margin-right: 10px;
 }
 
 .add-category-cancel-button {
@@ -123,7 +123,7 @@
     background-color: #ff0000;
     color: white;
     cursor: pointer;
-
+    margin-right: 1rem;
     &:hover {
         background-color: #7c0f0f;
     }

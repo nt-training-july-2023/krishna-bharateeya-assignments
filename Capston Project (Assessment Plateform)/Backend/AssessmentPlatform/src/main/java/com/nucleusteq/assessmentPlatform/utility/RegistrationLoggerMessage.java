@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contains the constant strings  related to user registration.
  */
-public class RegistrationLoggerMessage {
+public final class RegistrationLoggerMessage {
 
     /**
      * Log message indicating that a user has registered successfully.
@@ -72,5 +72,5 @@ public class RegistrationLoggerMessage {
      */
     private RegistrationLoggerMessage() {
     }
-    
+
 }

@@ -25,7 +25,9 @@
     position: fixed;
     width: 98%;
     color: white;
-    background-color: #04066e;
+    /* background-color: #04066e; #0F3443 + #34E89E */
+    background: linear-gradient(to right, #0F3443, #34E89E);
+
     padding: 15px;
     justify-content: space-between;
     align-items: center;
@@ -49,18 +51,19 @@
 }
 
 .user-test-card-body {
-    /* margin-top: 100px; */
     padding: 1px;
 }
 
 .user-test-table-wrapper {
+    display: flex;
+    justify-content: center;
     overflow-x: auto;
 }
 
 .user-test-table {
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
-    background-color: #d4c5c5;
+    /* background-color: #d4c5c5; */
     min-height: 83vh;
     margin-top: 100px;
 }

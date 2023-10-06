@@ -1,0 +1,9 @@
+.no-data-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+    background-color: rgb(250, 215, 215);
+    min-height: 75vh;
+  }
+  

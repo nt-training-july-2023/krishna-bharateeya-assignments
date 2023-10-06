@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contains the constant strings related to validations.
  */
-final public class ValidationMessage {
+public final class ValidationMessage {
     /**
      * Validation message for an empty first name field.
      */
@@ -170,6 +170,6 @@ final public class ValidationMessage {
     /**
      * Constructor for preventing the object creation of this class.
      */
-    private ValidationMessage(){ 
+    private ValidationMessage() {
     }
 }

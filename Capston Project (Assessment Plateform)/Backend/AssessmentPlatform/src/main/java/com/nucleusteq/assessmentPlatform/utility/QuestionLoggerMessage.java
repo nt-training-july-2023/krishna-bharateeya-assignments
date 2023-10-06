@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contain the constant strings of question operations.
  */
-public class QuestionLoggerMessage {
+public final class QuestionLoggerMessage {
 
     /**
      * Log message indicating that a request has been received to create a new

@@ -25,6 +25,11 @@ public class RegistrationDto {
     private int userId;
 
     /**
+     * Creating a instance to check duplicate.
+     */
+    private static final int EXPECTED_PASSWORD_LENGTH = 4;
+
+    /**
      * The first name of the user.
      */
     @NotBlank(message = ValidationMessage.FIRST_NAME_EMPTY)
@@ -61,6 +66,7 @@ public class RegistrationDto {
      * The password of the user.
      */
     @NotBlank(message = ValidationMessage.PASSWORD_EMPTY)
-    @Size(min = 4, message = ValidationMessage.PASSWORD_SIZE)
+    @Size(min = EXPECTED_PASSWORD_LENGTH,
+    message = ValidationMessage.PASSWORD_SIZE)
     private String password;
 }

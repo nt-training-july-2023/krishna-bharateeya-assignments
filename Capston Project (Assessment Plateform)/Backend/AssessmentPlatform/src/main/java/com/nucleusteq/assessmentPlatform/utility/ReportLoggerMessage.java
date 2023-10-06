@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contains the constant strings related to report.
  */
-public class ReportLoggerMessage {
+public final class ReportLoggerMessage {
 
     /**
      * Log message indicating that a request has been received to generate a

@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contains a collection of constant strings messages.
  */
-final public class Message {
+public final class Message {
 
     /**
      * Validation message indicating that method arguments failed validation.
@@ -116,8 +116,8 @@ final public class Message {
     /**
      * Error message indicating that a quiz already exists.
      */
-    public static final String QUIZ__ALREADY_EXISTS =
-            "This quiz already exists in database.";
+    public static final String QUIZ_ALREADY_EXISTS =
+            "This quiz already exists.";
 
     /**
      * Error message indicating that a quiz does not exist.

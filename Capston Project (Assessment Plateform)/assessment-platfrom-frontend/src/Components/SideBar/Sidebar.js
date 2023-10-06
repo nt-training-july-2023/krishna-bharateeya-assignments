@@ -121,7 +121,9 @@ const Sidebar = ({ children }) => {
             onClick={handleLogoutConfirmation}
           >
             <div className="icon">
-              <FaPowerOff />
+              <div className='powerOff-icon'>
+              < FaPowerOff />
+              </div>
             <div style={{ display: isOpen ? "block" : "none" }} className="link_text">Logout</div>
             </div>
           </NavLink>

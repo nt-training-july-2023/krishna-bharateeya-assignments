@@ -5,9 +5,7 @@
 }
 
 .add-update-question-container {
-
-    display: flex;
-    
+    display: flex; 
 }
 .add-update-question-field{
     width: 100%;
@@ -20,7 +18,6 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    /* margin-bottom: 0.5rem; */
 }
 .add-update-question-column {
 
@@ -29,20 +26,17 @@
 }
 
 .add-update-question-form {
-    width: 420px;
+    width: 55%;
     box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
     padding-top: 30px;
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: whitesmoke;
-    /* margin: auto; */
-    margin-top: 25px;
-    margin-left: 500px;
+    margin: auto;
 }
 
 .add-Update-quiz-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
+    padding: 5%;
 }
 
 .add-update-question-title {
@@ -53,21 +47,23 @@
     font-weight: 800;
 }
 
-/* .category-form-group {
-    margin-top: 1.5rem;
-} */
+.select-quiz{
+    margin-bottom: 10px;
+}
 
 .d-grid {
-    /* margin: 11px; */
     margin-top: 1.5rem;
 }
 
+.add-que-form-group{
+    margin-top: 0.5rem;
+}
 .category-form-control {
     width: 100%;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
+    color: black;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -105,10 +101,10 @@
     padding-left: 12%;
     padding-right: 12%;
 }
-label {
-    display: block;
-    /* padding: 10px; */
-  }
+.quiz-label{
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
 
   input[type="text"],
 textarea {
@@ -169,6 +165,22 @@ textarea {
 .question-error-field {
     border-color: red;
 }
+
+.option-div{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.option-col1{
+    width: 49%;
+}
+
+.option-col2{
+    width: 49%;
+}
+
+
 
 @media(max-width : 768px)
 {

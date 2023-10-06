@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './TestReport.css'
 import { GetAllReport, GetReportByEmail } from '../../ApiService/ApiService';
 import Sidebar from "../../Components/SideBar/Sidebar";
+import NoDataMessage from "../../Components/NoDataMessage/NoDataMessage";
 
 const Report = () => {
 
@@ -43,9 +44,13 @@ const Report = () => {
           <Sidebar />
         </div>
         <div className='report-column'>
-        
 
 <table className='report-table'>
+{reports.length === 0 ? (
+            <NoDataMessage message="No Report found." />
+          ) : (
+            <>
+
             <thead >
               <tr>
                 <th>Sr. No.</th>
@@ -61,6 +66,7 @@ const Report = () => {
                 <th>Date and Time</th>
               </tr>
             </thead>
+          
             <tbody>
               {reports.map((report, index) => (
                 <tr key={index} className='report-row'>
@@ -78,6 +84,8 @@ const Report = () => {
                 </tr>
               ))}
             </tbody>
+            </>
+          )}
           </table>
         </div>
       </div>

@@ -30,7 +30,7 @@ public class SuccessResponse {
      * @param msge    A message providing additional information about the
      *                   success of the operation.
      */
-    public SuccessResponse(final int sttsCode , final String msge) {
+    public SuccessResponse(final int sttsCode, final String msge) {
         this.statusCode = sttsCode;
         this.message = msge;
     }

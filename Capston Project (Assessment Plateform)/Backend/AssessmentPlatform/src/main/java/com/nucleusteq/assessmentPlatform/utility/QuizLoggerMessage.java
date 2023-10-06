@@ -3,7 +3,7 @@ package com.nucleusteq.assessmentPlatform.utility;
 /**
  * This class contains a collection of constant strings related to- Quiz.
  */
-public class QuizLoggerMessage {
+public final class QuizLoggerMessage {
 
     /**
      * Log message indicating that a request has been received to save a new

@@ -40,9 +40,8 @@ body {
 .login-form-control {
   width: 100%;
   padding: 6px;
-  font-size: 1rem;
   line-height: 1.9;
-  color: #495057;
+  color: black;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;

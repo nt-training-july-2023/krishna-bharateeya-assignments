@@ -1,6 +1,8 @@
 import Sidebar from '../../Components/SideBar/Sidebar';
 import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
 import './AddOrUpdateQuiz.css'
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '../../Components/Button/Button';
@@ -30,6 +32,10 @@ const AddOrUpdateQuiz = () => {
   const validateNotEmpty = (value) => {
     if (typeof value === 'string' && !value.trim()) {
       return 'This field is required';
+    } else if (typeof value === 'number') {
+      if (isNaN(value) || value === 0) {
+        return 'Please enter minimum 1 minute time';
+      }
     }
     return '';
   };
@@ -151,10 +157,13 @@ const AddOrUpdateQuiz = () => {
       const navigationUrl = categoryId ? `/quiz/${categoryId}` : '/quiz';
       navigate(navigationUrl);
     } catch (error) {
-      toast.error(
-        error.response?.data?.message ||
-        'An error occurred when updating/adding the quiz. Please try again.'
-      );
+      const errorMessage =
+        error.response?.data?.message || 'An error occurred. Please try again.';
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+      });
     }
   };
 
@@ -174,7 +183,7 @@ const AddOrUpdateQuiz = () => {
             <h2 className="add-Update-quiz-title">
               {quizId ? 'Update Quiz' : 'Add Quiz'}
             </h2>
-            <div className="add-Update-quiz-form-content">
+            <div className="add-Update-quiz-content">
               <div className="form-groups">
                 <label htmlFor="category-select">Category:</label>
                 <select
@@ -183,7 +192,7 @@ const AddOrUpdateQuiz = () => {
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
-                  <option value=""disabled>--Select a category--</option>
+                  <option value="" disabled>--Select a category--</option>
                   {categories.map((category) => (
                     <option
                       key={category.categoryId}

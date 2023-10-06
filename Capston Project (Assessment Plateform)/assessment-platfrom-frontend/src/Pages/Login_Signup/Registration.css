@@ -8,7 +8,7 @@
 }
 
 .registration-form {
-    width: 420px;
+    width: 55%;
     box-shadow: rgba(0, 0, 0, 0.16) 1px 1px 10px;
     padding-top: -10px;
     padding-bottom: 20px;
@@ -17,8 +17,8 @@
 }
 
 .registration-form-content {
-    padding-left: 12%;
-    padding-right: 12%;
+    padding-left: 9%;
+    padding-right: 9%;
 }
 
 .registration-form-title {
@@ -79,7 +79,7 @@
     padding: 6px;
     font-size: 1rem;
     line-height: 1.9;
-    color: #495057;
+    color: black;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -113,4 +113,15 @@
 
 .registration-error-field {
     border-color: red;
+}
+.main-column{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.col1{
+width: 49%;
+}
+.col2{
+    width: 49%;
 }

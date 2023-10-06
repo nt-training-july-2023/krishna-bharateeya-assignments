@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Button from '../../Components/Button/Button';
+import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
 
 const QuestionHome = () => {
 
@@ -86,54 +87,58 @@ const QuestionHome = () => {
 
             </div>
             <div className="question-card-body">
-              <div className="question-table-wrapper">
-                <table className='question-table'>
-                  <tbody className='quiz-table-content'>
-                    {questions.map((question, index) => (
-                      <div className="question-card" key={question.questionId}>
-                        <div className="question-card-header">
-                          <h3>{question.quiz.quizName}</h3>
+              {questions.length === 0 ? ( 
+                <NoDataMessage message="No Questions found." /> 
+              ) : (
+                <div className="question-table-wrapper">
+                  <table className='question-table'>
+                    <tbody className='quiz-table-content'>
+                      {questions.map((question, index) => (
+                        <div className="question-card" key={question.questionId}>
+                          <div className="question-card-header">
+                            <h3>{question.quiz.quizName}</h3>
+                          </div>
+                          <div className="question-card-body">
+
+                            <h4>{question.questionText}</h4>
+                            <label>
+                              <input type="radio" name={`option${index}`} value="optionOne" />
+                              {question.options.optionOne}
+
+                            </label>
+                            <br />
+                            <label>
+                              <input type="radio" name={`option${index}`} value="optionTwo" />
+                              {question.options.optionTwo}
+                            </label>
+                            <br />
+                            <label>
+                              <input type="radio" name={`option${index}`} value="optionThree" />
+                              {question.options.optionThree}
+                            </label>
+                            <br />
+                            <label>
+                              <input type="radio" name={`option${index}`} value="optionFour" />
+                              {question.options.optionFour}
+                            </label>
+
+                            <p><strong>Correct Option:</strong> {question.options.correctOption}</p>
+                            <p>Category: {question.quiz.category.categoryName}</p>
+
+                          </div>
+                          <div className="question-card-footer">
+
+                            <Link className="update-question-button" to={`/update-question/${question.questionId}`}>Update Question</Link>
+                            <Button className="delete-question-button" onClick={() => confirmDelete(question.questionId)}>Delete Question</Button>
+
+                          </div>
                         </div>
-                        <div className="question-card-body">
+                      ))}
+                    </tbody>
+                  </table>
 
-                          <h4>{question.questionText}</h4>
-                          <label>
-                            <input type="radio" name={`option${index}`} value="optionOne" />
-                            {question.options.optionOne}
-
-                          </label>
-                          <br />
-                          <label>
-                            <input type="radio" name={`option${index}`} value="optionTwo" />
-                            {question.options.optionTwo}
-                          </label>
-                          <br />
-                          <label>
-                            <input type="radio" name={`option${index}`} value="optionThree" />
-                            {question.options.optionThree}
-                          </label>
-                          <br />
-                          <label>
-                            <input type="radio" name={`option${index}`} value="optionFour" />
-                            {question.options.optionFour}
-                          </label>
-
-                          <p><strong>Correct Option:</strong> {question.options.correctOption}</p>
-                          <p>Category: {question.quiz.category.categoryName}</p>
-
-                        </div>
-                        <div className="question-card-footer">
-
-                          <Link className="update-question-button" to={`/update-question/${question.questionId}`}>Update Question</Link>
-                          <Button className="delete-question-button" onClick={() => confirmDelete(question.questionId)}>Delete Question</Button>
-
-                        </div>
-                      </div>
-                    ))}
-                  </tbody>
-                </table>
-
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
