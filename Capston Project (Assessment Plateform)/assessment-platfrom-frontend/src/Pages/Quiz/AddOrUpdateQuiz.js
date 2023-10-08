@@ -1,10 +1,9 @@
 import Sidebar from '../../Components/SideBar/Sidebar';
-import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import UnauthorizedAccess from '../../Components/UnauthrizedAccess/UnauthorizedAccess';
 import './AddOrUpdateQuiz.css'
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Button from '../../Components/Button/Button';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,44 +41,35 @@ const AddOrUpdateQuiz = () => {
 
 
   useEffect(() => {
-    LoadCategories()
-      .then((categories) => setCategories(categories))
-      .catch((error) => toast.error(error.message));
-
-    if (categoryId) {
-      setSelectedCategory(categoryId);
-      axios
-      LoadCategoryById(categoryId)
-        .then((response) => {
-          const categoryData = response;
-          setSelectedCategoryObject(categoryData);
-        })
-        .catch((error) =>
-          toast.error(
-            error.response?.data?.message ||
-            'An error occurred when fetching quiz details. Please try again.'
-          )
-        );
-    }
-    if (quizId) {
-      axios
-      GetQuizById(quizId)
-        .then((response) => {
-          const quizData = response;
-          setSelectedCategory(quizData.category.categoryId);
-          setQuizName(quizData.quizName);
-          setQuizDescription(quizData.quizDescription);
-          setQuizTime(quizData.timeInMinutes);
-          setSelectedCategoryObject(quizData.category);
-        })
-        .catch((error) =>
-          toast.error(
-            error.response?.data?.message ||
-            'An error occurred when fetching quiz details. Please try again.'
-          )
-        );
-    }
+    fetchData();
   }, [quizId, categoryId]);
+
+  const fetchData = async () => {
+    try {
+      LoadCategories()
+        .then((categories) => setCategories(categories))
+        .catch((error) => toast.error(error.response?.data?.message ));
+
+      if (categoryId) {
+        setSelectedCategory(categoryId);
+        const categoryData = await LoadCategoryById(categoryId);
+        setSelectedCategoryObject(categoryData);
+      }
+
+      if (quizId) {
+        const quizData = await GetQuizById(quizId);
+        setSelectedCategory(quizData.category.categoryId);
+        setQuizName(quizData.quizName);
+        setQuizDescription(quizData.quizDescription);
+        setQuizTime(quizData.timeInMinutes);
+        setSelectedCategoryObject(quizData.category);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'An error occurred. Please try again.');
+    }
+  };
+
+
 
   const handleQuizNameChange = (event) => {
     const value = event.target.value;
@@ -97,27 +87,25 @@ const AddOrUpdateQuiz = () => {
     setQuizDescriptionError(validateNotEmpty(value));
   };
 
-  const handleCategoryChange = (event) => {
+  
+  const handleCategoryChange = async (event) => {
     const categoryId = event.target.value;
-
-    axios
-    LoadCategoryById(categoryId)
-      .then((response) => {
-        const categoryObject = response;
-        setSelectedCategoryObject(categoryObject);
-        setSelectedCategory(categoryId);
-        setSelectedCategoryError('');
-      })
-      .catch((error) => {
-        setSelectedCategoryObject(null);
-        setSelectedCategory('');
-        setSelectedCategoryError(
-          error.response?.data?.message ||
-          'An error occurred when selecting a category. Please try again.'
-        );
-        toast.error(selectedCategoryError);
-      });
+  
+    try {
+      const categoryObject = await LoadCategoryById(categoryId);
+      setSelectedCategoryObject(categoryObject);
+      setSelectedCategory(categoryId);
+      setSelectedCategoryError('');
+    } catch (error) {
+      setSelectedCategoryObject(null);
+      setSelectedCategory('');
+      setSelectedCategoryError(
+        error.response?.data?.message 
+      );
+      Swal.fire('Error', selectedCategoryError, 'error');
+    }
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

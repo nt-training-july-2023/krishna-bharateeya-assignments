@@ -57,7 +57,13 @@ public final class Message {
      * Error message indicating that a user does not exist.
      */
     public static final String USER_NOT_FOUND =
-            "User does not exist.";
+            "User does not exist with id : ";
+
+    /**
+     * Error message indicating that a user does not exist.
+     */
+    public static final String USER_NOT_FOUND_BY_EMAIL =
+            "User does not exist with Email id : ";
 
     /**
      * Success message indicating successful registration.
@@ -93,7 +99,7 @@ public final class Message {
      * Error message indicating that a category does not exist.
      */
     public static final String CATEGORY_NOT_FOUND =
-            "Category does not exist.";
+            "Category does not exist with id : ";
 
     /**
      * Success message indicating successful quiz creation.
@@ -123,7 +129,7 @@ public final class Message {
      * Error message indicating that a quiz does not exist.
      */
     public static final String QUIZ_NOT_FOUND =
-            "Quiz does not exist.";
+            "Quiz does not exist with id : ";
 
     /**
      * Success message indicating successful question creation.
@@ -154,7 +160,7 @@ public final class Message {
      * Error message indicating that a question does not exist.
      */
     public static final String QUESTION_NOT_FOUND =
-            "Question does not exist.";
+            "Question does not exist with id : ";
 
     /**
      * Error message indicating that all options must be unique.

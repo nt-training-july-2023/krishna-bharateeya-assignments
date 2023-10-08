@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
+import Swal from 'sweetalert2'; 9
+import 'sweetalert2/dist/sweetalert2.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Button from '../../Components/Button/Button';
 import InputField from '../../Components/InputField/InputField';
+import { LoginService } from '../../ApiService/ApiService';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,13 +15,6 @@ const Login = () => {
 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-
-    const [response, setResponse] = useState({
-        status: false,
-        userRole: '',
-        message: '',
-    });
-
 
     const navigate = useNavigate();
 
@@ -72,28 +67,26 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/users/login', {
-                email,
-                password
-            });
-            localStorage.setItem('IsLoggedIn', true);
-            localStorage.setItem('userRole', response.data.role);
-            localStorage.setItem('email', response.data.email);
 
-            if (response.data.role === 'admin') {
+            const userData = {
+                email,
+                password,
+            };
+            const response = await LoginService(userData);
+            localStorage.setItem('IsLoggedIn', true);
+            localStorage.setItem('userRole', response.role);
+            localStorage.setItem('email', response.email);
+
+            if (response.role === 'admin') {
                 navigate('/adminHome');
-            } else if (response.data.role === 'user') {
+            } else if (response.role === 'user') {
                 navigate('/userHome');
             }
-
-            toast.success(response.data.message);
+            toast.success(response.message);
         } catch (error) {
-            toast.error(error.response.data.message);
+            Swal.fire('Login Failed', error.response.data.message, 'error');
         }
     };
-
-
-
 
     return (
         <div className="login-container">

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
-import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 import com.nucleusteq.assessmentPlatform.utility.RegistrationLoggerMessage;
 import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
@@ -70,8 +69,7 @@ public class RegistrationController {
      */
     @PostMapping(path = "/login")
     public final ResponseEntity<Map<String, String>> loginUser(
-            @Valid @RequestBody final LoginRequestDto user)
-            throws UserNotFoundException {
+            @Valid @RequestBody final LoginRequestDto user) {
         LOGGER.info(RegistrationLoggerMessage.LOGIN_REQUEST, user.getEmail());
 
         Map<String, String> response = registrationService.loginUser(user);
@@ -90,7 +88,7 @@ public class RegistrationController {
      */
     @GetMapping("/get/{id}")
     public final ResponseEntity<RegistrationDto> getUserById(
-            @PathVariable("id") final int userId) throws UserNotFoundException {
+            @PathVariable("id") final int userId) {
         LOGGER.info(RegistrationLoggerMessage.USER_ID_REQUEST, userId);
         RegistrationDto registrationDto = this.registrationService
                 .getUserById(userId);
@@ -121,8 +119,7 @@ public class RegistrationController {
      */
     @GetMapping("/getUser/{email}")
     public final ResponseEntity<RegistrationDto> getUserByEmail(
-            @PathVariable("email") final String email)
-            throws UserNotFoundException {
+            @PathVariable("email") final String email) {
         LOGGER.info(RegistrationLoggerMessage.USER_BY_EMAIL);
         RegistrationDto registrationDto = this.registrationService
                 .getUserByEmail(email);

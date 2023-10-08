@@ -61,12 +61,6 @@ const Sidebar = ({ children }) => {
       name: "Report",
       icon: <FaRegChartBar />
     },
-    // {
-    //   name: "Logout",
-    //   icon: <FaPowerOff />,
-
-
-    // },
   ]
 
   useEffect(() => {
@@ -84,7 +78,7 @@ const Sidebar = ({ children }) => {
     };
   }, []);
 
-  const toggleButton = isOpen ? null : toggle; 
+  const toggleButton = isOpen ? null : toggle;
   return (
     <div className="container">
       <div style={{ width: isOpen ? "155px" : "50px" }} className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -122,9 +116,9 @@ const Sidebar = ({ children }) => {
           >
             <div className="icon">
               <div className='powerOff-icon'>
-              < FaPowerOff />
+                < FaPowerOff />
               </div>
-            <div style={{ display: isOpen ? "block" : "none" }} className="link_text">Logout</div>
+              <div style={{ display: isOpen ? "block" : "none" }} className="link_text">Logout</div>
             </div>
           </NavLink>
         </div>

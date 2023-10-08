@@ -14,18 +14,11 @@ const UserTest = () => {
     const userRole = localStorage.getItem('userRole');
     const email = localStorage.getItem('email');
 
-    const [totalQuestions, setTotalQuestions] = useState(0);
-    const [totalMarks, setTotalMarks] = useState(0);
-    const [userName, setUserName] = useState('');
-    const [userEmailId, setUserEmailId] = useState('');
     const [quizName, setQuizName] = useState('');
-    const [categoryName, setCategoryName] = useState('');
     const [timeInSeconds, setTimeInSeconds] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [countdownComplete, setCountdownComplete] = useState(false);
-    const [reloadAttempts, setReloadAttempts] = useState(0);
-    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
     const navigate = useNavigate();
 
@@ -60,10 +53,8 @@ const UserTest = () => {
                 if (!countdownComplete) {
 
                     setCountdownComplete(true);
-                    if(questions.length>0)
+                    if (questions.length > 0)
                         handleSubmit();
-                    else
-                        <NoDataMessage message="No Question found." />
                 }
             }
         };
@@ -81,8 +72,6 @@ const UserTest = () => {
         const prevCount = parseInt(localStorage.getItem('reloadAttempts')) || 0;
         const newCount = prevCount + 1;
         localStorage.setItem('reloadAttempts', newCount.toString());
-        setReloadAttempts(newCount);
-
         if (localStorage.getItem('reloadAttempts') >= 3 && localStorage.getItem('reloadAttempts') <= 6) {
             Swal.fire({
                 title: 'Warning',
@@ -100,12 +89,10 @@ const UserTest = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     handleSubmit();
-                    console.log('Submitted successfully');
                 }
             });
         } else if (localStorage.getItem('reloadAttempts') > 6) {
             handleSubmit();
-            console.log('Submitted successfully');
         }
     }, []);
 
@@ -113,26 +100,24 @@ const UserTest = () => {
         try {
             const storedTimer = localStorage.getItem("timerInSeconds");
             const data = await GetQuestionsByQuizId(quizId);
-            setQuestions(data);
+            if (data.length > 0) {
+                setQuestions(data);
 
-            setTotalQuestions(data.length);
-            setTotalMarks(data.length);
-            setCategoryName(data[0].quiz.category.categoryName);
-            setQuizName(data[0].quiz.quizName);
-            localStorage.setItem('quizName', data[0].quiz.quizName);
-            localStorage.setItem('categoryName', data[0].quiz.category.categoryName);
-            localStorage.setItem('totalQuestion', data.length);
-            localStorage.setItem('totalMarks', data.length);
-            const timerInMinutes = data[0].quiz.timeInMinutes;
-            const timerInSeconds = timerInMinutes * 60;
-            if (!storedTimer) {
-                setTimeInSeconds(timerInSeconds);
-                localStorage.setItem("timerInSeconds",
-                    timerInSeconds.toString());
+                setQuizName(data[0].quiz.quizName);
+                localStorage.setItem('quizName', data[0].quiz.quizName);
+                localStorage.setItem('categoryName', data[0].quiz.category.categoryName);
+                localStorage.setItem('totalQuestion', data.length);
+                localStorage.setItem('totalMarks', data.length);
+                const timerInMinutes = data[0].quiz.timeInMinutes;
+                const timerInSeconds = timerInMinutes * 60;
+                if (!storedTimer) {
+                    setTimeInSeconds(timerInSeconds);
+                    localStorage.setItem("timerInSeconds",
+                        timerInSeconds.toString());
+                }
             }
         } catch (error) {
-            console.error('Error fetching questions:', error);
-
+            Swal.fire('Error', error, 'error');
         }
     };
 
@@ -141,8 +126,6 @@ const UserTest = () => {
     const getUserDetails = async () => {
 
         const data = await GetUserByEmail(email);
-        setUserName(data.firstName + " " + data.lastName);
-        setUserEmailId(data.email)
         localStorage.setItem('userName', data.firstName + " " + data.lastName);
         localStorage.setItem('userEmail', data.email);
     };
@@ -209,7 +192,6 @@ const UserTest = () => {
                 attemptedQuestions: localStorage.getItem('attemptedQuestions'),
                 dateAndTime: time,
             };
-            setIsFormSubmitted(true);
             localStorage.removeItem("timerInSeconds");
             localStorage.removeItem("selectedAnswers");
             localStorage.removeItem("userName");
@@ -224,18 +206,33 @@ const UserTest = () => {
             localStorage.removeItem("attemptedQuestions");
 
             const result = await CreateReport(payload);
-            navigate('/categoryHome');
+            navigate('/userHome');
             Swal.fire('Answers Submitted!', 'Your answers have been submitted successfully.', 'success');
         } catch (error) {
-            console.error('Error submitting answers:', error);
             Swal.fire('Error', 'An error occurred while submitting your answers.', 'error');
         }
     };
 
+    const handleConfirmSubmit = () => {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Are you sure you want to submit the test?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleSubmit();
+            }
+        });
+    };
+
+
     if (userRole !== 'user') {
         return <UnauthorizedAccess />;
     }
-console.log("questions.length :",questions.length);
+
     return (
         <div className='user-test-wrapper'>
             <DisableBackButton />
@@ -243,22 +240,22 @@ console.log("questions.length :",questions.length);
                 <h2>Time Remaining: {formattedTime}</h2>
                 <h2>{quizName}</h2>
                 <h3>
-    {questions.length > 0 ? (
-        <button className="submit-answers-button" onClick={handleSubmit} disabled={submitted}>
-            Submit Test
-        </button>
-    ) : (
-        <Link className="exit-button" to="/categoryHome">Exit</Link>
-    )}
-</h3>
+                    {questions.length > 0 ? (
+                        <button className="submit-answers-button" onClick={handleConfirmSubmit} disabled={submitted}>
+                            Submit Test
+                        </button>
+                    ) : (
+                        <Link className="exit-button" to="/userHome">Exit</Link>
+                    )}
+                </h3>
             </div>
             <div className="user-test-card-body">
                 <form onSubmit={handleSubmit} disabled={submitted}>
-                    {questions.length === 0 ? (
-                        <NoDataMessage message="No Question found." />
-                    ) : (
-                        <div className="user-test-table-wrapper">
-                            <table className='user-test-table'>
+                    <div className="user-test-table-wrapper">
+                        <table className='user-test-table'>
+                            {questions.length === 0 ? (
+                                <NoDataMessage message="No Question found." />
+                            ) : (
                                 <tbody className='user-test-table-content'>
                                     {questions.map((question, index) => (
                                         <div className="user-test-card" key={question.questionId}>
@@ -311,9 +308,9 @@ console.log("questions.length :",questions.length);
                                         </div>
                                     ))}
                                 </tbody>
-                            </table>
-                        </div>
-                    )}
+                            )}
+                        </table>
+                    </div>
                 </form>
             </div>
         </div>

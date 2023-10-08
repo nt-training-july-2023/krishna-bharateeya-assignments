@@ -21,7 +21,7 @@ const Report = () => {
       } else {
         data = await GetAllReport();
       }
-      
+
       data.sort((a, b) => {
         const dateA = new Date(a.dateAndTime).getTime();
         const dateB = new Date(b.dateAndTime).getTime();
@@ -37,55 +37,57 @@ const Report = () => {
   };
 
   return (
-    
+
     <div className='report-wrapper'>
       <div className='report-container'>
         <div className='report-sidebar-column'>
           <Sidebar />
         </div>
         <div className='report-column'>
+          <div className="report-card-header">
 
-<table className='report-table'>
-{reports.length === 0 ? (
-            <NoDataMessage message="No Report found." />
-          ) : (
-            <>
+            <h3>Reports</h3>
 
-            <thead >
-              <tr>
-                <th>Sr. No.</th>
-                <th>User Name</th>
-                <th>User Email</th>
-                {/* <th>Category Name</th> */}
-                <th>Quiz Name</th>
-                <th>Total Marks</th>
-                <th>Marks Obtained</th>
-                <th>Wrong Answers</th>
-                <th>Total Questions</th>
-                <th>Attempted Questions</th>
-                <th>Date and Time</th>
-              </tr>
-            </thead>
-          
-            <tbody>
-              {reports.map((report, index) => (
-                <tr key={index} className='report-row'>
-                  <td>{index + 1}</td>
-                  <td>{report.userName}</td>
-                  <td>{report.userEmailId}</td>
-                  {/* <td>{report.categoryName}</td> */}
-                  <td>{report.quizName}</td>
-                  <td>{report.totalMarks}</td>
-                  <td>{report.marksObtained}</td>
-                  <td>{report.wrongAnswers}</td>
-                  <td>{report.totalQuestions}</td>
-                  <td>{report.attemptedQuestions}</td>
-                  <td>{report.dateAndTime}</td>
-                </tr>
-              ))}
-            </tbody>
-            </>
-          )}
+          </div>
+          <table className='report-table'>
+            {reports.length === 0 ? (
+              <NoDataMessage message="No Report found." />
+            ) : (
+              <>
+
+                <thead >
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Quiz Name</th>
+                    <th>Total Marks</th>
+                    <th>Marks Obtained</th>
+                    <th>Wrong Answers</th>
+                    <th>Attempted Questions</th>
+                    <th>Total Questions</th>
+                    <th>Date and Time</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {reports.map((report, index) => (
+                    <tr key={index} className='report-row'>
+                      <td>{index + 1}</td>
+                      <td>{report.userName}</td>
+                      <td>{report.userEmailId}</td>
+                      <td>{report.quizName}</td>
+                      <td>{report.totalMarks}</td>
+                      <td>{report.marksObtained}</td>
+                      <td>{report.wrongAnswers}</td>
+                      <td>{report.attemptedQuestions}</td>
+                      <td>{report.totalQuestions}</td>
+                      <td>{report.dateAndTime}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            )}
           </table>
         </div>
       </div>

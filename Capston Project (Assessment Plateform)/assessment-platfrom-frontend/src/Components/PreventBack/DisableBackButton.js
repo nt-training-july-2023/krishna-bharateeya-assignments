@@ -7,7 +7,6 @@ const DisableBackButton = () => {
 
   useEffect(() => {
     const handlePopstate = () => {
-      console.log("Back Button Pressed!");
       window.history.pushState(null, "", window.location.href);
     };
 

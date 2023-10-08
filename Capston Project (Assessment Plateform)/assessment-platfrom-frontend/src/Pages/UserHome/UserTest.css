@@ -4,7 +4,6 @@
 
 .user-test-main-card {
     box-shadow: 3px 3px 5px 5px #939fd4;
-    /* margin-top: 15px; */
     border: none;
     width: 100%;
 }
@@ -25,7 +24,6 @@
     position: fixed;
     width: 98%;
     color: white;
-    /* background-color: #04066e; #0F3443 + #34E89E */
     background: linear-gradient(to right, #0F3443, #34E89E);
 
     padding: 15px;
@@ -33,6 +31,23 @@
     align-items: center;
     display: flex;
 }
+
+.exit-button{
+    background-color: #e74c3c;
+    color: #fff; 
+    padding: 15px 50px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+  }
+  
+  .exit-button:hover {
+    background-color: #c0392b; 
+  }
+  
+
+
 
 
 .user-test-start-button {
@@ -63,7 +78,6 @@
 .user-test-table {
     width: 70%;
     border-collapse: collapse;
-    /* background-color: #d4c5c5; */
     min-height: 83vh;
     margin-top: 100px;
 }
@@ -97,7 +111,6 @@
 
 
 .submit-answers-button {
-    /* margin-right: 45%; */
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;

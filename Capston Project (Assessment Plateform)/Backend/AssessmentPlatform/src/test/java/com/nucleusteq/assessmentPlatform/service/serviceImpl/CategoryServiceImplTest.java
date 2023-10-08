@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
-import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
@@ -189,7 +189,7 @@ public class CategoryServiceImplTest {
         when(categoryRepository.findByCategoryName("ExistingCategory")).thenReturn(Optional.of(category));
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
 
-        assertThrows(AlreadyExistsException.class, () -> {
+        assertThrows(DuplicateResourceException.class, () -> {
             categoryService.addCategory(categoryDto);
         });
     }
@@ -213,7 +213,7 @@ public class CategoryServiceImplTest {
         when(categoryRepository.findByCategoryName("ExistingCategory")).thenReturn(Optional.of(category));
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
 
-        assertThrows(AlreadyExistsException.class, () -> {
+        assertThrows(DuplicateResourceException.class, () -> {
             categoryService.updateCategory(categoryDto);
         });
     }

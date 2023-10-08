@@ -1,20 +1,23 @@
   .user-home-container {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
   }
 
   .user-home-card {
     background-color: #fff;
     width: 850px;
-    height: 550px;
+    height: 632px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
+    margin-top: 7px;
+    margin-left: 158px;
+    
+    width: 88.3%;
   }
 
-  .card-header {
+  .user-card-header {
     background-color: #0071bc;
     color: #fff;
     padding: 10px;
@@ -38,7 +41,8 @@
 
   .card-footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
   }
 
   .continue-button {
@@ -49,9 +53,28 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 5px;
   }
 
   .continue-button:hover {
     background-color: #005691;
   }
+
+.instructions {
+  border: 2px solid #000; 
+  border-radius: 10px;
+  margin-top: 30px;
+  padding: 10px; 
+}
+
+.instructions h2 {
+  color: #333;
+}
+
+.instructions ul {
+  list-style-type: disc; 
+  margin-left: 20px;
+}
+
+.instructions li {
+  margin-bottom: 5px; 
+}

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
-import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
+import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
@@ -30,7 +30,7 @@ public interface RegistrationService {
      * @return The retrieved RegistrationDto.
      * @throws UserNotFoundException If the user is not found.
      */
-    RegistrationDto getUserById(int userId) throws UserNotFoundException;
+    RegistrationDto getUserById(int userId) throws ResourceNotFoundException;
 
     /**
      * Retrieves all user registrations.
@@ -46,7 +46,7 @@ public interface RegistrationService {
      * @throws UserNotFoundException If the user is not found.
      */
     Map<String, String> loginUser(LoginRequestDto inputRegistrationDto)
-            throws LoginFailedException, UserNotFoundException;
+            throws LoginFailedException, ResourceNotFoundException;
 
     /**
      * Retrieves a user registration by its ID.
@@ -54,5 +54,6 @@ public interface RegistrationService {
      * @return The retrieved RegistrationDto.
      * @throws UserNotFoundException If the user is not found.
      */
-    RegistrationDto getUserByEmail(String email) throws UserNotFoundException;
+    RegistrationDto getUserByEmail(String email)
+            throws ResourceNotFoundException;
 }

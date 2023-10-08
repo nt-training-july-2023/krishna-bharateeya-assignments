@@ -8,6 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { GetQuizzes, DeleteQuiz, LoadQuizzesForCategory } from '../../ApiService/ApiService';
 import Button from '../../Components/Button/Button';
 import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
+
 const QuizHome = () => {
 
   const [quizzes, setQuizzes] = useState([]);
@@ -28,8 +29,7 @@ const QuizHome = () => {
       setQuizzes(data);
 
     } catch (error) {
-      console.error('Error fetching questions:', error);
-
+      Swal.fire('Error', error.response.data.message, 'error');
     }
   };
 
@@ -39,7 +39,7 @@ const QuizHome = () => {
       loadQuizzes();
 
     } catch (error) {
-      console.log(error.response.data.message || 'An error occurred. Please try again.');
+      Swal.fire('Error', error.response.data.message, 'error');
     }
   };
 

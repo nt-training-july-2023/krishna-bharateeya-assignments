@@ -25,11 +25,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
-import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
-import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
-import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
@@ -54,7 +52,7 @@ class RegistrationServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    public void testAddUser_Success() throws DuplicateMobileNumberException, DuplicateEmailException {
+    public void testAddUser_Success() {
         RegistrationDto registrationDto = new RegistrationDto();
         registrationDto.setUserRole("user");
         registrationDto.setEmail("test@nucleusteq.com");
@@ -90,7 +88,7 @@ class RegistrationServiceImplTest {
 
         when(registrationRepository.findByEmail(anyString())).thenReturn(Optional.of(new Registration()));
 
-        assertThrows(DuplicateEmailException.class, () -> registrationService.addUser(registration));
+        assertThrows(DuplicateResourceException.class, () -> registrationService.addUser(registration));
     }
 
     @Test
@@ -106,7 +104,7 @@ class RegistrationServiceImplTest {
 
         when(registrationRepository.findByMobileNumber(anyString())).thenReturn(Optional.of(new Registration()));
 
-        assertThrows(DuplicateMobileNumberException.class, () -> registrationService.addUser(registration));
+        assertThrows(DuplicateResourceException.class, () -> registrationService.addUser(registration));
     }
     
 
@@ -114,7 +112,7 @@ class RegistrationServiceImplTest {
 
 
     @Test
-    public void testLoginUser_Success() throws LoginFailedException, UserNotFoundException {
+    public void testLoginUser_Success(){
         LoginRequestDto loginRequestDto = new LoginRequestDto();
         loginRequestDto.setEmail("test@nucleusteq.com");
         loginRequestDto.setPassword("password123");
@@ -157,11 +155,11 @@ class RegistrationServiceImplTest {
         inputDto.setPassword("password");
         when(registrationRepository.getByEmail(anyString())).thenReturn(null);
 
-        assertThrows(UserNotFoundException.class, () -> registrationService.loginUser(inputDto));
+        assertThrows(ResourceNotFoundException.class, () -> registrationService.loginUser(inputDto));
     }
 
     @Test
-    public void testGetUserById_Success() throws UserNotFoundException {
+    public void testGetUserById_Success() {
         Registration registration = new Registration();
         registration.setUserId(1);
         registration.setEmail("test@nucleusteq.com");
@@ -178,7 +176,7 @@ class RegistrationServiceImplTest {
     public void testGetUserById_UserNotFound() {
         when(registrationRepository.findById(anyInt())).thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class, () -> registrationService.getUserById(1));
+        assertThrows(ResourceNotFoundException.class, () -> registrationService.getUserById(1));
     }
 
     @Test
@@ -205,7 +203,7 @@ class RegistrationServiceImplTest {
     }
     
     @Test
-    public void testGetUserByEmail_UserFound() throws UserNotFoundException {
+    public void testGetUserByEmail_UserFound() {
         String userEmail = "krishna@nucleusteq.com";
         Registration user = new Registration();
         user.setUserId(1);
@@ -223,7 +221,7 @@ class RegistrationServiceImplTest {
     }
 
     @Test
-    public void testGetUserByEmail_UserNotFound() throws UserNotFoundException {
+    public void testGetUserByEmail_UserNotFound() {
         String userEmail = "nonexistent@nucleusteq.com";
         when(registrationRepository.findByEmail(userEmail)).thenReturn(Optional.empty());
 

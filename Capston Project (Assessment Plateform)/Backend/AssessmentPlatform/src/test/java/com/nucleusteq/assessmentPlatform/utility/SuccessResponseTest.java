@@ -15,7 +15,6 @@ public class SuccessResponseTest {
         assertEquals(statusCode, successResponse.getStatusCode());
         assertEquals(message, successResponse.getMessage());
 
-        // Test setter methods
         int newStatusCode = 201;
         String newMessage = "Created";
 

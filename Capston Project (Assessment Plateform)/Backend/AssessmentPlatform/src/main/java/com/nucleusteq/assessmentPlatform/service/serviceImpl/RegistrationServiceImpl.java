@@ -14,11 +14,9 @@ import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
 import com.nucleusteq.assessmentPlatform.entity.Registration;
-import com.nucleusteq.assessmentPlatform.exception.DuplicateEmailException;
-import com.nucleusteq.assessmentPlatform.exception.DuplicateMobileNumberException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.LoginFailedException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
-import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.RegistrationRepository;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 import com.nucleusteq.assessmentPlatform.utility.Message;
@@ -108,14 +106,14 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .findByMobileNumber(registrationDto.getMobileNumber())
                 .ifPresent(existingUser -> {
                     LOGGER.error(Message.DUPLICATE_MOBILE_NUMBER);
-                    throw new DuplicateMobileNumberException(
+                    throw new DuplicateResourceException(
                             Message.DUPLICATE_MOBILE_NUMBER);
                 });
 
         registrationRepository.findByEmail(registrationDto.getEmail())
                 .ifPresent(existingUser -> {
                     LOGGER.error(Message.DUPLICATE_EMAIL);
-                    throw new DuplicateEmailException(
+                    throw new DuplicateResourceException(
                             Message.DUPLICATE_EMAIL);
                 });
 
@@ -147,7 +145,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      */
     public final Map<String, String> loginUser(
             final LoginRequestDto inputRegistrationDto)
-            throws LoginFailedException, UserNotFoundException {
+            throws LoginFailedException, ResourceNotFoundException {
         Map<String, String> response = new HashMap<>();
 
         Registration foundRegistration = registrationRepository
@@ -155,7 +153,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         if (foundRegistration == null) {
             LOGGER.error(Message.USER_NOT_FOUND);
-            throw new UserNotFoundException(Message.USER_NOT_FOUND);
+            throw new ResourceNotFoundException(Message.USER_NOT_FOUND_BY_EMAIL
+                    +inputRegistrationDto.getEmail());
         }
 
         String password = inputRegistrationDto.getPassword();
@@ -184,14 +183,14 @@ public class RegistrationServiceImpl implements RegistrationService {
      */
     @Override
     public final RegistrationDto getUserById(final int userId)
-            throws UserNotFoundException {
+            throws ResourceNotFoundException {
         Registration registration = this.registrationRepository.findById(userId)
                 .orElse(null);
 
         if (registration == null) {
-            LOGGER.error(Message.RESOURCE_NOT_FOUND + userId);
-            throw new UserNotFoundException(
-                    Message.RESOURCE_NOT_FOUND + userId);
+            LOGGER.error(Message.USER_NOT_FOUND + userId);
+            throw new ResourceNotFoundException(
+                    Message.USER_NOT_FOUND + userId);
         }
         return registrationToDto(registration);
     }
@@ -204,7 +203,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      */
     @Override
     public final RegistrationDto getUserByEmail(final String email)
-            throws UserNotFoundException {
+            throws ResourceNotFoundException {
         Optional<Registration> user = registrationRepository.findByEmail(email);
 
         return user.map(foundRegistration -> {
@@ -212,9 +211,9 @@ public class RegistrationServiceImpl implements RegistrationService {
                     foundRegistration);
             return registrationDto;
         }).orElseThrow(() -> {
-            LOGGER.error(Message.RESOURCE_NOT_FOUND + email);
+            LOGGER.error(Message.USER_NOT_FOUND_BY_EMAIL + email);
             return new ResourceNotFoundException(
-                    Message.RESOURCE_NOT_FOUND + email);
+                    Message.USER_NOT_FOUND_BY_EMAIL + email);
         });
     }
 

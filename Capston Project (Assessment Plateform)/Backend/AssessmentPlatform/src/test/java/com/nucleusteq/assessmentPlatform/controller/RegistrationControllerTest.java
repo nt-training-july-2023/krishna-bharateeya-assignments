@@ -1,7 +1,6 @@
 package com.nucleusteq.assessmentPlatform.controller;
 import com.nucleusteq.assessmentPlatform.dto.LoginRequestDto;
 import com.nucleusteq.assessmentPlatform.dto.RegistrationDto;
-import com.nucleusteq.assessmentPlatform.exception.UserNotFoundException;
 import com.nucleusteq.assessmentPlatform.service.RegistrationService;
 import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
@@ -53,7 +52,7 @@ public class RegistrationControllerTest {
     }
 
     @Test
-    public void testLoginUser() throws UserNotFoundException {
+    public void testLoginUser(){
         LoginRequestDto loginRequestDto = new LoginRequestDto();
         loginRequestDto.setEmail("krishna@nucleusteq.com");
         loginRequestDto.setPassword("password123");
@@ -67,7 +66,7 @@ public class RegistrationControllerTest {
     }
 
     @Test
-    public void testGetUserById() throws UserNotFoundException {
+    public void testGetUserById(){
         int userId = 1;
         RegistrationDto expectedUser = createSampleUser(userId);
 
@@ -108,7 +107,7 @@ public class RegistrationControllerTest {
     }
     
     @Test
-    public void testGetUserByEmail() throws UserNotFoundException {
+    public void testGetUserByEmail() {
         String email = "krishna@nucleusteq.com";
         
         RegistrationDto user = new RegistrationDto();

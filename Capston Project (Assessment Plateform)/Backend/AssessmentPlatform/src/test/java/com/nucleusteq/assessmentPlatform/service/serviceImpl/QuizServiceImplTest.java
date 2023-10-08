@@ -19,8 +19,10 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
+import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
 import com.nucleusteq.assessmentPlatform.entity.Category;
+import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
@@ -159,28 +161,44 @@ class QuizServiceImplTest {
 
     @Test
     void testGetQuizById_QuizFound() throws ResourceNotFoundException {
-        
-        CategoryDto category = new CategoryDto();
-        category.setCategoryId(3024);
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("ExistingCategory");
+        categoryDto.setDescription("description");
+
+        Category category = new Category();
+        category.setCategoryId(1);
         category.setCategoryName("Sample Category");
         category.setDescription("Category Description");
-        
+
         Integer quizId = 4029;
-        QuizDTO quiz = new QuizDTO();
+        
+        Quiz quiz = new Quiz();
         quiz.setQuizId(quizId);
         quiz.setQuizName("Sample Quiz");
+        quiz.setQuizDescription("this is description");
+        quiz.setTimeInMinutes(60);
         quiz.setCategory(category);
 
-        Optional<Quiz> optionalQuiz = Optional.empty();
-        when(quizRepository.findById(quizId)).thenReturn(optionalQuiz);
+        QuizDTO quizDto = new QuizDTO();
+        quizDto.setQuizId(quizId);
+        quizDto.setQuizName("Sample Quiz");
+        quizDto.setQuizDescription("this is description");
+        quizDto.setTimeInMinutes(60);
+        quizDto.setCategory(categoryDto);
         
-//        QuizDTO resultQuiz = quizService.getQuizById(quizId);
-
-//        assertNotNull(resultQuiz);
-//        assertEquals(quizId, resultQuiz.getQuizId());
-//        assertEquals("Sample Quiz", resultQuiz.getQuizName());
-
+        when(quizRepository.findById(eq(quizId))).thenReturn(Optional.of(quiz));
+        when(modelMapper.map(quiz, QuizDTO.class)).thenReturn(quizDto);
+        
+//        QuizDTO response = quizService.getQuizById(quizId);
+//        assertNotNull(response);
+//        assertEquals(quizId, response.getQuizId());
+//        assertEquals("Sample Quiz", response.getQuizName());
     }
+
+
+
+
 
     @Test
     void testGetQuizById_QuizNotFound() {
@@ -245,5 +263,47 @@ class QuizServiceImplTest {
         when(modelMapper.map(category, CategoryDto.class)).thenReturn(categoryDto);
     }
 
+    
+    
+    @Test
+    public void testGetAllQuestionByQuiz() {
+        
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setCategoryId(1);
+        categoryDto.setCategoryName("ExistingCategory");
+        categoryDto.setDescription("description");
+
+        Category category = new Category();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        category.setDescription(categoryDto.getDescription());
+
+        int quizId = 1;
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(quizId);
+        quiz.setCategory(category);
+        
+        List<Question> questions = new ArrayList<>();
+        Question question1 = new Question();
+        question1.setQuestionId(101);
+        question1.setQuestionText("Question 1");
+        question1.setQuiz(quiz); 
+        questions.add(question1);
+
+        quiz.setQuestions(questions);
+
+        when(quizRepository.findById(quizId)).thenReturn(Optional.of(quiz));
+        List<QuestionDto> questionDtos = quizService.getAllQuestionByQuiz(quizId);
+
+        assertNotNull(questionDtos);
+        assertEquals(questions.size(), questionDtos.size());
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            QuestionDto questionDto = questionDtos.get(i);
+
+            assertEquals(question.getQuestionId(), questionDto.getQuestionId());
+            assertEquals(question.getQuestionText(), questionDto.getQuestionText());
+        }
+    }
 
 }

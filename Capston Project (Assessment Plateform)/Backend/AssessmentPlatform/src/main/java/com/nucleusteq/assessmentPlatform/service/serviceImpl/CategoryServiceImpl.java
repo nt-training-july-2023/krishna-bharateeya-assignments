@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
-import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
@@ -65,7 +65,8 @@ public class CategoryServiceImpl implements CategoryService {
                 .findByCategoryName(newCategory.getCategoryName());
         if (existingCategory.isPresent()) {
             LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
-            throw new AlreadyExistsException(Message.CATEGORY_ALREADY_EXISTS);
+            throw new DuplicateResourceException(
+                Message.CATEGORY_ALREADY_EXISTS);
         }
         categoryRepository.save(newCategory);
         return new SuccessResponse(HttpStatus.CREATED.value(),
@@ -128,7 +129,8 @@ public class CategoryServiceImpl implements CategoryService {
                         .findByCategoryName(categoryDto.getCategoryName())
                         .isPresent()) {
             LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
-            throw new AlreadyExistsException(Message.CATEGORY_ALREADY_EXISTS);
+            throw new DuplicateResourceException(
+                Message.CATEGORY_ALREADY_EXISTS);
         }
         existingCategory = dtoToEntity(categoryDto);
         categoryRepository.save(existingCategory);

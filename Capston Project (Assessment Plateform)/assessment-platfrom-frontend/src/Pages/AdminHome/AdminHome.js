@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './AdminHome.css';
-import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import UnauthorizedAccess from '../../Components/UnauthrizedAccess/UnauthorizedAccess';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -18,42 +17,41 @@ const AdminHome = () => {
   }, []);
 
   const handleLogout = () => {
-    console.log("logout function called");
-    toast.success("Logout successful");
+    toast.success("Logout successfully.");
     localStorage.removeItem('IsLoggedIn');
     localStorage.removeItem('userRole');
     localStorage.removeItem('email');
     navigate("/");
   };
 
-  const handleLogoutConfirmation =() =>{
+  const handleLogoutConfirmation = () => {
     Swal.fire({
-      text:"Confirm Logout?",
-      icon:"warning",
-      showCancelButton:true,
-      showConfirmButton:true,
-    }).then((result)=>{
-      if(result.isConfirmed){
+      text: "Confirm Logout?",
+      icon: "warning",
+      showCancelButton: true,
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
         handleLogout();
       }
-      });
+    });
   }
   const loadUsers = async () => {
     try {
-      const result = await LoadUsers(); 
+      const result = await LoadUsers();
       setUsers(result);
     } catch (error) {
       if (error.response) {
-        console.error('Server Error:', error.response.data);
+        Swal.fire('Error', error.response.data.message, 'error');
       }
     }
   };
 
-  
+
   const userRole = localStorage.getItem('userRole');
   if (userRole !== 'admin') {
-    return (     
-        <UnauthorizedAccess/>
+    return (
+      <UnauthorizedAccess />
     );
   }
 
@@ -61,7 +59,7 @@ const AdminHome = () => {
     <div className="admin-home-wrapper">
       <div className='admin-main-container'>
         <div className='siderbar-column'>
-          <Sidebar/>
+          <Sidebar />
         </div>
         <div className='admin-column'>
           <div className="admin-home-container">

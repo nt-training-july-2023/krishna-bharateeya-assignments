@@ -32,7 +32,7 @@
     padding-bottom: 20px;
     border-radius: 8px;
     background-color: whitesmoke;
-    margin: auto;
+    margin-left: 370px;
 }
 
 .add-Update-quiz-form-content {
@@ -186,6 +186,11 @@ textarea {
 {
     .add-Update-quiz-sidebar-column{
         height: 100vh;
+    }
+    .add-update-question-form {
+       
+        margin-left: 50px;
+        margin:auto;
     }
 }
 

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import './AddOrUpdateCategory.css';
 import Sidebar from "../../Components/SideBar/Sidebar";
 import { toast } from "react-toastify";
-import UnauthorizedAccess from "../UnauthrizedAccess/UnauthorizedAccess"
+import UnauthorizedAccess from '../../Components/UnauthrizedAccess/UnauthorizedAccess';
 import { LoadCategoryById, SaveCategory } from "../../ApiService/ApiService";
 import InputField from "../../Components/InputField/InputField";
 import Button from "../../Components/Button/Button";
@@ -67,7 +66,6 @@ const AddOrUpdateCategory = () => {
       if (categoryId) {
 
         response = await SaveCategory(category, categoryId);
-        console.log("Create category message :", response)
         toast.success(response.message);
       } else {
         response = await SaveCategory(category);
@@ -93,7 +91,7 @@ const AddOrUpdateCategory = () => {
       const response = await LoadCategoryById(categoryId);
       setCategory(response);
     } catch (error) {
-      toast.error('Failed to load category');
+      Swal.fire('Error', error.response.data.message, 'error');
     }
   };
 

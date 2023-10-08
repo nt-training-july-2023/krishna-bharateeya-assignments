@@ -1,7 +1,7 @@
 import Sidebar from '../../Components/SideBar/Sidebar';
 import './QuestionHome.css'
 import React, { useState, useEffect } from "react";
-import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import UnauthorizedAccess from '../../Components/UnauthrizedAccess/UnauthorizedAccess';
 import { LoadQuestions, DeleteQuestion, GetQuestionsByQuizId } from '../../ApiService/ApiService';
 import { Link, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -28,8 +28,7 @@ const QuestionHome = () => {
       setQuestions(data);
 
     } catch (error) {
-      console.error('Error fetching questions:', error);
-
+      Swal.fire('Error', error.response.data.message, 'error');
     }
   };
 
@@ -38,7 +37,7 @@ const QuestionHome = () => {
       await DeleteQuestion(questionId);
       loadQuestionsData();
     } catch (error) {
-      console.log(error.response || 'An error occurred. Please try again.');
+      Swal.fire('Error', error.response.data.message, 'error');
     }
   };
 
@@ -57,13 +56,6 @@ const QuestionHome = () => {
       deleteQuestion(questionId);
       Swal.fire('Deleted!', 'Your quiz has been deleted.', 'success');
     }
-  };
-
-  const handleOptionChange = (index, selectedOption) => {
-    setUserAnswers({
-      ...userAnswers,
-      [index]: selectedOption,
-    });
   };
 
   const userRole = localStorage.getItem('userRole');
@@ -87,8 +79,8 @@ const QuestionHome = () => {
 
             </div>
             <div className="question-card-body">
-              {questions.length === 0 ? ( 
-                <NoDataMessage message="No Questions found." /> 
+              {questions.length === 0 ? (
+                <NoDataMessage message="No Questions found." />
               ) : (
                 <div className="question-table-wrapper">
                   <table className='question-table'>

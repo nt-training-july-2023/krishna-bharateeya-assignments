@@ -53,28 +53,14 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles AlreadyExistsException by returning a response with a "Conflict"
-     * status.
-     * @param exception The AlreadyExistsException to handle.
-     * @return A ResponseEntity with a "Conflict" status and an error message.
-     */
-    @ExceptionHandler(AlreadyExistsException.class)
-    public final ResponseEntity<ErrorResponse> handleAlreadyExistException(
-            final AlreadyExistsException exception) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.CONFLICT.value(), exception.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    /**
      * Handles DuplicateEmailException by returning a response with a "Conflict"
      * status.
      * @param exception The DuplicateEmailException to handle.
      * @return A ResponseEntity with a "Conflict" status and an error message.
      */
-    @ExceptionHandler(DuplicateEmailException.class)
-    public final ResponseEntity<ErrorResponse> handleDuplicateEmail(
-            final DuplicateEmailException exception) {
+    @ExceptionHandler(DuplicateResourceException.class)
+    public final ResponseEntity<ErrorResponse> handleDuplicateResourceException(
+            final DuplicateResourceException exception) {
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.CONFLICT.value(), exception.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
@@ -110,20 +96,6 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles DuplicateMobileNumberException by returning a response with a
-     * "Conflict" status.
-     * @param exception The DuplicateMobileNumberException to handle.
-     * @return A ResponseEntity with a "Conflict" status and an error message.
-     */
-    @ExceptionHandler(DuplicateMobileNumberException.class)
-    public final ResponseEntity<ErrorResponse> handleDuplicateMobileNumber(
-            final DuplicateMobileNumberException exception) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.CONFLICT.value(), exception.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    /**
      * Handles UserEmailDomainException by returning a response with a "Bad
      * Request" status.
      * @param exception The UserEmailDomainException to handle.
@@ -131,26 +103,13 @@ public class GlobalExceptionHandler {
      *         message.
      */
     @ExceptionHandler(DuplicateOptionException.class)
-    public final ResponseEntity<ErrorResponse> handleEmailDomain(
+    public final ResponseEntity<ErrorResponse> handleDuplicateOptionException(
             final DuplicateOptionException exception) {
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.CONFLICT.value(), exception.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
-    /**
-     * Handles UserNotFoundException by returning a response with a "Not Found"
-     * status.
-     * @param exception The UserNotFoundException to handle.
-     * @return A ResponseEntity with a "Not Found" status and an error message.
-     */
-    @ExceptionHandler(UserNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleUserNotFound(
-            final UserNotFoundException exception) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(), exception.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
 
     /**
      * Handles HttpMessageNotReadableException by returning.

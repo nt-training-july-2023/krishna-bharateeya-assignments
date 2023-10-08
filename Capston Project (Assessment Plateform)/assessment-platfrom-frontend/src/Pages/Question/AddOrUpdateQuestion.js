@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './AddOrUpdateQuestion.css';
 import InputField from "../../Components/InputField/InputField";
-import UnauthorizedAccess from '../UnauthrizedAccess/UnauthorizedAccess';
+import UnauthorizedAccess from '../../Components/UnauthrizedAccess/UnauthorizedAccess';
 import { GetQuizzes, AddQuestions, UpdateQuestions, GetQuestionsById, GetQuizById } from '../../ApiService/ApiService';
 import Button from '../../Components/Button/Button';
 const AddOrUpdateQuestion = () => {
@@ -24,7 +24,7 @@ const AddOrUpdateQuestion = () => {
         optionFour: '',
     });
     const [correctOption, setCorrectOption] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting] = useState(false);
 
     const [fieldErrors, setFieldErrors] = useState({
         selectedQuiz: '',
@@ -40,7 +40,7 @@ const AddOrUpdateQuestion = () => {
 
         GetQuizzes()
             .then((data) => setQuizzes(data))
-            .catch((error) => console.error('Error fetching quizzes:', error));
+            .catch((error) => Swal.fire('Error', error.response.data.message, 'error'));
 
         if (quizId) {
             setSelectedQuiz(quizId);
@@ -50,10 +50,7 @@ const AddOrUpdateQuestion = () => {
                     setSelectedQuizObject(quizData);
                 })
                 .catch((error) =>
-                    console.error(
-                        error.response?.data?.message ||
-                        'An error occurred. Please try again.'
-                    )
+                    Swal.fire('Error', error.response.data.message, 'error')
                 );
         }
 
@@ -73,10 +70,7 @@ const AddOrUpdateQuestion = () => {
                     setSelectedQuizObject(questionData.quiz);
                 })
                 .catch((error) =>
-                    console.error(
-                        error.response?.data?.message ||
-                        'An error occurred. Please try again.'
-                    )
+                    Swal.fire('Error', error.response.data.message, 'error')
                 );
         }
     }, [questionId, quizId]);
@@ -119,10 +113,7 @@ const AddOrUpdateQuestion = () => {
                 selectedQuiz: '',
             }));
         } catch (error) {
-            console.error(
-                error.response?.data?.message ||
-                'An error occurred. Please try again.'
-            );
+            Swal.fire('Error', error.response.data.message, 'error');
             setFieldErrors((prevErrors) => ({
                 ...prevErrors,
                 selectedQuiz: 'An error occurred. Please try again.',
@@ -304,7 +295,7 @@ const AddOrUpdateQuestion = () => {
 
 
                             <div className={`add-que-form-group ${fieldErrors.correctOption ? 'has-error' : ''}`}>
-                                <label className='select-quiz'  htmlFor='correct-option'>Correct Option:</label>
+                                <label className='select-quiz' htmlFor='correct-option'>Correct Option:</label>
                                 <select
                                     id='correct-option'
                                     className={`add-update-question-field ${fieldErrors.correctOption ? 'question-error-field' : ''}`}

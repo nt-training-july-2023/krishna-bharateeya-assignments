@@ -11,7 +11,7 @@
 }
 
 .report-column {
-  margin-left: 157px;
+  margin-left: 159px;
   margin-right: -6px;
   width: 100%;
 }
@@ -41,6 +41,17 @@
 .report-row {
   align-items: center;
   border: 1px solid white;
+}
+
+.report-card-header {
+  
+  background-color: #f8f9fa;
+  margin-top: 20px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 110%;
 }
 
 /* .report-row:nth-child(even) {

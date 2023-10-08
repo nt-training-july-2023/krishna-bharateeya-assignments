@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './CategoryHome.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -9,14 +9,13 @@ import Sidebar from '../../Components/SideBar/Sidebar';
 import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
 
 const CategoryHome = () => {
+
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         loadCategories();
     }, []);
 
     const loadCategories = async () => {
-
-
         clearLocaleStorage();
         const result = await LoadCategories();
         setCategories(result);
@@ -44,7 +43,7 @@ const CategoryHome = () => {
             loadCategories();
 
         } catch (error) {
-            console.log(error.response.data.message || 'An error occurred. Please try again.');
+            Swal.fire('Error', error.response.data.message, 'error');
         }
     };
 
@@ -66,6 +65,7 @@ const CategoryHome = () => {
     };
 
     const userRole = localStorage.getItem('userRole');
+
     return (
         <div className="category-wrapper">
             <div className="category-container">
@@ -130,7 +130,5 @@ const CategoryHome = () => {
         </div>
     );
 
-
 }
-
 export default CategoryHome;

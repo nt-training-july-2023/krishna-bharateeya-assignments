@@ -17,7 +17,7 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
-import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
@@ -70,7 +70,7 @@ public class QuizServiceImpl implements QuizService {
                 .findByQuizName(quizDTO.getQuizName());
         if (existingQuiz.isPresent()) {
             LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
-            throw new AlreadyExistsException(
+            throw new DuplicateResourceException(
                     Message.QUIZ_ALREADY_EXISTS);
         }
         Optional<Category> categoryDto = categoryRepository
@@ -110,7 +110,7 @@ public class QuizServiceImpl implements QuizService {
                 && quizRepository.findByQuizName(quizDTO.getQuizName())
                         .isPresent()) {
             LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
-            throw new AlreadyExistsException(Message.QUIZ_ALREADY_EXISTS);
+            throw new DuplicateResourceException(Message.QUIZ_ALREADY_EXISTS);
         }
 
         existingQuiz.setQuizName(quizDTO.getQuizName());
@@ -226,6 +226,10 @@ public class QuizServiceImpl implements QuizService {
     public final List<QuestionDto> getAllQuestionByQuiz(final int quizId) {
 
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+        if (optionalQuiz.isEmpty()) {
+            throw new ResourceNotFoundException(Message.QUIZ_NOT_FOUND
+                    + quizId);
+        }
         List<Question> questions = optionalQuiz.get().getQuestions();
         return questions.stream().map(this::convertEntityToDto)
                 .collect(Collectors.toList());

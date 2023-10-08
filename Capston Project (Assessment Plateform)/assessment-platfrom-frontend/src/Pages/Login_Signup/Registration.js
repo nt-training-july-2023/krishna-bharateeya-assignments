@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,7 +35,7 @@ const Registration = () => {
             if (userRole === 'admin') {
                 navigate('/adminHome');
             } else if (userRole === 'user') {
-                navigate('/categoryHome');
+                navigate('/userHome');
             }
         }
     }, [navigate]);
@@ -81,6 +80,11 @@ const Registration = () => {
     const validateEmailDomainName = (email) => {
         if (!email.endsWith('@nucleusteq.com')) {
             return 'Email must end with @nucleusteq.com';
+        }
+        const emailRegex = /^[a-zA-Z][a-zA-Z0-9._-]*@nucleusteq\.com$/;
+
+        if (!emailRegex.test(email)) {
+          return 'Email must start with a letter and end with @nucleusteq.com';
         }
         return '';
     };
@@ -187,7 +191,7 @@ const Registration = () => {
             };
 
             const response = await RegistrationService(userData);
-            toast.success(response);
+            toast.success(response.message);
             navigate('/');
         } catch (error) {
             toast.error(error.response?.data);
@@ -215,19 +219,6 @@ const Registration = () => {
                                 />
                             </div>
 
-                            <div className={`form-group ${lastNameError ? 'has-error' : ''}`}>
-                                {lastNameError && <p className="registration-error-message">{lastNameError}</p>}
-                                <InputField
-                                    type="text"
-                                    className={`registration-form-control ${lastNameError ? 'registration-error-field' : ''}`}
-                                    name="lastName"
-                                    placeholder="Last name"
-                                    value={lastName}
-                                    onChange={(e) => handleLastNameChange(e.target.value)}
-
-                                />
-                            </div>
-
                             <div className={`registration-form-group ${mobileNumberError ? 'has-error' : ''}`}>
                                 {mobileNumberError && <p className="registration-error-message">{mobileNumberError}</p>}
                                 <InputField
@@ -241,11 +232,36 @@ const Registration = () => {
                                 />
                             </div>
 
+                            <div className={`registration-form-group ${passwordError ? 'has-error' : ''}`}>
+                                {passwordError && <p className="registration-error-message">{passwordError}</p>}
+                                <InputField
+                                    type="password"
+                                    className={`registration-form-control ${passwordError ? 'registration-error-field' : ''}`}
+                                    k name="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => handlePasswordChange(e.target.value)}
 
+                                />
+                            </div>
 
                         </div>
 
                         <div className='col2'>
+
+                            <div className={`form-group ${lastNameError ? 'has-error' : ''}`}>
+                                {lastNameError && <p className="registration-error-message">{lastNameError}</p>}
+                                <InputField
+                                    type="text"
+                                    className={`registration-form-control ${lastNameError ? 'registration-error-field' : ''}`}
+                                    name="lastName"
+                                    placeholder="Last name"
+                                    value={lastName}
+                                    onChange={(e) => handleLastNameChange(e.target.value)}
+
+                                />
+                            </div>
+
                             <div className={`registration-form-group ${emailError ? 'has-error' : ''}`}>
                                 {emailError && <p className="registration-error-message">{emailError}</p>}
                                 <InputField
@@ -259,18 +275,6 @@ const Registration = () => {
                                 />
                             </div>
 
-                            <div className={`registration-form-group ${passwordError ? 'has-error' : ''}`}>
-                                {passwordError && <p className="registration-error-message">{passwordError}</p>}
-                                <InputField
-                                    type="password"
-                                    className={`registration-form-control ${passwordError ? 'registration-error-field' : ''}`}
-                                    name="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => handlePasswordChange(e.target.value)}
-
-                                />
-                            </div>
 
                             <div className={`registration-form-group ${confirmPasswordError ? 'has-error' : ''}`}>
                                 {confirmPasswordError && <p className="registration-error-message">{confirmPasswordError}</p>}
