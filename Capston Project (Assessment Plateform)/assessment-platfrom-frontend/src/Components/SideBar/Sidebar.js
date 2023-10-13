@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import CustomLogo from './logo.png';
+import CustomLogo from '../../Assets/Logo/logo.png'
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);

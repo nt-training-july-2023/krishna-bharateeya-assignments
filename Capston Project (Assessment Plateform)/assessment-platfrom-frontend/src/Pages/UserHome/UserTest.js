@@ -72,7 +72,7 @@ const UserTest = () => {
         const prevCount = parseInt(localStorage.getItem('reloadAttempts')) || 0;
         const newCount = prevCount + 1;
         localStorage.setItem('reloadAttempts', newCount.toString());
-        if (localStorage.getItem('reloadAttempts') >= 3 && localStorage.getItem('reloadAttempts') <= 6) {
+        if (localStorage.getItem('reloadAttempts') >= 3 && localStorage.getItem('reloadAttempts') <= 5) {
             Swal.fire({
                 title: 'Warning',
                 text: 'If you refresh the page again, the test will be submitted',
@@ -91,7 +91,7 @@ const UserTest = () => {
                     handleSubmit();
                 }
             });
-        } else if (localStorage.getItem('reloadAttempts') > 6) {
+        } else if (localStorage.getItem('reloadAttempts') > 5) {
             handleSubmit();
         }
     }, []);

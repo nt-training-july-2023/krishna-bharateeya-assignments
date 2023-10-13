@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
-import Swal from 'sweetalert2'; 9
+import Swal from 'sweetalert2'; 
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
@@ -84,12 +84,20 @@ const Login = () => {
             }
             toast.success(response.message);
         } catch (error) {
-            Swal.fire('Login Failed', error.response.data.message, 'error');
+            if (error.response) {
+                Swal.fire('Login Failed', error.response.data.message, 'error');
+            } else {
+                Swal.fire('Login Failed', 'The server is currently unavailable. Please try again later.', 'error');
+            }
         }
     };
 
     return (
+        <div>
         <div className="login-container">
+            <div>
+            <p className='login-p'>Assessment Platform</p>
+            </div>
             <form className="login-form" onSubmit={handleLogin}>
                 <h2 className="login-form-title">Login</h2>
                 <div className="login-form-content">
@@ -133,6 +141,7 @@ const Login = () => {
                 </div>
             </form>
 
+        </div>
         </div>
     );
 };

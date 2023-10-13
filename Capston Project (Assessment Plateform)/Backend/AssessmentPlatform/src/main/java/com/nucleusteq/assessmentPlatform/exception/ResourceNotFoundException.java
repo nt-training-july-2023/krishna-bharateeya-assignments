@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception for indicating not found conflicts.
  */
+@SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new ResourceNotFoundException with the specified error

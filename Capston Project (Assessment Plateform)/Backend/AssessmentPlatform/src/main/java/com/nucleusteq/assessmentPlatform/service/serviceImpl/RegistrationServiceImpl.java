@@ -154,7 +154,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (foundRegistration == null) {
             LOGGER.error(Message.USER_NOT_FOUND);
             throw new ResourceNotFoundException(Message.USER_NOT_FOUND_BY_EMAIL
-                    +inputRegistrationDto.getEmail());
+                    + inputRegistrationDto.getEmail());
         }
 
         String password = inputRegistrationDto.getPassword();

@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -67,10 +68,14 @@ class RegistrationServiceImplTest {
 
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.CREATED.value(),
+                "Test Registered Successfully."
+            );
         SuccessResponse response = registrationService.addUser(registrationDto);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals("Test Registered Successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
 
     }
     
@@ -125,11 +130,13 @@ class RegistrationServiceImplTest {
         when(registrationRepository.getByEmail("test@nucleusteq.com")).thenReturn(foundRegistration);
         when(passwordEncoder.matches("password123", foundRegistration.getPassword())).thenReturn(true);
 
+        Map<String, String> expectedResponse = new HashMap<>();
+        expectedResponse.put("message", "Logged in successfully.");
+        expectedResponse.put("email", "test@nucleusteq.com");
+        expectedResponse.put("role", "user");
+        
         Map<String, String> response = registrationService.loginUser(loginRequestDto);
-
-        assertEquals("Logged in successfully.", response.get("message"));
-        assertEquals("test@nucleusteq.com", response.get("email"));
-        assertEquals("user", response.get("role"));
+        assertEquals(expectedResponse, response);
     }
     @Test
     public void testLoginUser_WrongPassword() {

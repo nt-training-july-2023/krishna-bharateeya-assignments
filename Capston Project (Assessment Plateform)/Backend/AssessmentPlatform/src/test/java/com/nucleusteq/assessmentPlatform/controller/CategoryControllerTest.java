@@ -33,54 +33,41 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void testGetAllCategories() throws Exception {
-        List<CategoryDto> categoryDtoList = new ArrayList<>();
-
-        when(categoryService.getAllCategory()).thenReturn(categoryDtoList);
-
-        
-
-        ResponseEntity<List<CategoryDto>> responseEntity = categoryController.getAllCategories();
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    }
-
-    @Test
     public void testSaveCategory() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryName("Test Category");
         categoryDto.setDescription("Test description");
  
-        SuccessResponse successResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Category created successfully.");
+        SuccessResponse exceptedResponse = new SuccessResponse(HttpStatus.CREATED.value(),"Category created successfully.");
 
-        when(categoryService.addCategory(categoryDto)).thenReturn(successResponse);
+        when(categoryService.addCategory(categoryDto)).thenReturn(exceptedResponse);
 
         ResponseEntity<SuccessResponse> response = categoryController.saveCategory(categoryDto);
 
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(successResponse, response.getBody());
+        assertEquals(exceptedResponse, response.getBody());
     }
 
 
 
     @Test
     public void testUpdateCategory_Success() throws Exception {
-        CategoryService categoryService = mock(CategoryService.class);
         int categoryId = 1;
         CategoryDto updatedCategoryDto = new CategoryDto();
         updatedCategoryDto.setCategoryId(categoryId);
         updatedCategoryDto.setCategoryName("Updated Category");
         updatedCategoryDto.setDescription("Updated Description");
 
-        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(),"Category updated successfully.");
+        SuccessResponse exceptedResponse = new SuccessResponse(HttpStatus.OK.value(),"Category updated successfully.");
 
-        when(categoryService.updateCategory(updatedCategoryDto)).thenReturn(successResponse);
+        when(categoryService.updateCategory(updatedCategoryDto)).thenReturn(exceptedResponse);
 
         ResponseEntity<SuccessResponse> response = categoryController.updateCategory(categoryId, updatedCategoryDto);
 
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(exceptedResponse, response.getBody());
     }
 
     @Test
@@ -95,6 +82,7 @@ public class CategoryControllerTest {
 
         ResponseEntity<CategoryDto> resultCategory = categoryController.getCategoryById(categoryId);
         assertEquals(HttpStatus.OK, resultCategory.getStatusCode());
+        assertEquals(expectedCategory, resultCategory.getBody());
     }
 
     @Test
@@ -134,5 +122,15 @@ public class CategoryControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(successResponse, response.getBody());
         
+    }
+    
+    @Test
+    public void testGetAllCategories() throws Exception {
+        List<CategoryDto> categoryDtoList = new ArrayList<>();
+
+        when(categoryService.getAllCategory()).thenReturn(categoryDtoList);
+        ResponseEntity<List<CategoryDto>> responseEntity = categoryController.getAllCategories();
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 }

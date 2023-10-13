@@ -31,10 +31,10 @@ class QuestionServiceImplTest {
 
     @InjectMocks
     private QuestionServiceImpl questionService;
-    
+
     @Mock
     private QuizRepository quizRepository;
-    
+
     @Mock
     private QuestionServiceImpl questionService2;
     @Mock
@@ -47,162 +47,187 @@ class QuestionServiceImplTest {
 
     @Test
     public void testAddQuestion() {
-        
-      CategoryDto categoryDto = new CategoryDto(1, "C. S.","CS Description");
 
-      QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto); 
-      
-      QuestionDto questionDTO = new QuestionDto();
-      questionDTO.setQuestionId(1);
-      questionDTO.setQuestionText("Not a Programming Language :");
-      QuestionOptions options = new QuestionOptions("java", "html", "hindi", "python", "hindi");
-      questionDTO.setOptions(options);
-      questionDTO.setQuiz(quizDTO);
+        CategoryDto categoryDto = new CategoryDto(1, "C. S.", "CS Description");
 
-      
-      when(quizRepository.findById(questionDTO.getQuiz().getQuizId())).thenReturn(Optional.of(new Quiz()));
+        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90,
+                categoryDto);
 
-        when(questionRepository.save(any(Question.class))).thenReturn(new Question());
-
-        SuccessResponse response = questionService.addQuestion(questionDTO);
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals("Question created successfully.", response.getMessage());
-    }
-    
-    @Test
-    public void testUpdateQuestion() throws NotFoundException {
-        
-        
-        Integer questionId = 1;
-        CategoryDto categoryDto = new CategoryDto(1, "C. S.","CS Description");
-
-        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto); 
-        
         QuestionDto questionDTO = new QuestionDto();
         questionDTO.setQuestionId(1);
         questionDTO.setQuestionText("Not a Programming Language :");
-        QuestionOptions options = new QuestionOptions("java", "html", "hindi", "python", "hindi");
+        QuestionOptions options = new QuestionOptions("java", "html", "hindi",
+                "python", "hindi");
         questionDTO.setOptions(options);
         questionDTO.setQuiz(quizDTO);
-        
+
+        when(quizRepository.findById(questionDTO.getQuiz().getQuizId()))
+                .thenReturn(Optional.of(new Quiz()));
+
+        when(questionRepository.save(any(Question.class)))
+                .thenReturn(new Question());
+
+        SuccessResponse response = questionService.addQuestion(questionDTO);
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.CREATED.value(),
+                "Question created successfully."
+            );
+        assertNotNull(response);
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        assertEquals(expectedResponse, response);
+    }
+
+    @Test
+    public void testUpdateQuestion() throws NotFoundException {
+
+        Integer questionId = 1;
+        CategoryDto categoryDto = new CategoryDto(1, "C. S.", "CS Description");
+
+        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90,
+                categoryDto);
+
+        QuestionDto questionDTO = new QuestionDto();
+        questionDTO.setQuestionId(1);
+        questionDTO.setQuestionText("Not a Programming Language :");
+        QuestionOptions options = new QuestionOptions("java", "html", "hindi",
+                "python", "hindi");
+        questionDTO.setOptions(options);
+        questionDTO.setQuiz(quizDTO);
+
         Optional<Question> optionalQuestion = Optional.of(new Question());
 
-        when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
-        when(questionRepository.save(any(Question.class))).thenReturn(new Question());
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
+        when(questionRepository.save(any(Question.class)))
+                .thenReturn(new Question());
 
-        SuccessResponse response = questionService.updateQuestion(questionId, questionDTO);
-
+        SuccessResponse response = questionService.updateQuestion(questionId,
+                questionDTO);
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.OK.value(),
+                "Question updated successfully."
+            );
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals("Question updated successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
     }
-    
+
     @Test
     public void testUpdateQuestionNotFound() {
         Integer questionId = 1;
-        CategoryDto categoryDto = new CategoryDto(1, "C. S.","CS Description");
+        CategoryDto categoryDto = new CategoryDto(1, "C. S.", "CS Description");
 
-        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90, categoryDto); 
-        
+        QuizDTO quizDTO = new QuizDTO(1, "Java", "Java Description", 90,
+                categoryDto);
+
         QuestionDto questionDTO = new QuestionDto();
         questionDTO.setQuestionId(12);
         questionDTO.setQuestionText("Not a Programming Language :");
-        QuestionOptions options = new QuestionOptions("java", "html", "hindi", "python", "hindi");
+        QuestionOptions options = new QuestionOptions("java", "html", "hindi",
+                "python", "hindi");
         questionDTO.setOptions(options);
         questionDTO.setQuiz(quizDTO);
         Optional<Question> optionalQuestion = Optional.empty();
 
-        when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
 
-        assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.updateQuestion(questionId, questionDTO));
+        assertThrows(
+                com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class,
+                () -> questionService.updateQuestion(questionId, questionDTO));
     }
 
-@Test
-public void testDeleteQuestion() throws NotFoundException {
-    Integer questionId = 1;
-    Optional<Question> optionalQuestion = Optional.of(new Question());
+    @Test
+    public void testDeleteQuestion() throws NotFoundException {
+        Integer questionId = 1;
+        Optional<Question> optionalQuestion = Optional.of(new Question());
 
-    when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
 
-    assertDoesNotThrow(() -> questionService.deleteQuestion(questionId));
-}
+        assertDoesNotThrow(() -> questionService.deleteQuestion(questionId));
+    }
 
-@Test
-public void testDeleteQuestionNotFound() {
-    Integer questionId = 1;
-    Optional<Question> optionalQuestion = Optional.empty();
+    @Test
+    public void testDeleteQuestionNotFound() {
+        Integer questionId = 1;
+        Optional<Question> optionalQuestion = Optional.empty();
 
-    when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
 
-    assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.deleteQuestion(questionId));
-}
+        assertThrows(
+                com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class,
+                () -> questionService.deleteQuestion(questionId));
+    }
 
-@Test
-public void testGetQuestionById() throws NotFoundException {
-    Integer questionId = 1;
-    
-    Category category = new Category(1, "C. S.","CS Description");
+    @Test
+    public void testGetQuestionById() throws NotFoundException {
+        Integer questionId = 1;
 
-    Quiz quiz= new Quiz(1, "Java", "Java Description", 90, category); 
-    
-    Question question = new Question();
-    question.setQuestionId(1);
-    question.setQuestionText("Not a Programming Language :");
-    question.setOptionOne("java");
-    question.setOptionTwo("html");
-    question.setOptionThree("hindi");
-    question.setOptionFour("python");
-    question.setCorrectOption("hindi");
-    question.setQuiz(quiz);
-    
-    Optional<Question> optionalQuestion = Optional.of(question);
+        Category category = new Category(1, "C. S.", "CS Description");
 
-    when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
+        Quiz quiz = new Quiz(1, "Java", "Java Description", 90, category);
 
-    QuestionDto result = questionService.getQuestionById(questionId);
+        Question question = new Question();
+        question.setQuestionId(1);
+        question.setQuestionText("Not a Programming Language :");
+        question.setOptionOne("java");
+        question.setOptionTwo("html");
+        question.setOptionThree("hindi");
+        question.setOptionFour("python");
+        question.setCorrectOption("hindi");
+        question.setQuiz(quiz);
 
-    assertNotNull(result);
-    assertEquals(questionId, result.getQuestionId());
-}
+        Optional<Question> optionalQuestion = Optional.of(question);
 
-@Test
-public void testGetQuestionByIdNotFound() {
-    Integer questionId = 1;
-    Optional<Question> optionalQuestion = Optional.empty();
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
 
-    when(questionRepository.findById(questionId)).thenReturn(optionalQuestion);
+        QuestionDto result = questionService.getQuestionById(questionId);
 
-    assertThrows(com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class, () -> questionService.getQuestionById(questionId));
-}
+        assertNotNull(result);
+        assertEquals(questionId, result.getQuestionId());
+    }
 
+    @Test
+    public void testGetQuestionByIdNotFound() {
+        Integer questionId = 1;
+        Optional<Question> optionalQuestion = Optional.empty();
 
-@Test
-public void testGetAllQuestion() {
-    
-    Category category = new Category(1, "C. S.","CS Description");
+        when(questionRepository.findById(questionId))
+                .thenReturn(optionalQuestion);
 
-    Quiz quiz= new Quiz(1, "Java", "Java Description", 90, category); 
-    
-    Question question = new Question();
-    question.setQuestionId(1);
-    question.setQuestionText("Not a Programming Language :");
-    question.setOptionOne("java");
-    question.setOptionTwo("html");
-    question.setOptionThree("hindi");
-    question.setOptionFour("python");
-    question.setCorrectOption("hindi");
-    question.setQuiz(quiz);
-   
-    List<Question> questionList = new ArrayList<>();
-    questionList.add(question);
+        assertThrows(
+                com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException.class,
+                () -> questionService.getQuestionById(questionId));
+    }
 
-    when(questionRepository.findAll()).thenReturn(questionList);
+    @Test
+    public void testGetAllQuestion() {
 
-    List<QuestionDto> result = questionService.getAllQuestion();
+        Category category = new Category(1, "C. S.", "CS Description");
 
-    assertNotNull(result);
-    assertFalse(result.isEmpty());
-}
+        Quiz quiz = new Quiz(1, "Java", "Java Description", 90, category);
+
+        Question question = new Question();
+        question.setQuestionId(1);
+        question.setQuestionText("Not a Programming Language :");
+        question.setOptionOne("java");
+        question.setOptionTwo("html");
+        question.setOptionThree("hindi");
+        question.setOptionFour("python");
+        question.setCorrectOption("hindi");
+        question.setQuiz(quiz);
+
+        List<Question> questionList = new ArrayList<>();
+        questionList.add(question);
+
+        when(questionRepository.findAll()).thenReturn(questionList);
+
+        List<QuestionDto> result = questionService.getAllQuestion();
+
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+    }
 }

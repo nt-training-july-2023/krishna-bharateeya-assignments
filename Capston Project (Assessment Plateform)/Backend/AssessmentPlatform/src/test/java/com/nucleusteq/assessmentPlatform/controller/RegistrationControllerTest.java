@@ -60,9 +60,12 @@ public class RegistrationControllerTest {
         when(registrationService.loginUser(loginRequestDto)).thenReturn(createAuthResponse());
 
         ResponseEntity<Map<String, String>> responseEntity = registrationController.loginUser(loginRequestDto);
-
+       
+        Map<String, String> expectedResponse = new HashMap<>();
+        expectedResponse.put("message", "Login successful");
+        
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Login successful", responseEntity.getBody().get("message"));
+        assertEquals(expectedResponse, responseEntity.getBody());
     }
 
     @Test

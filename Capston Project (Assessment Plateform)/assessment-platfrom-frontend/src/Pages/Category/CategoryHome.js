@@ -76,7 +76,7 @@ const CategoryHome = () => {
                     <div className="category-card">
                         <div className="category-card-header">
                             {userRole === 'user' ? (
-                                <h3>Test Categories</h3>
+                                <h3>Put Your Efforts to the Test !</h3>
                             ) : (
                                 <>
                                     <h3>Categories Home</h3>

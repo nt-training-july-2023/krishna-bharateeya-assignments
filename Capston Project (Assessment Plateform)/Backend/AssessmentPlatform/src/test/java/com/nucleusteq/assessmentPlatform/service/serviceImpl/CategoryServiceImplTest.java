@@ -47,16 +47,22 @@ public class CategoryServiceImplTest {
     public void testAddCategory_Success() {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setCategoryName("Test Category");
+        categoryDto.setDescription("Description");
 
         Category category = new Category();
         category.setCategoryName("Test Category");
+        category.setDescription("Description");
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.CREATED.value(),
+                "Category created successfully."
+            );
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(category);
 
         SuccessResponse response = categoryService.addCategory(categoryDto);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals("Category created successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
 
     }
 
@@ -67,10 +73,12 @@ public class CategoryServiceImplTest {
         Category category = new Category();
         category.setCategoryId(categoryId);
         category.setCategoryName("Test Category");
+        category.setDescription("Description");
 
         CategoryDto expectedDto = new CategoryDto();
         expectedDto.setCategoryId(categoryId);
         expectedDto.setCategoryName("Test Category");
+        expectedDto.setDescription("Description");
 
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
         when(modelMapper.map(category, CategoryDto.class)).thenReturn(expectedDto);
@@ -122,6 +130,10 @@ public class CategoryServiceImplTest {
         updatedCategory.setCategoryId(1);
         updatedCategory.setCategoryName("Updated Category");
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.OK.value(),
+                "Category updated successfully."
+            );
         when(categoryRepository.findById(1)).thenReturn(Optional.of(existingCategory));
         when(modelMapper.map(categoryDto, Category.class)).thenReturn(updatedCategory);
         when(categoryRepository.save(updatedCategory)).thenReturn(updatedCategory);
@@ -130,7 +142,7 @@ public class CategoryServiceImplTest {
        
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals("Category updated successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
 
     }
 
@@ -151,12 +163,16 @@ public class CategoryServiceImplTest {
         Category category = new Category();
         category.setCategoryId(categoryId);
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.OK.value(),
+                "Category deleted successfully."
+            );
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
 
         SuccessResponse response = categoryService.deleteCategory(categoryId);
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals("Category deleted successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
 
     }
 

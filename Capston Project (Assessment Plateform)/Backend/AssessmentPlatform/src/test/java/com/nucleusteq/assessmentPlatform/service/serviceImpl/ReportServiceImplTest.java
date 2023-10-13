@@ -50,9 +50,14 @@ class ReportServiceImplTest {
 
         SuccessResponse response = reportService.createReport(reportDto);
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.CREATED.value(),
+                "Report created successfully."
+            );
+        
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals("Report created successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
     }
 
     @Test

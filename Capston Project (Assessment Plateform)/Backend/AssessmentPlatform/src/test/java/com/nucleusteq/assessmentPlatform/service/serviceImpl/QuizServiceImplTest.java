@@ -76,11 +76,16 @@ class QuizServiceImplTest {
             Quiz savedQuiz = invocation.getArgument(0);
             return savedQuiz;
         });
+        
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.CREATED.value(),
+                "Quiz created successfully."
+            );
 
         SuccessResponse response = quizService.addQuiz(quizDto);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        assertEquals("Quiz created successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
 
     }
 
@@ -88,8 +93,6 @@ class QuizServiceImplTest {
     @Test
     void testUpdateQuiz() throws NotFoundException {
         Integer quizId = 4028;
-
-      
 
         when(quizRepository.save(any())).thenReturn(new Quiz());
 
@@ -123,9 +126,13 @@ class QuizServiceImplTest {
         when(modelMapper.map(quizDTO, Quiz.class)).thenReturn(quiz);
         SuccessResponse response = quizService.updateQuiz(quizDTO.getQuizId(), quizDTO);
 
+        SuccessResponse expectedResponse = new SuccessResponse(
+                HttpStatus.OK.value(),
+                "Quiz updated successfully."
+            );
         assertNotNull(response);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        assertEquals("Quiz updated successfully.", response.getMessage());
+        assertEquals(expectedResponse, response);
         
     }
 
@@ -158,47 +165,6 @@ class QuizServiceImplTest {
 
         assertThrows(ResourceNotFoundException.class, () -> quizService.deleteQuiz(quizId));
     }
-
-    @Test
-    void testGetQuizById_QuizFound() throws ResourceNotFoundException {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setCategoryId(1);
-        categoryDto.setCategoryName("ExistingCategory");
-        categoryDto.setDescription("description");
-
-        Category category = new Category();
-        category.setCategoryId(1);
-        category.setCategoryName("Sample Category");
-        category.setDescription("Category Description");
-
-        Integer quizId = 4029;
-        
-        Quiz quiz = new Quiz();
-        quiz.setQuizId(quizId);
-        quiz.setQuizName("Sample Quiz");
-        quiz.setQuizDescription("this is description");
-        quiz.setTimeInMinutes(60);
-        quiz.setCategory(category);
-
-        QuizDTO quizDto = new QuizDTO();
-        quizDto.setQuizId(quizId);
-        quizDto.setQuizName("Sample Quiz");
-        quizDto.setQuizDescription("this is description");
-        quizDto.setTimeInMinutes(60);
-        quizDto.setCategory(categoryDto);
-        
-        when(quizRepository.findById(eq(quizId))).thenReturn(Optional.of(quiz));
-        when(modelMapper.map(quiz, QuizDTO.class)).thenReturn(quizDto);
-        
-//        QuizDTO response = quizService.getQuizById(quizId);
-//        assertNotNull(response);
-//        assertEquals(quizId, response.getQuizId());
-//        assertEquals("Sample Quiz", response.getQuizName());
-    }
-
-
-
-
 
     @Test
     void testGetQuizById_QuizNotFound() {

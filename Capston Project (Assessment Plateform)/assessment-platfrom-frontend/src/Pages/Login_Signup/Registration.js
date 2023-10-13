@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2'; 
+import 'sweetalert2/dist/sweetalert2.min.css';
 import { toast } from 'react-toastify';
 import { RegistrationService } from '../../ApiService/ApiService';
 import Button from '../../Components/Button/Button';
@@ -194,7 +196,11 @@ const Registration = () => {
             toast.success(response.message);
             navigate('/');
         } catch (error) {
-            toast.error(error.response?.data);
+            if (error.response) {
+                Swal.fire('Login Failed', error.response.data.message, 'error');
+            } else {
+                Swal.fire('Login Failed', 'The server is currently unavailable. Please try again later.', 'error');
+            }
         }
     };
 

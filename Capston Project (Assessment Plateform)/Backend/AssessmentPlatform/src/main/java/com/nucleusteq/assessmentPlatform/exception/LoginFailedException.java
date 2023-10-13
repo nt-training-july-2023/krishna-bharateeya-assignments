@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception for indicating login failed due to unauthorized access.
  */
+@SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
 public class LoginFailedException extends RuntimeException {
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new LoginFailedException with the specified error message.

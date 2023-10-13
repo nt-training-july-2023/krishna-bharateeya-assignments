@@ -8,8 +8,6 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import com.nucleusteq.assessmentPlatform.utility.ErrorResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

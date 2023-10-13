@@ -16,26 +16,7 @@ const AdminHome = () => {
     loadUsers();
   }, []);
 
-  const handleLogout = () => {
-    toast.success("Logout successfully.");
-    localStorage.removeItem('IsLoggedIn');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('email');
-    navigate("/");
-  };
 
-  const handleLogoutConfirmation = () => {
-    Swal.fire({
-      text: "Confirm Logout?",
-      icon: "warning",
-      showCancelButton: true,
-      showConfirmButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleLogout();
-      }
-    });
-  }
   const loadUsers = async () => {
     try {
       const result = await LoadUsers();
@@ -66,9 +47,6 @@ const AdminHome = () => {
             <div className="admin-home-card">
               <div className="admin-home-card-header">
                 <h3>Welcome To Admin Dashboard</h3>
-                <center>
-                  <button className="admin-logout-button" onClick={handleLogoutConfirmation}>Logout</button>
-                </center>
               </div>
               <div className="admin-home-card-body">
                 <div className="admin-home-table-wrapper">

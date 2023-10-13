@@ -58,7 +58,7 @@ public class RegistrationDto {
      * The email address of the user.
      */
     @NotBlank(message = ValidationMessage.EMAIL_EMPTY)
-    @Pattern(regexp = "^[A-Z0-9a-z.+_-]+@nucleusteq[.]com$",
+    @Pattern(regexp = "^[A-Za-z][A-Z0-9a-z.+_-]*@nucleusteq[.]com$",
             message = ValidationMessage.EMAIL_DOMAIN_INVALID)
     private String email;
 
