@@ -77,7 +77,8 @@ function App() {
           <Route exact path="/userQuestion/:quizId" element={<PrivateRoute Component={UserTest} isLoggedIn={localStorage.getItem('IsLoggedIn')}  isRefresh={isRefresh} setTrue={setTrue}/>} />
           
           <Route exact path="/report" element={<PrivateRoute Component={TestReport} isLoggedIn={localStorage.getItem('IsLoggedIn')} />} />
-          
+          {/* <Route path="*" element={<UserHome/>} /> */}
+
         </Routes>
       </Router>
     </div>

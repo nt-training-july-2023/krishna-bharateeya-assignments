@@ -59,4 +59,16 @@ public interface QuizService {
      * @return The List Of Questions  Entity.
      */
     List<QuestionDto> getAllQuestionByQuiz(int quizId);
+
+    /**
+     * Enables a category with the specified ID.
+     * @param quizId The unique identifier of the category to enable.
+     */
+    void enableQuiz(int quizId);
+
+    /**
+     * Disables a category with the specified ID.
+     * @param quizId The unique identifier of the category to disable.
+     */
+    void disableQuiz(int quizId);
 }

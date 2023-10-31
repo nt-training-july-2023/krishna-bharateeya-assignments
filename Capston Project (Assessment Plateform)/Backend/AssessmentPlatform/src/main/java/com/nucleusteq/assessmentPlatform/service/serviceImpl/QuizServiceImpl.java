@@ -235,9 +235,42 @@ public class QuizServiceImpl implements QuizService {
                 .collect(Collectors.toList());
     }
 
+    
+    /**
+     * Enables a category with the specified ID.
+     * @param quizId The unique identifier of the category to enable.
+     */
+    public void enableQuiz(int quizId) {
+        Quiz existingQuiz = quizRepository.findById(quizId)
+               .orElseThrow(() -> {
+                    LOGGER.error(Message.QUIZ_NOT_FOUND + quizId);
+                    throw new ResourceNotFoundException(
+                          Message.QUIZ_NOT_FOUND + quizId);
+                  });
+
+            existingQuiz.setEnabled(true);
+            quizRepository.save(existingQuiz);
+        
+    }
+
+    /**
+     * Disables a category with the specified ID.
+     * @param quizId The unique identifier of the category to disable.
+     */
+    public void disableQuiz(int quizId) {
+        Quiz existingQuiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> {
+                     LOGGER.error(Message.QUIZ_NOT_FOUND + quizId);
+                     throw new ResourceNotFoundException(
+                           Message.QUIZ_NOT_FOUND + quizId);
+                   });
+
+            existingQuiz.setEnabled(false);
+            quizRepository.save(existingQuiz);
+    }
+
     /**
      * @param question The object to be converted.
-     *
      * @return the converted into QuestionDto entity.
      */
     private QuestionDto convertEntityToDto(final Question question) {

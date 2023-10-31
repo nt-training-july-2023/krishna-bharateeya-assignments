@@ -53,5 +53,17 @@ public interface CategoryService {
      * @return The updated CategoryDto.
      */
     List<Quiz> getAllQuizByCategory(int categoryId);
+    
+    /**
+     * Enables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to enable.
+     * @return 
+     */
+    boolean enableCategory(int categoryId);
 
+    /**
+     * Disables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to disable.
+     */
+    boolean disableCategory(int categoryId);
 }

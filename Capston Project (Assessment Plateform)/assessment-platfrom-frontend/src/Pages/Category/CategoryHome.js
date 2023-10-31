@@ -3,25 +3,40 @@ import { Link } from 'react-router-dom';
 import './CategoryHome.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { toast } from "react-toastify";
 import Button from '../../Components/Button/Button';
-import { LoadCategories, DeleteCategory } from '../../ApiService/ApiService';
+import { LoadCategories, DeleteCategory, EnableCategory, DisableCategory } from '../../ApiService/ApiService';
 import Sidebar from '../../Components/SideBar/Sidebar';
 import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
 
 const CategoryHome = () => {
 
     const [categories, setCategories] = useState([]);
+    const [categoryStatus, setCategoryStatus] = useState({});
+    const userRole = localStorage.getItem('userRole');
+
     useEffect(() => {
         loadCategories();
     }, []);
 
     const loadCategories = async () => {
+        console.log("form Category useeffects :");
         clearLocaleStorage();
         const result = await LoadCategories();
-        setCategories(result);
+        const categoryStatusObj = {};
+        if (userRole === 'admin') {
+            result.forEach((category) => {
+                categoryStatusObj[category.categoryId] = category.enabled;
+            });
+            setCategoryStatus(categoryStatusObj);
+        }
+        const filteredCategories = (userRole === 'user')
+            ? result.filter(category => category.enabled)
+            : result;
+
+        setCategories(filteredCategories);
+        setCategoryStatus(categoryStatusObj);
     };
-
-
     const clearLocaleStorage = () => {
         localStorage.removeItem("timerInSeconds");
         localStorage.removeItem("selectedAnswers");
@@ -64,7 +79,38 @@ const CategoryHome = () => {
         }
     };
 
-    const userRole = localStorage.getItem('userRole');
+
+    const handleToggle = async (categoryId) => {
+        try {
+            // loadCategories();
+            if (categoryStatus[categoryId]) {
+                await DisableCategory(categoryId);
+            } else {
+                await EnableCategory(categoryId);
+            }
+            setCategoryStatus((prevCategoryStatus) => ({
+
+                ...prevCategoryStatus,
+                [categoryId]: !prevCategoryStatus[categoryId],
+            }));
+            toast.success(
+                categoryStatus[categoryId]
+                    ? 'Category disabled successfully'
+                    : 'Category enabled successfully'
+            );
+            
+        } catch (error) {
+            const errorMessage =
+                error.response?.data?.message || 'An error occurred. Please try again.';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
+        }
+    };
+
+
 
     return (
         <div className="category-wrapper">
@@ -98,6 +144,9 @@ const CategoryHome = () => {
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Actions</th>
+                                                {userRole === 'admin' && (
+                                                    <th scope="col">Publish</th>
+                                                )}
                                             </tr>
                                         </thead>
                                         <tbody className='category-tbody'>
@@ -117,6 +166,20 @@ const CategoryHome = () => {
                                                             </>
                                                         )}
                                                     </td>
+
+                                                    {userRole === 'admin' && (
+                                                        <td>
+                                                            <label className="toggle-switch">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={categoryStatus[category.categoryId]}
+                                                                    onChange={() => handleToggle(category.categoryId)}
+                                                                />
+                                                                <span className="slider round"></span>
+                                                            </label>
+                                                        </td>
+                                                    )}
+
                                                 </tr>
                                             ))}
                                         </tbody>

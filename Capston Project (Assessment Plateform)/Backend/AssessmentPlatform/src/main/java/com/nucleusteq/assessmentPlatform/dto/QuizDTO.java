@@ -45,6 +45,10 @@ public class QuizDTO {
     private int timeInMinutes;
 
     /**
+     * The state of the quiz.
+     */
+    private boolean enabled;
+    /**
      * The category belong to quiz.
      */
     @NotNull(message = ValidationMessage.CATEGORY_NULL)

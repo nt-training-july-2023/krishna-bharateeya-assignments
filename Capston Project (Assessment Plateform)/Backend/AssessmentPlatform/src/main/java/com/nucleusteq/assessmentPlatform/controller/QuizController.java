@@ -134,4 +134,22 @@ public class QuizController {
         LOGGER.info(QuizLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
+
+    /**
+     * Enables a category with the specified ID.
+     * @param quizId The unique identifier of the category to enable.
+     */
+    @PutMapping("enable/{quizId}")
+    public void enableCategory(@PathVariable int quizId) {
+        quizService.enableQuiz(quizId);
+    }
+
+    /**
+     * Disables a category with the specified ID.
+     * @param quizId The unique identifier of the category to disable.
+     */
+    @PutMapping("disable/{quizId}")
+    public void disableCategory(@PathVariable int quizId) {
+        quizService.disableQuiz(quizId);
+    }
 }

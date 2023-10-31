@@ -102,31 +102,32 @@ const Login = () => {
                 <h2 className="login-form-title">Login</h2>
                 <div className="login-form-content">
 
-                    <div className={`login-form-group ${emailError ? 'has-error' : ''}`}>
-                        {emailError && <p className="login-error-message">{emailError}</p>}
-
+                    {/* <div className={`login-form-group ${emailError ? 'has-error' : ''}`}> */}
+                        
+                        <div className=''>
                         <InputField
                             type="text"
-                            className={`login-form-control ${emailError ? 'login-error-field' : ''}`}
+                            className='login-form-control'
                             name="username"
                             placeholder="Email"
                             value={email}
                             onChange={(e) => handleEmailChange(e.target.value)}
 
                         />
+                            <div className='login-error-message'>{emailError}</div>
+
                     </div>
-                    <br />
-                    <div className={`login-form-group ${passwordError ? 'has-error' : ''}`}>
-                        {passwordError && <p className="login-error-message">{passwordError}</p>}
+                        <div className='login-input-error'>
                         <InputField
                             type="password"
-                            className={`login-form-control ${passwordError ? 'login-error-field' : ''}`}
+                            className={`login-form-control`}
                             name="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => handlePasswordChange(e.target.value)}
 
                         />
+                        <div className='login-error-message'>{passwordError}</div>
                     </div>
                     <div className="login-submit">
                         <Button onClick={handleLogin} className="button" type="submit" children='Login'></Button>

@@ -72,10 +72,10 @@ public class QuestionServiceImpl implements QuestionService {
         optionSet.add(resQue.getOptionThree());
         optionSet.add(resQue.getOptionFour());
 
-        if (optionSet.size() < EXPECTED_NUMBER_OF_OPTIONS) {
-          LOGGER.error(Message.DUPLICATE_OPTION_ERROR);
-          throw new DuplicateOptionException(Message.DUPLICATE_OPTION_ERROR);
-        }
+//        if (optionSet.size() < EXPECTED_NUMBER_OF_OPTIONS) {
+//          LOGGER.error(Message.DUPLICATE_OPTION_ERROR);
+//          throw new DuplicateOptionException(Message.DUPLICATE_OPTION_ERROR);
+//        }
 
         String checkCorrectAnswer = resQue.getCorrectOption();
         if (!checkCorrectAnswer.equals(resQue.getOptionOne())

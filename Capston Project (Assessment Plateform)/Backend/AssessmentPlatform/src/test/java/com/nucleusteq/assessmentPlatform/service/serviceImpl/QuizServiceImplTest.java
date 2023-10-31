@@ -271,5 +271,49 @@ class QuizServiceImplTest {
             assertEquals(question.getQuestionText(), questionDto.getQuestionText());
         }
     }
+    
+    
+    @Test
+    public void testEnableQuiz() {
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(1);
+        quiz.setEnabled(false);
+
+        when(quizRepository.findById(1)).thenReturn(Optional.of(quiz));
+        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
+
+        quizService.enableQuiz(1);
+        assertTrue(quiz.isEnabled());
+    }
+
+    @Test
+    public void testEnableQuizNotFound() {
+        when(quizRepository.findById(1)).thenReturn(Optional.empty());
+        
+        assertThrows(ResourceNotFoundException.class, () -> quizService.enableQuiz(1));
+    }
+
+    
+    @Test
+    public void testDisableQuiz() {
+
+        Quiz quiz = new Quiz();
+        quiz.setQuizId(1);
+        quiz.setEnabled(true);
+
+        when(quizRepository.findById(1)).thenReturn(Optional.of(quiz));
+        when(quizRepository.save(any(Quiz.class))).thenReturn(quiz);
+        quizService.disableQuiz(1);
+        assertFalse(quiz.isEnabled());
+    }
+
+    @Test
+    public void testDisableQuizNotFound() {
+        
+        when(quizRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> quizService.disableQuiz(1));
+
+    }
 
 }

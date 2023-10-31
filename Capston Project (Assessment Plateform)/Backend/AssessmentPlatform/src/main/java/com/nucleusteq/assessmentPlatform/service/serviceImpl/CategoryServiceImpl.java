@@ -171,6 +171,42 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     /**
+     * Enables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to enable.
+     */
+    public boolean enableCategory(int categoryId) {
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> {
+                 LOGGER.error(Message.CATEGORY_NOT_FOUND + categoryId);
+                  throw new ResourceNotFoundException(
+                        Message.CATEGORY_NOT_FOUND + categoryId);
+                });
+
+            existingCategory.setEnabled(true);
+            categoryRepository.save(existingCategory);
+            return true;
+
+    }
+
+    /**
+     * Disables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to disable.
+     */
+    public boolean disableCategory(int categoryId) {
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> {
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND + categoryId);
+                    throw new ResourceNotFoundException(
+                          Message.CATEGORY_NOT_FOUND + categoryId);
+                  });
+
+            existingCategory.setEnabled(false);
+            categoryRepository.save(existingCategory);
+            return false;
+    }
+
+    
+    /**
      * Converts UserDTO to User entity.
      * @param categoryDto The UserDTO object.
      * @return Category object.

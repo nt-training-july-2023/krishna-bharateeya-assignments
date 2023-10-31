@@ -62,6 +62,12 @@ public class Quiz {
     private int timeInMinutes;
 
     /**
+     * The state of the quiz.
+     */
+    @Column(nullable = false)
+    private boolean enabled;
+
+    /**
      * The Category to the Quiz belong.
      */
     @ManyToOne
@@ -127,6 +133,7 @@ public class Quiz {
         quizName = qName;
         quizDescription = qDescription;
         timeInMinutes = time;
+        this.enabled = false; 
         category = new Category(cat.getCategoryId(),
                 cat.getCategoryName(), cat.getDescription());
     }

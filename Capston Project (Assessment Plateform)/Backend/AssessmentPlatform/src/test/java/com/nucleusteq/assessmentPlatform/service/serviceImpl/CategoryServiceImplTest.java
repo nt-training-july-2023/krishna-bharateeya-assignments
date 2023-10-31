@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class CategoryServiceImplTest {
@@ -232,5 +233,48 @@ public class CategoryServiceImplTest {
         assertThrows(DuplicateResourceException.class, () -> {
             categoryService.updateCategory(categoryDto);
         });
+    }
+    
+    @Test
+    public void testEnableCategory() {
+        Category category = new Category();
+        category.setCategoryId(1);
+        category.setEnabled(false);
+
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
+        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+
+        categoryService.enableCategory(1);
+        assertTrue(category.isEnabled());
+    }
+
+    @Test
+    public void testEnableCategoryNotFound() {
+        when(categoryRepository.findById(1)).thenReturn(Optional.empty());
+        
+        assertThrows(ResourceNotFoundException.class, () -> categoryService.enableCategory(1));
+    }
+
+    
+    @Test
+    public void testDisableCategory() {
+
+        Category category = new Category();
+        category.setCategoryId(1);
+        category.setEnabled(true);
+
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
+        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+        categoryService.disableCategory(1);
+        assertFalse(category.isEnabled());
+    }
+
+    @Test
+    public void testDisableCategoryNotFound() {
+        
+        when(categoryRepository.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> categoryService.disableCategory(1));
+
     }
 }

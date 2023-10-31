@@ -17,7 +17,7 @@
 }
 
 .report-table {
-  width: 113%;
+  width: 108%;
   border-collapse: collapse;
 }
 
@@ -51,7 +51,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 110%;
+  width: 105%;
 }
 
 /* .report-row:nth-child(even) {

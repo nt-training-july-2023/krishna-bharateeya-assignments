@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { GetQuizzes, DeleteQuiz, LoadQuizzesForCategory } from '../../ApiService/ApiService';
+import { toast } from "react-toastify";
+import { GetQuizzes, DeleteQuiz, LoadQuizzesForCategory, EnableQuiz, DisableQuiz } from '../../ApiService/ApiService';
 import Button from '../../Components/Button/Button';
 import NoDataMessage from '../../Components/NoDataMessage/NoDataMessage';
 
@@ -14,6 +15,8 @@ const QuizHome = () => {
   const [quizzes, setQuizzes] = useState([]);
   const { categoryId } = useParams();
   const navigate = useNavigate();
+  const [quizStatus, setQuizStatus] = useState({});
+  const userRole = localStorage.getItem('userRole');
   useEffect(() => {
     loadQuizzes();
   }, [categoryId]);
@@ -26,12 +29,59 @@ const QuizHome = () => {
       } else {
         data = await GetQuizzes();
       }
-      setQuizzes(data);
+
+
+      const quizStatusObj = {};
+
+      if (userRole === 'admin') {
+        data.forEach((quiz) => {
+          quizStatusObj[quiz.quizId] = quiz.enabled;
+        });
+      }
+      const filteredQuizzes = (userRole === 'user')
+        ? data.filter(quiz => quiz.enabled)
+        : data;
+
+      setQuizzes(filteredQuizzes);
+      setQuizStatus(quizStatusObj);
 
     } catch (error) {
       Swal.fire('Error', error.response.data.message, 'error');
     }
   };
+  EnableQuiz
+  DisableQuiz
+
+  const handleToggle = async (quizId) => {
+    try {
+      if (quizStatus[quizId]) {
+        await DisableQuiz(quizId);
+      } else {
+        await EnableQuiz(quizId);
+      }
+      setQuizStatus((prevQuizStatus) => ({
+
+        ...prevQuizStatus,
+        [quizId]: !prevQuizStatus[quizId],
+      }));
+      toast.success(
+        quizStatus[quizId]
+          ? 'Quiz disabled successfully'
+          : 'Quiz enabled successfully'
+      );
+    } catch (error) {
+      console.log("error occured :", error);
+      const errorMessage =
+        error.response?.data?.message || 'An error occurred. Please try again.';
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+      });
+    }
+  };
+
+
 
   const deleteQuiz = async (id) => {
     try {
@@ -59,7 +109,7 @@ const QuizHome = () => {
       Swal.fire('Deleted!', 'Your quiz has been deleted.', 'success');
     }
   };
-  const userRole = localStorage.getItem('userRole');
+
 
   const handleOpenQuiz = (quizId) => {
     Swal.fire({
@@ -121,7 +171,7 @@ const QuizHome = () => {
               )}
             </div>
             <div className="category-card-body">
-              {quizzes.length === 0 ? ( 
+              {quizzes.length === 0 ? (
                 <NoDataMessage message="No Quiz found." />
               ) : (
                 <div className="table-wrapper">
@@ -131,7 +181,22 @@ const QuizHome = () => {
                       {quizzes.map((quiz, index) => (
                         <div className="quiz-card" key={index}>
                           <div className="quiz-card-header">
-                            <h3>{quiz.quizName}</h3>
+                            <div className='name-button'>
+                              <h3>{quiz.quizName}</h3>
+
+                              {userRole === 'admin' && (
+                                <td>
+                                  <label className="toggle-switch">
+                                    <input
+                                      type="checkbox"
+                                      checked={quizStatus[quiz.quizId]}
+                                      onChange={() => handleToggle(quiz.quizId)}
+                                    />
+                                    <span className="slider round"></span>
+                                  </label>
+                                </td>
+                              )}
+                            </div>
                             <p>{quiz.quizDescription}</p>
                           </div>
 

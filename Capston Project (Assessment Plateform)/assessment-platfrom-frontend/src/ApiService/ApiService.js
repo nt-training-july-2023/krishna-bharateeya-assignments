@@ -129,5 +129,26 @@ export const GetAllReport = async () => {
     return response.data;
 }
 
+export const EnableCategory = async (categoryId) => {
+
+    const response = await axios.put(`${BASE_URL}/category/enable/${categoryId}`);
+    console.log("Api Log :",response.data);
+    return response.data;
+}
+export const DisableCategory = async (categoryId) => {
+
+    const response = await axios.put(`${BASE_URL}/category/disable/${categoryId}`);
+    return response.data;
+}
+export const EnableQuiz = async (quizId) => {
+
+    const response = await axios.put(`${BASE_URL}/quizzes/enable/${quizId}`);
+    return response.data;
+}
+export const DisableQuiz = async (quizId) => {
+
+    const response = await axios.put(`${BASE_URL}/quizzes/disable/${quizId}`);
+    return response.data;
+}
 
 

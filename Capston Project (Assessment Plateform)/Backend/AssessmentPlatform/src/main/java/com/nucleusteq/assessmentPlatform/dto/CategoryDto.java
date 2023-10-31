@@ -33,6 +33,11 @@ public class CategoryDto {
     private String description;
 
     /**
+     * The State of the category.
+     */
+    private boolean enabled;
+
+    /**
      * Copy constructor for the CategoryDto class.
      *@param cId The CategoryDto object to create a copy from.
      * @param cName The CategoryDto object to create a copy from.

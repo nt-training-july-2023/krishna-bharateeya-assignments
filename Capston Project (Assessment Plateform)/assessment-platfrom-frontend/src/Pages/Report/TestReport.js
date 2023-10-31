@@ -9,9 +9,11 @@ const Report = () => {
   const userRole = localStorage.getItem('userRole');
   const email = localStorage.getItem('email');
   const [reports, setReports] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
     loadReports();
-  }, [email]);
+  }, [email, searchQuery]);
 
   const loadReports = async () => {
     try {
@@ -28,13 +30,27 @@ const Report = () => {
         return dateB - dateA;
       });
 
-      setReports(data);
+      const filteredReports = data.filter((report) =>
+        report.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        report.userEmailId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        report.quizName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        report.dateAndTime.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+
+      setReports(filteredReports);
 
     } catch (error) {
       console.error('Error fetching questions:', error);
 
     }
   };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+
 
   return (
 
@@ -47,7 +63,12 @@ const Report = () => {
           <div className="report-card-header">
 
             <h3>Reports</h3>
-
+            <input
+              type="text"
+              placeholder="Search reports..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
           </div>
           <table className='report-table'>
             {reports.length === 0 ? (
@@ -66,7 +87,8 @@ const Report = () => {
                     <th>Wrong Answers</th>
                     <th>Attempted Questions</th>
                     <th>Total Questions</th>
-                    <th>Date and Time</th>
+                    <th>Date </th>
+                    <th>Time</th>
                   </tr>
                 </thead>
 
@@ -82,7 +104,8 @@ const Report = () => {
                       <td>{report.wrongAnswers}</td>
                       <td>{report.attemptedQuestions}</td>
                       <td>{report.totalQuestions}</td>
-                      <td>{report.dateAndTime}</td>
+                      <td>{report.dateAndTime.split(",")[0]}</td>
+                      <td>{report.dateAndTime.split(",")[1]}</td>
                     </tr>
                   ))}
                 </tbody>

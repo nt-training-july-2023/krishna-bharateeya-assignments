@@ -50,6 +50,12 @@ public class Category {
      */
     @Column(nullable = false)
     private String description;
+
+    /**
+     * The state of the category.
+     */
+    @Column(nullable = false)
+    private boolean enabled;
     /**
      * The quizzes map with category.
      */
@@ -84,6 +90,7 @@ public class Category {
         this.categoryId = cId;
         this.categoryName = cName;
         this.description = cDescription;
+        this.enabled = false; 
     }
 
 }

@@ -6,6 +6,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { GetQuestionsByQuizId, GetUserByEmail, CreateReport } from "../../ApiService/ApiService";
 import NoDataMessage from "../../Components/NoDataMessage/NoDataMessage";
 import DisableBackButton from "../../Components/PreventBack/DisableBackButton";
+import VisibilityChangeHandler from "../../Components/VisibilityChange/VisibilityChangeHandler";
 
 const UserTest = () => {
 
@@ -21,6 +22,23 @@ const UserTest = () => {
     const [countdownComplete, setCountdownComplete] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden' && !submitted) {
+                setTimeout(() => {
+                    handleSubmit();
+                }, 500);
+            }
+        };
+    
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []);
+    
 
 
     useEffect(() => {
@@ -95,6 +113,7 @@ const UserTest = () => {
             handleSubmit();
         }
     }, []);
+
 
     const loadQuestionsData = async () => {
         try {
@@ -174,10 +193,11 @@ const UserTest = () => {
         if (e) {
             e.preventDefault();
         }
+        localStorage.setItem("submitted",'true');
         setSubmitted(true);
         try {
 
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
             const time = new Date().toLocaleString('en-US', options);
 
             const payload = {
@@ -206,6 +226,7 @@ const UserTest = () => {
             localStorage.removeItem("attemptedQuestions");
 
             const result = await CreateReport(payload);
+            
             navigate('/userHome');
             Swal.fire('Answers Submitted!', 'Your answers have been submitted successfully.', 'success');
         } catch (error) {
@@ -239,6 +260,7 @@ const UserTest = () => {
             <div className='user-test-card-header-main'>
                 <h2>Time Remaining: {formattedTime}</h2>
                 <h2>{quizName}</h2>
+                <h3>Attempted Questions : {localStorage.getItem('attemptedQuestions')||0} / {localStorage.getItem('totalQuestion')}</h3>
                 <h3>
                     {questions.length > 0 ? (
                         <button className="submit-answers-button" onClick={handleConfirmSubmit} disabled={submitted}>

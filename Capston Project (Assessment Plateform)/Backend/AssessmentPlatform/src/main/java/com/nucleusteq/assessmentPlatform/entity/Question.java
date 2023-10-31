@@ -58,13 +58,11 @@ public class Question {
     /**
      * The third option for the question.
      */
-    @Column(nullable = false)
     private String optionThree;
 
     /**
      * The forth option for the question.
      */
-    @Column(nullable = false)
     private String optionFour;
 
     /**

@@ -32,6 +32,7 @@ const UserHome = () => {
     localStorage.removeItem("correctAnswersCount");
     localStorage.removeItem("wrongAnswers");
     localStorage.removeItem("attemptedQuestions");
+    localStorage.removeItem("tabVisibility");
   };
   const userRole = localStorage.getItem('userRole');
   if (userRole !== 'user') {

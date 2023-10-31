@@ -136,4 +136,22 @@ public class CategoryController {
         LOGGER.info(CategoryLoggerMessages.CATEGORY_DELETED_SUCCESSFULLY);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * Enables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to enable.
+     */
+    @PutMapping("enable/{categoryId}")
+    public boolean enableCategory(@PathVariable int categoryId) {
+        return categoryService.enableCategory(categoryId);
+    }
+
+    /**
+     * Disables a category with the specified ID.
+     * @param categoryId The unique identifier of the category to disable.
+     */
+    @PutMapping("disable/{categoryId}")
+    public boolean disableCategory(@PathVariable int categoryId) {
+        return categoryService.disableCategory(categoryId);
+    }
 }

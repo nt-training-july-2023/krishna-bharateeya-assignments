@@ -22,13 +22,11 @@ public class QuestionOptions {
     /**
      * The third answer option.
      */
-    @NotBlank(message = "Option Three Text cannot be empty.")
     private String optionThree;
 
     /**
      * The fourth answer option.
      */
-    @NotBlank(message = "Option Four Text cannot be empty.")
     private String optionFour;
 
     /**
