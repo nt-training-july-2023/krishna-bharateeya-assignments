@@ -1,8 +1,8 @@
 package com.nucleusteq.assessmentPlatform.controller;
 
 import java.util.List;
-import java.util.Objects;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
 import com.nucleusteq.assessmentPlatform.dto.QuizDTO;
-import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
+import com.nucleusteq.assessmentPlatform.utility.QuizLoggerMessage;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
+
+import jakarta.validation.Valid;
 
 /**
  * Controller class for managing Quizzes.
@@ -38,24 +41,22 @@ public class QuizController {
     private QuizService quizService;
 
     /**
-     * This is quiz controller object it call the quiz methods.
-     * @param quService user to assign in the constructor.
+     * this is logger object that is use to generate log.
      */
-    @Autowired
-    public QuizController(final QuizService quService) {
-        this.quizService = Objects.requireNonNull(quService,
-                "quizService must not be null");
-    }
-
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(QuizController.class);
     /**
      * Adds a new quiz.
      * @param quizDTO The QuizDTO object containing Quiz information.
      * @return A message indicating the result of the quiz addition.
      */
     @PostMapping
-    public final String addQuiz(@RequestBody final QuizDTO quizDTO) {
-        String createdQuiz = quizService.addQuiz(quizDTO);
-        return createdQuiz;
+    public final ResponseEntity<SuccessResponse> addQuiz(@Valid @RequestBody
+            final QuizDTO quizDTO) {
+        LOGGER.info(QuizLoggerMessage.ADD_QUIZ_REQUEST);
+        SuccessResponse createdQuiz = quizService.addQuiz(quizDTO);
+        LOGGER.info(QuizLoggerMessage.QUIZ_CREATED_SUCCESSFULLY);
+        return new ResponseEntity<>(createdQuiz, HttpStatus.CREATED);
     }
 
     /**
@@ -66,10 +67,13 @@ public class QuizController {
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @PutMapping("/{quizId}")
-    public final String updateQuiz(@PathVariable final Integer quizId,
-            @RequestBody final QuizDTO quizDTO) throws NotFoundException {
-        String updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
-        return updatedQuiz;
+    public final ResponseEntity<SuccessResponse> updateQuiz(@PathVariable
+            final Integer quizId, @Valid @RequestBody final QuizDTO quizDTO)
+            throws NotFoundException {
+        LOGGER.info(QuizLoggerMessage.UPDATE_QUIZ_REQUEST);
+        SuccessResponse updatedQuiz = quizService.updateQuiz(quizId, quizDTO);
+        LOGGER.info(QuizLoggerMessage.QUIZ_UPDATED_SUCCESSFULLY);
+        return new ResponseEntity<>(updatedQuiz, HttpStatus.OK);
     }
 
     /**
@@ -79,10 +83,13 @@ public class QuizController {
      * @throws NotFoundException If the user's email domain is invalid.
      */
     @DeleteMapping("/{quizId}")
-    public final ResponseEntity<Void> deleteQuiz(
+    public final ResponseEntity<SuccessResponse> deleteQuiz(
             @PathVariable final Integer quizId) throws NotFoundException {
-        quizService.deleteQuiz(quizId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        LOGGER.info(QuizLoggerMessage.DELETE_QUIZ_REQUEST + quizId);
+        SuccessResponse response = quizService.deleteQuiz(quizId);
+        LOGGER.info(
+                QuizLoggerMessage.DELETE_QUIZ_REQUEST_SUCCESSFULLY + quizId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -94,7 +101,9 @@ public class QuizController {
     @GetMapping("/{quizId}")
     public final ResponseEntity<QuizDTO> getQuizById(
             @PathVariable final Integer quizId) throws NotFoundException {
+        LOGGER.info(QuizLoggerMessage.GET_QUIZ_BY_ID_REQUEST + quizId);
         QuizDTO quizDTO = quizService.getQuizById(quizId);
+        LOGGER.info(QuizLoggerMessage.QUIZ_UPDATED_SUCCESSFULLY);
         return new ResponseEntity<>(quizDTO, HttpStatus.OK);
     }
 
@@ -104,10 +113,12 @@ public class QuizController {
      */
     @GetMapping
     public final ResponseEntity<List<QuizDTO>> getAllQuizzes() {
+        LOGGER.info(QuizLoggerMessage.GET_ALL_QUIZZES_REQUEST);
         List<QuizDTO> quizzes = quizService.getAllQuizzes();
+        LOGGER.info(QuizLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
-    
+
     /**
      * Retrieves a category by its ID.
      *
@@ -115,8 +126,12 @@ public class QuizController {
      * @return The list of questions entity.
      */
     @GetMapping("questions/{quizId}")
-    public final List<QuestionDto> getAllQuestionByQuiz(
+    public final ResponseEntity<List<QuestionDto>> getAllQuestionByQuiz(
             @PathVariable final int quizId) {
-        return quizService.getAllQuestionByQuiz(quizId);
+        LOGGER.info(
+                QuizLoggerMessage.GET_ALL_QUESTIONS_BY_QUIZ_REQUEST + quizId);
+        List<QuestionDto> questions = quizService.getAllQuestionByQuiz(quizId);
+        LOGGER.info(QuizLoggerMessage.LIST_OF_QUESTIONS_RETRIEVED_SUCCESSFULLY);
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
@@ -14,12 +17,13 @@ import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Question;
 import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
-import com.nucleusteq.assessmentPlatform.exception.AlreadyExistsException;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
-import com.nucleusteq.assessmentPlatform.repository.QuestionRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.QuizService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Implementation of the CategoryService interface for managing categories.
@@ -27,12 +31,6 @@ import com.nucleusteq.assessmentPlatform.service.QuizService;
 @Service
 public class QuizServiceImpl implements QuizService {
 
-    /**
-     * This is Question Repository object that is for calling. the repository.
-     * methods.
-     */
-    @Autowired
-    private QuestionRepository questionRepository;
     /**
      * This is Quiz Repository object that is for calling. the repository.
      * methods.
@@ -54,55 +52,84 @@ public class QuizServiceImpl implements QuizService {
     private ModelMapper modelMapper;
 
     /**
+     * this is logger object that is use to generate log.
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(QuizServiceImpl.class);
+
+    /**
      * Adds a new quiz.
      *
      * @param quizDTO The DTO containing category information.
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String addQuiz(final QuizDTO quizDTO) {
-        if (quizDTO == null) {
-            throw new IllegalArgumentException("QuizDTO cannot be null");
-        }
+    public final SuccessResponse addQuiz(final QuizDTO quizDTO) {
+
         Optional<Quiz> existingQuiz = quizRepository
                 .findByQuizName(quizDTO.getQuizName());
         if (existingQuiz.isPresent()) {
-            throw new AlreadyExistsException(
-                    "Quiz with the same name already exists");
+            LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
+            throw new DuplicateResourceException(
+                    Message.QUIZ_ALREADY_EXISTS);
         }
-        Quiz quiz = convertToEntity(quizDTO);
-        System.out.println("printiing the quiz category description :"
-                + quiz.getCategory().getDescription());
-        quizRepository.save(quiz);
+        Optional<Category> categoryDto = categoryRepository
+                .findById(quizDTO.getCategory().getCategoryId());
 
-        return "Quiz added successfully";
+        if (!categoryDto.isPresent()) {
+            LOGGER.error(Message.CATEGORY_NOT_FOUND
+                    + quizDTO.getCategory().getCategoryId());
+            throw new ResourceNotFoundException(
+                    Message.CATEGORY_NOT_FOUND
+                            + quizDTO.getCategory().getCategoryId());
+        }
+
+        Quiz quiz = convertToEntity(quizDTO);
+        quizRepository.save(quiz);
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+                Message.QUIZ_CREATED_SUCCESSFULLY);
+
     }
 
     /**
      * Updates a quiz.
-     * 
      * @param quizId  The ID of the quiz.
      * @param quizDTO The DTO containing updated quiz information.
      * @return The updated String.
      */
     @Override
-    public final String updateQuiz(final Integer quizId, final QuizDTO quizDTO)
+    public final SuccessResponse updateQuiz(final Integer quizId,
+            final QuizDTO quizDTO)
             throws ResourceNotFoundException {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
-        if (optionalQuiz.isPresent()) {
-            Quiz quiz = optionalQuiz.get();
-            quiz.setQuizName(quizDTO.getQuizName());
-            quiz.setQuizDescription(quizDTO.getQuizDescription());
-            quiz.setTimeInMinutes(quizDTO.getTimeInMinutes());
-            quiz.setCategory(categoryRepository
-                    .findById(quizDTO.getCategory().getCategoryId())
-                    .orElse(null));
-            quizRepository.save(quiz);
-            return "Quiz updated successfully";
-        } else {
+        Quiz existingQuiz = quizRepository.findById(quizId).orElseGet(() -> {
+            LOGGER.error(Message.QUIZ_NOT_FOUND + quizId);
             throw new ResourceNotFoundException(
-                    "Quiz with ID " + quizId + " not found");
+                    Message.QUIZ_NOT_FOUND + quizId);
+        });
+        if (!existingQuiz.getQuizName().equals(quizDTO.getQuizName())
+                && quizRepository.findByQuizName(quizDTO.getQuizName())
+                        .isPresent()) {
+            LOGGER.error(Message.QUIZ_ALREADY_EXISTS);
+            throw new DuplicateResourceException(Message.QUIZ_ALREADY_EXISTS);
         }
+
+        existingQuiz.setQuizName(quizDTO.getQuizName());
+        existingQuiz.setQuizDescription(quizDTO.getQuizDescription());
+        existingQuiz.setTimeInMinutes(quizDTO.getTimeInMinutes());
+        existingQuiz.setCategory(categoryRepository
+                .findById(quizDTO.getCategory().getCategoryId())
+                .orElseGet(() -> {
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND
+                            + quizDTO.getCategory().getCategoryId());
+                    throw new ResourceNotFoundException(
+                            Message.CATEGORY_NOT_FOUND
+                                    + quizDTO.getCategory().getCategoryId());
+                }));
+        quizRepository.save(existingQuiz);
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.QUIZ_UPDATED_SUCCESSFULLY);
+
+
     }
 
     /**
@@ -112,15 +139,19 @@ public class QuizServiceImpl implements QuizService {
      *
      */
     @Override
-    public final void deleteQuiz(final Integer quizId)
+    public final SuccessResponse deleteQuiz(final Integer quizId)
             throws ResourceNotFoundException {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
-        if (optionalQuiz.isPresent()) {
-            quizRepository.deleteById(quizId);
-        } else {
-            throw new ResourceNotFoundException(
-                    "Quiz ID " + quizId + " not found");
-        }
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> {
+                    LOGGER.error(Message.QUIZ_NOT_FOUND, quizId);
+                    return new ResourceNotFoundException(
+                            Message.QUIZ_NOT_FOUND + quizId);
+                });
+        quizRepository.deleteById(quiz.getQuizId());
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.QUIZ_DELETED_SUCCESSFULLY);
+
+
     }
 
     /**
@@ -133,14 +164,12 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public final QuizDTO getQuizById(final Integer quizId)
             throws ResourceNotFoundException {
-        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
-        if (optionalQuiz.isPresent()) {
-            Quiz quiz = optionalQuiz.get();
-            return convertToDTO(quiz);
-        } else {
-            throw new ResourceNotFoundException(
+        Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> {
+            LOGGER.error("Quiz not found with Id : {}", quizId);
+            return new ResourceNotFoundException(
                     "Quiz with ID " + quizId + " not found");
-        }
+        });
+        return convertToDTO(quiz);
     }
 
     /**
@@ -161,7 +190,7 @@ public class QuizServiceImpl implements QuizService {
      * @param quiz The quiz entity to convert.
      * @return The converted QuizDTO.
      */
-    private QuizDTO convertToDTO(final Quiz quiz) {
+    QuizDTO convertToDTO(final Quiz quiz) {
         QuizDTO quizDTO = modelMapper.map(quiz, QuizDTO.class);
         if (quiz.getCategory() != null) {
             CategoryDto categoryDto = modelMapper.map(quiz.getCategory(),
@@ -177,7 +206,7 @@ public class QuizServiceImpl implements QuizService {
      * @param quizDTO The quizDTO to convert.
      * @return The converted quiz entity.
      */
-    private Quiz convertToEntity(final QuizDTO quizDTO) {
+    Quiz convertToEntity(final QuizDTO quizDTO) {
         Quiz quiz = modelMapper.map(quizDTO, Quiz.class);
         if (quizDTO.getCategory() != null) {
             Category category = modelMapper.map(quizDTO.getCategory(),
@@ -194,12 +223,13 @@ public class QuizServiceImpl implements QuizService {
      * @return The list of question entity.
      */
     @Override
-    public List<QuestionDto> getAllQuestionByQuiz(int quizId) {
-
-        Quiz quiz = new Quiz();
-        quiz.setQuizId(quizId);
+    public final List<QuestionDto> getAllQuestionByQuiz(final int quizId) {
 
         Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+        if (optionalQuiz.isEmpty()) {
+            throw new ResourceNotFoundException(Message.QUIZ_NOT_FOUND
+                    + quizId);
+        }
         List<Question> questions = optionalQuiz.get().getQuestions();
         return questions.stream().map(this::convertEntityToDto)
                 .collect(Collectors.toList());

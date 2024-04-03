@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -77,6 +78,7 @@ public class Question {
      */
     @ManyToOne
     @JoinColumn(name = "quiz_id")
+    @NotNull(message = "Quiz Object cannot be empty.")
     private Quiz quiz;
 
     /**

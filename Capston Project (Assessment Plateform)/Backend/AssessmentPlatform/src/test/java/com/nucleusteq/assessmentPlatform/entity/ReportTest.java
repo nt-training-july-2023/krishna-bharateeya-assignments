@@ -7,49 +7,67 @@ import org.junit.jupiter.api.Test;
 
 class ReportTest {
 
-   Report report;
-   
-   @BeforeEach
-   void init() {
-       report=new Report();
-   }
-   
-   @Test
-   void testGettersAndSetters() {
-       assertEquals(0,report.getReportId());
-       assertEquals(0, report.getWrongAnswers());
-       assertEquals(0, report.getTotalMark());
-       assertEquals(0, report.getObtainedMark());
-       
-   }
-   
-   @Test
-   void testAllGettersAndSetters() {
-       Report allParaReport =new Report();
-       allParaReport.setReportId(11);
-       allParaReport.setTotalMark(100);
-       allParaReport.setObtainedMark(45);
-       allParaReport.setWrongAnswers(7);
-       
-       assertEquals(11,allParaReport.getReportId());
-       assertEquals(7, allParaReport.getWrongAnswers());
-       assertEquals(100, allParaReport.getTotalMark());
-       assertEquals(45, allParaReport.getObtainedMark());
-       
-   }
-   
-   @Test
-   void allArgConstructor() {
-       Report allParaReport =new Report(
-               103,
-               100,
-               67,
-               7
-               );
-       assertEquals(103,allParaReport.getReportId());
-       assertEquals(100, allParaReport.getTotalMark());
-       assertEquals(67, allParaReport.getObtainedMark());
-       assertEquals(7, allParaReport.getWrongAnswers());
-   }
+    private Report report;
 
+    @BeforeEach
+    public void setUp() {
+        report = new Report();
+    }
+
+    @Test
+    public void testReportProperties() {
+        report.setReportId(1);
+        report.setUserName("Krishna kumar");
+        report.setUserEmailId("krishna@nucleusteq.com");
+        report.setCategoryName("Math");
+        report.setQuizName("Math Quiz");
+        report.setTotalMarks(20);
+        report.setMarksObtained(15);
+        report.setTotalQuestions(10);
+        report.setAttemptedQuestions(8);
+        report.setDateAndTime("2023-09-23 10:00:00");
+        report.setWrongAnswers(2);
+
+        assertEquals(1, report.getReportId());
+        assertEquals("Krishna kumar", report.getUserName());
+        assertEquals("krishna@nucleusteq.com", report.getUserEmailId());
+        assertEquals("Math", report.getCategoryName());
+        assertEquals("Math Quiz", report.getQuizName());
+        assertEquals(20, report.getTotalMarks());
+        assertEquals(15, report.getMarksObtained());
+        assertEquals(10, report.getTotalQuestions());
+        assertEquals(8, report.getAttemptedQuestions());
+        assertEquals("2023-09-23 10:00:00", report.getDateAndTime());
+        assertEquals(2, report.getWrongAnswers());
+    }
+
+    @Test
+    public void testAllArgsConstructor() {
+        
+        int reportId = 123;
+        String userName = "Krishna kumar";
+        String userEmailId = "krishna@nucleusteq.com";
+        String categoryName = "Category";
+        String quizName = "Quiz";
+        Integer totalMarks = 100;
+        int marksObtained = 85;
+        int totalQuestions = 20;
+        int attemptedQuestions = 18;
+        String dateAndTime = "10-07-2023 14:30:00";
+        int wrongAnswers = 3;
+
+        Report report = new Report(reportId, userName, userEmailId, categoryName, quizName, totalMarks, marksObtained, totalQuestions, attemptedQuestions, dateAndTime, wrongAnswers);
+
+        assertEquals(reportId, report.getReportId());
+        assertEquals(userName, report.getUserName());
+        assertEquals(userEmailId, report.getUserEmailId());
+        assertEquals(categoryName, report.getCategoryName());
+        assertEquals(quizName, report.getQuizName());
+        assertEquals(totalMarks, report.getTotalMarks());
+        assertEquals(marksObtained, report.getMarksObtained());
+        assertEquals(totalQuestions, report.getTotalQuestions());
+        assertEquals(attemptedQuestions, report.getAttemptedQuestions());
+        assertEquals(dateAndTime, report.getDateAndTime());
+        assertEquals(wrongAnswers, report.getWrongAnswers());
+    }
 }

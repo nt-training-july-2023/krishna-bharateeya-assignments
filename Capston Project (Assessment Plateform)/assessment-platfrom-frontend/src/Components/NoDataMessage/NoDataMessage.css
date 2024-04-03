@@ -1,0 +1,26 @@
+.no-data-message {
+    /* text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+    background-color: rgb(250, 215, 215);
+    min-height: 75vh; */
+    min-height: 74.9vh; 
+    text-align: center;
+    background-color: #fff; /* Background color for the container */
+    border: 1px solid #ddd; /* Add a border for the container */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+    border-radius: 5px; /* Rounded corners for the container */
+  }
+  .ndm-para{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 50px;
+    /* color: #777; */
+    color: #333; /* Header text color */
+    margin-bottom: 10px;
+  }
+  

@@ -5,15 +5,22 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 import com.nucleusteq.assessmentPlatform.dto.CategoryDto;
 import com.nucleusteq.assessmentPlatform.entity.Category;
 import com.nucleusteq.assessmentPlatform.entity.Quiz;
+import com.nucleusteq.assessmentPlatform.exception.DuplicateResourceException;
 import com.nucleusteq.assessmentPlatform.exception.ResourceNotFoundException;
 import com.nucleusteq.assessmentPlatform.repository.CategoryRepository;
 import com.nucleusteq.assessmentPlatform.repository.QuizRepository;
 import com.nucleusteq.assessmentPlatform.service.CategoryService;
+import com.nucleusteq.assessmentPlatform.utility.Message;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * Implementation of the CategoryService interface for managing categories.
@@ -40,27 +47,34 @@ public class CategoryServiceImpl implements CategoryService {
     private ModelMapper modelMapper;
 
     /**
+     * this is logger object that is use to generate log.
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(CategoryServiceImpl.class);
+
+    /**
      * Adds a new category.
-     *
      * @param categoryDto The DTO containing category information.
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String addCategory(final CategoryDto categoryDto) {
+    public final SuccessResponse addCategory(final CategoryDto categoryDto) {
 
-        if (categoryDto != null) {
-            Category newCategory = modelMapper.map(categoryDto, Category.class);
-
-            categoryRepository.save(newCategory);
-            return categoryDto.getCategoryName() + " Added Successfully";
-
+        Category newCategory = dtoToEntity(categoryDto);
+        Optional<Category> existingCategory = categoryRepository
+                .findByCategoryName(newCategory.getCategoryName());
+        if (existingCategory.isPresent()) {
+            LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
+            throw new DuplicateResourceException(
+                Message.CATEGORY_ALREADY_EXISTS);
         }
-        return "Please Enter all the field";
+        categoryRepository.save(newCategory);
+        return new SuccessResponse(HttpStatus.CREATED.value(),
+                Message.CATEGORY_CREATED_SUCCESSFULLY);
     }
 
     /**
      * Retrieves a category by ID.
-     *
      * @param id The ID of the category to retrieve.
      * @return The CategoryDto representing the category.
      * @throws RuntimeException If the category is not found.
@@ -72,66 +86,80 @@ public class CategoryServiceImpl implements CategoryService {
 
         if (foundCategory.isPresent()) {
             Category category = foundCategory.get();
-            return modelMapper.map(category, CategoryDto.class);
+            return entityToDTO(category);
         } else {
-            throw new RuntimeException("Category not found for id: " + id);
+            LOGGER.error(Message.CATEGORY_NOT_FOUND + id);
+            throw new ResourceNotFoundException(
+                    Message.CATEGORY_NOT_FOUND + id);
         }
 
     }
 
     /**
      * Retrieves a list of all categories.
-     *
      * @return A list of CategoryDto objects representing categories.
      */
     @Override
     public final List<CategoryDto> getAllCategory() {
 
         List<Category> categories = categoryRepository.findAll();
-        return categories.stream()
-                .map(category -> modelMapper.map(category, CategoryDto.class))
+        return categories.stream().map(this::entityToDTO)
                 .collect(Collectors.toList());
     }
 
     /**
      * Updates a category.
-     *
      * @param categoryDto The DTO containing updated category information.
      * @return The updated CategoryDto.
      */
     @Override
-    public final String updateCategory(final CategoryDto categoryDto) {
+    public final SuccessResponse updateCategory(final CategoryDto categoryDto) {
 
         Category existingCategory = categoryRepository
-                .findById(categoryDto.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "No category found with ID : "
-                                + categoryDto.getCategoryId()));
-
-        modelMapper.map(categoryDto, existingCategory);
+                .findById(categoryDto.getCategoryId()).orElseThrow(() -> {
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND,
+                            categoryDto.getCategoryId());
+                    return new ResourceNotFoundException(
+                            Message.CATEGORY_NOT_FOUND
+                                    + categoryDto.getCategoryId());
+                });
+        if (!existingCategory.getCategoryName()
+                .equals(categoryDto.getCategoryName())
+                && categoryRepository
+                        .findByCategoryName(categoryDto.getCategoryName())
+                        .isPresent()) {
+            LOGGER.error(Message.CATEGORY_ALREADY_EXISTS);
+            throw new DuplicateResourceException(
+                Message.CATEGORY_ALREADY_EXISTS);
+        }
+        existingCategory = dtoToEntity(categoryDto);
         categoryRepository.save(existingCategory);
-        return categoryDto.getCategoryName() + " Updated Successfully";
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.CATEGORY_UPDATED_SUCCESSFULLY);
     }
 
     /**
      * Deletes a category.
-     *
      * @param categoryId The ID of the category to delete.
      * @return A message indicating the result of the operation.
      */
     @Override
-    public final String deleteCategory(final int categoryId) {
-        Category category = null;
+    public final SuccessResponse deleteCategory(final int categoryId) {
 
-        category = categoryRepository.findById(categoryId).orElse(null);
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> {
+                    LOGGER.error(Message.CATEGORY_NOT_FOUND, categoryId);
+                    return new ResourceNotFoundException(
+                            Message.CATEGORY_NOT_FOUND + categoryId);
+                });
 
         categoryRepository.delete(category);
-        return "Category Deletd Successfully";
+        return new SuccessResponse(HttpStatus.OK.value(),
+                Message.CATEGORY_DELETED_SUCCESSFULLY);
     }
 
     /**
      * Gets all quiz By categoryId.
-     *
      * @param categoryId The ID of the category to get the quiz.
      * @return list of quiz related to this category.
      */
@@ -140,6 +168,24 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         category.setCategoryId(categoryId);
         return quizRepository.findByCategory(category);
+    }
+
+    /**
+     * Converts UserDTO to User entity.
+     * @param categoryDto The UserDTO object.
+     * @return Category object.
+     */
+    final Category dtoToEntity(final CategoryDto categoryDto) {
+        return this.modelMapper.map(categoryDto, Category.class);
+    }
+
+    /**
+     * Converts User entity to UserDTO.
+     * @param category category object.
+     * @return CategoryDto object.
+     */
+    final CategoryDto entityToDTO(final Category category) {
+        return this.modelMapper.map(category, CategoryDto.class);
     }
 
 }

@@ -1,11 +1,10 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +24,8 @@ initialValue = Report.ID_INITIAL_VALUE, allocationSize = 1)
 public class Report {
 
     /**
-     * Constant for initial value of report ID sequence.
-     m*/
+     * Constant for initial value of report ID sequence. m
+     */
     public static final int ID_INITIAL_VALUE = 6010;
 
     /**
@@ -37,26 +36,62 @@ public class Report {
     private int reportId;
 
     /**
-     * The user for whom the report is generated.
+     * userName name attribute.
      */
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private Registration reportOfTheUser;
-
+    @Column(nullable = false)
+    private String userName;
 
     /**
-     * The total marks in the assessment.
+     * userEmailId email attribute.
      */
-    private int totalMark;
+    @Column(nullable = false)
+    private String userEmailId;
 
     /**
-     * The obtained marks in the assessment.
+     * category name attribute.
      */
-    private int obtainedMark;
+    @Column(nullable = false)
+    private String categoryName;
+    /**
+     * quiz name attribute.
+     */
+    @Column(nullable = false)
+    private String quizName;
+
+    /**
+     * total marks of quiz attribute.
+     */
+    @Column(nullable = false)
+    private Integer totalMarks;
+
+    /**
+     * marks obtained in quiz attribute.
+     */
+    @Column(nullable = false)
+    private int marksObtained;
+
+    /**
+     * total questions in quiz attribute.
+     */
+    @Column(nullable = false)
+    private int totalQuestions;
+
+    /**
+     * number of attempted questions attribute.
+     */
+    @Column(nullable = false)
+    private int attemptedQuestions;
+
+    /**
+     * date and time attribute.
+     */
+    @Column(nullable = false)
+    private String dateAndTime;
 
     /**
      * The count of wrong answers in the assessment.
      */
+    @Column(nullable = false)
     private int wrongAnswers;
 
 }

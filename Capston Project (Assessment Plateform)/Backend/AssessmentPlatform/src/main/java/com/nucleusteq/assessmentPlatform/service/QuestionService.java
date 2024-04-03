@@ -6,6 +6,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.nucleusteq.assessmentPlatform.dto.QuestionDto;
+import com.nucleusteq.assessmentPlatform.utility.SuccessResponse;
 
 /**
  * This is `QuestionService` interface.
@@ -18,7 +19,7 @@ public interface QuestionService {
      * @param questionDto The DTO containing quiz information.
      * @return A message indicating the result of the operation.
      */
-    String addQuestion(QuestionDto questionDto);
+    SuccessResponse addQuestion(QuestionDto questionDto);
 
     /**
      * Updates a quiz.
@@ -28,21 +29,19 @@ public interface QuestionService {
      * @throws NotFoundException If the quizId is invalid.
      */
 
-    String updateQuestion(Integer questionId, QuestionDto questionDto)
+    SuccessResponse updateQuestion(Integer questionId, QuestionDto questionDto)
             throws NotFoundException;
 
     /**
      * Deletes a quiz.
-     *
      * @param questionId The ID of the question to delete.
+     * @return a successful message.
      * @throws NotFoundException If the quizId is invalid.
      */
-
-    void deleteQuestion(Integer questionId) throws NotFoundException;
+    SuccessResponse deleteQuestion(Integer questionId) throws NotFoundException;
 
     /**
      * Retrieves a quiz by its ID.
-     *
      * @param questionId The ID of the question to retrieve.
      * @return The retrieved questionDto.
      * @throws NotFoundException If the quizId is invalid.
@@ -51,7 +50,6 @@ public interface QuestionService {
 
     /**
      * Retrieves all questions.
-     *
      * @return A list of all questions.
      */
     List<QuestionDto> getAllQuestion();

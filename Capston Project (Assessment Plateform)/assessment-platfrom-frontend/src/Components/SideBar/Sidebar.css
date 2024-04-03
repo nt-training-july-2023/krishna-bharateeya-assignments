@@ -1,0 +1,140 @@
+*{
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+}
+
+.main {
+  width: 100%;
+  padding: 20px;
+  
+}
+
+/* Sidebar styles */
+.sidebar {
+  background: #1f1075;
+  color: #fff;
+  height: 100vh;
+  margin-top: 0px !important;
+  /* transition: all 0.5s; */
+  overflow-x: hidden;
+  position: fixed;
+}
+
+
+
+.top_section {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+}
+
+.home-logo {
+  display: block;
+  width: 55px; 
+  height: auto;
+}
+
+.home-logo[style*="display: none"] {
+  display: none;
+}
+
+.bars {
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+.link {
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  /* transition: all 0.5s; */
+}
+
+.link:hover {
+  background: lightskyblue;
+  color: #000;
+  /* transition: all 0.5s; */
+}
+
+.link_text {
+  font-size: 20px;
+}
+
+.active {
+  background: rgb(225, 230, 233);
+  color: #000;
+}
+
+.sidebar-logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+.sidebar-logout-button a {
+  flex-direction: column;
+  align-items: center;
+  background-color: #c20600;
+  color: white;
+  text-decoration: none;
+  padding: 4px 46px;
+  margin-top: 452px;
+  position: fixed;
+  top: 123px; 
+}
+
+
+.sidebar-logout-button a:hover{
+  background-color: #cc0000;
+  color: white;
+}
+.sidebar-logout-button .icon {
+  font-size: 24px; 
+}
+
+.logout-button button:hover {
+  background-color: #cc0000; 
+}
+.powerOff-icon{
+  margin-left: 19px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1;
+    height: 120vh !important;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+
+  .sidebar.open {
+    width: 200px; 
+  }
+
+  .main {
+    margin-left: 50px; 
+    transition: 0.5s;
+  }
+
+  .container {
+    position: relative;
+  }
+  .sidebar-logout-button a {
+    padding: 4px 13px;
+    padding: 10px 13px; 
+  }
+  .powerOff-icon{
+    height: 33px;
+    margin-left: 0px;
+  }
+ 
+}

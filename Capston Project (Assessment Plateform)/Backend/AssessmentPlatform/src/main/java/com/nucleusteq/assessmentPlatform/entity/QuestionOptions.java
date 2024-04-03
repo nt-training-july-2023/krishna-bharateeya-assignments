@@ -1,5 +1,7 @@
 package com.nucleusteq.assessmentPlatform.entity;
 
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * Represents the answer options for a question.
  */
@@ -8,26 +10,31 @@ public class QuestionOptions {
     /**
      * The first answer option.
      */
+    @NotBlank(message = "Option One Text cannot be empty.")
     private String optionOne;
 
     /**
      * The second answer option.
      */
+    @NotBlank(message = "Option Two Text cannot be empty.")
     private String optionTwo;
 
     /**
      * The third answer option.
      */
+    @NotBlank(message = "Option Three Text cannot be empty.")
     private String optionThree;
 
     /**
      * The fourth answer option.
      */
+    @NotBlank(message = "Option Four Text cannot be empty.")
     private String optionFour;
 
     /**
      * The correct answer option.
      */
+    @NotBlank(message = "Correct Option Text cannot be empty.")
     private String correctOption;
 
     /**

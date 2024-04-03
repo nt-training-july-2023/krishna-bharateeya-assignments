@@ -1,7 +1,15 @@
 package com.nucleusteq.assessmentPlatform.dto;
 
-import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
 
+
+import org.springframework.validation.annotation.Validated;
+
+import com.nucleusteq.assessmentPlatform.entity.QuestionOptions;
+import com.nucleusteq.assessmentPlatform.utility.ValidationMessage;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +19,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@Validated
 public class QuestionDto {
 
     /**
@@ -21,11 +30,14 @@ public class QuestionDto {
     /**
      * The text of the question.
      */
+    @NotBlank(message = ValidationMessage.QUESTION_TEXT_EMPTY)
     private String questionText;
 
     /**
      * The answer options for the question.
      */
+    @NotNull(message = ValidationMessage.OPTIONS_NULL)
+    @Valid
     private QuestionOptions options;
 
     /**
@@ -59,6 +71,7 @@ public class QuestionDto {
     /**
      * The quiz to which the quiz belongs.
      */
+    @NotNull(message = ValidationMessage.QUIZ_NULL)
     private QuizDTO quiz;
 
     /**
